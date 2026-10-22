@@ -1,0 +1,34 @@
+# Weekly update PRs against develop. Actions are pinned to commit SHAs (version in the comment);
+# Dependabot bumps both. cooldown holds back releases younger than a week, so a hijacked
+# release has time to be caught and yanked before it lands here.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    # the 2010 era runs on real jQuery 1.12 on purpose
+    ignore:
+      - dependency-name: jquery
+      - dependency-name: "@types/jquery"
+    groups:
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+      dependencies:
+        dependency-type: production
+        update-types: [minor, patch]
