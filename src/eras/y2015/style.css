@@ -287,6 +287,7 @@
 /* the three cards share one slot and take turns */
 .era--y2015 .y15-route__card {
   grid-area: 1 / 1;
+  align-self: start;
   overflow: hidden;
   border-top: 4px solid var(--fw);
   border-radius: 2px;
@@ -337,6 +338,149 @@
   color: var(--ind);
 }
 
+/* the argument: a Q&A thread that fills up, then gets closed */
+.era--y2015 .y15-war {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  /* the rest of the pinned screen (title, roads, chips, ticker) takes about 580px */
+  height: clamp(280px, calc(100vh - 590px), 380px);
+  overflow: hidden;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: var(--dp2);
+}
+
+.era--y2015 .y15-war__q {
+  position: relative;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.era--y2015 .y15-war__title {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  color: #0b57a4;
+}
+
+.era--y2015 .y15-war__ask {
+  margin: 4px 0 8px;
+  font-size: 13px;
+  color: #424242;
+}
+
+.era--y2015 .y15-war__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.era--y2015 .y15-war__tags span {
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: #e1ecf4;
+  color: #39739d;
+  font: 11px / 1.5 var(--mono);
+}
+
+/* the notice drops in over the question's body, the way a closed question wore it */
+.era--y2015 .y15-war__meta {
+  display: grid;
+}
+
+.era--y2015 .y15-war__meta > * {
+  grid-area: 1 / 1;
+}
+
+.era--y2015 .y15-war__closed {
+  align-self: start;
+  margin: 4px -8px 0;
+  padding: 6px 8px;
+  border: 1px solid #e6cf79;
+  background: #fdf7e2;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #3b3b3b;
+}
+
+.era--y2015 .y15-war__closed b {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+.era--y2015 .y15-war__clip {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  /* older replies scroll off under a fade, not a hard cut */
+  mask-image: linear-gradient(transparent, #000 28px);
+  transition: opacity 0.4s;
+}
+
+.era--y2015 .y15-war__list {
+  /* the comments' offsetTop, which scrolls the thread, is measured from here */
+  position: relative;
+  margin: 0;
+  padding: 6px 20px 10px;
+  list-style: none;
+}
+
+.era--y2015 .y15-war__c {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-left: calc(var(--d) * 22px);
+  padding: 8px 0 8px calc(min(var(--d), 1) * 12px);
+  border-left: calc(min(var(--d), 1) * 2px) solid #e0e0e0;
+}
+
+.era--y2015 .y15-war__vote {
+  display: grid;
+  justify-items: center;
+  min-width: 34px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #9e9e9e;
+}
+
+.era--y2015 .y15-war__vote b {
+  font: 500 14px var(--mono);
+  color: #424242;
+}
+
+.era--y2015 .y15-war__c.is-neg .y15-war__vote b {
+  color: #c62828;
+}
+
+.era--y2015 .y15-war__who {
+  font: 500 11px var(--mono);
+  color: var(--ind);
+}
+
+.era--y2015 .y15-war__c p {
+  margin: 1px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+}
+
+/* once closed, the argument goes grey (on the clip: GSAP owns each reply's own opacity) */
+.era--y2015 .y15-war.is-closed .y15-war__clip {
+  opacity: 0.55;
+}
+
+.era--y2015 .y15-branch.is-static .y15-war__clip {
+  mask-image: none;
+}
+
+.era--y2015 .y15-branch.is-static .y15-war {
+  grid-area: auto;
+  height: auto;
+}
+
 .era--y2015 .y15-branch.is-static .y15-route__card {
   grid-area: auto;
   margin-bottom: 16px;
@@ -366,6 +510,24 @@
   .era--y2015 .y15-route pre {
     padding: 12px 14px;
     font-size: 11px;
+  }
+  .era--y2015 .y15-war {
+    height: clamp(240px, calc(100vh - 520px), 340px);
+  }
+  .era--y2015 .y15-war__q {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+  .era--y2015 .y15-war__list {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+  .era--y2015 .y15-war__c {
+    gap: 8px;
+    margin-left: calc(var(--d) * 12px);
+  }
+  .era--y2015 .y15-war__c p {
+    font-size: 12.5px;
   }
 }
 
@@ -2152,34 +2314,49 @@
   }
 }
 
-/* easter egg: JavaScript fatigue ticker */
+/* easter egg: JavaScript fatigue ticker, as a Material snackbar */
 .era--y2015 .y15-fatigue {
-  position: absolute;
-  right: var(--gutter);
-  bottom: 5vh;
-  z-index: 2;
-  max-width: 300px;
-  margin: 0;
-  padding: 8px 12px;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.06);
+  align-self: center;
+  max-width: 720px;
+  margin: 14px auto 0;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 2px;
+  background: #323232;
+  box-shadow: var(--dp3);
   font:
-    400 11px / 1.35 "Roboto",
+    400 13px / 1.45 "Roboto",
     sans-serif;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .era--y2015 .y15-fatigue b {
-  font-family: "Roboto Mono", monospace;
-  font-weight: 500;
-  color: #c51162;
+  display: inline-block;
+  min-width: 1.4em;
+  font:
+    700 18px / 1 "Roboto Mono",
+    monospace;
+  text-align: center;
+  color: #ff4081;
+  vertical-align: -1px;
+}
+
+/* each new framework lands with a bump */
+.era--y2015 .y15-fatigue b.is-bump {
+  animation: y15-bump 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.4);
+}
+
+@keyframes y15-bump {
+  from {
+    transform: scale(1.8);
+  }
 }
 
 .era--y2015 .y15-fatigue__sigh {
   display: block;
   margin-top: 2px;
   font-style: italic;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* short desktop screens: the whole fork (title, roads, card, ticker) fits one pinned screen */
@@ -2197,29 +2374,15 @@
     padding: 12px 20px;
     font-size: 12px;
   }
-}
-
-/* below ~1360px the corner would reach under the code card: sit under it instead */
-@media (min-width: 760px) and (max-width: 1359.98px) {
-  .era--y2015 .y15-fatigue {
-    position: static;
-    align-self: center;
-    max-width: 640px;
-    margin: 18px auto 0;
-    text-align: center;
-  }
-  .era--y2015 .y15-fatigue__sigh {
-    display: inline;
-    margin: 0 0 0 4px;
+  .era--y2015 .y15-war {
+    height: clamp(240px, calc(100vh - 450px), 320px);
   }
 }
 
 @media (max-width: 759.98px) {
   .era--y2015 .y15-fatigue {
-    left: var(--gutter);
-    right: auto;
-    bottom: 3vh;
-    max-width: none;
-    font-size: 10px;
+    margin-top: 12px;
+    padding: 8px 14px;
+    font-size: 11.5px;
   }
 }
