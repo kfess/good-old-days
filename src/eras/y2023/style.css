@@ -2053,3 +2053,9 @@
     font-size: 12px;
   }
 }
+
+/* the Japanese punchline is longer: smaller type keeps "App Routerで、" on one line */
+:root:lang(ja) .era--y2023 .y23-ar__punch {
+  font-size: clamp(30px, 4.4vw, 68px);
+  line-height: 1.12;
+}

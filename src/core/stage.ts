@@ -1,3 +1,4 @@
+import { placeAfterSwitch } from './i18n';
 import { gsap, jumpTo, reducedMotion, ScrollTrigger, scrollToEl } from './scroll';
 import type { Era, EraTheme } from './types';
 
@@ -292,7 +293,13 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
   keepPlaceOnResize(sections, syncToScroll);
   window.addEventListener('load', () => {
     refresh();
-    // deep links (e.g. #stack-y2018) only land correctly once pins have their final size
+    // deep links (e.g. #stack-y2018) and a language switch's reload only land correctly once pins
+    // have their final size
+    const place = placeAfterSwitch();
+    if (place !== null) {
+      requestAnimationFrame(() => jumpTo(place));
+      return;
+    }
     const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
     if (target)
       requestAnimationFrame(() => window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 120));

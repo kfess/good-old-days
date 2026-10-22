@@ -1,4 +1,5 @@
 import '../styles/consent.css';
+import { t } from './i18n';
 
 /**
  * Google Analytics 4, only in builds made with VITE_GA_ID (set by the deploy workflow from the
@@ -78,10 +79,13 @@ export function openConsent(): void {
   banner.className = 'consent';
   banner.setAttribute('aria-label', 'Analytics consent');
   banner.innerHTML = `
-    <p class="consent__text">May I count your visit? With your OK, this page uses Google Analytics, which sets cookies, to see how far people scroll. Nothing else is collected.</p>
+    <p class="consent__text">${t(
+      'May I count your visit? With your OK, this page uses Google Analytics, which sets cookies, to see how far people scroll. Nothing else is collected.',
+      'アクセス数を数えてもいいですか？許可いただいた場合のみ、どこまでスクロールされたかを見るためにGoogle Analytics（Cookieを使います）を読み込みます。それ以外は何も集めません。',
+    )}</p>
     <div class="consent__actions">
-      <button type="button" class="consent__btn" data-choice="denied">No thanks</button>
-      <button type="button" class="consent__btn consent__btn--yes" data-choice="granted">Allow</button>
+      <button type="button" class="consent__btn" data-choice="denied">${t('No thanks', '許可しない')}</button>
+      <button type="button" class="consent__btn consent__btn--yes" data-choice="granted">${t('Allow', '許可する')}</button>
     </div>`;
   banner.addEventListener('click', (e) => {
     const choice = (e.target as HTMLElement).closest<HTMLElement>('[data-choice]')?.dataset.choice as

@@ -2,6 +2,7 @@ import { siReact, siTailwindcss, siVuedotjs } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { angularShield } from '../../components/marks';
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 
@@ -281,10 +282,16 @@ const TW_LINES: { open: string; close: string; toks: string[]; on: Tok['on'] }[]
 ];
 
 /** One developer's take on utility classes, a month apart. */
-const TW_TAKES: [string, string][] = [
-  ['May 2019', 'Ew. That’s just inline styles with extra steps. Who would write HTML this ugly?'],
-  ['Jun 2019', '…okay. I’m never writing a CSS file again. (Still ugly, though.)'],
-];
+const TW_TAKES: [string, string][] = t(
+  [
+    ['May 2019', 'Ew. That’s just inline styles with extra steps. Who would write HTML this ugly?'],
+    ['Jun 2019', '…okay. I’m never writing a CSS file again. (Still ugly, though.)'],
+  ],
+  [
+    ['May 2019', 'インラインスタイルで書いてるだけやろ。こんな汚いHTML誰が書くねん'],
+    ['Jun 2019', '……はい。もうこれでいいわ（汚いけど）'],
+  ],
+);
 
 const tailwind: StageScene = {
   year: '2019.05',
@@ -310,7 +317,7 @@ const tailwind: StageScene = {
         ([when, text], i) => `
       <figure class="y18-tw__take" data-t="${i}">
         <i class="y18-tw__face" aria-hidden="true"></i>
-        <figcaption><b>Frontend dev</b> <span>· ${esc(when)}</span></figcaption>
+        <figcaption><b>${t('Frontend dev', 'フロントエンドエンジニア')}</b> <span>· ${esc(when)}</span></figcaption>
         <p>${esc(text)}</p>
       </figure>`,
       ).join('')}`;

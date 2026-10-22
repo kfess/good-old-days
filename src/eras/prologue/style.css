@@ -656,6 +656,53 @@
   background: #fff;
 }
 
+/* the warning a 2018+ browser would show, in today's chrome, not the XP bar's */
+.era--prologue .p-aj__warn {
+  --strike: 0;
+  position: relative;
+  display: inline-block;
+  max-width: 0;
+  padding: 1px 0;
+  overflow: hidden;
+  vertical-align: middle;
+  border-radius: 999px;
+  background: #fce8e6;
+  font:
+    500 11px / 1.5 system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  white-space: nowrap;
+  color: #c5221f;
+  visibility: hidden;
+}
+
+.era--prologue .p-aj__warn::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(var(--strike));
+  transform-origin: left;
+}
+
+.era--prologue .p-aj__note {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  margin: 0;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.75);
+  font:
+    11px / 1.4 Tahoma,
+    Verdana,
+    sans-serif;
+  color: #fff;
+}
+
 .era--prologue .p-aj__reloads b {
   color: #c00;
 }
@@ -1015,6 +1062,7 @@
     height: 22vh;
   }
   .era--prologue .p-aj__url,
+  .era--prologue .p-aj__note,
   .era--prologue .p-aj__wire {
     display: none;
   }
@@ -1388,6 +1436,29 @@
     sans-serif;
   color: #ccc;
   cursor: pointer;
+}
+
+/* in Japanese, the homepages are set in what every 1999 Japanese homepage was set in */
+:root:lang(ja) .era--prologue {
+  --p-ja: "MS PGothic", "ＭＳ Ｐゴシック", "Osaka", sans-serif;
+}
+
+:root:lang(ja) .era--prologue .p-table,
+:root:lang(ja) .era--prologue .p-gb input,
+:root:lang(ja) .era--prologue .p-gb button,
+:root:lang(ja) .era--prologue .p-snow-toggle,
+:root:lang(ja) .era--prologue .p-live__view,
+:root:lang(ja) .era--prologue .p-ip__page {
+  font-family: var(--p-ja);
+}
+
+/* the marquee and headings keep their Latin faces; only the kana fall through */
+:root:lang(ja) .era--prologue .p-marquee {
+  font-family: "Courier New", var(--p-ja);
+}
+
+:root:lang(ja) .era--prologue .p-h4 {
+  font-family: "Comic Sans MS", "Comic Sans", var(--p-ja);
 }
 
 .era--prologue .p-spark {
@@ -2065,4 +2136,9 @@ html[data-era="prologue"] .hud__srv-val {
     flex-wrap: wrap;
     justify-content: center;
   }
+}
+
+/* the count sits mid-sentence: one line each, so the narrow menu column never breaks 人目 apart */
+:root:lang(ja) .era--prologue .p-counter > span:not(.p-digits) {
+  display: block;
 }

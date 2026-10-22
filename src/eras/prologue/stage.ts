@@ -1,4 +1,5 @@
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { phone, pixelArt, puzzle } from './pixel';
 
@@ -114,7 +115,8 @@ const lamp: StageScene = {
     const nEl = art.querySelector<HTMLElement>('.p-php__n')!;
     const log = art.querySelector<HTMLElement>('.p-php__log')!;
     const code =
-      '<!-- don\'t touch this. it works. -->\n<?php\n  mysql_query("UPDATE hits SET n = n + 1");\n  $r = mysql_query("SELECT n FROM hits");\n?>\nYou are visitor #<?php echo mysql_result($r, 0); ?>';
+      t("<!-- don't touch this. it works. -->", '<!-- ここ触るな。なぜか動いてる。 -->') +
+      '\n<?php\n  mysql_query("UPDATE hits SET n = n + 1");\n  $r = mysql_query("SELECT n FROM hits");\n?>\nYou are visitor #<?php echo mysql_result($r, 0); ?>';
 
     const paint = (n: number) => {
       const s = String(Math.floor(n)).padStart(7, '0');
@@ -242,10 +244,10 @@ const ajax: StageScene = {
       <div class="p-aj">
         <div class="p-aj__bar">
           <span class="p-aj__btn">◀</span><span class="p-aj__btn">▶</span><span class="p-aj__btn p-aj__reload">⟳</span>
-          <span class="p-aj__url">http://maps.example.com/</span>
+          <span class="p-aj__url"><span class="p-aj__warn">${t('⚠ Not secure', '⚠ 保護されていない通信')}</span>http://maps.example.com/</span>
           <span class="p-aj__reloads">reloads: <b>0</b></span>
         </div>
-        <div class="p-aj__view"><div class="p-aj__map" style="--cols:${COLS}">${tiles}</div><i class="p-aj__pin"></i><i class="p-aj__hand"></i></div>
+        <div class="p-aj__view"><div class="p-aj__map" style="--cols:${COLS}">${tiles}</div><i class="p-aj__pin"></i><i class="p-aj__hand"></i><p class="p-aj__note">${t('↑ Still http://, and few people minded.', '↑ httpのままでも、気にする人は少なかった。')}</p></div>
         <div class="p-aj__status"><code class="p-aj__typed"></code><span class="p-aj__rs">readyState <b>0</b></span></div>
       </div>
       <div class="p-aj__wire" aria-hidden="true"><i></i><i></i><i></i><span>XMLHttpRequest</span></div>`;
@@ -269,6 +271,16 @@ const ajax: StageScene = {
       0,
     );
     tl.from(art.querySelector('.p-aj'), { opacity: 0, y: 40, duration: 0.3 }, 0.3);
+    // a warning from the future flickers into the address bar, gets struck out, and leaves a note:
+    // in 2005 a plain http:// page was simply a page
+    const warn = art.querySelector<HTMLElement>('.p-aj__warn')!;
+    // it takes no room while away, so the URL sits where it always did
+    const room = { maxWidth: 260, paddingLeft: 8, paddingRight: 8, marginRight: 6 };
+    const none = { maxWidth: 0, paddingLeft: 0, paddingRight: 0, marginRight: 0 };
+    tl.fromTo(warn, { autoAlpha: 0, ...none }, { autoAlpha: 1, ...room, duration: 0.12, ease: 'steps(4)' }, 0.55)
+      .to(warn, { '--strike': 1, duration: 0.12, ease: 'power1.in' }, 0.8)
+      .to(warn, { autoAlpha: 0, ...none, duration: 0.12 }, 0.95)
+      .from(art.querySelector('.p-aj__note'), { autoAlpha: 0, y: -6, duration: 0.12 }, 0.95);
     scrubType(tl, typed, "xhr.open('GET', '/tile?x=7&y=3', true);", 0.5, 0.5);
     const drag = { p: 0 };
     tl.to(
@@ -306,11 +318,11 @@ const iphone: StageScene = {
         <div class="p-ip__device"><i class="p-ip__speaker"></i><i class="p-ip__home"></i></div>
         <div class="p-ip__screen">
           <div class="p-ip__page">
-            <div class="p-ip__marq">★ Welcome to my homepage! ★ Sign my guestbook! ★</div>
+            <div class="p-ip__marq">${t('★ Welcome to my homepage! ★ Sign my guestbook! ★', '★ ようこそ私のホームページへ！ ★ ゲストブックに記帳してね！ ★')}</div>
             <p class="p-ip__h">~*~ My Cool Page ~*~</p>
-            <p class="p-ip__count">You are visitor <b>0048213</b></p>
+            <p class="p-ip__count">${t('You are visitor <b>0048213</b>', 'あなたは <b>0048213</b> 人目の訪問者です')}</p>
             <div class="p-ip__flash">${puzzle('p-ip__puzzle')}<span>Flash: not supported</span></div>
-            <p class="p-ip__links"><u>Links</u> · <u>Guestbook</u> · <u>Webring</u></p>
+            <p class="p-ip__links">${t('<u>Links</u> · <u>Guestbook</u> · <u>Webring</u>', '<u>リンク</u> · <u>ゲストブック</u> · <u>ウェブリング</u>')}</p>
           </div>
         </div>
         <i class="p-ip__finger p-ip__finger--a"></i><i class="p-ip__finger p-ip__finger--b"></i>

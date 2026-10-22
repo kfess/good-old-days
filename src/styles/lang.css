@@ -1,0 +1,60 @@
+/* Japanese has no spaces to wrap at: break between phrases, not inside words (Chrome; others ignore it) */
+:root:lang(ja) body {
+  word-break: auto-phrase;
+}
+
+/* The language switch: one neutral pill, the same in every era, under the consent card. */
+.lang {
+  position: fixed;
+  right: var(--gutter);
+  bottom: 16px;
+  z-index: 150;
+  display: flex;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: #16161d;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  font:
+    11px / 1 system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  /* stays quiet so it never competes with the scene beneath it; full strength on hover */
+  opacity: 0.55;
+  transition: opacity 0.3s;
+}
+
+.lang:hover,
+.lang:focus-within {
+  opacity: 1;
+}
+
+.lang button {
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #a1a1aa;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lang button[aria-pressed="true"] {
+  background: #ececf1;
+  color: #16161d;
+  font-weight: 600;
+  cursor: default;
+}
+
+.lang button:focus-visible {
+  outline: 2px solid #8ab4f8;
+  outline-offset: 1px;
+}
+
+@media (max-width: 759.98px) {
+  .lang {
+    right: 12px;
+    bottom: 12px;
+  }
+}

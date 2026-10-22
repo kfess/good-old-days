@@ -2854,3 +2854,12 @@
     bottom: 3vh;
   }
 }
+
+/* a Japanese line has no spaces to wrap at, so it would break mid-word: keep each one on one line */
+:root:lang(ja) .era--y2018 .dk__beat {
+  max-width: none;
+}
+
+:root:lang(ja) .era--y2018 .dk__beat blockquote {
+  white-space: nowrap;
+}

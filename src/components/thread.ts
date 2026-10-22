@@ -1,3 +1,4 @@
+import { t } from '../core/i18n';
 import { reducedMotion } from '../core/scroll';
 import { esc, h, onceInView, typeInto } from '../core/util';
 
@@ -9,8 +10,11 @@ export const THREAD: Record<string, { how: string; code: string }> = {
   y2015: { how: 'React', code: 'this.setState({ menuOpen: false });' },
   y2018: { how: 'Hooks + TypeScript', code: 'const [open, setOpen] = useState<boolean>(false);' },
   y2021: { how: 'Tailwind', code: "<nav className={open ? 'block' : 'hidden md:block'}>" },
-  y2023: { how: 'ChatGPT', code: '› How do I hide the menu on mobile?' },
-  y2025: { how: 'Claude Code', code: '$ claude "hide the menu on mobile"' },
+  y2023: {
+    how: 'ChatGPT',
+    code: t('› How do I hide the menu on mobile?', '› スマホでメニュー隠すにはどうすればいい？'),
+  },
+  y2025: { how: 'Claude Code', code: t('$ claude "hide the menu on mobile"', '$ claude "スマホではメニュー隠して"') },
 };
 
 const ORDER = Object.keys(THREAD);

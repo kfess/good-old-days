@@ -210,6 +210,15 @@
   font-size: 15px;
 }
 
+/* in Japanese, the 1999 homepage is in MS PGothic; the marquee keeps Comic Sans for its Latin */
+:root:lang(ja) .era--epilogue .m99 {
+  font-family: "MS PGothic", "ＭＳ Ｐゴシック", "Osaka", sans-serif;
+}
+
+:root:lang(ja) .era--epilogue .m99__mq {
+  font-family: "Comic Sans MS", "Comic Sans", "MS PGothic", "ＭＳ Ｐゴシック", "Osaka", sans-serif;
+}
+
 /* 2010 */
 .era--epilogue .m10 {
   background: linear-gradient(#f4f8fb, #dfe8f0);
@@ -835,6 +844,11 @@
   transition: transform 0.5s cubic-bezier(0.2, 1.4, 0.4, 1);
 }
 
+/* kana have no italic: a slanted 和文 only looks broken */
+:root:lang(ja) .era--epilogue .coda__off {
+  font-style: normal;
+}
+
 /* …until Claude centres it */
 .era--epilogue .coda__off.is-centred .coda__off-t {
   animation: none;
@@ -931,6 +945,16 @@
   color: #00ff66;
   font-weight: 400;
   letter-spacing: 0.2em;
+}
+
+/* Press Start 2P has no kana: DotGothic16 keeps the sentence pixelated in Japanese */
+:root:lang(ja) .era--epilogue .coda__counter {
+  font-family: "Press Start 2P", "DotGothic16", monospace;
+}
+
+/* in Japanese the count sits mid-sentence, so it needs room on both sides */
+:root:lang(ja) .era--epilogue .coda__counter b {
+  margin: 0 8px;
 }
 
 .era--epilogue .coda__again {
@@ -1038,6 +1062,18 @@
     400 clamp(11px, 1.3vw, 18px) / 1.5 "Press Start 2P",
     monospace;
   color: #ffffff;
+}
+
+/* Press Start 2P has no kana: in Japanese the lines switch to DotGothic16, pixel type with kana,
+   so a Latin word like PSD doesn't stand out from the text around it. The years keep their face. */
+:root:lang(ja) .era--epilogue .coda__list li {
+  /* 6ch was measured in Press Start 2P, where 1ch is 1em */
+  grid-template-columns: 6em minmax(0, 1fr);
+  font-family: "DotGothic16", monospace;
+}
+
+:root:lang(ja) .era--epilogue .coda__list b {
+  font-family: "Press Start 2P", monospace;
 }
 
 /* the punchline half of each line */

@@ -42,6 +42,7 @@ import {
 } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { gitlabTanuki2015, terraform2020 } from '../../components/marks';
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 import { k8sMark } from './k8s-logo';
@@ -120,7 +121,7 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-          # don't touch this. it works.
+          ${t("# don't touch this. it works.", '# ここ触るな。なぜか動いてる。')}
           readinessProbe:
             httpGet:
               path: /healthz
