@@ -1,0 +1,384 @@
+/*
+ * Stage (headline-technology scenes), credits (supporting cast) and thread (hide the menu).
+ * Neutral defaults; eras restyle them in their own scope.
+ */
+
+/* ---------------- stage ---------------- */
+
+.stage__pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.stage__year {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: min(36vw, 62vh);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--fg) 12%, transparent);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stage__odo {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.stage__strip {
+  display: block;
+  width: 0.62em;
+  line-height: 1;
+  text-align: center;
+  word-break: break-all;
+  transition: transform 0.9s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.stage__scene {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+
+.stage__art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.stage__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: min(40vh, 34vw);
+  height: min(40vh, 34vw);
+  margin: calc(min(40vh, 34vw) / -2) 0 0 calc(min(40vh, 34vw) / -2);
+  font-size: min(40vh, 34vw);
+  line-height: 0;
+}
+
+.stage__logo-in {
+  width: 100%;
+  height: 100%;
+}
+
+.stage__logo .logo {
+  width: 100%;
+  height: 100%;
+}
+
+.stage__logo .logo--word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.32em;
+  line-height: 1;
+}
+
+.stage__copy {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 9vh;
+  z-index: 3;
+  max-width: min(560px, 80vw);
+}
+
+.stage__kicker {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.stage__name {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 112px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.stage__line {
+  margin: 14px 0 0;
+  font-family: var(--jp);
+  font-size: clamp(15px, 1.4vw, 20px);
+  color: var(--muted);
+}
+
+.stage__dots {
+  position: absolute;
+  right: calc(var(--gutter) + 24px);
+  bottom: 9vh;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stage__dots li {
+  width: 22px;
+  height: 3px;
+  background: color-mix(in srgb, var(--fg) 18%, transparent);
+  transition: background 0.4s, width 0.4s;
+}
+
+.stage__dots li.is-on {
+  width: 44px;
+  background: var(--accent);
+}
+
+.stage--static .stage__pin {
+  height: auto;
+  /* the pinned stage clips its scenes; unpinned, only sideways (art bleeding past the edge widened the page) */
+  overflow: visible;
+  overflow-x: clip;
+}
+.stage--static .stage__year,
+.stage--static .stage__dots {
+  display: none;
+}
+.stage--static .stage__scene {
+  position: relative;
+  min-height: 100vh;
+  visibility: visible;
+}
+
+@media (max-width: 759.98px) {
+  .stage__logo {
+    top: 40%;
+    width: 46vw;
+    height: 46vw;
+    margin: -23vw 0 0 -23vw;
+    font-size: 46vw;
+  }
+  .stage__copy {
+    right: var(--gutter);
+    bottom: 12vh;
+  }
+  .stage__dots {
+    left: var(--gutter);
+    right: auto;
+    bottom: 6vh;
+  }
+}
+
+/* ---------------- credits ---------------- */
+
+.credits {
+  display: grid;
+  gap: 4vh;
+  padding: 14vh 0;
+  overflow: hidden;
+}
+
+.credits__title {
+  margin: 0;
+  padding: 0 var(--gutter);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.credits__row {
+  display: flex;
+  gap: clamp(40px, 6vw, 110px);
+  width: max-content;
+  padding: 0 var(--gutter);
+  will-change: transform;
+}
+
+/* without motion the rows never slide: wrap them, or everything past the right edge stays hidden */
+@media (prefers-reduced-motion: reduce) {
+  .credits__row {
+    flex-wrap: wrap;
+    row-gap: 5vh;
+    width: auto;
+  }
+}
+
+.credit {
+  display: flex;
+  gap: 0.35em;
+  align-items: center;
+  font-size: clamp(40px, 6vw, 96px);
+  white-space: nowrap;
+}
+
+.credit__icon {
+  flex: none;
+  font-size: 0.9em;
+  line-height: 0;
+}
+
+.credit__text {
+  display: grid;
+}
+
+.credit__name {
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.credit__meta {
+  margin-top: 0.35em;
+  font-family: var(--jp);
+  font-size: max(12px, 0.15em);
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.credit__meta b {
+  margin-right: 0.5em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------------- thread ---------------- */
+
+.thread {
+  display: grid;
+  gap: 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14vh var(--gutter);
+}
+
+.thread__title {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.thread__title span {
+  margin-left: 0.6em;
+  color: var(--muted);
+}
+
+.thread__diff {
+  display: grid;
+  gap: 6px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+}
+
+.thread__line {
+  display: grid;
+  grid-template-columns: 2.2ch minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: baseline;
+  padding: 14px 20px;
+  font-family: var(--thread-font, var(--mono));
+}
+
+.thread__sign {
+  font-size: clamp(16px, 2vw, 28px);
+  font-weight: 700;
+}
+
+.thread__src {
+  position: relative;
+  min-width: 0;
+  font-family: var(--thread-font, var(--mono));
+  font-size: clamp(15px, 2.2vw, 32px);
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.thread__line em {
+  font-family: var(--jp);
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.thread__line--del {
+  color: color-mix(in srgb, #e5534b 70%, var(--fg));
+  background: color-mix(in srgb, #e5534b 9%, transparent);
+  transition: opacity 0.6s ease 0.4s;
+}
+
+.thread__line--del .thread__src::after {
+  content: '';
+  position: absolute;
+  top: 55%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+.thread.is-struck .thread__line--del {
+  opacity: 0.5;
+}
+
+.thread.is-struck .thread__line--del .thread__src::after {
+  transform: scaleX(1);
+}
+
+.thread__line--add {
+  color: var(--fg);
+  background: color-mix(in srgb, #3fb950 10%, transparent);
+}
+
+.thread__line--add .thread__sign {
+  color: #3fb950;
+}
+
+.thread__caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: thread-caret 1s steps(1) infinite;
+}
+
+.thread.is-done .thread__caret {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes thread-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 759.98px) {
+  .thread__line {
+    grid-template-columns: 2ch minmax(0, 1fr);
+    padding: 12px 14px;
+  }
+  .thread__line em {
+    grid-column: 2;
+  }
+}

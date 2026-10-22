@@ -1,0 +1,535 @@
+/*
+ * Structural styles + a neutral default skin for the shared components.
+ * Eras restyle them inside their own scope, e.g. `.era--y2010 .tcard__body { … }`.
+ */
+
+.logo {
+  width: 1em;
+  height: 1em;
+}
+
+.logo--word {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* ---------------- deploy ---------------- */
+
+.deploy {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 720px;
+}
+
+.deploy__btn {
+  justify-self: start;
+  padding: 0.8em 1.8em;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.deploy__btn:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.deploy__win {
+  overflow: hidden;
+  border-radius: 10px;
+  background: #111;
+  color: #ddd;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.deploy__bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 12px;
+  background: #222;
+}
+
+.deploy__bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #555;
+}
+
+.deploy__bar span {
+  margin-left: 8px;
+  opacity: 0.6;
+}
+
+.deploy__log {
+  height: 320px;
+  padding: 12px 14px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+ /* once a long log scrolls, fade the top edge so a half-hidden line never looks clipped */
+.deploy__log.is-scrolled {
+  -webkit-mask-image: linear-gradient(transparent 0, #000 34px);
+  mask-image: linear-gradient(transparent 0, #000 34px);
+}
+
+.deploy__log:empty::before {
+  content: '▸ press the button';
+  opacity: 0.35;
+}
+
+.deploy__prompt {
+  color: var(--accent);
+}
+
+.deploy__line--ok {
+  color: #7ee787;
+}
+
+.deploy__line--err {
+  color: #ff7b72;
+}
+
+.deploy__meter {
+  display: inline-block;
+  width: min(160px, 30vw);
+  height: 8px;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.deploy__meter i {
+  display: block;
+  height: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ---------------- stack of the day (architecture diagram) ---------------- */
+
+.stack {
+  --box-bg: color-mix(in srgb, var(--fg) 6%, var(--bg));
+  --box-fg: var(--fg);
+  --box-edge: color-mix(in srgb, var(--fg) 20%, var(--bg));
+  --box-role: var(--accent);
+  --box-muted: var(--muted);
+  --box-radius: 10px;
+  --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  --wire: color-mix(in srgb, var(--fg) 32%, transparent);
+  --wire-hot: var(--accent);
+  --deploy: var(--muted);
+  --ai: #d97757;
+  --packet: var(--accent);
+  --sd-font: inherit;
+  --flap-bg: #151515;
+  --flap-fg: #ffb347;
+  --flap-font: var(--mono);
+  container-type: inline-size;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stack__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.stack__title {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stack__meta {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stack__count {
+  display: inline-block;
+  min-width: 1ch;
+  font-size: 1.6em;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.sd__stage {
+  position: relative;
+  padding: 28px 0 12px;
+}
+
+/* 2025's arcs (you → agent, browser → services) need headroom above the boxes */
+.sd--y2025 .sd__stage {
+  padding-top: 96px;
+}
+
+.sd__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.9fr 1.15fr 0.85fr 1.15fr 1fr;
+  gap: 46px 40px;
+  align-items: stretch;
+}
+
+.sd__wires {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sd__box {
+  position: relative;
+  min-width: 0;
+  padding: 12px 14px 13px;
+  border: 1px solid var(--box-edge);
+  border-radius: var(--box-radius);
+  background: var(--box-bg);
+  color: var(--box-fg);
+  box-shadow: var(--box-shadow);
+  font-family: var(--sd-font);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.6s ease;
+  transition-delay: calc(var(--d) * 90ms);
+}
+
+.stack.is-in .sd__box {
+  opacity: 1;
+  transform: none;
+}
+
+.stack.is-in .sd__box.is-faint {
+  opacity: 0.5;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.stack.is-drawn .sd__box.has-change {
+  box-shadow:
+    var(--box-shadow),
+    0 0 0 1.5px var(--wire-hot),
+    0 0 24px color-mix(in srgb, var(--wire-hot) 32%, transparent);
+}
+
+.sd__box--infra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  align-items: center;
+  padding-block: 10px;
+}
+
+.sd__box--infra .sd__rows {
+  margin: 0;
+}
+
+.sd__role {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--box-role);
+}
+
+.sd__note {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--box-muted);
+}
+
+.sd__rows {
+  display: grid;
+  gap: 7px;
+  margin: 9px 0 0;
+}
+
+.sd__row dt {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--box-muted);
+}
+
+.sd__row dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-items: baseline;
+  margin: 1px 0 0;
+}
+
+.sd__val {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.sd__val.is-flipping {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: var(--flap-bg);
+  color: var(--flap-fg);
+  font-family: var(--flap-font);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sd__was {
+  font-size: 10px;
+  color: var(--box-muted);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.sd__row.is-flipped .sd__was {
+  opacity: 0.7;
+}
+
+/* one split-flap cell: a faint divider and the hinge line across the middle */
+.flap__w {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.flap__c {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 0.7em;
+  height: 1.5em;
+  box-shadow: inset -1px 0 0 rgba(127, 127, 127, 0.14);
+  white-space: pre;
+}
+
+.flap__c::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.flap__c.is-flip {
+  animation: flap-flip 0.11s ease-in;
+}
+
+@keyframes flap-flip {
+  0% {
+    transform: rotateX(80deg);
+    filter: brightness(1.6);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* wires */
+.sd__wire {
+  fill: none;
+  stroke: var(--wire);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: var(--len, 0) var(--len, 0);
+  stroke-dashoffset: var(--len, 0);
+  transition:
+    stroke-dashoffset 0.9s ease,
+    stroke 0.25s;
+}
+
+.stack.is-drawn .sd__wire {
+  stroke-dashoffset: 0;
+}
+
+.sd__wire--deploy,
+.sd__wire--mcp {
+  stroke-dasharray: 6 6;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.5s;
+}
+
+.stack.is-drawn .sd__wire--deploy,
+.stack.is-drawn .sd__wire--mcp {
+  opacity: 1;
+}
+
+.sd__wire--deploy {
+  stroke: var(--deploy);
+}
+
+.sd__wire--ai,
+.sd__wire--mcp {
+  stroke: var(--ai);
+  stroke-width: 2.5;
+}
+
+.stack.is-drawn .sd__wire--mcp {
+  animation: sd-march 0.9s linear infinite;
+}
+
+@keyframes sd-march {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.sd__wire.is-hot {
+  stroke: var(--wire-hot);
+  stroke-width: 3;
+}
+
+.sd__label {
+  font: 600 10.5px var(--sd-font, sans-serif);
+  letter-spacing: 0.02em;
+  fill: var(--box-muted);
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.8s;
+}
+
+.stack.is-drawn .sd__label {
+  opacity: 1;
+}
+
+.sd__label--deploy {
+  font-family: var(--mono);
+}
+
+.sd__label--ai,
+.sd__label--mcp {
+  fill: var(--ai);
+}
+
+.sd__packet {
+  fill: var(--packet);
+  opacity: 0;
+  filter: drop-shadow(0 0 6px var(--packet));
+  transition: opacity 0.2s;
+}
+
+.stack.is-sending .sd__packet {
+  opacity: 1;
+}
+
+.sd__replay {
+  display: block;
+  margin: 14px auto 0;
+  padding: 6px 14px;
+  border: 1px solid var(--box-edge);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sd__replay:hover {
+  color: var(--fg);
+}
+
+/* narrow: the same diagram as a vertical flow; developer and AI become side notes */
+@container (max-width: 680px) {
+  .sd__stage,
+  .sd--y2025 .sd__stage {
+    padding-top: 6px;
+  }
+  .sd__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .sd__wires {
+    display: none;
+  }
+  .sd__box--client {
+    order: 1;
+  }
+  .sd__box--mid {
+    order: 2;
+  }
+  .sd__box--server {
+    order: 3;
+  }
+  .sd__box--ai {
+    order: 4;
+  }
+  .sd__box--data {
+    order: 5;
+  }
+  .sd__box--infra {
+    order: 6;
+  }
+  /* the developer reads first, as on the wide diagram */
+  .sd__box--dev {
+    order: -1;
+    margin-bottom: 6px;
+  }
+  .sd--y2018 .sd__box--ai,
+  .sd--y2021 .sd__box--ai {
+    order: 8;
+  }
+  .sd__box--client::after,
+  .sd__box--mid::after,
+  .sd__box--server::after {
+    content: '↕';
+    position: absolute;
+    left: 50%;
+    bottom: -22px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    line-height: 1;
+    color: var(--muted);
+  }
+  /* 2025: the agent isn't in the request path; it sits above it, operating everything */
+  .sd--y2025 .sd__box--mid {
+    order: 0;
+    margin-bottom: 4px;
+  }
+  .sd--y2025 .sd__box--mid::after {
+    content: '';
+  }
+  .sd--y2018 .sd__box--ai,
+  .sd--y2021 .sd__box--ai {
+    margin-top: 6px;
+  }
+}

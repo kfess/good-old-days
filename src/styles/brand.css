@@ -1,0 +1,84 @@
+/*
+ * Brand typography for technology names (src/components/brand.ts).
+ * Selectors carry one class more than the eras' `.era--x .stage__name` rules so the brand face wins,
+ * while deliberate scene states (e.g. the 2025 "make it brutalist" rewrite) still override it.
+ */
+
+.stage .stage__name.has-brand-font,
+.credits .credit__name.has-brand-font {
+  font-family: var(--brand-font);
+  font-weight: var(--brand-weight);
+  text-transform: var(--brand-tt);
+  letter-spacing: var(--brand-ls);
+}
+
+/* ---- official wordmarks ---- */
+
+.stage .stage__name.has-brand-mark,
+.credits .credit__name.has-brand-mark {
+  /* gradient/clip text effects from era skins must not apply to images */
+  -webkit-text-fill-color: currentColor;
+  background: none;
+}
+
+.bmark-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22em;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.bmark {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: calc(0.96em * var(--bmark-scale, 1));
+}
+
+.credit__name .bmark {
+  height: calc(0.9em * var(--bmark-scale, 1));
+}
+
+.bsuffix {
+  /* era skins that paint names as gradient-clipped text leave `color: transparent`; the version needs a real colour */
+  color: var(--fg);
+  -webkit-text-fill-color: var(--fg);
+  font-family: var(--brand-font, inherit);
+  font-weight: var(--brand-weight, 700);
+  font-size: 0.72em;
+  letter-spacing: -0.01em;
+}
+
+/* pick the variant the brand provides for the era's background */
+.bmark--on-dark {
+  display: none;
+}
+
+:is(.era--prologue, .era--y2018, .era--y2021, .era--y2025, .era--epilogue) .bmark--on-light {
+  display: none;
+}
+
+:is(.era--prologue, .era--y2018, .era--y2021, .era--y2025, .era--epilogue) .bmark--on-dark {
+  display: block;
+}
+
+/* era decorations that prefix plain names don't belong in front of a logo */
+.credits .credits__row .credit .credit__name.has-brand-mark::before {
+  content: none;
+}
+
+/* trademark and licence notice: a footer after the pinned coda */
+.coda__footer {
+  position: relative;
+  padding: 8vh 16px 10vh;
+  background: #000033;
+}
+
+.coda__legal {
+  max-width: 760px;
+  margin: 0 auto;
+  font: 400 10px / 1.5 'Inter', system-ui, sans-serif;
+  color: rgba(200, 200, 230, 0.55);
+  text-align: center;
+}

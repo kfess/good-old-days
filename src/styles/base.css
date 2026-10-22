@@ -1,0 +1,227 @@
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --accent: #0066cc;
+  --muted: #666666;
+  --hud-font: system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 56px);
+  --jp: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, var(--jp);
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg);
+}
+
+.stage-bg__fade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+.era {
+  position: relative;
+}
+
+/* ---------------- HUD ---------------- */
+
+.hud {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  font-family: var(--hud-font);
+  color: var(--fg);
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.hud.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* a scrim under the top HUD: solid behind the labels, then fading, so content never reads through them */
+.hud::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 112px;
+  background: linear-gradient(var(--bg) 0, var(--bg) 54px, color-mix(in srgb, var(--bg) 60%, transparent) 80px, transparent 112px);
+  opacity: 0.94;
+}
+
+.hud__left {
+  position: absolute;
+  top: 18px;
+  left: var(--gutter);
+}
+
+.hud__year {
+  display: flex;
+  height: 1em;
+  overflow: hidden;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.odo {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odo__strip {
+  display: block;
+  width: 1ch;
+  line-height: 1;
+  text-align: center;
+  word-break: break-all;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hud__era {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hud__servers {
+  position: absolute;
+  top: 18px;
+  right: var(--gutter);
+  display: grid;
+  justify-items: end;
+  line-height: 1.2;
+}
+
+.hud__srv-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+}
+
+.hud__srv-val {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-variant-numeric: tabular-nums;
+}
+
+.hud__srv-unit {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.hud__rail {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--gutter) * 0.5);
+  display: grid;
+  gap: 10px;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  /* stays quiet so it never competes with scene art drawn beneath it; full strength on hover */
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.hud__rail:hover,
+.hud__rail:focus-within {
+  opacity: 1;
+}
+
+.hud__rail button {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.hud__rail button span {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hud__rail button:hover span,
+.hud__rail button:focus-visible span,
+.hud__rail:hover button.is-active span {
+  opacity: 1;
+}
+
+.hud__rail button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.hud__rail button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .odo__strip {
+    transition: none;
+  }
+}
+
+@media (max-width: 759.98px) {
+  .hud__left,
+  .hud__servers {
+    top: 10px;
+  }
+  .hud__srv-unit,
+  .hud__rail {
+    display: none;
+  }
+}

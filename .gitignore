@@ -1,0 +1,9 @@
+node_modules/
+dist/
+# scripts/shot.mjs output
+shots/
+.env*
+*.local
+.DS_Store
+# design notes, kept local
+PLAN.md

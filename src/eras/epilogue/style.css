@@ -1,0 +1,1203 @@
+.era--epilogue {
+  font-family: 'Geist', 'Inter', var(--jp);
+  color: #fff;
+}
+
+.era--epilogue .fin__pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.era--epilogue .fin__stage {
+  position: absolute;
+  inset: 0;
+}
+
+.era--epilogue .fin__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.era--epilogue .fin__mini {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 14px;
+  transform-origin: 0 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  will-change: transform, opacity;
+}
+
+.era--epilogue .fin__mini > div {
+  position: absolute;
+  inset: 0;
+}
+
+.era--epilogue .fin__tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-family: 'Geist Mono', var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+/* the tag sits top-right, so the 1999 one drops below the marquee bar */
+.era--epilogue .fin__mini--1999 .fin__tag {
+  top: 32px;
+}
+
+.era--epilogue .fin__log {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 6vh;
+  z-index: 3;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin: 0;
+  overflow: hidden;
+  color: #d9d9d9;
+  font-family: 'Geist Mono', var(--mono);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.era--epilogue .fin__log.is-on {
+  opacity: 1;
+}
+
+.era--epilogue .fin__end {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: 0 var(--gutter);
+  text-align: center;
+  opacity: 0;
+}
+
+.era--epilogue .fin__title {
+  margin: 0;
+  font-size: clamp(44px, 8.4vw, 132px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-shadow: 0 0 60px rgba(255, 190, 160, 0.35);
+}
+
+.era--epilogue .fin__caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.82em;
+  margin-left: 0.06em;
+  vertical-align: -0.04em;
+  background: #fff;
+  animation: fin-blink 1s steps(1) infinite;
+}
+
+@keyframes fin-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* reduced motion: a static mosaic + the closing line */
+.era--epilogue .fin.is-static .fin__pin {
+  height: auto;
+  min-height: 100vh;
+}
+
+.era--epilogue .fin.is-static .fin__stage {
+  position: relative;
+  height: 70vh;
+}
+
+.era--epilogue .fin.is-static .fin__end {
+  position: relative;
+  padding: 8vh var(--gutter) 14vh;
+  opacity: 1;
+}
+
+/* ================= miniatures ================= */
+
+/* 1999 */
+.era--epilogue .m99 {
+  background: #000033 radial-gradient(#fff 1px, transparent 1.4px) 0 0 / 34px 34px;
+  color: #fff;
+  font-family: 'Times New Roman', serif;
+  text-align: center;
+}
+
+.era--epilogue .m99__mq {
+  margin: 0;
+  overflow: hidden;
+  background: #000080;
+  border-bottom: 2px ridge #c0c0c0;
+  color: #ffff00;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.era--epilogue .m99__mq span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: fin-mq 7s linear infinite;
+}
+
+@keyframes fin-mq {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.era--epilogue .m99__h {
+  margin: 26px 0 14px;
+  color: #ff3df5;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 17px;
+  text-shadow: 3px 3px 0 #00ff66;
+}
+
+.era--epilogue .m99__c {
+  margin: 0 0 16px;
+  font-size: 15px;
+}
+
+.era--epilogue .m99__c span {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 1px 5px;
+  background: #000;
+  border: 1px solid #555;
+  color: #00ff66;
+  font-family: 'Courier New', monospace;
+}
+
+.era--epilogue .m99__uc {
+  margin: 0 40px;
+  padding: 6px;
+  background: repeating-linear-gradient(-45deg, #ffcc00 0 14px, #111 14px 28px);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+}
+
+.era--epilogue .m99__links {
+  margin: 18px 0 0;
+  color: #7f7fff;
+  font-size: 15px;
+}
+
+/* 2010 */
+.era--epilogue .m10 {
+  background: linear-gradient(#f4f8fb, #dfe8f0);
+  color: #333;
+  font-family: 'Lucida Grande', 'Trebuchet MS', sans-serif;
+}
+
+.era--epilogue .m10__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 18px;
+  background: linear-gradient(#4aa3e8 0%, #2a7fc9 50%, #1f6fb6 51%, #2b84cf 100%);
+  color: #fff;
+  font-size: 22px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.era--epilogue .m10__beta {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: linear-gradient(#ffb347, #ff7a00);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.era--epilogue .m10__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 18px;
+}
+
+.era--epilogue .m10__thumbs i {
+  height: 70px;
+  border: 4px solid #fff;
+  border-radius: 4px;
+  background: linear-gradient(160deg, #8ec5fc, #e0c3fc);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.era--epilogue .m10__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.era--epilogue .m10__box {
+  padding: 10px 10px 4px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.era--epilogue .m10__img {
+  width: 240px;
+  height: 150px;
+  background: linear-gradient(180deg, #7ec8ff 0%, #bfe6ff 55%, #6dbf4b 56%, #3e8f2c 100%);
+}
+
+.era--epilogue .m10__box p {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 2px;
+  font-size: 12px;
+  color: #666;
+}
+
+.era--epilogue .m10__btn {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: linear-gradient(#a6e05b 0%, #7cc537 50%, #64b11f 51%, #86cc45 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 0 #4b8a17, inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -webkit-box-reflect: below 2px linear-gradient(transparent 55%, rgba(255, 255, 255, 0.35));
+}
+
+/* 2013 */
+.era--epilogue .m13 {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 10px;
+  background: #1abc9c;
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+.era--epilogue .m13__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #e74c3c;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.era--epilogue .m13__icon span {
+  text-shadow: 1px 1px #c0392b, 2px 2px #c0392b, 3px 3px #c0392b, 4px 4px #c0392b, 5px 5px #c0392b, 6px 6px #c0392b, 7px 7px #c0392b,
+    8px 8px #c0392b, 9px 9px #c0392b, 10px 10px #c0392b, 11px 11px #c0392b, 12px 12px #c0392b, 14px 14px #c0392b, 16px 16px #c0392b,
+    18px 18px #c0392b, 20px 20px #c0392b, 24px 24px #c0392b, 28px 28px #c0392b;
+}
+
+.era--epilogue .m13 h4 {
+  margin: 6px 0 0;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.era--epilogue .m13 p {
+  margin: 0;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.era--epilogue .m13__ghost {
+  margin-top: 6px;
+  padding: 8px 22px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 2016 */
+.era--epilogue .m16 {
+  background: #eceff1;
+  color: #212121;
+  font-family: 'Roboto', sans-serif;
+}
+
+.era--epilogue .m16__bar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  height: 56px;
+  padding: 0 18px;
+  background: #3f51b5;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.era--epilogue .m16__card {
+  position: relative;
+  overflow: hidden;
+  margin: 18px 18px 0;
+  padding: 16px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.era--epilogue .m16__card--2 {
+  margin-top: 12px;
+}
+
+.era--epilogue .m16__card b {
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.era--epilogue .m16__card p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #757575;
+}
+
+.era--epilogue .m16__ripple {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(63, 81, 181, 0.25);
+  transform: translate(-50%, -50%) scale(0);
+  animation: fin-ripple 1.8s ease-out infinite;
+}
+
+@keyframes fin-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+  }
+}
+
+.era--epilogue .m16__fab {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ff4081;
+  color: #fff;
+  font-size: 28px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 2019 */
+.era--epilogue .m19 {
+  padding: 22px;
+  background: radial-gradient(120% 100% at 0% 0%, #1a2550, #0b1020);
+  color: #e8ecf6;
+  font-family: 'Poppins', sans-serif;
+}
+
+.era--epilogue .m19__h {
+  display: flex;
+  justify-content: space-between;
+  /* clear of the year tag */
+  margin: 0 72px 16px 0;
+  font-size: 15px;
+}
+
+.era--epilogue .m19__h b {
+  color: #7ee787;
+}
+
+.era--epilogue .m19__pods {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.era--epilogue .m19__pods i {
+  height: 54px;
+  border: 1px solid rgba(50, 108, 229, 0.7);
+  border-radius: 10px;
+  background: rgba(50, 108, 229, 0.22);
+  box-shadow: inset 0 0 18px rgba(50, 108, 229, 0.35);
+}
+
+.era--epilogue .m19__pods i:nth-child(8) {
+  animation: fin-pod 2.4s ease-in-out infinite;
+}
+
+@keyframes fin-pod {
+  0%,
+  30% {
+    border-color: #ff7b72;
+    background: rgba(255, 123, 114, 0.25);
+    opacity: 0.4;
+  }
+  60%,
+  100% {
+    border-color: rgba(50, 108, 229, 0.7);
+    background: rgba(50, 108, 229, 0.22);
+    opacity: 1;
+  }
+}
+
+.era--epilogue .m19 code {
+  display: block;
+  margin-top: 18px;
+  color: #8a94b2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+/* 2022 */
+.era--epilogue .m22 {
+  background: #07070c;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.era--epilogue .m22__aurora {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(40% 50% at 30% 30%, rgba(167, 139, 250, 0.7), transparent 70%),
+    radial-gradient(40% 50% at 70% 60%, rgba(96, 165, 250, 0.6), transparent 70%),
+    radial-gradient(30% 40% at 50% 90%, rgba(244, 114, 182, 0.5), transparent 70%);
+  filter: blur(20px);
+  animation: fin-aurora 8s ease-in-out infinite alternate;
+}
+
+@keyframes fin-aurora {
+  to {
+    transform: translate(6%, -4%) rotate(8deg);
+  }
+}
+
+.era--epilogue .m22__grid {
+  position: absolute;
+  inset: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+
+.era--epilogue .m22__grid > div {
+  display: grid;
+  place-items: end start;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  color: #f2f2f7;
+  font-size: 15px;
+}
+
+.era--epilogue .m22__k {
+  place-items: center !important;
+  font-size: 34px !important;
+  font-weight: 700;
+}
+
+.era--epilogue .m22__w {
+  font-size: 22px !important;
+  font-weight: 700;
+}
+
+/* 2024 */
+.era--epilogue .m24 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  background: #f5f3ee;
+  color: #1f1e1d;
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+}
+
+.era--epilogue .m24__u {
+  align-self: flex-end;
+  /* clear of the year tag */
+  margin-right: 72px;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: #e7e2d8;
+}
+
+.era--epilogue .m24__a {
+  display: flex;
+  gap: 10px;
+}
+
+.era--epilogue .m24__av {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #d97757;
+  color: #fff;
+  font-size: 12px;
+}
+
+.era--epilogue .m24__a p {
+  margin: 2px 0 0;
+}
+
+.era--epilogue .m24__a code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #1f1e1d;
+  color: #f5f3ee;
+  font-size: 13px;
+}
+
+.era--epilogue .m24__a i {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: #d97757;
+  animation: fin-blink 1s steps(1) infinite;
+}
+
+.era--epilogue .m24__in {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 12px 16px;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(#fffdf9, #fffdf9) padding-box, linear-gradient(90deg, #d97757, #e879a6, #8b5cf6, #3b82f6) border-box;
+  color: #a8a29e;
+}
+
+/* 2025 */
+.era--epilogue .m25 {
+  padding: 22px;
+  background: #0c0c0c;
+  color: #e6e6e6;
+  font-family: 'Geist Mono', monospace;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.era--epilogue .m25 p {
+  margin: 0;
+}
+
+.era--epilogue .m25 b,
+.era--epilogue .m25 em {
+  color: #d97757;
+  font-style: normal;
+}
+
+.era--epilogue .m25__ok {
+  color: #7ee787;
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .fin__log {
+    bottom: 4vh;
+    font-size: 11px;
+  }
+  .era--epilogue .fin__tag {
+    font-size: 16px;
+  }
+}
+
+/* ================= coda: back to 1999, a confession, and the irony ================= */
+
+.era--epilogue .coda {
+  position: relative;
+  height: 1520vh;
+}
+
+.era--epilogue .coda__sticky {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade, 0px));
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade, 0px));
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+}
+
+.era--epilogue .coda__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 33% 72%, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 58% 28%, #ffff99 50%, transparent 51%),
+    radial-gradient(1px 1px at 76% 61%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 14%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 22% 88%, #ccf 50%, transparent 51%),
+    radial-gradient(2px 2px at 45% 9%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 93% 83%, #fff 50%, transparent 51%),
+    #000033;
+  background-size: 420px 420px, 380px 380px, 520px 520px, 300px 300px, 460px 460px, 340px 340px, 600px 600px, 280px 280px, auto;
+  image-rendering: pixelated;
+  animation: coda-twinkle 3s steps(2) infinite;
+}
+
+@keyframes coda-twinkle {
+  50% {
+    filter: brightness(1.35);
+  }
+}
+
+.era--epilogue .coda__miss,
+.era--epilogue .coda__pains,
+.era--epilogue .coda__joy,
+.era--epilogue .coda__verdict,
+.era--epilogue .coda__irony {
+  position: absolute;
+  left: 50%;
+  width: min(1100px, calc(100vw - 32px));
+  transform: translateX(-50%);
+}
+
+.era--epilogue .coda__miss {
+  top: 22vh;
+}
+
+.era--epilogue .coda__k {
+  margin: 0 0 22px;
+  font: 400 clamp(11px, 1.1vw, 15px) / 1.6 'Press Start 2P', monospace;
+  color: #9999cc;
+}
+
+.era--epilogue .coda__title {
+  margin: 0;
+  font: 400 clamp(26px, 5.4vw, 76px) / 1.25 'Press Start 2P', monospace;
+  color: #ffff00;
+  text-shadow: 4px 4px 0 #ff00cc, 0 0 24px rgba(255, 255, 0, 0.35);
+}
+
+.era--epilogue .coda__strong {
+  margin: 28px 0 0;
+  font: 400 clamp(24px, 4.4vw, 60px) / 1 'Press Start 2P', monospace;
+  color: #ff3366;
+  text-shadow: 3px 3px 0 #000, 0 0 30px rgba(255, 51, 102, 0.55);
+}
+
+.era--epilogue .coda__strong span {
+  display: inline-block;
+  animation: coda-blink 1.1s steps(1) infinite;
+}
+
+@keyframes coda-blink {
+  85% {
+    opacity: 0.25;
+  }
+}
+
+.era--epilogue .coda__irony {
+  top: 44vh;
+}
+
+.era--epilogue .coda__i1 {
+  margin: 0 0 14px;
+  font: 400 13px / 1.4 'Geist Mono', 'JetBrains Mono', monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d97757;
+}
+
+.era--epilogue .coda__i2 {
+  margin: 0;
+  font: 600 clamp(20px, 2.6vw, 36px) / 1.35 'Geist', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+  color: #f2f2f2;
+}
+
+.era--epilogue .coda__i2 em {
+  font-style: normal;
+  color: #d97757;
+}
+
+.era--epilogue .coda__i3 {
+  margin: 18px 0 0;
+  font: 500 clamp(14px, 1.4vw, 19px) / 1.5 'Geist', 'Inter', sans-serif;
+  color: rgba(242, 242, 242, 0.8);
+}
+
+.era--epilogue .coda__off {
+  position: relative;
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85em;
+  font-style: italic;
+  color: #7fdbff;
+}
+
+/* off-centre, wandering like the 2011 line… */
+.era--epilogue .coda__off-t {
+  display: inline-block;
+  animation: coda-off 3.2s steps(1) infinite;
+  transition: transform 0.5s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+/* …until Claude centres it */
+.era--epilogue .coda__off.is-centred .coda__off-t {
+  animation: none;
+  transform: none;
+}
+
+.era--epilogue .coda__fix {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-top: 4px;
+  font: 400 11px 'Geist Mono', monospace;
+  font-style: normal;
+  color: #7ee787;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.4s ease 0.3s;
+}
+
+.era--epilogue .coda__off.is-centred .coda__fix {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .era--epilogue .coda__off-t {
+    animation: none;
+  }
+}
+
+.era--epilogue .coda__ck {
+  position: relative;
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.era--epilogue .coda__bubble {
+  position: relative;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #fff8f3;
+  color: #2b1a14;
+  font: 600 clamp(14px, 1.2vw, 17px) / 1.35 'Geist', 'Inter', sans-serif;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.era--epilogue .coda__bubble::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.era--epilogue .coda__ck .ck {
+  width: clamp(84px, 8vw, 116px);
+  height: clamp(84px, 8vw, 116px);
+}
+
+.era--epilogue .coda__bye {
+  /* flows right under the irony block, so the two can never overlap on short screens */
+  margin-top: clamp(20px, 4vh, 44px);
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.era--epilogue .coda__counter {
+  margin: 0;
+  font: 400 11px / 1 'Press Start 2P', monospace;
+  color: #c0c0c0;
+}
+
+.era--epilogue .coda__counter b {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 5px 6px;
+  border: 2px inset #808080;
+  background: #000;
+  color: #00ff66;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.era--epilogue .coda__again {
+  padding: 8px 16px;
+  border: 2px outset #dfdfdf;
+  background: #c0c0c0;
+  color: #000;
+  font: 400 11px / 1 'Press Start 2P', monospace;
+  cursor: pointer;
+}
+
+.era--epilogue .coda__again:active {
+  border-style: inset;
+}
+
+.era--epilogue .coda__small {
+  margin: 0;
+  font: 400 11px / 1.4 'Geist Mono', monospace;
+  color: #8888aa;
+}
+
+.era--epilogue .coda.is-static {
+  height: auto;
+}
+.era--epilogue .coda.is-static .coda__sticky {
+  position: relative;
+  display: grid;
+  gap: 12vh;
+  height: auto;
+  padding: 16vh 0;
+}
+.era--epilogue .coda.is-static .coda__miss,
+.era--epilogue .coda.is-static .coda__pains,
+.era--epilogue .coda.is-static .coda__joy,
+.era--epilogue .coda.is-static .coda__verdict,
+.era--epilogue .coda.is-static .coda__irony,
+.era--epilogue .coda.is-static .coda__bye {
+  position: relative;
+  inset: auto;
+  left: auto;
+  transform: none;
+  margin: 0 auto;
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .coda__miss {
+    top: 16vh;
+  }
+  .era--epilogue .coda__irony {
+    top: 42vh;
+  }
+  .era--epilogue .coda__i2 br {
+    display: none;
+  }
+}
+
+/* back then: the struggles, one line at a time */
+.era--epilogue .coda__pains {
+  top: 10vh;
+  bottom: 0;
+  overflow: hidden;
+  padding-top: 4vh;
+  /* lines scrolling up fade out before they reach the HUD */
+  -webkit-mask-image: linear-gradient(transparent 0, #000 9vh);
+  mask-image: linear-gradient(transparent 0, #000 9vh);
+  display: grid;
+  align-content: start;
+  justify-items: center;
+}
+
+.era--epilogue .coda.is-static .coda__pains {
+  overflow: visible;
+  padding-top: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.era--epilogue .coda__then {
+  margin: 0 0 22px;
+  font: 400 clamp(11px, 1.1vw, 15px) / 1.6 'Press Start 2P', monospace;
+  color: #9999cc;
+}
+
+.era--epilogue .coda__list {
+  display: grid;
+  gap: clamp(10px, 1.6vh, 18px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.era--epilogue .coda__list li {
+  display: grid;
+  grid-template-columns: 6ch minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  font: 400 clamp(11px, 1.3vw, 18px) / 1.5 'Press Start 2P', monospace;
+  color: #ffffff;
+}
+
+/* the punchline half of each line */
+.era--epilogue .coda__list em {
+  font-style: normal;
+  color: #7fdbff;
+}
+
+.era--epilogue .coda__list b {
+  font-weight: 400;
+  color: #00ff66;
+}
+
+.era--epilogue .coda__verdict {
+  /* centred over the faded list, so the verdict never falls off the bottom */
+  top: 30vh;
+}
+
+.era--epilogue .coda__loved {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.era--epilogue .coda__l1 {
+  font: 400 clamp(14px, 1.8vw, 26px) / 1.4 'Press Start 2P', monospace;
+  color: #c0c0ff;
+}
+
+.era--epilogue .coda__l2 {
+  display: block;
+  font: 400 clamp(20px, 3.6vw, 52px) / 1.25 'Press Start 2P', monospace;
+  color: #ffff00;
+  text-shadow: 4px 4px 0 #ff00cc, 0 0 28px rgba(255, 255, 0, 0.35);
+}
+
+.era--epilogue .coda__ours {
+  margin: 4.5vh 0 0;
+  font: 400 clamp(16px, 2.6vw, 38px) / 1.35 'Press Start 2P', monospace;
+  color: #ffffff;
+  text-shadow: 3px 3px 0 #00a84f, 0 0 26px rgba(0, 255, 102, 0.45);
+}
+
+.era--epilogue .coda__ours-t {
+  display: inline-block;
+}
+
+.era--epilogue .coda__ours-caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: -0.1em;
+  background: #00ff66;
+  animation: coda-blink 1s steps(1) infinite;
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .coda__pains {
+    top: 12vh;
+  }
+  .era--epilogue .coda__list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    font-size: 10px;
+  }
+}
+
+/* 2011: centering a div — it jumps with every trick and never lands in the middle */
+.era--epilogue .coda__ctr {
+  position: relative;
+  display: block;
+}
+
+.era--epilogue .coda__ctr-t {
+  display: inline-block;
+  color: #ff9a9a;
+  animation: coda-ctr 4s steps(1) infinite;
+}
+
+.era--epilogue .coda__ctr i {
+  position: absolute;
+  top: -2.1em;
+  right: 0;
+  font-size: 0.55em;
+  font-style: normal;
+  color: #ff6b81;
+  white-space: nowrap;
+  opacity: 0;
+  animation: coda-ctr-try 4s steps(1) infinite;
+  animation-delay: calc(var(--i) * 1s);
+}
+
+/* never once in the middle */
+@keyframes coda-off {
+  0% {
+    transform: translate(-72%, 0.2em);
+  }
+  25% {
+    transform: translate(64%, 0.6em);
+  }
+  50% {
+    transform: translate(-38%, -0.55em);
+  }
+  75% {
+    transform: translate(85%, 0.25em);
+  }
+}
+
+@keyframes coda-ctr {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(34%, 0.5em);
+  }
+  50% {
+    transform: translate(9%, -0.6em);
+  }
+  75% {
+    transform: translate(46%, 0.25em);
+  }
+}
+
+@keyframes coda-ctr-try {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .era--epilogue .coda__ctr-t,
+  .era--epilogue .coda__ctr i {
+    animation: none;
+  }
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .coda__ctr i {
+    display: none;
+  }
+}
+
+/* "it works!" — a Firebug console (2007), the whole reward of an evening */
+.era--epilogue .coda__joy {
+  top: 30vh;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.era--epilogue .coda__fb {
+  width: min(520px, 100%);
+  border: 1px solid #a5a5a5;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  font: 13px / 1.5 Monaco, Menlo, 'Courier New', monospace;
+  text-align: left;
+  color: #000;
+}
+
+.era--epilogue .coda__fb-tabs {
+  display: flex;
+  gap: 14px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #bbb;
+  background: linear-gradient(#f2f2f2, #dcdcdc);
+  font: 12px 'Lucida Grande', Tahoma, sans-serif;
+  color: #555;
+}
+
+.era--epilogue .coda__fb-tabs b {
+  font-weight: 700;
+  color: #000;
+}
+
+.era--epilogue .coda__fb-in,
+.era--epilogue .coda__fb-out {
+  margin: 0;
+  padding: 6px 10px;
+}
+
+.era--epilogue .coda__fb-in {
+  border-bottom: 1px solid #e3e3e3;
+  color: #0000aa;
+}
+
+.era--epilogue .coda__fb-in b {
+  font-weight: 400;
+  color: #0000aa;
+}
+
+.era--epilogue .coda__fb-typed {
+  display: inline-block;
+}
+
+.era--epilogue .coda__fb-out {
+  font-size: 15px;
+  color: #000;
+}
+
+.era--epilogue .coda__joy-cap {
+  margin: 0;
+  font: 400 clamp(13px, 1.4vw, 18px) / 1.4 'Press Start 2P', monospace;
+  color: #ffff00;
+  text-shadow: 3px 3px 0 #ff00cc;
+}
+
+/* phones: the 2011 line wanders less, so it never leaves the screen */
+@keyframes coda-ctr-sm {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(12%, 0.4em);
+  }
+  50% {
+    transform: translate(4%, -0.5em);
+  }
+  75% {
+    transform: translate(16%, 0.2em);
+  }
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .coda__ctr-t {
+    animation-name: coda-ctr-sm;
+  }
+}

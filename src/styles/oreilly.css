@@ -1,0 +1,75 @@
+/* Parody "O RLY?"-style book cover (src/components/oreilly.ts). Size it with `width` on .orly. */
+
+.orly {
+  --orly-band: #b0193f;
+  display: grid;
+  width: 150px;
+  margin: 0;
+  padding: 0 0 7px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  background: #fbfbf8;
+  color: #1d1d1d;
+  font-family: 'Times New Roman', Georgia, serif;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22), 2px 0 0 rgba(0, 0, 0, 0.06) inset;
+  aspect-ratio: 0.76;
+  container-type: inline-size;
+}
+
+.orly__rule {
+  height: 3.5cqw;
+  background: var(--orly-band);
+}
+
+.orly__top {
+  display: flex;
+  justify-content: space-between;
+  padding: 3cqw 6cqw 0;
+  font: italic 6cqw / 1.2 Georgia, serif;
+}
+
+.orly__sub {
+  margin: 2cqw 6cqw 0;
+  font: italic 7cqw / 1.15 Georgia, serif;
+  text-align: center;
+}
+
+.orly__art {
+  width: 82%;
+  margin: 1cqw auto 0;
+}
+
+.orly__band {
+  display: flex;
+  align-items: center;
+  min-height: 26cqw;
+  margin-top: 1cqw;
+  padding: 3cqw 6cqw;
+  background: var(--orly-band);
+}
+
+.orly__title {
+  color: #fff;
+  font: 400 10.5cqw / 1.02 'Times New Roman', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.orly__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 3cqw 6cqw 0;
+}
+
+.orly__foot b {
+  font: 700 8cqw / 1 'Times New Roman', Georgia, serif;
+}
+
+.orly__foot sup {
+  font-size: 0.6em;
+}
+
+.orly__foot span {
+  font: italic 5.5cqw / 1 Georgia, serif;
+}

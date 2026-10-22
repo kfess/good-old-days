@@ -1,0 +1,90 @@
+.ck {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  line-height: 0;
+  animation: ck-bob 1.2s steps(2) infinite;
+  animation-delay: calc(var(--ck-d, 0s) * -1);
+}
+
+.ck svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ck__body,
+.ck__arms,
+.ck__legs {
+  fill: #d77757;
+}
+
+.ck__eye {
+  fill: #1a1a1a;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ck-blink 4.2s steps(1) infinite;
+  animation-delay: calc(var(--ck-d, 0s) * -3);
+}
+
+/* little legs take turns */
+.ck__legs-a,
+.ck__legs-b {
+  animation: ck-step 0.8s steps(1) infinite;
+  animation-delay: calc(var(--ck-d, 0s) * -1);
+}
+
+.ck__legs-b {
+  animation-delay: calc(var(--ck-d, 0s) * -1 - 0.4s);
+}
+
+.ck--busy .ck__legs-a,
+.ck--busy .ck__legs-b {
+  animation-duration: 0.4s;
+}
+
+.ck--busy .ck__legs-b {
+  animation-delay: calc(var(--ck-d, 0s) * -1 - 0.2s);
+}
+
+.ck--wave .ck__arm-r {
+  animation: ck-wave 0.6s steps(1) infinite;
+}
+
+@keyframes ck-bob {
+  50% {
+    transform: translateY(-6%);
+  }
+}
+
+@keyframes ck-blink {
+  0%,
+  92% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.2);
+  }
+}
+
+@keyframes ck-step {
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes ck-wave {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ck,
+  .ck__eye,
+  .ck__legs-a,
+  .ck__legs-b,
+  .ck__arm-r {
+    animation: none;
+  }
+}
