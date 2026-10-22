@@ -4,7 +4,7 @@ import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
-import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
 import { mountApp } from './app';
@@ -50,8 +50,15 @@ function mountBridge(parent: HTMLElement): void {
 
   const input = el.querySelector<HTMLInputElement>('input')!;
   const lws = Array.from(el.querySelectorAll<HTMLElement>('.y15-lw'));
-  let manual = false;
-  input.addEventListener('change', () => (manual = true));
+  // the theme here is the scroll position, so flipping the switch scrolls to where the lights go out
+  // (or back to where they're still on). While that scroll runs, the switch keeps the side it was
+  // flipped to instead of following the scroll back and forth.
+  let heading: boolean | null = null;
+  input.addEventListener('change', () => {
+    heading = input.checked;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    scrollToEl(heading ? top + el.offsetHeight - window.innerHeight * 0.25 : top);
+  });
 
   if (reducedMotion) {
     lws.forEach((w) => w.style.setProperty('--on', '0'));
@@ -86,11 +93,14 @@ function mountBridge(parent: HTMLElement): void {
       // flip exactly where the blended background crosses mid-grey, so the text never vanishes
       const dark = self.progress > 0.45;
       el.classList.toggle('is-dark', dark);
-      if (!manual) input.checked = dark;
+      if (heading === null || heading === dark) {
+        heading = null;
+        input.checked = dark;
+      }
     },
     onLeave: () => el.classList.add('is-dark'),
     onLeaveBack: () => {
-      manual = false;
+      heading = null;
       input.checked = false;
       el.classList.remove('is-dark');
     },
