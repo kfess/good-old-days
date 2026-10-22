@@ -15,7 +15,8 @@ export const FLAT = {
 } as const;
 
 /**
- * Bootstrap's 2013 mark (a "B" in a rounded square, Bootstrap 3 docs), traced in a 24×24 box.
+ * Bootstrap's purple "B" in a rounded square (the docs' touch icon from 2.1, Aug 2012; on the Bootstrap 3
+ * homepage itself only from 3.1, Jan 2014), traced in a 24×24 box.
  * simple-icons now ships only the 2021 mark with curly braces, which would be an anachronism here.
  * The B is wound against the square and its counters with it, so the default nonzero fill cuts the B out.
  */
@@ -29,8 +30,9 @@ export const bootstrapB = {
 } as unknown as SimpleIcon;
 
 /**
- * Bootstrap 2 had no mark (its docs set the name in Helvetica), so its scene shows what it stood for:
- * three `span4` columns of the 12-column grid. Original art.
+ * Bootstrap 2's only mark was the docs' touch-icon "B", and it kept changing (blue in 2.0.0, black in 2.0.4,
+ * purple from 2.1), so its scene shows what it stood for instead: three `span4` columns of the 12-column grid.
+ * Original art.
  */
 export const bootstrapGrid = {
   title: 'Bootstrap',

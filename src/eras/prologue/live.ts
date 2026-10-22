@@ -87,7 +87,7 @@ export function createLiveSite(): LiveSite {
     halfLogged = false;
     cgiLogged = false;
     live(false);
-    log.innerHTML = '<div class="p-live__cmd">$ tail -f access_log error_log</div>';
+    log.innerHTML = '<div class="p-live__cmd">[root@zeus logs]# tail -f access_log error_log</div>';
     hit('198.51.100.7', '02', '', 200, OLD_SIZE);
     render(shown);
   };

@@ -42,7 +42,7 @@ function mountBridge(parent: HTMLElement): void {
           </label>
           <h3 class="y15-bridge__title" aria-label="Then, the lights went out.">${words.map((w) => `<span class="y15-lw" data-w="${w}" aria-hidden="true">${w}</span>`).join(' ')}</h3>
           <p class="y15-bridge__jp">The screen went dark. Infrastructure moved behind the cluster.</p>
-          <code class="y15-bridge__code">@media (prefers-color-scheme: dark)</code>
+          <code class="y15-bridge__code">document.body.classList.toggle('dark-theme')</code>
         </div>
       </div>
     </section>`);
@@ -184,14 +184,23 @@ export const era: Era = {
         { text: 'Sending build context to Docker daemon  4.096MB' },
         { kind: 'progress', text: 'Step 4/6 : RUN npm install', delay: 800 },
         { text: 'Successfully built 9f2c3a1b7e44' },
-        { kind: 'cmd', text: 'docker push acme/web:1.4.2' },
-        { text: 'The push refers to a repository [docker.io/acme/web]' },
+        // 2017's ECR login: get-login prints a `docker login` command for the shell to run
+        { kind: 'cmd', text: '$(aws ecr get-login --no-include-email --region us-east-1)' },
+        { text: 'Login Succeeded' },
+        { kind: 'cmd', text: 'docker tag acme/web:1.4.2 123456789012.dkr.ecr.us-east-1.amazonaws.com/acme/web:1.4.2' },
+        { kind: 'cmd', text: 'docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/acme/web:1.4.2' },
+        { text: 'The push refers to a repository [123456789012.dkr.ecr.us-east-1.amazonaws.com/acme/web]' },
         { kind: 'progress', text: 'Pushing layers', delay: 1000 },
         { kind: 'ok', text: '1.4.2: digest: sha256:4e1fa90c… size: 2412' },
+        // `service up` runs a single task; the fleet is scaled to 50 straight after
         { kind: 'cmd', text: 'ecs-cli compose service up' },
         {
+          text: 'INFO[0030] ECS Service has reached a stable state  desiredCount=1 runningCount=1 serviceName=ecscompose-service-web',
+        },
+        { kind: 'cmd', text: 'ecs-cli compose service scale 50' },
+        {
           kind: 'ok',
-          text: 'INFO[0030] ECS Service has reached a stable state  desiredCount=50 runningCount=50 serviceName=ecscompose-service-web',
+          text: 'INFO[0074] ECS Service has reached a stable state  desiredCount=50 runningCount=50 serviceName=ecscompose-service-web',
         },
         { kind: 'cmd', text: 'serverless deploy' },
         { text: 'Serverless: Uploading CloudFormation file to S3...' },

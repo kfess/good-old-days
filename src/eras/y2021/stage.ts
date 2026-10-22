@@ -59,7 +59,7 @@ const vite: StageScene = {
           <div class="y21-vt__vite">
             <p><span class="y21-term__p">❯</span> <span class="y21-vt__c2"></span></p>
             <p class="y21-vt__dim">&gt; vite</p>
-            <p class="y21-vt__banner"><b>vite v2.0.5</b> <span>dev server running at:</span></p>
+            <p class="y21-vt__banner"><b>vite v2.0.4</b> <span>dev server running at:</span></p>
             <p class="y21-vt__dim">  &gt; Local:    <u>http://localhost:3000/</u></p>
             <p class="y21-vt__dim">  &gt; Network:  <u>http://192.168.1.12:3000/</u></p>
             <p class="y21-vt__banner"><span>ready in <em>312ms.</em></span></p>

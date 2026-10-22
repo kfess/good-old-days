@@ -56,6 +56,7 @@ function appRouterCard(): HTMLElement {
 
 /* ---------------- intro ---------------- */
 
+// the reply waits on a bare blinking cursor: ChatGPT in 2022 showed no "Thinking…" before the first token
 function intro(section: HTMLElement): void {
   const el = h(`
     <header class="y23-intro">
@@ -68,7 +69,7 @@ function intro(section: HTMLElement): void {
         </div>
         <div class="y23-reply">
           <span class="y23-avatar" aria-hidden="true">✦</span>
-          <p class="y23-reply__text"><span class="y23-shimmer">Thinking…</span></p>
+          <p class="y23-reply__text"><span class="ai-cursor" aria-hidden="true"></span></p>
         </div>
       </div>
       <p class="y23-intro__years">2023 — 2024</p>
@@ -108,6 +109,8 @@ function intro(section: HTMLElement): void {
 
 /* ---------------- showcase: tool use ---------------- */
 
+// as it arrived in June 2023: the model returns a function_call, the result goes back as a "function" message
+
 const WEATHER = t(
   "It's 18°C and cloudy in Paris. Bring a light jacket.",
   'パリは18°Cでくもりです。薄手の上着があると安心です。',
@@ -116,12 +119,12 @@ const WEATHER = t(
 function toolCard(): HTMLElement {
   const el = h(`
     <article class="y23-card y23-card--tool">
-      <p class="y23-card__k">02 — Tool use</p>
+      <p class="y23-card__k">02 — Function calling</p>
       <h4 class="y23-card__h">AI started calling functions.</h4>
       <ol class="y23-tool">
         <li><span class="y23-tool__who">user</span><p>${t("What's the weather in Paris?", 'パリの天気は？')}</p></li>
-        <li><span class="y23-tool__who y23-tool__who--call">tool_use</span><pre>get_weather({ "city": "Paris" })</pre></li>
-        <li><span class="y23-tool__who y23-tool__who--res">tool_result</span><pre>{ "temp_c": 18, "sky": "cloudy" }</pre></li>
+        <li><span class="y23-tool__who y23-tool__who--call">function_call</span><pre>get_weather({ "city": "Paris" })</pre></li>
+        <li><span class="y23-tool__who y23-tool__who--res">function</span><pre>{ "temp_c": 18, "sky": "cloudy" }</pre></li>
         <li><span class="y23-tool__who">assistant</span><p class="y23-tool__ans"></p></li>
       </ol>
     </article>`);
@@ -404,7 +407,8 @@ function gpuPanel(section: HTMLElement): void {
 
 /* ---------------- bridge: chat → terminal ---------------- */
 
-const ASK = t('Ask anything…', 'なんでも聞いてください…');
+// ChatGPT's input box in 2023
+const ASK = t('Send a message…', 'メッセージを送信…');
 
 function bridge(section: HTMLElement): void {
   const el = h(`
@@ -473,7 +477,7 @@ export const era: Era = {
         { year: '2023.07', name: 'Llama 2', icon: siMeta, line: 'The weights landed on your machine.' },
         { year: '2023.12', name: 'Gemini', line: 'Text and images, together from the start.' },
       ],
-      'Also starring — 2023–2024',
+      'Also starring — 2022–2024',
     );
 
     const show = h(`
@@ -533,7 +537,7 @@ export const era: Era = {
     createStack(ship, [
       { cat: 'Frontend', prev: 'Next.js / Vite', value: 'Next.js App Router + shadcn/ui' },
       { cat: 'Language', prev: 'TypeScript + Zod', value: 'TypeScript + Python' },
-      { cat: 'CSS / UI', prev: 'Tailwind CSS (JIT)', value: 'Tailwind + shadcn/ui' },
+      { cat: 'CSS / UI', prev: 'Tailwind CSS v3', value: 'Tailwind + shadcn/ui' },
       { cat: 'Build', prev: 'Vite / esbuild', value: 'Vite / Turbopack' },
       { cat: 'Backend', prev: 'tRPC / Edge Functions', value: 'LLM APIs + Hono' },
       { cat: 'Database', prev: 'Supabase / PlanetScale', value: 'pgvector / Vector DB' },

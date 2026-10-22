@@ -32,7 +32,7 @@ interface Brand {
 const UBUNTU = { font: "'Ubuntu', sans-serif", weight: 700 }; // Kubernetes wordmark (kubernetes/kubernetes logo/name_blue.svg)
 const MONA = { font: "'Mona Sans', sans-serif", weight: 700 }; // GitHub brand typeface (2022.11): 2025 agents only
 const GSANS = { font: "'Google Sans', 'Google Sans Flex', sans-serif", weight: 500 }; // Google (Product Sans, 2015)
-const GFLEX = { font: "'Google Sans Flex', 'Google Sans', sans-serif", weight: 500 }; // Gemini from 2025 (Google Sans Flex)
+const GFLEX = { font: "'Google Sans Flex', 'Google Sans', sans-serif", weight: 500 }; // Gemini from 2025.11 (Google Sans Flex went public then)
 const GEIST = { font: "'Geist', sans-serif", weight: 600 }; // Vercel
 const INTER = { font: "'Inter', sans-serif", weight: 600 };
 // substitutes for proprietary faces
@@ -139,7 +139,7 @@ export const BRANDS: Record<string, Brand> = {
   // LangChain (2022.10) had no logo, only 🦜️🔗: the credit spells it that way
   'Vercel AI SDK': INTER, // 2023.06: the "AI SDK" wordmark came with the later rename; Vercel set type in Inter before Geist (2023.10)
   'shadcn/ui': GEIST,
-  Gemini: GSANS, // 2023: Google Sans Flex is from 2025
+  Gemini: GSANS, // 2023: Google Sans Flex is from 2025.11
 
   // ---- 2025–2026
   'Claude Code': ANTHROPIC,
@@ -150,14 +150,15 @@ export const BRANDS: Record<string, Brand> = {
   'Claude 4': ANTHROPIC,
   'GPT-5': OPENAI,
   'GPT-6 Astra': OPENAI,
-  'Agent SDK & Skills': ANTHROPIC,
+  'Claude Agent SDK': ANTHROPIC,
+  'Agent Skills': ANTHROPIC,
   'Grok 3': INTER,
-  'Gemini 2.5 Pro': GFLEX,
+  'Gemini 2.5 Pro': GSANS, // 2025.03: before Google Sans Flex went public
   'OpenAI o3': OPENAI,
   'Llama 4': META,
   Qwen3: INTER,
   'Copilot coding agent': MONA,
-  'Gemini CLI': GFLEX,
+  'Gemini CLI': GSANS, // 2025.06: likewise
   'Gemini 3': GFLEX,
 };
 

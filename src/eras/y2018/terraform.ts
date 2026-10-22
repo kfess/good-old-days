@@ -14,6 +14,8 @@ import { k8sMark } from './k8s-logo';
  * The plan count (26) is exactly what this configuration creates:
  *   vpc 1 · internet gateway 1 · public subnets 3 · route table 1 · route table associations 3
  *   · IAM roles 2 · IAM policy attachments 4 · EKS cluster 1 · EKS node groups 10
+ * The leaked-key side note is July 2020 too: AWS emailed and opened a support case; the
+ * AWSCompromisedKeyQuarantine policy it attaches today only appeared in 2020-08.
  */
 const GROUPS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 
@@ -248,7 +250,7 @@ export function createTerraform(section: HTMLElement): HTMLElement {
         <p class="tf__handoff">Infrastructure by Terraform.<br/><span>Applications by Argo CD.</span></p>
         <aside class="tf__leak" aria-hidden="true">
           <pre><span class="tf__leak-c" data-at="0.015">$ git add . &amp;&amp; git commit -m "wip"</span><span data-at="0.03">[master 9f3c2e1] wip</span><span data-at="0.03"> 2 files changed, 41 insertions(+)</span><span class="tf__leak-bad" data-at="0.03"> create mode 100644 terraform.tfvars</span><span class="tf__leak-c" data-at="0.05">$ git push origin master</span></pre>
-          <p class="tf__leak-alert" data-at="0.075"><b>✉ AWS</b>Access key AKIA••••••••7Q2X found in a public GitHub repo. A quarantine policy was attached to its IAM user.</p>
+          <p class="tf__leak-alert" data-at="0.075"><b>✉ AWS</b>Access key AKIA••••••••7Q2X found in a public GitHub repo. A support case has been opened: rotate it now.</p>
           <small data-at="0.1">${t('Everyone did it once.', '誰もが一度は通る道。')}</small>
         </aside>
       </div>

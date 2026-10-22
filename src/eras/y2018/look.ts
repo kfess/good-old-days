@@ -49,7 +49,7 @@ const QUICK = t(['Pricing', 'Talk to sales', 'Something else'], ['料金につ�
 /** the "Something else" chip: never matches a rule, whatever the language */
 const OTHER = QUICK[2];
 
-/** A 2019 SaaS landing page in a browser frame: mesh gradient, CSS Grid magazine, neumorphism, dark mode, chatbot. */
+/** A 2019 SaaS landing page in a browser frame: mesh gradient, CSS Grid magazine, isometric art, dark mode, chatbot. */
 export function createLook(parent: HTMLElement): void {
   const el = h(`
     <div class="look" data-hud-year="2019">
@@ -89,7 +89,14 @@ export function createLook(parent: HTMLElement): void {
               <h5>${t('Autoscaling', 'オートスケール')}</h5><p>${t('From zero to millions.', 'ゼロから数百万まで。')}</p>
             </article>
             <article class="look__card"><h5>99.99%</h5><p>${t('uptime SLA', '稼働率SLA')}</p></article>
-            <article class="look__card is-neu"><span class="look__knob" aria-hidden="true"></span><h5>Soft UI</h5><p>${t('Neumorphism, 2020.', 'ニューモーフィズム、2020年。')}</p></article>
+            <article class="look__card is-iso">
+              <svg class="look__cube" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M20 3.7 L35 12.4 L20 21 L5 12.4Z" fill="#b8a6ff"/>
+                <path d="M5 12.4 L20 21 V38.3 L5 29.6Z" fill="#7c5cff"/>
+                <path d="M35 12.4 L20 21 V38.3 L35 29.6Z" fill="#5a3fd9"/>
+              </svg>
+              <h5>${t('Isometric', 'アイソメ')}</h5><p>${t('Every diagram, at 30°.', '図解はぜんぶ30度。')}</p>
+            </article>
             <article class="look__card is-wide"><h5>${t('“We moved to Kubernetes in a weekend.”', '「週末でKubernetesに移行しました」')}</h5><p>${t('— a very optimistic CTO', '— ちょっと楽観的なCTO')}</p></article>
           </div>
           <div class="look__bot">

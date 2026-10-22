@@ -63,7 +63,7 @@ const SESSION: Line[] = [
   { html: '<span class="y25-dot">⏺</span> <b>Read</b>(src/theme.ts)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Read 48 lines</span>', todo: 0 },
   {
-    html: `<span class="y25-txt">⏺</span> ${t("Line 14: `// don't touch this. it works.` — git blame: you, 2010. Keep it?", '14行目: `// ここ触るな。なぜか動いてる。` — git blame: あなた, 2010年。残しますか？')}`,
+    html: `<span class="y25-txt">⏺</span> ${t("Line 14: `// don't touch this. it works.` — git blame: you, 2019. Keep it?", '14行目: `// ここ触るな。なぜか動いてる。` — git blame: あなた, 2019年。残しますか？')}`,
   },
   { html: `<span class="y25-user">${t('&gt; keep it.', '&gt; 残して。')}</span>` },
   { html: '<span class="y25-dot">⏺</span> <b>Update</b>(src/theme.ts)' },
@@ -244,11 +244,11 @@ function bridge(section: HTMLElement): void {
   const el = h(`
     <div class="y25-bridge">
       <p class="y25-bridge__line"><span class="y25-acc">&gt;</span> <span class="y25-bridge__typed"></span><span class="y25-caret"></span></p>
-      <p class="y25-bridge__out"><span class="y25-dot">⏺</span> ${t('Starting from 1999…', '1999年から始めます…')}</p>
+      <p class="y25-bridge__out"><span class="y25-dot">⏺</span> ${t('Starting with the &lt;marquee&gt;…', 'まずは&lt;marquee&gt;から…')}</p>
     </div>`);
   section.appendChild(el);
   const typed = el.querySelector<HTMLElement>('.y25-bridge__typed')!;
-  const text = t('rebuild everything, from the beginning.', '全部作り直して。最初から。');
+  const text = t('rebuild everything since 1999.', '1999年から全部作り直して。');
   if (reducedMotion) {
     typed.textContent = text;
     el.classList.add('is-done');
@@ -318,8 +318,14 @@ export const era: Era = {
           line: 'With Safari 26, the GPU in every major browser engine.',
         },
         {
+          year: '2025.09',
+          name: 'Claude Agent SDK',
+          icon: logo(siAnthropic, 'current'),
+          line: 'The harness behind Claude Code, yours to build on.',
+        },
+        {
           year: '2025.10',
-          name: 'Agent SDK & Skills',
+          name: 'Agent Skills',
           icon: logo(siAnthropic, 'current'),
           line: 'Agents, assembled from parts.',
         },

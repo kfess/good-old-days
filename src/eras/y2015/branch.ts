@@ -67,14 +67,14 @@ const THREAD: Reply[] = t(
     { who: 'react_fan', text: 'Components are the separation of concerns.', score: 96, d: 2 },
     {
       who: 'ng2_or_bust',
-      text: 'Angular 2. TypeScript, DI, a CLI. Real apps need a real framework.',
+      text: 'Angular 2. TypeScript, DI, even a CLI (beta). Real apps need a real framework.',
       score: 142,
       d: 0,
     },
     { who: 'angularjs_veteran', text: 'Angular 2 isn’t even AngularJS. They rewrote everything.', score: 201, d: 1 },
     { who: 'vue_curious', text: 'Vue. Read the docs in an afternoon, shipped by the evening.', score: 133, d: 0 },
     { who: 'enterprise_architect', text: 'Vue is a toy for small projects.', score: 38, d: 1 },
-    { who: 'perf_nerd', text: 'The virtual DOM is pure overhead. Look at the benchmarks.', score: 57, d: 0 },
+    { who: 'perf_nerd', text: 'The virtual DOM isn’t free. Look at the benchmarks.', score: 57, d: 0 },
     { who: 'old_timer', text: 'Just use jQuery.', score: -23, d: 0 },
     { who: 'tired_dev', text: 'By the time you’ve decided, there’ll be a fourth one.', score: 312, d: 0 },
   ],
@@ -85,7 +85,7 @@ const THREAD: Reply[] = t(
     { who: 'react_shinja', text: 'コンポーネント単位で分離してるんだが？', score: 96, d: 2 },
     {
       who: 'sier_naka_no_hito',
-      text: '業務ならAngular 2。TypeScript、DI、CLI全部入り。大規模ならこれしかない',
+      text: '業務ならAngular 2。TypeScript、DI、CLI（β）まで全部入り。大規模ならこれしかない',
       score: 142,
       d: 0,
     },
@@ -111,7 +111,7 @@ const THREAD: Reply[] = t(
 /**
  * The 2016 fork in the road, shown rather than picked: as you scroll, React, Angular 2 and Vue 2
  * take their turn, then all three roads stay lit. Then the internet argues about it until the
- * question is closed as opinion-based. (2018 merges them into TypeScript.)
+ * question is closed as opinion-based. (By 2018 the roads start bending toward TypeScript.)
  */
 export function mountBranch(parent: HTMLElement): void {
   const el = h(`
@@ -168,7 +168,7 @@ export function mountBranch(parent: HTMLElement): void {
               </ol>
             </div>
           </div>
-          <p class="y15-route__next">→ 2018 · Every road merges into TypeScript.</p>
+          <p class="y15-route__next">${t('→ 2018 · The roads start bending toward TypeScript.', '→ 2018 · どの道も、少しずつTypeScriptへ。')}</p>
         </div>
         <p class="y15-fatigue" aria-live="off">${t(
           'New JavaScript frameworks released since you opened this page: <b>0</b> <span class="y15-fatigue__sigh">…and I still haven’t caught up with the last one.</span>',

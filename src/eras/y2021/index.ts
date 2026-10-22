@@ -118,7 +118,7 @@ export const era: Era = {
     const bentoWrap = h(`
       <div class="y21-block y21-bento">
         <div class="y21-head">
-          <p class="y21-kicker">The look of 2021–22</p>
+          <p class="y21-kicker">The look of 2022</p>
           <h3 class="y21-h">Bento, glass and glow.</h3>
           <p class="y21-p">Dark UI, glowing borders, frosted glass. ⌘K reaches everything.</p>
         </div>
@@ -217,7 +217,7 @@ export const era: Era = {
     createStack(stackWrap, [
       { cat: 'Frontend', prev: 'React Hooks / Next.js', value: 'Next.js / Vite' },
       { cat: 'Language', prev: 'TypeScript', value: 'TypeScript + Zod' },
-      { cat: 'CSS / UI', prev: 'styled-components / Tailwind', value: 'Tailwind CSS (JIT)' },
+      { cat: 'CSS / UI', prev: 'styled-components / Tailwind', value: 'Tailwind CSS v3' },
       { cat: 'Build', prev: 'webpack 4 + Babel', value: 'Vite / esbuild' },
       { cat: 'Backend', prev: 'NestJS / GraphQL / Serverless', value: 'tRPC / Edge Functions' },
       { cat: 'Database', prev: 'Aurora / Firestore', value: 'Supabase / PlanetScale' },

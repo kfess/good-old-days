@@ -3,7 +3,7 @@ import { h } from '../../core/util';
 import { MD } from './isometric';
 
 /*
- * Two years after the split: the five services above become a few hundred, drawn the way those call
+ * A year after the split: the six services above become a few hundred, drawn the way those call
  * graphs were drawn (services on a ring, every dependency a chord through the middle). With enough
  * services the middle goes solid, and people called the picture a Death Star. Scroll grows it.
  * Canvas rather than SVG: hundreds of curves are redrawn on every scroll step.
@@ -53,7 +53,7 @@ function build(): Graph {
 export function mountDeathStar(parent: HTMLElement): void {
   const el = h(`
     <div class="y15-card y15-star">
-      <p class="y15-card__title">Two years later <span class="y15-star__count">8 services</span></p>
+      <p class="y15-card__title">A year later <span class="y15-star__count">8 services</span></p>
       <div class="y15-star__grid">
         <div class="y15-star__copy">
           <p class="y15-star__big">Every team got its own service.</p>

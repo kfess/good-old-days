@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { t } from '../../core/i18n';
 import { reducedMotion } from '../../core/scroll';
 import { h } from '../../core/util';
 
@@ -30,7 +31,7 @@ export function buildCloud(): HTMLElement {
             </table>
             <div class="w-wizard__row">
               <label>Instance type
-                <select class="w-type"><option>m1.small (1.7 GiB, 1 ECU)</option><option>c1.medium (1.7 GiB, 5 ECU)</option></select>
+                <select class="w-type"><option>m1.small (1.7 GB, 1 ECU)</option><option>c1.medium (1.7 GB, 5 ECU)</option></select>
               </label>
               <label>Count <input class="w-count" type="number" value="3" min="1" max="5"></label>
               <button type="button" class="w-gbtn w-gbtn--orange w-launch">Launch</button>
@@ -46,7 +47,7 @@ export function buildCloud(): HTMLElement {
           <div class="w-lamp__layer w-lamp__layer--m"><b>M</b><span>MySQL</span></div>
           <div class="w-lamp__layer w-lamp__layer--a"><b>A</b><span>Apache 2.2</span></div>
           <div class="w-lamp__layer w-lamp__layer--l"><b>L</b><span>Linux</span></div>
-          <figcaption>The LAMP stack — on someone else's computer.</figcaption>
+          <figcaption>${t('The LAMP stack — on a credit card, by the hour.', 'LAMP スタックを、クレジットカードで時間貸し。')}</figcaption>
         </figure>
       </div>
     </div>`);
