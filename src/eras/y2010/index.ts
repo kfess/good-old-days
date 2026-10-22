@@ -1,4 +1,4 @@
-import { siBackbonedotjs, siCoffeescript, siJquery, siNpm, siRubyonrails } from 'simple-icons';
+import { siBackbonedotjs, siJquery } from 'simple-icons';
 import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
@@ -7,7 +7,6 @@ import { createThread } from '../../components/thread';
 import { gsap, reducedMotion } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
-import { bootstrapB } from '../y2012/art'; // simple-icons only has the 2021 mark
 import { buildCloud } from './cloud';
 import { buildShowcase } from './showcase';
 import { STAGE_2010 } from './stage';
@@ -118,23 +117,17 @@ export const era: Era = {
       section,
       [
         { year: '2007', name: 'Heroku', icon: 'Heroku', line: 'git push, and you’re live. Rails’ favorite home.' },
-        { year: '2010', name: 'npm', icon: siNpm, line: 'Any library, one command away.' },
+        { year: '2010', name: 'npm', line: 'Any library, one command away.' },
         { year: '2010', name: 'Express', line: 'The minimalist framework for Node.' },
         { year: '2010', name: 'Socket.IO', line: 'Real-time came to the browser.' },
         { year: '2010.03', name: 'jQuery UI 1.8', icon: siJquery, line: 'Drag-and-drop, date pickers, all plugins.' },
         { year: '2010.05', name: 'Sass 3 (SCSS)', line: 'Plain CSS syntax, plus variables and nesting.' },
-        { year: '2010.08', name: 'Rails 3', icon: siRubyonrails, line: 'Standard issue for startups.' },
+        { year: '2010.08', name: 'Rails 3', line: 'Standard issue for startups.' },
         { year: '2010.10', name: 'Backbone.js', icon: siBackbonedotjs, line: 'A backbone for jQuery spaghetti.' },
-        {
-          year: '2010.12',
-          name: 'CoffeeScript 1.0',
-          icon: siCoffeescript,
-          line: 'JavaScript without the curly braces.',
-        },
+        { year: '2010.12', name: 'CoffeeScript 1.0', line: 'JavaScript without the curly braces.' },
         {
           year: '2011.08',
           name: 'Twitter Bootstrap',
-          icon: bootstrapB,
           line: 'Twitter’s in-house toolkit, open-sourced.',
         },
       ],

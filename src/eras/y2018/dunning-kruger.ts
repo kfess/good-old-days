@@ -32,7 +32,7 @@ const BEATS: { x: number; when: string; say: string; place: string; pos: 'peak' 
 /** the walk is done by this share of the scroll; the rest holds the final beat on screen */
 const WALK_END = 0.82;
 
-export function createDunning(section: HTMLElement): void {
+export function createDunningKruger(section: HTMLElement): void {
   const el = h(`
     <div class="dk">
       <div class="dk__sticky">

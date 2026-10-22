@@ -15,3 +15,7 @@ Now one sentence is enough.
 I miss the good old days. Strongly.
 
 https://kfess.github.io/good-old-days/
+
+---
+
+All product names, logos and brands are property of their respective owners, used for identification only; no endorsement is implied. Logo licences and trademark notices are listed in the page footer.

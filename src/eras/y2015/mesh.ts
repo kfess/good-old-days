@@ -1,7 +1,7 @@
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
-import { MD } from './iso';
-import { ripples } from './md';
+import { MD } from './isometric';
+import { ripples } from './ripple';
 
 /*
  * Microservices are not just split-up containers: they call each other over the network.

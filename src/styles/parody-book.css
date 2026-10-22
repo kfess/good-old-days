@@ -1,4 +1,4 @@
-/* Parody "O RLY?"-style book cover (src/components/oreilly.ts). Size it with `width` on .orly. */
+/* Parody "O RLY?"-style book cover (src/components/parody-book.ts). Size it with `width` on .orly. */
 
 .orly {
   --orly-band: #b0193f;

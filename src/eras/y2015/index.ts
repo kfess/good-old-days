@@ -11,7 +11,7 @@ import { mountApp } from './app';
 import { mountBranch } from './branch';
 import { mountInfra } from './infra';
 import { mountIntro } from './intro';
-import { ripples } from './md';
+import { ripples } from './ripple';
 import { STAGE_2015 } from './stage';
 import './style.css';
 

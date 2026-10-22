@@ -868,7 +868,7 @@
   }
 }
 
-.era--epilogue .coda__ck {
+.era--epilogue .coda__clawd {
   position: relative;
   display: inline-flex;
   gap: 14px;
@@ -902,7 +902,7 @@
   transform: translateY(-50%) rotate(45deg);
 }
 
-.era--epilogue .coda__ck .ck {
+.era--epilogue .coda__clawd .clawd {
   width: clamp(84px, 8vw, 116px);
   height: clamp(84px, 8vw, 116px);
 }
@@ -1288,5 +1288,59 @@
 @media (max-width: 759.98px) {
   .era--epilogue .coda__ctr-t {
     animation-name: coda-ctr-sm;
+  }
+}
+
+/* ================= autopilot ================= */
+/* every tool of the story, in today's marks, lit one by one by the agent before they fuse into one */
+
+.era--epilogue .fin__wall {
+  --tool: min(4.4vw, 7vh);
+  position: absolute;
+  inset: 0 0 8vh;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(12, var(--tool));
+  gap: calc(var(--tool) * 0.5);
+  place-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.era--epilogue .fin__tool {
+  display: block;
+  width: var(--tool);
+  height: var(--tool);
+  color: #262626;
+  transition:
+    color 0.25s,
+    filter 0.25s,
+    transform 0.25s;
+}
+
+.era--epilogue .fin__tool svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.era--epilogue .fin__tool.is-lit {
+  color: var(--c);
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--c) 45%, transparent));
+}
+
+.era--epilogue .fin__tool.is-new {
+  transform: scale(1.3);
+}
+
+.era--epilogue .fin.is-static .fin__wall {
+  display: none;
+}
+
+@media (max-width: 759.98px) {
+  .era--epilogue .fin__wall {
+    --tool: min(10.5vw, 5.4vh);
+    grid-template-columns: repeat(6, var(--tool));
   }
 }

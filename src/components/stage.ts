@@ -1,5 +1,5 @@
 import { gsap, reducedMotion, ScrollTrigger } from '../core/scroll';
-import { holdHudYear } from '../core/stage';
+import { dateHudSpan, holdHudYear } from '../core/stage';
 import { esc, h } from '../core/util';
 import { brandName } from './brand';
 
@@ -194,7 +194,7 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
     sync();
   });
 
-  gsap
+  const pinTl = gsap
     .timeline({
       scrollTrigger: {
         trigger: pin,
@@ -211,6 +211,7 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
       },
     })
     .add(master);
+  dateHudSpan(pinTl.scrollTrigger!, sceneYear(0), sceneYear(scenes.length - 1));
 
   return el;
 }

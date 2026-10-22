@@ -2,7 +2,7 @@ import { gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger, scrollToEl } from '..
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
-import { claudeKun } from '../../components/claudekun';
+import { clawd } from '../../components/clawd';
 import { h } from '../../core/util';
 
 const CENTER_TRICKS = [
@@ -73,7 +73,7 @@ export function buildCoda(): HTMLElement {
           <p class="coda__i1">The irony?</p>
           <p class="coda__i2">I couldn’t build a page about the good old days <br /><em>without AI.</em></p>
           <p class="coda__i3">By hand, this page would have taken my entire life.<span class="coda__off"><span class="coda__off-t">(I’d still be centering the div.)</span><code class="coda__fix">display: grid; place-items: center;</code></span></p>
-          <div class="coda__ck">${claudeKun('', 'wave')}<p class="coda__bubble">Hi, I’m Claude.<br />I centered the div for you.</p></div>
+          <div class="coda__clawd">${clawd('', 'wave')}<p class="coda__bubble">Hi, I’m Claude.<br />I centered the div for you.</p></div>
           <div class="coda__bye">
           <p class="coda__counter">You are visitor <b>0000001</b></p>
           <button type="button" class="coda__again">↺ Back to 1999</button>
@@ -83,7 +83,7 @@ export function buildCoda(): HTMLElement {
 
       </div>
     </div>
-      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; Claude Code mascot © Anthropic.</p></footer>
+      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio, Argo and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; the Claude Code mascot (Clawd) © Anthropic. GPT, ChatGPT and Codex are trademarks of OpenAI; Gemini and Google Chrome of Google LLC; Llama of Meta Platforms, Inc.; GitHub and Copilot of GitHub, Inc.; TypeScript and Visual Studio Code of Microsoft Corporation; Cursor of Anysphere, Inc.; Firefox of the Mozilla Foundation; Grok of xAI; DeepSeek, Qwen and Mistral of their respective companies. Icons via Simple Icons (CC0); where a brand licenses its logo, that licence applies: Vue.js logo by Evan You (CC BY-NC-SA 4.0), HTML5 logo by W3C (CC BY 3.0), Jenkins logo (CC BY-SA 3.0), OpenTelemetry and WebGPU logos (CC BY 4.0), Apache Kafka, Fluentd and Rook logos (Apache 2.0), Backbone.js, Deno, JavaScript, Storybook and GitHub Copilot icons (MIT).</p></footer>
     </div>`);
   const coda = el.querySelector<HTMLElement>('.coda')!;
   el.querySelector('.coda__again')!.addEventListener('click', () => scrollToEl(0));
@@ -184,7 +184,7 @@ export function buildCoda(): HTMLElement {
     .fromTo(q('.coda__i2'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 22.85)
     .fromTo(q('.coda__i3'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 23.45)
     .fromTo(
-      q('.coda__ck'),
+      q('.coda__clawd'),
       { opacity: 0, scale: 0, rotate: -40 },
       { opacity: 1, scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.4)' },
       24.25,

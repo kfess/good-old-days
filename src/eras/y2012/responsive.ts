@@ -51,7 +51,7 @@ export function mountResponsive(parent: HTMLElement): void {
       </div>
       <div class="rd__stage">
         <div class="rd__frame">
-          <div class="rd__bar"><i></i><i></i><i></i><span>lumen.io</span></div>
+          <div class="rd__bar"><i></i><i></i><i></i><span>lumen.example</span></div>
           <div class="rd__body">
             <nav class="lm-off" aria-label="lumen menu">
               <b>lumen</b><a>Features</a><a>Pricing</a><a>Blog</a><a>Contact</a>

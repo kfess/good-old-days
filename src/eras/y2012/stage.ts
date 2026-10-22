@@ -1,8 +1,8 @@
-import { type SimpleIcon, siDocker, siReact } from 'simple-icons';
-import { angularShield } from '../../components/marks';
+import { type SimpleIcon, siReact } from 'simple-icons';
+import { angularShield, dockerWhale2013 } from '../../components/marks';
 import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY, reducedMotion } from '../../core/scroll';
-import { bootstrapB, FLAT } from './art';
+import { bootstrapGrid, FLAT } from './art';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 let uid = 0;
@@ -66,7 +66,7 @@ const bootstrap2: StageScene = {
   kicker: 'Sleek, intuitive, and powerful',
   line: 'Even engineers could build a decent-looking site.',
   className: 'y12-scene y12-scene--bs',
-  logo: longShadowBadge(bootstrapB, FLAT.amethyst),
+  logo: longShadowBadge(bootstrapGrid, FLAT.amethyst),
   length: 1.2,
   play({ art, logo: tile, tl }) {
     const col = (n: number) => `
@@ -212,10 +212,10 @@ const BOX_COLORS = [
 const docker: StageScene = {
   year: '2013',
   name: 'Docker',
-  kicker: 'Build, ship, run',
+  kicker: 'Pack, ship and run',
   line: '“Works on my machine,” shipped as-is.',
   className: 'y12-scene y12-scene--docker',
-  logo: longShadowBadge(siDocker, FLAT.river),
+  logo: longShadowBadge(dockerWhale2013, FLAT.river),
   length: 1.8,
   play({ art, logo, tl }) {
     const cells: { c: number; r: number }[] = [];

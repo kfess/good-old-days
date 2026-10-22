@@ -1,6 +1,6 @@
 import { reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
 import { esc, h } from '../../core/util';
-import { visibleLoop } from '../y2018/loop';
+import { visibleLoop } from '../y2018/visible-loop';
 
 export interface BentoActions {
   save: () => void;

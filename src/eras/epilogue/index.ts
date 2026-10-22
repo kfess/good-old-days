@@ -2,6 +2,7 @@ import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
 import { fitCanvas, loopWhenVisible } from '../y2023/lib';
+import { AUTOPILOT, buildWall, onBlack } from './autopilot';
 import { buildCoda } from './coda';
 import './style.css';
 
@@ -9,11 +10,10 @@ import './style.css';
 const BW = 480;
 const BH = 300;
 
-const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
+const MINIS: { year: string; log: string; html: string }[] = [
   {
     year: '1999',
     log: '<marquee>, hit counter, webring',
-    colors: ['#ffff00', '#00ff66', '#ff3df5', '#7f7fff'],
     html: `<div class="m99">
       <p class="m99__mq"><span>★ Welcome to my homepage!! ★ Sign my guestbook ★ Best viewed in 800×600 ★ </span></p>
       <h4 class="m99__h">~*~ My Cool Page ~*~</h4>
@@ -25,7 +25,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2010',
     log: 'Lightbox, glossy buttons, beta badge',
-    colors: ['#ff7a00', '#3b8dd8', '#8cc63f', '#ffffff'],
     html: `<div class="m10">
       <div class="m10__head"><b>Snapr</b><span class="m10__beta">beta</span></div>
       <div class="m10__thumbs"><i></i><i></i><i></i><i></i></div>
@@ -36,7 +35,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2013',
     log: 'flat UI, long shadows, ghost buttons',
-    colors: ['#1abc9c', '#ecf0f1', '#e74c3c', '#f1c40f'],
     html: `<div class="m13">
       <div class="m13__icon"><span>✓</span></div>
       <h4>Flat is the new black.</h4>
@@ -47,7 +45,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2016',
     log: 'paper, ink, floating action button',
-    colors: ['#3f51b5', '#ff4081', '#ffffff', '#c5cae9'],
     html: `<div class="m16">
       <div class="m16__bar"><span>☰</span> Inbox</div>
       <div class="m16__card"><b>Material</b><p>Paper, ink and elevation.</p><span class="m16__ripple"></span></div>
@@ -58,7 +55,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2019',
     log: 'pods, replicas, self-healing',
-    colors: ['#326ce5', '#8a94b2', '#ffffff', '#7ee787'],
     html: `<div class="m19">
       <p class="m19__h"><span>deployment/web</span><b>12/12 ready</b></p>
       <div class="m19__pods">${'<i></i>'.repeat(12)}</div>
@@ -68,7 +64,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2022',
     log: 'glass, bento, ⌘K',
-    colors: ['#a78bfa', '#60a5fa', '#f472b6', '#ffffff'],
     html: `<div class="m22">
       <div class="m22__aurora"></div>
       <div class="m22__grid"><div class="m22__k">⌘K</div><div>Edge</div><div>Deploy preview</div><div class="m22__w">Ship faster.</div></div>
@@ -77,7 +72,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2024',
     log: 'streaming tokens, ✨',
-    colors: ['#d97757', '#f5f3ee', '#8b5cf6', '#3b82f6'],
     html: `<div class="m24">
       <div class="m24__u">Rebuild the web.</div>
       <div class="m24__a"><span class="m24__av">✦</span><p>Sure — starting with <code>&lt;marquee&gt;</code> and a hit counter<i></i></p></div>
@@ -87,7 +81,6 @@ const MINIS: { year: string; log: string; colors: string[]; html: string }[] = [
   {
     year: '2025',
     log: 'agents, in a terminal',
-    colors: ['#d97757', '#e6e6e6', '#7ee787', '#ffb59a'],
     html: `<div class="m25">
       <p><b>&gt;</b> rebuild everything</p>
       <p><em>⏺</em> Write(1999/index.html)</p>
@@ -130,7 +123,8 @@ function layout(stage: HTMLElement): { slots: Slot[]; center: Slot; W: number; H
 /* ---------------- particles ---------------- */
 
 interface Particle {
-  era: number;
+  /** the tool on the wall the particle leaves from */
+  tool: number;
   u: number;
   v: number;
   // unit sphere target
@@ -150,11 +144,10 @@ function makeParticles(n: number): Particle[] {
     const y = 1 - (k / (n - 1)) * 2;
     const r = Math.sqrt(1 - y * y);
     const th = golden * k;
-    // shuffle which era each sphere point comes from so colors mix on the surface
-    const era = (k * 7 + ((k * 2654435761) >>> 28)) % MINIS.length;
-    const pal = MINIS[era].colors;
+    // shuffle which tool each sphere point comes from so colors mix on the surface
+    const tool = (k * 7 + ((k * 2654435761) >>> 28)) % AUTOPILOT.length;
     out.push({
-      era,
+      tool,
       u: Math.random(),
       v: Math.random(),
       sx: Math.cos(th) * r,
@@ -162,7 +155,7 @@ function makeParticles(n: number): Particle[] {
       sz: Math.sin(th) * r,
       delay: Math.random() * 0.35,
       swirl: (Math.random() - 0.5) * 2,
-      color: pal[k % pal.length],
+      color: onBlack(AUTOPILOT[tool][0].hex),
       size: Math.random() < 0.08 ? 2.8 : 1.7,
     });
   }
@@ -190,6 +183,7 @@ export const era: Era = {
                 `<div class="fin__mini fin__mini--${m.year}" data-i="${i}"><span class="fin__tag">${m.year}</span>${m.html}</div>`,
             ).join('')}
           </div>
+          ${buildWall()}
           <canvas class="fin__canvas" aria-hidden="true"></canvas>
           <p class="fin__log" aria-hidden="true"></p>
           <div class="fin__end">
@@ -206,6 +200,8 @@ export const era: Era = {
     const canvas = el.querySelector<HTMLCanvasElement>('.fin__canvas')!;
     const log = el.querySelector<HTMLElement>('.fin__log')!;
     const end = el.querySelector<HTMLElement>('.fin__end')!;
+    const wall = el.querySelector<HTMLElement>('.fin__wall')!;
+    const tools = Array.from(el.querySelectorAll<HTMLElement>('.fin__tool'));
 
     if (reducedMotion) {
       el.classList.add('is-static');
@@ -216,12 +212,18 @@ export const era: Era = {
 
     const STEP = 0.62;
     const MOSAIC_END = (MINIS.length - 1) * STEP + 0.72;
-    const DISSOLVE_START = MOSAIC_END + 0.5;
+    // autopilot: the mosaic steps back and one agent drives every tool, faster and faster
+    const AUTO_START = MOSAIC_END + 0.5;
+    const AUTO_LIT = AUTO_START + 0.35;
+    const AUTO_END = AUTO_LIT + 2.4;
+    const litAt = (k: number) => AUTO_LIT + (AUTO_END - AUTO_LIT) * Math.sqrt(k / AUTOPILOT.length);
+    const DISSOLVE_START = AUTO_END + 0.6;
     const DISSOLVE_END = DISSOLVE_START + 2.8;
     const TOTAL = DISSOLVE_END + 1.6;
     const state = { p: 0, q: 0 };
 
     let lastLog = '';
+    let lastLit = -1;
     const tl = gsap.timeline({
       defaults: { ease: 'power2.inOut' },
       // the scrub smooths time after the last scroll event, so sync the log on every tick
@@ -230,7 +232,8 @@ export const era: Era = {
         trigger: pin,
         pin: true,
         start: 'top top',
-        end: '+=760%',
+        // ~76vh of scrolling per timeline unit
+        end: () => `+=${Math.round(TOTAL * 76)}%`,
         scrub: 0.8,
         invalidateOnRefresh: true,
       },
@@ -273,10 +276,25 @@ export const era: Era = {
         t0 + 0.4,
       );
     });
-    tl.to(minis, { opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power1.in' }, DISSOLVE_START + 0.05)
+    tl.to(minis, { opacity: 0.05, duration: 0.35, ease: 'power1.out' }, AUTO_START - 0.1)
+      .fromTo(
+        wall,
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' },
+        AUTO_START,
+      )
+      .to(minis, { opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power1.in' }, DISSOLVE_START + 0.05)
+      .to(wall, { opacity: 0, duration: 0.7, ease: 'power1.in' }, DISSOLVE_START + 0.15)
       .to(state, { p: 1, duration: DISSOLVE_END - DISSOLVE_START, ease: 'none' }, DISSOLVE_START)
       .to(state, { q: 1, duration: TOTAL - DISSOLVE_END, ease: 'none' }, DISSOLVE_END)
       .fromTo(end, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, DISSOLVE_END + 0.2);
+
+    /** how many tools the agent has lit by timeline time `t` */
+    function lit(t: number): number {
+      let n = 0;
+      while (n < AUTOPILOT.length && litAt(n) <= t) n++;
+      return n;
+    }
 
     function updateLog() {
       const t = tl.time();
@@ -284,10 +302,23 @@ export const era: Era = {
       if (t < MOSAIC_END - 0.1) {
         const i = Math.min(MINIS.length - 1, Math.max(0, Math.floor((t + 0.1) / STEP)));
         text = `⏺ Write(${MINIS[i].year}/index.html) — ${MINIS[i].log}`;
-      } else if (t < DISSOLVE_START) {
+      } else if (t < AUTO_LIT) {
         text = '✓ 27 years rebuilt in 4.2s';
+      } else if (t < AUTO_END + 0.15) {
+        const n = lit(t);
+        text = n > 0 ? `⏺ ${AUTOPILOT[n - 1][1]}` : '';
+      } else if (t < DISSOLVE_START) {
+        text = `✓ ${AUTOPILOT.length} tools, one prompt. Nobody touched a keyboard.`;
       } else if (t < DISSOLVE_END - 0.4) {
         text = '⏺ Compressing 27 years into one prompt…';
+      }
+      const n = lit(t);
+      if (n !== lastLit) {
+        lastLit = n;
+        tools.forEach((el, k) => {
+          el.classList.toggle('is-lit', k < n);
+          el.classList.toggle('is-new', k === n - 1 && t < AUTO_END);
+        });
       }
       if (text !== lastLog) {
         lastLog = text;
@@ -304,13 +335,26 @@ export const era: Era = {
     const small = window.matchMedia('(max-width: 759.98px)').matches;
     const parts = makeParticles(small ? 2200 : 5200);
 
+    // where each tool sits in the pin, measured once the wall is still and again after a resize
+    let centers: { x: number; y: number; s: number }[] = [];
+    let measuredAt = '';
+    const measure = (W: number, H: number) => {
+      if (measuredAt === `${W}x${H}`) return;
+      measuredAt = `${W}x${H}`;
+      const box = pin.getBoundingClientRect();
+      centers = tools.map((t) => {
+        const r = t.getBoundingClientRect();
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2, s: r.width };
+      });
+    };
+
     loopWhenVisible(pin, (now) => {
       const { w: W, h: H, dpr } = fitCanvas(canvas);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       const p = state.p;
       if (p <= 0) return;
-      const L = layout(stage);
+      measure(W, H);
       const rot = now / 9000 + p * 1.6;
       const cr = Math.cos(rot);
       const sr = Math.sin(rot);
@@ -332,9 +376,10 @@ export const era: Era = {
 
       ctx.globalCompositeOperation = 'lighter';
       for (const pt of parts) {
-        const slot = L.slots[pt.era];
-        const x0 = slot.x + pt.u * BW * slot.s;
-        const y0 = slot.y + pt.v * BH * slot.s;
+        // each particle leaves from a spot on its tool's mark
+        const c = centers[pt.tool];
+        const x0 = c.x + (pt.u - 0.5) * c.s;
+        const y0 = c.y + (pt.v - 0.5) * c.s;
         // rotate sphere target
         const x1 = pt.sx * cr + pt.sz * sr;
         const z1 = -pt.sx * sr + pt.sz * cr;

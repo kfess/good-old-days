@@ -1,6 +1,6 @@
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
-import { type Box, MD, scene } from './iso';
+import { type Box, MD, scene } from './isometric';
 
 const WORDS = ['component.', 'container.', 'function.', 'microservice.'];
 

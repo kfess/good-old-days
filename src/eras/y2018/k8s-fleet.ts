@@ -1,7 +1,7 @@
 import { MOBILE_QUERY, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 import { drawK8sMark } from './k8s-logo';
-import { visibleLoop } from './loop';
+import { visibleLoop } from './visible-loop';
 
 /*
  * The infra climax: one container becomes a planet-scale fleet.
@@ -267,7 +267,7 @@ const BEATS: Beat[] = [
 
 /* ---------------- the component ---------------- */
 
-export function createK8sEpic(parent: HTMLElement): void {
+export function createK8sFleet(parent: HTMLElement): void {
   const el = h(`
     <div class="kx">
       <div class="kx__pin">

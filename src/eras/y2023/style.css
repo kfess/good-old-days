@@ -1890,17 +1890,23 @@
   }
 }
 
-/* easter egg: App Router, all of it */
+/* easter egg: App Router, all of it, and the punchline it earns */
 .era--y2023 .y23-ar {
-  width: min(460px, 100%);
-  margin: 0 0 64px auto;
-  padding: 16px 18px 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: center;
+  margin: 24px 0 96px;
+}
+
+.era--y2023 .y23-ar__card {
+  padding: 20px 22px 16px;
   border-radius: 14px;
   background: #fffdf8;
   box-shadow:
     0 0 0 1px #e6e0d4,
     0 14px 30px rgba(31, 30, 29, 0.08);
-  transform: rotate(0.6deg);
+  transform: rotate(-0.6deg);
 }
 
 .era--y2023 .y23-ar__k {
@@ -1917,7 +1923,7 @@
   display: grid;
   margin: 0;
   font:
-    400 12px / 1.6 "Geist Mono",
+    400 14px / 1.65 "Geist Mono",
     monospace;
   color: #1f1e1d;
   white-space: pre-wrap;
@@ -1993,27 +1999,57 @@
   transition-delay: 0.99s;
 }
 
-.era--y2023 .y23-ar__punch {
+.era--y2023 .y23-ar__count {
   margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed #e6e0d4;
   font:
-    700 16px "Geist",
-    sans-serif;
-  letter-spacing: -0.01em;
-  color: #1f1e1d;
-  text-align: right;
+    500 12px "Geist Mono",
+    monospace;
+  color: #6b6862;
   opacity: 0;
-  transition: opacity 0.4s 1.3s;
+  transition: opacity 0.4s 1.1s;
 }
 
-.era--y2023 .y23-ar.is-in .y23-ar__punch {
+.era--y2023 .y23-ar__count b {
+  color: #b4532f;
+}
+
+.era--y2023 .y23-ar__punch {
+  margin: 0;
+  font:
+    800 clamp(40px, 6vw, 96px) / 0.98 "Geist",
+    sans-serif;
+  letter-spacing: -0.045em;
+  color: #1f1e1d;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.5s 1.6s,
+    transform 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) 1.6s;
+}
+
+.era--y2023 .y23-ar__punch span {
+  background: linear-gradient(90deg, #d97757, #e879a6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.era--y2023 .y23-ar.is-in :is(.y23-ar__count, .y23-ar__punch) {
   opacity: 1;
+  transform: none;
 }
 
 @media (max-width: 759.98px) {
   .era--y2023 .y23-ar {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .era--y2023 .y23-ar__card {
     transform: none;
   }
   .era--y2023 .y23-ar__tree {
-    font-size: 11px;
+    font-size: 12px;
   }
 }

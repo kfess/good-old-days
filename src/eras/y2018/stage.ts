@@ -1,4 +1,4 @@
-import { siReact, siTailwindcss, siTypescript, siVuedotjs } from 'simple-icons';
+import { siReact, siTailwindcss, siVuedotjs } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { angularShield } from '../../components/marks';
 import { type StageScene, scrubType } from '../../components/stage';
@@ -46,8 +46,8 @@ const typescript: StageScene = {
   kicker: 'JavaScript that scales',
   line: 'The typo that shipped in JavaScript, caught before it ever ran.',
   className: 'y18-scene y18-scene--ts',
-  // #3178c6 and the official square mark came with the 2020 rebrand; 2018 TypeScript was #007acc
-  logo: glow({ ...siTypescript, hex: '007ACC' }, '#007acc'),
+  // the square "TS" mark and #3178c6 came with the 2020 rebrand; 2018 TypeScript had only its name, in #007acc
+  logo: glow('TS', '#007acc'),
   length: 1.4,
   play({ art, logo: mark, tl }) {
     art.innerHTML = `
@@ -172,7 +172,7 @@ const hooks: StageScene = {
   year: '2019.02',
   name: 'React Hooks',
   kicker: 'Goodbye, this',
-  line: 'Dropped classes. Back to functions.',
+  line: 'Classes became optional. Back to functions.',
   className: 'y18-scene y18-scene--hooks',
   logo: glow(siReact, '#61dafb'),
   length: 1.2,
@@ -280,15 +280,22 @@ const TW_LINES: { open: string; close: string; toks: string[]; on: Tok['on'] }[]
   },
 ];
 
+/** One developer's take on utility classes, a month apart. */
+const TW_TAKES: [string, string][] = [
+  ['May 2019', 'Ew. That’s just inline styles with extra steps. Who would write HTML this ugly?'],
+  ['Jun 2019', '…okay. I’m never writing a CSS file again. (Still ugly, though.)'],
+];
+
 const tailwind: StageScene = {
   year: '2019.05',
   name: 'Tailwind CSS',
   kicker: 'Utility-first',
   line: 'The whole design, in the class attribute.',
   className: 'y18-scene y18-scene--tw',
-  // v1 (2019) drew the wave in teal; sky blue arrived with v2 (2020.11)
-  logo: glow({ ...siTailwindcss, hex: '17B8BA' }, '#17b8ba'),
-  length: 1.2,
+  // v1 (2019) drew the wave in a teal gradient and sky blue arrived with v2 (2020.11): the mark stays
+  // plain white rather than recoloured, and only the glow carries the v1 teal
+  logo: glow(logo(siTailwindcss, 'current'), '#17b8ba'),
+  length: 1.5,
   play({ art, logo: mark, tl }) {
     art.innerHTML = `
       <pre class="y18-tw__code"><code>${TW_LINES.map((_, i) => `<span class="y18-tw__line" data-l="${i}"></span>`).join('')}</code></pre>
@@ -298,7 +305,15 @@ const tailwind: StageScene = {
           <span class="y18-tw__who"><b>Ada Lovelace</b><small>Staff Engineer</small></span>
           <span class="y18-tw__btn" data-n="btn">Follow</span>
         </div>
-      </div>`;
+      </div>
+      ${TW_TAKES.map(
+        ([when, text], i) => `
+      <figure class="y18-tw__take" data-t="${i}">
+        <i class="y18-tw__face" aria-hidden="true"></i>
+        <figcaption><b>Frontend dev</b> <span>· ${esc(when)}</span></figcaption>
+        <p>${esc(text)}</p>
+      </figure>`,
+      ).join('')}`;
 
     const toks: Tok[] = TW_LINES.flatMap((l, line) => l.toks.map((cls) => ({ line, cls, on: l.on })));
     const lineEls = Array.from(art.querySelectorAll<HTMLElement>('.y18-tw__line'));
@@ -309,7 +324,7 @@ const tailwind: StageScene = {
     };
     const total = toks.reduce((s, t) => s + t.cls.length + 1, 0);
 
-    // the Tailwind wordmark already carries the mark, so the glowing logo bows out instead of parking on it
+    // the glowing logo bows out instead of parking: the utility classes are the star of this scene
     park(tl, mark, [0, 78], [0, -105]);
     tl.to(mark, { opacity: 0, duration: 0.3 }, 0.2);
     tl.from(
@@ -355,7 +370,12 @@ const tailwind: StageScene = {
       },
       0.55,
     );
-    tl.to({}, { duration: 0.35 });
+    // the reaction everyone had, and the reaction everyone had a month later
+    const [ugh, fine] = Array.from(art.querySelectorAll<HTMLElement>('.y18-tw__take'));
+    tl.fromTo(ugh, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.2, ease: 'back.out(2)' }, 1.25);
+    tl.to(ugh, { opacity: 0, y: -10, duration: 0.15 }, 2.95);
+    tl.fromTo(fine, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.2, ease: 'back.out(2)' }, 3.05);
+    tl.to({}, { duration: 0.45 });
   },
 };
 

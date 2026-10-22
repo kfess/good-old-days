@@ -1,6 +1,6 @@
 import { gsap, reducedMotion } from '../../core/scroll';
 import { esc, h, onceInView } from '../../core/util';
-import { ripples } from './md';
+import { ripples } from './ripple';
 
 /* ---------------- the Redux side ---------------- */
 

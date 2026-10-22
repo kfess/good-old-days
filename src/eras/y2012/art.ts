@@ -28,6 +28,19 @@ export const bootstrapB = {
   svg: '',
 } as unknown as SimpleIcon;
 
+/**
+ * Bootstrap 2 had no mark (its docs set the name in Helvetica), so its scene shows what it stood for:
+ * three `span4` columns of the 12-column grid. Original art.
+ */
+export const bootstrapGrid = {
+  title: 'Bootstrap',
+  slug: 'bootstrap',
+  hex: '563D7C',
+  source: 'https://getbootstrap.com/2.0.4/',
+  path: 'M2 4h5.5v16H2zm7.25 0h5.5v16h-5.5zm7.25 0H22v16h-5.5z',
+  svg: '',
+} as unknown as SimpleIcon;
+
 type Shape =
   | { t: 'rect'; x: number; y: number; w: number; h: number; r?: number; detail?: boolean }
   | { t: 'circle'; cx: number; cy: number; r: number; detail?: boolean }

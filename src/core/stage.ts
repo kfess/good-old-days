@@ -89,6 +89,16 @@ export function holdHudYear(year: number | null): void {
   setYear(year ?? progressYear);
 }
 
+/**
+ * Stretches of an era that are dated (a pinned stage, the Terraform scene): `first` where the trigger
+ * starts, `last` where it ends. The era's scroll progress interpolates between these and the era's own
+ * bounds, so the HUD never rolls back to an earlier year once a dated stretch has passed.
+ */
+const yearSpans: { trigger: ScrollTrigger; first: number; last: number }[] = [];
+export function dateHudSpan(trigger: ScrollTrigger, first: number, last: number): void {
+  yearSpans.push({ trigger, first, last });
+}
+
 const srvState = { n: 0 };
 function setServers(s: Era['servers']): void {
   srvUnit.textContent = s.unit;
@@ -159,6 +169,24 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
   const hudTriggers: ScrollTrigger[] = [];
   const blendTriggers: (ScrollTrigger | null)[] = [];
 
+  // the year at scroll position `y` in era `i`: piecewise linear through the era's dated stretches
+  const eraYear = (i: number, t: ScrollTrigger, y: number): number => {
+    const [from, to] = eras[i].years;
+    const pts: [number, number][] = [[t.start, from]];
+    for (const s of yearSpans) {
+      if (s.trigger.start >= t.start && s.trigger.end <= t.end)
+        pts.push([s.trigger.start, s.first], [s.trigger.end, s.last]);
+    }
+    pts.push([t.end, to + 1]);
+    pts.sort((a, b) => a[0] - b[0]);
+    let k = 0;
+    while (k < pts.length - 2 && y >= pts[k + 1][0]) k++;
+    const [p0, y0] = pts[k];
+    const [p1, y1] = pts[k + 1];
+    const f = p1 > p0 ? Math.min(1, Math.max(0, (y - p0) / (p1 - p0))) : 1;
+    return Math.min(to, Math.max(from, Math.floor(y0 + f * (y1 - y0))));
+  };
+
   eras.forEach((era, i) => {
     const section = sections[i];
 
@@ -173,8 +201,7 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
       onEnter: () => activate(era),
       onEnterBack: () => activate(era),
       onUpdate: (self) => {
-        const [from, to] = era.years;
-        progressYear = Math.min(to, from + Math.floor(self.progress * (to - from + 1)));
+        progressYear = eraYear(i, self, self.scroll());
         if (heldYear === null) setYear(progressYear);
       },
     });
@@ -228,8 +255,7 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
     const i = hudTriggers.findIndex((t) => y >= t.start && y < t.end);
     if (i >= 0) {
       activate(eras[i]);
-      const [from, to] = eras[i].years;
-      progressYear = Math.min(to, from + Math.floor(hudTriggers[i].progress * (to - from + 1)));
+      progressYear = eraYear(i, hudTriggers[i], y);
       if (heldYear === null) setYear(progressYear);
     }
     let theme = eras[0].theme;

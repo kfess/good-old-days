@@ -1,4 +1,4 @@
-import { siDeno, siGithubactions, siHelm, siIstio, siSvelte } from 'simple-icons';
+import { siGithubactions, siHelm, siIstio, siSvelte } from 'simple-icons';
 import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
@@ -7,9 +7,10 @@ import { createThread } from '../../components/thread';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
 import { createGlobe } from '../y2021/globe';
-import { createDunning } from './dunning';
-import { ILLUST_2018 } from './illust';
-import { createK8sEpic } from './k8s-epic';
+import { DENO } from '../y2021/icons'; // the 2020–2023 dinosaur; simple-icons ships the newer one
+import { createDunningKruger } from './dunning-kruger';
+import { ILLUST_2018 } from './illustration';
+import { createK8sFleet } from './k8s-fleet';
 import { k8sMark } from './k8s-logo';
 import { createLandscape } from './landscape';
 import { createLook } from './look';
@@ -44,9 +45,9 @@ export const era: Era = {
     createTerraform(section);
 
     // ---- the infra climax: one container → a planet-scale fleet ----
-    createK8sEpic(section);
+    createK8sFleet(section);
     // ---- …and what it actually felt like to learn it ----
-    createDunning(section);
+    createDunningKruger(section);
 
     const credits = createCredits(
       section,
@@ -62,7 +63,7 @@ export const era: Era = {
         { year: '2019', name: 'Svelte 3', icon: siSvelte, line: 'The framework vanishes at build time.' },
         { year: '2019', name: 'GitHub Actions', icon: siGithubactions, line: 'CI moved into the repository.' },
         { year: '2019', name: 'Helm 3', icon: siHelm, line: 'YAML, packaged and shipped.' },
-        { year: '2020', name: 'Deno 1.0', icon: siDeno, line: 'Node’s creator, starting Node over.' },
+        { year: '2020', name: 'Deno 1.0', icon: DENO, line: 'Node’s creator, starting Node over.' },
         { year: '2020', name: 'GPT-3', line: '175 billion parameters. Nobody knew what it meant yet.' },
       ],
       'Also starring — 2018–2020',

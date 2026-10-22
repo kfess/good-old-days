@@ -1524,6 +1524,50 @@
   border-radius: 18px;
 }
 
+/* the take everyone had about Tailwind, and the one they had a month later */
+.era--y2018 .y18-tw__take {
+  position: absolute;
+  top: calc(14vh + 42vh + 18px);
+  right: var(--gutter);
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 12px;
+  width: min(38vw, 560px);
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(21, 32, 43, 0.95);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  color: #e7ecf3;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  opacity: 0;
+}
+
+.era--y2018 .y18-tw__face {
+  grid-row: span 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f093fb, #5b3cff);
+}
+
+.era--y2018 .y18-tw__take figcaption {
+  font-size: 13px;
+  color: #8899a6;
+}
+
+.era--y2018 .y18-tw__take figcaption b {
+  color: #e7ecf3;
+}
+
+.era--y2018 .y18-tw__take p {
+  margin: 4px 0 0;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.4;
+}
+
 /* the unstyled element … */
 .era--y2018 .y18-tw__el {
   display: block;
@@ -1710,6 +1754,15 @@
     right: var(--gutter);
     width: auto;
     height: 20vh;
+  }
+  .era--y2018 .y18-tw__take {
+    top: calc(44vh + 20vh + 10px);
+    left: var(--gutter);
+    width: auto;
+    padding: 10px 12px;
+  }
+  .era--y2018 .y18-tw__take p {
+    font-size: 12px;
   }
 }
 

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { parodyBook } from '../../components/oreilly';
+import { parodyBook } from '../../components/parody-book';
 import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 

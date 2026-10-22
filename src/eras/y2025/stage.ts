@@ -9,11 +9,11 @@ import {
   siMistralai,
   siQwen,
 } from 'simple-icons';
-import { claudeKun, claudeKunCrowd } from '../../components/claudekun';
+import { clawd, clawdCrowd } from '../../components/clawd';
 import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
-import { iconSprite, kunSprite, orbitMarks, textSprite } from './kuns';
+import { clawdSprite, iconSprite, orbitMarks, textSprite } from './orbit';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
@@ -196,7 +196,7 @@ const claudeCode: StageScene = {
     art.innerHTML = `
       <div class="y25s-prompt"><span class="y25-acc">&gt;</span> <span class="y25s-prompt__t"></span><i class="y25-caret"></i></div>
       <div class="y25s-log">${CC_LOG.map(([, html]) => `<p>${html}</p>`).join('')}</div>
-      <div class="y25s-ck"><span class="y25s-ck__say"><span class="a">On it.</span><span class="b">BRUTAL.</span></span>${claudeKun('', 'busy')}</div>`;
+      <div class="y25s-spark"><span class="y25s-spark__say"><span class="a">On it.</span><span class="b">BRUTAL.</span></span><span class="y25s-spark__glyph">✻</span></div>`;
     mountAscii(logo, drawIcon(siClaude), tl);
     toCorner(tl, logo);
     const typed = art.querySelector<HTMLElement>('.y25s-prompt__t')!;
@@ -205,7 +205,7 @@ const claudeCode: StageScene = {
     scrubType(tl, typed, 'make this scene brutalist', 0.45, 0.45);
     tl.from(art.querySelector('.y25s-log'), { opacity: 0, y: 20, duration: 0.15 }, 0.9);
     tl.fromTo(
-      art.querySelector('.y25s-ck'),
+      art.querySelector('.y25s-spark'),
       { scale: 0, rotate: -25 },
       { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.4)' },
       0.95,
@@ -251,7 +251,7 @@ const HABITS: [string, string, number][] = [
 const vibe: StageScene = {
   year: '2025.02',
   name: 'Vibe coding',
-  kicker: 'forget that the code even exists',
+  kicker: '“forget that the code even exists” — Andrej Karpathy',
   line: 'Don’t read the code. Feel the vibe. Accept all.',
   className: 'y25s y25s--vibe',
   logo: asciiSlot('#e879a6'),
@@ -330,11 +330,11 @@ const TASKS: [string, string, Tool][] = [
   ['deps', 'upgrade 48 packages', 'claude'],
 ];
 
-/** Each agent shows up with its own tool: Claude-kun for Claude Code, a mark for the rest. */
+/** Each agent shows up with its own tool: Clawd for Claude Code, a mark for the rest. */
 const TOOLS: Record<Tool, { name: string; badge: () => string }> = {
-  claude: { name: 'Claude Code', badge: () => claudeKun('', 'busy') },
+  claude: { name: 'Claude Code', badge: () => clawd('', 'busy') },
   codex: { name: 'Codex', badge: () => '<span class="y25s-tool y25s-tool--codex">&gt;_</span>' },
-  gemini: { name: 'Gemini CLI', badge: () => `<span class="y25s-tool">${mark(siGooglegemini, '#a78bfa')}</span>` },
+  gemini: { name: 'Gemini CLI', badge: () => `<span class="y25s-tool">${mark(siGooglegemini)}</span>` },
   copilot: { name: 'Copilot agent', badge: () => `<span class="y25s-tool">${mark(siGithubcopilot, '#e6e6e6')}</span>` },
   cursor: { name: 'Cursor agent', badge: () => `<span class="y25s-tool">${mark(siCursor, '#e6e6e6')}</span>` },
 };
@@ -356,7 +356,7 @@ const parallel: StageScene = {
         ${TASKS.map(
           ([id, task, tool], i) => `
           <div class="y25s-pane y25s-pane--${tool}" style="--i:${i}">
-            <span class="y25s-pane__ck">${TOOLS[tool].badge()}</span>
+            <span class="y25s-pane__clawd">${TOOLS[tool].badge()}</span>
             <p class="y25s-pane__h"><span class="y25s-spin">⠋</span><b>${TOOLS[tool].name}</b> <span class="y25-dim">wt/${esc(id)}</span></p>
             <p class="y25s-pane__t">${esc(task)}</p>
             <p class="y25s-pane__l"><span class="y25-dot">⏺</span> Edit · Bash · Read</p>
@@ -364,8 +364,8 @@ const parallel: StageScene = {
           </div>`,
         ).join('')}
       </div>
-      <div class="y25s-crowd"><div class="y25s-crowd__row">${claudeKunCrowd(40, '', 'busy')}</div><p class="y25s-crowd__n"><b>×40</b> and counting</p></div>
-      <div class="y25s-mainck">${claudeKun('', 'wave')}</div>`;
+      <div class="y25s-crowd"><div class="y25s-crowd__row">${clawdCrowd(40, '', 'busy')}</div><p class="y25s-crowd__n"><b>×40</b> and counting</p></div>
+      <div class="y25s-mainclawd">${clawd('', 'wave')}</div>`;
     mountAscii(logo, drawFan, tl);
     toCorner(tl, logo);
     const panes = Array.from(art.querySelectorAll<HTMLElement>('.y25s-pane'));
@@ -423,13 +423,13 @@ const parallel: StageScene = {
       },
       1.95,
     );
-    // the crowd: dozens of Claude-kuns march across while the panes work, then head home
+    // the crowd: dozens of Clawds march across while the panes work, then head home
     const crowd = art.querySelector<HTMLElement>('.y25s-crowd')!;
     const row = art.querySelector<HTMLElement>('.y25s-crowd__row')!;
-    const kuns = Array.from(row.children) as HTMLElement[];
+    const clawds = Array.from(row.children) as HTMLElement[];
     tl.fromTo(crowd, { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.95);
     tl.fromTo(
-      kuns,
+      clawds,
       { scale: 0, y: 20 },
       { scale: 1, y: 0, stagger: 0.008, duration: 0.12, ease: 'back.out(2.2)' },
       0.95,
@@ -441,14 +441,14 @@ const parallel: StageScene = {
       0.95,
     );
     tl.to(
-      kuns,
+      clawds,
       { scale: 0, y: -30, opacity: 0, stagger: { each: 0.006, from: 'center' }, duration: 0.14, ease: 'power2.in' },
       1.95,
     );
     tl.to(crowd, { opacity: 0, duration: 0.1 }, 2.15);
     tl.to(main, { opacity: 1, scale: 1.08, duration: 0.2 }, 2.2);
     tl.fromTo(
-      art.querySelector('.y25s-mainck'),
+      art.querySelector('.y25s-mainclawd'),
       { scale: 0, rotate: -30 },
       { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.6)' },
       2.25,
@@ -493,12 +493,12 @@ const mark = (icon: SimpleIcon, color = `#${icon.hex}`) =>
 const LABS: { model: string; lab: string; mark: string }[] = [
   { model: 'Claude', lab: 'Anthropic', mark: mark(siClaude) },
   { model: 'GPT', lab: 'OpenAI', mark: wordmark('OpenAI') },
-  { model: 'Gemini', lab: 'Google', mark: mark(siGooglegemini, '#a78bfa') },
-  { model: 'Llama', lab: 'Meta', mark: mark(siMeta, '#3b8bff') },
+  { model: 'Gemini', lab: 'Google', mark: mark(siGooglegemini) },
+  { model: 'Llama', lab: 'Meta', mark: mark(siMeta) },
   { model: 'DeepSeek', lab: 'DeepSeek', mark: mark(siDeepseek) },
   { model: 'Mistral', lab: 'Mistral AI', mark: mark(siMistralai) },
   { model: 'Grok', lab: 'xAI', mark: wordmark('xAI') },
-  { model: 'Qwen', lab: 'Alibaba', mark: mark(siQwen, '#8b7bff') },
+  { model: 'Qwen', lab: 'Alibaba', mark: mark(siQwen) },
 ];
 
 const frontier: StageScene = {
@@ -567,17 +567,17 @@ const frontier: StageScene = {
       0.45,
     );
 
-    // and the field fills with hundreds of tiny marks from every lab (a few Claude-kuns among them)
+    // and the field fills with hundreds of tiny marks from every lab (a few Clawds among them)
     const sprites = [
       iconSprite(siClaude),
       textSprite('OpenAI'),
-      iconSprite(siGooglegemini, '#a78bfa'),
-      iconSprite(siMeta, '#3b8bff'),
-      kunSprite(),
+      iconSprite(siGooglegemini),
+      iconSprite(siMeta),
+      clawdSprite(),
       iconSprite(siDeepseek),
       iconSprite(siMistralai),
       textSprite('xAI'),
-      iconSprite(siQwen, '#8b7bff'),
+      iconSprite(siQwen),
     ];
     const orbit = orbitMarks(art.querySelector<HTMLCanvasElement>('.y25s-orbit')!, scene, logo, sprites, 240);
     tl.fromTo(orbit.state, { reveal: 0 }, { reveal: 1, duration: 1.1, ease: 'power2.out' }, 0.6);

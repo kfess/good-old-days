@@ -1,8 +1,8 @@
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h, onceInView } from '../../core/util';
-import { type Box, MD, P, scene } from './iso';
-import { ripples } from './md';
+import { type Box, MD, P, scene } from './isometric';
 import { mountMesh } from './mesh';
+import { ripples } from './ripple';
 
 const S = 24;
 const SERVICES: [string, string, number, number][] = [

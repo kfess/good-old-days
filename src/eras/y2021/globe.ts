@@ -1,4 +1,4 @@
-import { visibleLoop } from '../y2018/loop';
+import { visibleLoop } from '../y2018/visible-loop';
 
 type V3 = [number, number, number];
 

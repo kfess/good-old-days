@@ -20,7 +20,7 @@ import { DESKTOP_QUERY, gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger } from 
 import type { Era } from '../../core/types';
 import { h, onceInView } from '../../core/util';
 import { Run, wait } from '../y2023/lib';
-import { mountAsciiGlobe } from './ascii';
+import { mountAsciiGlobe } from './ascii-globe';
 import { STAGE_2025 } from './stage';
 import './style.css';
 
@@ -299,15 +299,15 @@ export const era: Era = {
           icon: siGooglegemini,
           line: 'Google’s open-source agent, in the terminal.',
         },
-        { year: '2025.08', name: 'GPT-5', line: 'Thinking models became the default.' },
+        { year: '2025.08', name: 'GPT-5', line: 'Thinking became automatic: it decides when to reason.' },
         {
           year: '2025.09',
           name: 'WebGPU',
           icon: logo(siWebgpu, 'current'),
-          line: 'With Safari 26, the GPU in every major browser.',
+          line: 'With Safari 26, the GPU in every major browser engine.',
         },
         {
-          year: '2025',
+          year: '2025.10',
           name: 'Agent SDK & Skills',
           icon: logo(siAnthropic, 'current'),
           line: 'Agents, assembled from parts.',
@@ -317,7 +317,7 @@ export const era: Era = {
           year: '2026.07',
           name: 'TypeScript native',
           icon: siTypescript,
-          line: 'TypeScript 7: the compiler, rewritten in Go. Builds ~10× faster.',
+          line: 'TypeScript 7: the compiler, ported to Go. Builds ~10× faster.',
         },
         { year: '2026.09', name: 'GPT-6 Astra', line: 'The first model OpenAI rated “Critical” for cyber.' },
       ],

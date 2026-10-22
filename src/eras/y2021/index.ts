@@ -98,7 +98,7 @@ export const era: Era = {
     createCredits(
       section,
       [
-        { year: '2021', name: 'Astro', icon: siAstro, line: 'JavaScript only on the islands that need it.' },
+        { year: '2021', name: 'Astro', line: 'JavaScript only on the islands that need it.' },
         {
           year: '2021',
           name: 'Cloudflare Pages',

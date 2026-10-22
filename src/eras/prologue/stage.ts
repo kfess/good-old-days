@@ -44,51 +44,30 @@ function phpLogo(): string {
   return pixelArt(rows(g), { K: '#4f5b93', P: '#777bb4', L: '#8892bf', T: '#000000' }, 'p-logo', 'PHP');
 }
 
-/** The Flash Player tile, in pixels: a rounded red square, lit from the top left, with the white "f". */
+/**
+ * A Flash 5 timeline strip, in pixels: keyframe, motion tween, keyframe, with the red playhead.
+ * Brand-free on purpose: the red "f" tile is Adobe's Flash Player icon from 2007 on, not Macromedia's.
+ */
 function flashLogo(): string {
-  const n = 16;
-  const g = grid(n, n, 'R');
-  for (let y = 0; y < n; y++)
-    for (let x = 0; x < n; x++) {
-      if (x + y < 6) g[y][x] = 'H';
-      else if (x + y > 24) g[y][x] = 'D';
-    }
-  // rounded corners
-  for (const [x, y] of [
-    [0, 0],
-    [1, 0],
-    [0, 1],
-    [15, 0],
-    [14, 0],
-    [15, 1],
-    [0, 15],
-    [1, 15],
-    [0, 14],
-    [15, 15],
-    [14, 15],
-    [15, 14],
-  ])
-    g[y][x] = '.';
-  stamp(
-    g,
+  return pixelArt(
     [
-      '......WWW.',
-      '.....WW..W',
-      '.....W....',
-      '....WW....',
-      '..WWWWWW..',
-      '....W.....',
-      '...WW.....',
-      '...W......',
-      '..WW......',
-      '.WW.......',
-      'WW........',
+      '.............RRR.....',
+      '.............RRR.....',
+      '..............R......',
+      'KKKKKKKKKKKKKKRKKKKKK',
+      'KTTTKTTTKTTTKTRTKTTTK',
+      'KTTTKTTTKTTTKTRTKATTK',
+      `KT${'A'.repeat(12)}RAAAATK`,
+      'KTTTKTTTKTTTKTRTKATTK',
+      'KTDTKTTTKTTTKTRTKTDTK',
+      'KDDDKTTTKTTTKTRTKDDDK',
+      'KKKKKKKKKKKKKKRKKKKKK',
+      '..............R......',
     ],
-    3,
-    3,
-    'W',
+    { K: '#3a3a3a', T: '#c9c6f5', A: '#000000', D: '#000000', R: '#e0242a' },
+    'p-logo',
+    'Flash 5 timeline',
   );
-  return pixelArt(rows(g), { R: '#d4161a', H: '#f2454a', D: '#8f0b0e', W: '#ffffff' }, 'p-logo', 'Flash');
 }
 
 function xhrLogo(): string {
@@ -171,8 +150,8 @@ const lamp: StageScene = {
 };
 
 const flash: StageScene = {
-  year: '1996',
-  name: 'Flash',
+  year: '2000.08',
+  name: 'Flash 5',
   kicker: 'Loading… please wait',
   line: 'Intros, games, everything. All Flash.',
   className: 'p-scene p-scene--flash',
@@ -380,4 +359,4 @@ const iphone: StageScene = {
   },
 };
 
-export const STAGE_PROLOGUE: StageScene[] = [flash, lamp, ajax, iphone];
+export const STAGE_PROLOGUE: StageScene[] = [lamp, flash, ajax, iphone];

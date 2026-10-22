@@ -1,5 +1,5 @@
 import type { SimpleIcon } from 'simple-icons';
-import { claudeKun } from '../../components/claudekun';
+import { clawd } from '../../components/clawd';
 import { reducedMotion } from '../../core/scroll';
 
 const toImage = (svg: string): Promise<HTMLImageElement> => {
@@ -23,16 +23,16 @@ export function textSprite(text: string, color = '#ffffff'): Promise<HTMLImageEl
   );
 }
 
-/** Claude-kun as a standalone image: the CSS classes become an inline <style>, since SVG-as-image can't see page CSS. */
-export function kunSprite(): Promise<HTMLImageElement> {
-  const inner = claudeKun('', 'happy').match(/<svg[^>]*>([\s\S]*)<\/svg>/)![1];
-  const css = '.ck__body,.ck__arms,.ck__legs{fill:#d77757}.ck__eye{fill:#1a1a1a}';
+/** Clawd as a standalone image: the CSS classes become an inline <style>, since SVG-as-image can't see page CSS. */
+export function clawdSprite(): Promise<HTMLImageElement> {
+  const inner = clawd('', 'happy').match(/<svg[^>]*>([\s\S]*)<\/svg>/)![1];
+  const css = '.clawd__body,.clawd__arms,.clawd__legs{fill:#d77757}.clawd__eye{fill:#1a1a1a}';
   return toImage(
     `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 -4 18 18" shape-rendering="crispEdges"><style>${css}</style>${inner}</svg>`,
   );
 }
 
-interface Kun {
+interface Orbiter {
   ring: number;
   a: number;
   speed: number;
@@ -46,7 +46,7 @@ const RINGS = [
 ];
 
 /**
- * Hundreds of tiny marks (lab logos, a few Claude-kuns) orbiting the frontier on tilted rings.
+ * Hundreds of tiny marks (lab logos, a few Claude-orbiters) orbiting the frontier on tilted rings.
  * `state.reveal` (0 → 1, scrubbed by the scene) spirals them out from the center.
  * Draws only while the canvas is on screen and its scene is the current one; centered on `center`.
  */
@@ -59,7 +59,7 @@ export function orbitMarks(
 ): { state: { reveal: number } } {
   const state = { reveal: 0 };
   const ctx = canvas.getContext('2d')!;
-  const kuns: Kun[] = Array.from({ length: count }, (_, i) => ({
+  const orbiters: Orbiter[] = Array.from({ length: count }, (_, i) => ({
     ring: i % RINGS.length,
     a: (i * 2.399963) % (Math.PI * 2),
     speed: (0.12 + (((i * 37) % 100) / 100) * 0.18) * (i % 2 ? 1 : 0.85),
@@ -95,9 +95,9 @@ export function orbitMarks(
     const cx = c.left + c.width / 2 - box.left;
     const cy = c.top + c.height / 2 - box.top;
     const unit = Math.min(w, h * 1.35);
-    const shown = Math.round(kuns.length * Math.min(1, state.reveal * 1.15));
+    const shown = Math.round(orbiters.length * Math.min(1, state.reveal * 1.15));
     for (let i = 0; i < shown; i++) {
-      const k = kuns[i];
+      const k = orbiters[i];
       if (!reducedMotion) k.a += k.speed * dt;
       const ring = RINGS[k.ring];
       const R = unit * ring.r * (0.35 + 0.65 * state.reveal);

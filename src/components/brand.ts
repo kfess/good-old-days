@@ -48,12 +48,12 @@ const TAILWIND: Mark = { light: M('tailwindcss-on-light.svg'), dark: M('tailwind
 
 export const BRANDS: Record<string, Brand> = {
   // ---- before 2010
-  Flash: { font: "'Source Sans 3', sans-serif", weight: 700 }, // Myriad → Source Sans 3 (Adobe's open face)
+  'Flash 5': { font: "'Source Sans 3', sans-serif", weight: 700 }, // Myriad → Source Sans 3 (Adobe's open face)
   'Perl CGI': { font: "'Lato', sans-serif", weight: 900 },
   'Ruby on Rails': INTER,
   Firefox: {}, // 2004: the Firefox Sharp Sans wordmark only came with the 2019 rebrand
   Git: {}, // 2005: Jason Long's logo is from 2012
-  jQuery: { mark: { light: M('jquery-on-light.svg'), dark: M('jquery-on-dark.svg'), scale: 1.35 } },
+  jQuery: {}, // 2006: the wordmark is Scott Jehl's 2008 redesign; jQuery 1.4 (2010) wears it below
   'jQuery 1.4': {
     mark: { light: M('jquery-on-light.svg'), dark: M('jquery-on-dark.svg'), scale: 1.35 },
     suffix: '1.4',
@@ -67,13 +67,13 @@ export const BRANDS: Record<string, Brand> = {
   'Node.js': {}, // 2010: the hexagon wordmark came with the July 2011 rebrand
   'Bootstrap 2': { font: "'Helvetica Neue', Helvetica, Arial, sans-serif", weight: 700 },
   'Twitter Bootstrap': { font: "'Helvetica Neue', Helvetica, Arial, sans-serif", weight: 700 },
-  npm: { mark: { any: M('npm.svg'), scale: 0.8 } },
+  npm: {}, // 2010: the square-letter wordmark is npm, Inc.'s (2014)
   Express: {}, // 2010: the boxed wordmark is from the May 2026 "new look"
-  'Sass 3 (SCSS)': { font: "'Source Sans 3', sans-serif", weight: 700 }, // sass-lang.com's face
+  'Sass 3 (SCSS)': {}, // 2010: sass-lang.com's Source Sans is from 2012
   'Rails 3': INTER,
   Heroku: { font: "'Questrial', sans-serif", weight: 400 }, // ITC Avant Garde → Questrial
   'Backbone.js': { mark: { light: M('backbone-on-light.png'), scale: 0.95 } },
-  'CoffeeScript 1.0': { font: "'Alegreya Sans', sans-serif", weight: 700 },
+  'CoffeeScript 1.0': {}, // 2010: Alegreya Sans (2013) is the CoffeeScript 2 site's face, and the cup its logo
   'Socket.IO': INTER,
   'jQuery UI 1.8': { mark: { light: M('jqueryui-on-light.svg'), scale: 1.35 }, suffix: '1.8' },
 
@@ -98,7 +98,7 @@ export const BRANDS: Record<string, Brand> = {
   Babel: { mark: { any: M('babel.svg'), scale: 1.25 } },
   Redux: { font: "'Lato', sans-serif", weight: 900 }, // Lato Black per the Redux logo README
   GraphQL: { mark: { any: M('graphql.svg'), scale: 1.05 } },
-  'Rust 1.0': { font: "'Alfa Slab One', serif", weight: 400 }, // rust-lang.org
+  'Rust 1.0': {}, // 2015: rust-lang.org's Alfa Slab One headings came with the 2018 redesign
   Yarn: { mark: { any: M('yarn.svg'), scale: 1.2 } },
   'Next.js': {}, // 2016: nextjs-on-*.svg is the wordmark redrawn for Next.js 13 (2022); used from there on
   Prettier: INTER,
@@ -112,19 +112,20 @@ export const BRANDS: Record<string, Brand> = {
   'Svelte 3': { mark: { any: M('svelte.svg'), scale: 0.95 }, suffix: '3' },
   'GitHub Actions': {}, // 2019: Mona Sans is from 2022
   'Helm 3': { mark: { dark: M('helm-on-dark.svg'), scale: 1.6 }, suffix: '3' },
-  'Deno 1.0': { mark: { dark: M('deno-on-dark.svg'), scale: 1.05 }, suffix: '1.0' },
+  'Deno 1.0': {}, // 2020: Deno's wordmark is a later redraw; the credit shows the 2020 dinosaur icon instead
   'GPT-2': OPENAI,
   'GPT-3': OPENAI,
 
   // ---- 2021–2022
   Vite: INTER,
+  'Vite 2': INTER,
   'GitHub Copilot': {}, // 2021: Mona Sans is from 2022.11
   'Stable Diffusion': { font: "'Archivo', sans-serif", weight: 700 }, // stability.ai
-  Astro: { mark: { dark: M('astro-on-dark.svg'), scale: 1.05 } },
+  Astro: {}, // 2021: the flame-"A" wordmark is from after the launch
   'Cloudflare Pages': INTER, // Inter is Cloudflare's brand typeface
   'SolidJS 1.0': { font: "'Poppins', sans-serif", weight: 600 }, // Gordita → Poppins
   Remix: { mark: { dark: M('remix-on-dark.svg'), scale: 0.72 } },
-  Turborepo: { mark: { dark: M('turborepo-on-dark.svg'), scale: 0.8 } },
+  Turborepo: {}, // 2021: the wordmark is the later redraw; the credit shows the 2022 icon instead
   Bun: { font: "'Archivo', sans-serif", weight: 800 },
   'Next.js 13': { mark: NEXT, suffix: '13' },
 
@@ -135,8 +136,8 @@ export const BRANDS: Record<string, Brand> = {
   MCP: INTER, // modelcontextprotocol.io sets its wordmark in Inter
   Claude: ANTHROPIC,
   'Llama 2': META,
-  LangChain: { mark: { light: M('langchain-on-light.svg'), scale: 0.9 } },
-  'Vercel AI SDK': { mark: { light: M('ai-sdk-on-light.svg'), scale: 0.85 } },
+  // LangChain (2022.10) had no logo, only 🦜️🔗: the credit spells it that way
+  'Vercel AI SDK': INTER, // 2023.06: the "AI SDK" wordmark came with the later rename; Vercel set type in Inter before Geist (2023.10)
   'shadcn/ui': GEIST,
   Gemini: GSANS, // 2023: Google Sans Flex is from 2025
 

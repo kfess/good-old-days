@@ -1151,27 +1151,37 @@
   font-family: var(--y25-mono);
 }
 
-/* ================= Claude-kun (2025) ================= */
+/* ================= ✻ (2025.02) ================= */
+/* the research preview had no mascot yet (Clawd arrived with Claude Code 2.0): its spinner glyph stands in */
 
-.era--y2025 .y25s-ck {
+.era--y2025 .y25s-spark {
   position: absolute;
   top: calc(14vh + 96px);
   left: calc(30vw + min(44vw, 660px) + 30px);
   z-index: 3;
   width: 116px;
   transform-origin: 50% 100%;
+  text-align: center;
 }
 
-.era--y2025 .y25s-ck .ck {
-  width: 116px;
-  height: 116px;
-  filter: drop-shadow(0 0 22px rgba(217, 119, 87, 0.35));
+.era--y2025 .y25s-spark__glyph {
+  display: inline-block;
+  color: #d97757;
+  font: 400 104px / 1 var(--y25-mono);
+  text-shadow: 0 0 22px rgba(217, 119, 87, 0.35);
+  animation: y25s-spark-spin 2.4s steps(8) infinite;
   transition:
-    filter 0.3s,
-    rotate 0.3s;
+    color 0.3s,
+    text-shadow 0.3s;
 }
 
-.era--y2025 .y25s-ck__say {
+@keyframes y25s-spark-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.era--y2025 .y25s-spark__say {
   display: block;
   width: max-content;
   margin: 0 auto 8px;
@@ -1188,12 +1198,12 @@
     box-shadow 0.3s;
 }
 
-.era--y2025 .y25s-ck__say .b {
+.era--y2025 .y25s-spark__say .b {
   display: none;
 }
 
-/* Claude-kun goes brutalist with the scene */
-.era--y2025 .y25s--cc.is-b3 .y25s-ck__say {
+/* the ✻ goes brutalist with the scene */
+.era--y2025 .y25s--cc.is-b3 .y25s-spark__say {
   border: 3px solid #000;
   border-radius: 0;
   background: #000;
@@ -1205,50 +1215,44 @@
   box-shadow: 5px 5px 0 #fff;
 }
 
-.era--y2025 .y25s--cc.is-b3 .y25s-ck__say .a {
+.era--y2025 .y25s--cc.is-b3 .y25s-spark__say .a {
   display: none;
 }
 
-.era--y2025 .y25s--cc.is-b3 .y25s-ck__say .b {
+.era--y2025 .y25s--cc.is-b3 .y25s-spark__say .b {
   display: inline;
 }
 
-.era--y2025 .y25s--cc.is-b3 .y25s-ck .ck {
-  rotate: 6deg;
-  filter: drop-shadow(8px 8px 0 #000);
+.era--y2025 .y25s--cc.is-b3 .y25s-spark__glyph {
+  color: #fff;
+  text-shadow: 8px 8px 0 #000;
+  animation-play-state: paused;
 }
 
-.era--y2025 .y25s--cc.is-b3 .y25s-ck .ck__body,
-.era--y2025 .y25s--cc.is-b3 .y25s-ck .ck__arms {
-  fill: #fff;
+@media (prefers-reduced-motion: reduce) {
+  .era--y2025 .y25s-spark__glyph {
+    animation: none;
+  }
 }
 
-.era--y2025 .y25s--cc.is-b3 .y25s-ck .ck__legs {
-  fill: #000;
-}
-
-.era--y2025 .y25s--cc.is-b3 .y25s-ck .ck__eye {
-  fill: #ffe600;
-}
-
-/* one Claude-kun per agent pane */
+/* one Clawd per agent pane */
 .era--y2025 .y25s-pane {
   position: relative;
 }
 
-.era--y2025 .y25s-pane__ck {
+.era--y2025 .y25s-pane__clawd {
   position: absolute;
   top: -20px;
   right: 10px;
   line-height: 0;
 }
 
-.era--y2025 .y25s-pane__ck .ck {
+.era--y2025 .y25s-pane__clawd .clawd {
   width: 38px;
   height: 38px;
 }
 
-.era--y2025 .y25s-pane.is-done .y25s-pane__ck .ck__legs {
+.era--y2025 .y25s-pane.is-done .y25s-pane__clawd .clawd__legs {
   fill: #7ee787;
 }
 
@@ -1271,7 +1275,7 @@
   will-change: transform;
 }
 
-.era--y2025 .y25s-crowd__row .ck {
+.era--y2025 .y25s-crowd__row .clawd {
   width: 40px;
   height: 40px;
 }
@@ -1289,7 +1293,7 @@
   color: #d97757;
 }
 
-.era--y2025 .y25s-mainck {
+.era--y2025 .y25s-mainclawd {
   position: absolute;
   top: calc(14vh + min(18vh, 125px) - 110px);
   left: calc(26vw + (100vw - 26vw - var(--gutter)) / 2 - 36px);
@@ -1297,7 +1301,7 @@
   line-height: 0;
 }
 
-.era--y2025 .y25s-mainck .ck {
+.era--y2025 .y25s-mainclawd .clawd {
   width: 72px;
   height: 72px;
   filter: drop-shadow(0 0 18px rgba(217, 119, 87, 0.5));
@@ -1312,27 +1316,26 @@
 }
 
 @media (max-width: 759.98px) {
-  .era--y2025 .y25s-ck {
+  .era--y2025 .y25s-spark {
     top: calc(15vh - 62px);
     left: auto;
     right: var(--gutter);
     width: 52px;
   }
-  .era--y2025 .y25s-ck .ck {
-    width: 52px;
-    height: 52px;
+  .era--y2025 .y25s-spark__glyph {
+    font-size: 48px;
   }
-  .era--y2025 .y25s-ck__say {
+  .era--y2025 .y25s-spark__say {
     position: absolute;
     right: calc(100% + 6px);
     top: 14px;
     margin: 0;
   }
-  .era--y2025 .y25s-pane__ck {
+  .era--y2025 .y25s-pane__clawd {
     top: -12px;
     right: 6px;
   }
-  .era--y2025 .y25s-pane__ck .ck {
+  .era--y2025 .y25s-pane__clawd .clawd {
     width: 24px;
     height: 24px;
   }
@@ -1342,18 +1345,18 @@
     left: var(--gutter);
     height: 40px;
   }
-  .era--y2025 .y25s-crowd__row .ck {
+  .era--y2025 .y25s-crowd__row .clawd {
     width: 28px;
     height: 28px;
   }
   .era--y2025 .y25s-crowd__n {
     display: none;
   }
-  .era--y2025 .y25s-mainck {
+  .era--y2025 .y25s-mainclawd {
     top: calc(14vh + 23vh - 100px);
     left: calc(50vw - 28px);
   }
-  .era--y2025 .y25s-mainck .ck {
+  .era--y2025 .y25s-mainclawd .clawd {
     width: 56px;
     height: 56px;
   }

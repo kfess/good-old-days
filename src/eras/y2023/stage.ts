@@ -2,7 +2,6 @@ import type { SimpleIcon } from 'simple-icons';
 import {
   siBrave,
   siClaude,
-  siCursor,
   siGit,
   siGithub,
   siGoogledrive,
@@ -25,6 +24,9 @@ function orb(mark: string, tone = '#d97757'): string {
 
 /** Original abstract mark for the GPT-4 scene: a speech bubble made of tokens. */
 const TOKEN_MARK = `<svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8.2L7 21v-3.5H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" opacity=".16"/><rect x="5" y="8" width="4.2" height="2.6" rx="1.3" fill="currentColor"/><rect x="10.2" y="8" width="2.8" height="2.6" rx="1.3" fill="currentColor" opacity=".7"/><rect x="14" y="8" width="5" height="2.6" rx="1.3" fill="currentColor" opacity=".45"/><rect x="5" y="12" width="6.5" height="2.6" rx="1.3" fill="currentColor" opacity=".7"/><rect x="12.5" y="12" width="3" height="2.6" rx="1.3" fill="currentColor"/></svg>`;
+
+/** Original mark for the Cursor scene: a text caret with a spark (simple-icons only ships today's logo). */
+const CARET_MARK = `<svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="3" width="9" height="2" rx="1" fill="currentColor"/><rect x="11" y="4" width="2" height="16" rx="1" fill="currentColor"/><rect x="7.5" y="19" width="9" height="2" rx="1" fill="currentColor"/><path d="M19 2.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9z" fill="currentColor" opacity=".7"/></svg>`;
 
 /* ---------------- GPT-4: tokens, one at a time ---------------- */
 
@@ -338,7 +340,7 @@ const cursor: StageScene = {
   kicker: '⌘K · the AI code editor',
   line: 'The editor, rebuilt for AI.',
   className: 'y23s y23s--cur',
-  logo: orb(logo(siCursor, 'current'), '#8b5cf6'),
+  logo: orb(CARET_MARK, '#8b5cf6'),
   length: 1.35,
   // the editor leaves at the end: hold the accepted edit
   still: 0.9,

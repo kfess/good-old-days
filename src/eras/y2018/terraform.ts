@@ -1,7 +1,7 @@
-import { siTerraform } from 'simple-icons';
 import { logo } from '../../components/logo';
+import { terraform2020 } from '../../components/marks';
 import { reducedMotion, ScrollTrigger } from '../../core/scroll';
-import { holdHudYear } from '../../core/stage';
+import { dateHudSpan, holdHudYear } from '../../core/stage';
 import { esc, h } from '../../core/util';
 import { k8sMark } from './k8s-logo';
 
@@ -206,7 +206,7 @@ export function createTerraform(section: HTMLElement): HTMLElement {
     <div class="tf">
       <div class="tf__sticky">
         <header class="tf__head">
-          <p class="y18-kicker tf__kicker"><span class="tf__mark">${logo(siTerraform)}</span>2020 · Terraform 0.12 · AWS provider 2.70</p>
+          <p class="y18-kicker tf__kicker"><span class="tf__mark">${logo(terraform2020)}</span>2020 · Terraform 0.12 · AWS provider 2.70</p>
           <h3 class="y18-h tf__h">First, the cluster itself.<br/><span>Written down, planned, applied.</span></h3>
         </header>
         <div class="tf__grid">
@@ -311,12 +311,13 @@ export function createTerraform(section: HTMLElement): HTMLElement {
   });
   // the scene is dated 2020 (Terraform 0.12, AWS provider 2.70, EKS 1.17): the HUD says so too
   // (measured at the HUD's own 55% line, after the pins above)
-  ScrollTrigger.create({
+  const dated = ScrollTrigger.create({
     trigger: el,
     start: 'top 55%',
     end: 'bottom 55%',
     refreshPriority: -1,
     onToggle: (self) => holdHudYear(self.isActive ? 2020 : null),
   });
+  dateHudSpan(dated, 2020, 2020);
   return el;
 }

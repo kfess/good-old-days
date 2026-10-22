@@ -1,7 +1,7 @@
-import { siGooglegemini, siLangchain, siMeta, siShadcnui, siVercel } from 'simple-icons';
+import { siMeta, siShadcnui, siVercel } from 'simple-icons';
 import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
-import { parodyBook } from '../../components/oreilly';
+import { parodyBook } from '../../components/parody-book';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
@@ -32,13 +32,18 @@ const APP_TREE: [string, string?][] = [
 ];
 
 function appRouterCard(): HTMLElement {
+  const files = APP_TREE.filter(([f]) => !f.endsWith('/')).length;
+  const directives = APP_TREE.filter(([, tag]) => tag).length;
   const el = h(`
     <aside class="y23-ar" aria-label="A Next.js App Router file tree">
-      <p class="y23-ar__k">Next.js 14 · App Router</p>
-      <pre class="y23-ar__tree">${APP_TREE.map(
-        ([f, tag]) => `<span>${esc(f)}${tag ? ` <em>${esc(tag)}</em>` : ''}</span>`,
-      ).join('')}</pre>
-      <p class="y23-ar__punch">I just wanted a page.</p>
+      <div class="y23-ar__card">
+        <p class="y23-ar__k">Next.js 14 · App Router</p>
+        <pre class="y23-ar__tree">${APP_TREE.map(
+          ([f, tag]) => `<span>${esc(f)}${tag ? ` <em>${esc(tag)}</em>` : ''}</span>`,
+        ).join('')}</pre>
+        <p class="y23-ar__count"><b>${files}</b> files · <b>${directives}</b> directives · for <b>1</b> page</p>
+      </div>
+      <p class="y23-ar__punch">I just wanted<br /><span>a page.</span></p>
     </aside>`);
   if (reducedMotion) {
     el.classList.add('is-in');
@@ -390,12 +395,13 @@ export const era: Era = {
     createCredits(
       section,
       [
-        { year: '2022.10', name: 'LangChain', icon: siLangchain, line: 'Chain your prompts together.' },
+        // no logo yet in 2022: the README and the docs wrote it with emoji
+        { year: '2022.10', name: '🦜️🔗 LangChain', line: 'Chain your prompts together.' },
         { year: '2023.03', name: 'Claude', line: 'Helpful, honest, harmless — by design.' },
         { year: '2023.03', name: 'shadcn/ui', icon: siShadcnui, line: 'Don’t install it. Copy it, and make it yours.' },
         { year: '2023.06', name: 'Vercel AI SDK', icon: siVercel, line: 'Streaming UI in a few lines.' },
         { year: '2023.07', name: 'Llama 2', icon: siMeta, line: 'The weights landed on your machine.' },
-        { year: '2023.12', name: 'Gemini', icon: siGooglegemini, line: 'Text and images, together from the start.' },
+        { year: '2023.12', name: 'Gemini', line: 'Text and images, together from the start.' },
       ],
       'Also starring — 2023–2024',
     );

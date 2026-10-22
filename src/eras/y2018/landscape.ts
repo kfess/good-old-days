@@ -6,7 +6,6 @@ import {
   siCeph,
   siCilium,
   siCncf,
-  siConsul,
   siContainerd,
   siDatadog,
   siDocker,
@@ -16,7 +15,6 @@ import {
   siFalco,
   siFluentd,
   siGithubactions,
-  siGitlab,
   siGrafana,
   siHarbor,
   siHelm,
@@ -40,16 +38,16 @@ import {
   siRook,
   siSentry,
   siSpinnaker,
-  siTerraform,
-  siVault,
   siVitess,
 } from 'simple-icons';
 import { logo } from '../../components/logo';
+import { gitlabTanuki2015, terraform2020 } from '../../components/marks';
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 import { k8sMark } from './k8s-logo';
 
-// only marks that looked like this in 2018–2020 (Redis, New Relic and Traefik have been redrawn since)
+// only marks that looked like this in 2018–2020 (Redis, New Relic, Traefik, Consul and Vault have been redrawn since;
+// GitLab and Terraform are shown as they were then)
 const ICONS: SimpleIcon[] = [
   siDocker,
   siHelm,
@@ -72,9 +70,7 @@ const ICONS: SimpleIcon[] = [
   siCilium,
   siSpinnaker,
   siJenkins,
-  siGitlab,
-  siConsul,
-  siVault,
+  gitlabTanuki2015,
   siPodman,
   siRancher,
   siRedhatopenshift,
@@ -90,7 +86,7 @@ const ICONS: SimpleIcon[] = [
   siApachekafka,
   siRabbitmq,
   siNginx,
-  siTerraform,
+  terraform2020,
   siPulumi,
   siAnsible,
   siGithubactions,

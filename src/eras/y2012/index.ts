@@ -1,6 +1,7 @@
-import { siAnsible, siGrunt, siSublimetext, siTerraform, siVuedotjs } from 'simple-icons';
+import { siAnsible, siVuedotjs } from 'simple-icons';
 import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
+import { sublimeText2 } from '../../components/marks';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
@@ -97,8 +98,8 @@ export const era: Era = {
         { year: '2012', name: 'TypeScript', line: 'Types: insurance for JavaScript.' },
         // the gopher (Renée French, CC BY 4.0) predates Go 1.0; the slanted "GO" logo came in 2018
         { year: '2012', name: 'Go 1.0', icon: GOPHER, line: 'Simple, fast, concurrent.' },
-        { year: '2012', name: 'Grunt', icon: siGrunt, line: 'Minify and concat, left to tasks.' },
-        { year: '2012', name: 'Sublime Text 2', icon: siSublimetext, line: '⌘D, ⌘D, ⌘D — multiple cursors.' },
+        { year: '2012', name: 'Grunt', line: 'Minify and concat, left to tasks.' },
+        { year: '2012', name: 'Sublime Text 2', icon: sublimeText2, line: '⌘D, ⌘D, ⌘D — multiple cursors.' },
         // the "A" was black until the Red Hat red of the 2020s
         {
           year: '2012',
@@ -109,7 +110,7 @@ export const era: Era = {
         { year: '2013', name: 'Bootstrap 3', icon: bootstrapB, line: 'Mobile first. And every site looked the same.' },
         { year: '2013', name: 'gulp', line: 'Streams over config.' },
         { year: '2014', name: 'Vue.js', icon: siVuedotjs, line: 'The framework that felt just right.' },
-        { year: '2014', name: 'Terraform', icon: siTerraform, line: 'Write infra as code, then plan.' },
+        { year: '2014', name: 'Terraform', line: 'Write infra as code, then plan.' },
       ],
       'Also starring — 2012–2014',
     );

@@ -1,5 +1,5 @@
 import { esc } from '../core/util';
-import '../styles/oreilly.css';
+import '../styles/parody-book.css';
 
 /**
  * An original parody tech-book cover in the style of the "O RLY?" meme covers
@@ -65,6 +65,6 @@ export function parodyBook(o: ParodyBookOptions): string {
       <p class="orly__sub">${esc(o.subtitle)}</p>
       <svg class="orly__art" viewBox="0 0 128 88" aria-hidden="true">${ANIMALS[o.animal]}</svg>
       <div class="orly__band"><span class="orly__title">${esc(o.title)}</span></div>
-      <div class="orly__foot"><b>O RLY<sup>?</sup></b><span>The Practical Developer</span></div>
+      <div class="orly__foot"><b>O RLY<sup>?</sup></b><span>Good Old Days Press</span></div>
     </figure>`;
 }

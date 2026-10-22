@@ -1,4 +1,3 @@
-import { siGithub, siJquery, siPerl, siRubyonrails } from 'simple-icons';
 import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
@@ -108,13 +107,13 @@ export const era: Era = {
     createCredits(
       section,
       [
-        { year: '1993', name: 'Perl CGI', icon: siPerl, line: 'Message boards lived in cgi-bin.' },
-        { year: '2004', name: 'Ruby on Rails', icon: siRubyonrails, line: 'A blog in 15 minutes.' },
+        { year: '1993', name: 'Perl CGI', line: 'Message boards lived in cgi-bin.' },
+        { year: '2004', name: 'Ruby on Rails', line: 'A blog in 15 minutes.' },
         { year: '2004', name: 'Firefox', line: 'Tabs and pop-up blocking, for everyone.' },
         { year: '2005', name: 'Git', line: 'Distributed version control, born for Linux.' },
-        { year: '2006', name: 'jQuery', icon: siJquery, line: 'And then, $ took over.' },
+        { year: '2006', name: 'jQuery', line: 'And then, $ took over.' },
         { year: '2006', name: 'Amazon EC2', line: 'Servers, rented with a credit card.' },
-        { year: '2008', name: 'GitHub', icon: siGithub, line: 'Code went social.' },
+        { year: '2008', name: 'GitHub', line: 'Code went social.' },
         { year: '2008', name: 'Google Chrome', line: 'With V8, JavaScript got serious.' },
       ],
       'Also starring — before 2010',
