@@ -41,6 +41,11 @@ export const era: Era = {
 
     createStage(section, STAGE_2018);
 
+    // the 2019 look comes before the 2020 infrastructure, so the HUD's year never rolls back
+    const lookWrap = h(`<div class="y18-block y18-block--look"></div>`);
+    section.appendChild(lookWrap);
+    createLook(lookWrap);
+
     // ---- infrastructure as code: Terraform builds the cluster that Argo CD will deploy to ----
     createTerraform(section);
 
@@ -73,10 +78,6 @@ export const era: Era = {
     });
 
     createLandscape(section);
-
-    const lookWrap = h(`<div class="y18-block y18-block--look"></div>`);
-    section.appendChild(lookWrap);
-    createLook(lookWrap);
 
     createThread(section, 'y2018');
 

@@ -355,4 +355,6 @@ const kubernetes: StageScene = {
   },
 };
 
-export const STAGE_2015: StageScene[] = [es2015, kubernetes, webpack];
+/** webpack 2 (2017) plays after the 2016 blocks, so the years only ever move forward. */
+export const STAGE_2015: StageScene[] = [es2015, kubernetes];
+export const STAGE_2015_LATE: StageScene[] = [webpack];

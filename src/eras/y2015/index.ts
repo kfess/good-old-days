@@ -12,7 +12,7 @@ import { mountBranch } from './branch';
 import { mountInfra } from './infra';
 import { mountIntro } from './intro';
 import { ripples } from './ripple';
-import { STAGE_2015 } from './stage';
+import { STAGE_2015, STAGE_2015_LATE } from './stage';
 import './style.css';
 
 const VSCODE = `<svg viewBox="0 0 24 24" aria-label="code"><path fill="#007acc" d="M8.6 16.6 4 12l4.6-4.6L7.2 6l-6 6 6 6zm6.8 0L20 12l-4.6-4.6L16.8 6l6 6-6 6z"/></svg>`;
@@ -144,6 +144,9 @@ export const era: Era = {
     mountInfra(section);
 
     createThread(section, 'y2015');
+
+    // webpack 2 shipped in 2017: after the 2016 blocks, just before the 2017 deploy
+    createStage(section, STAGE_2015_LATE);
 
     const ship = h(`
       <section class="y15-panel y15-ship" data-hud-year="2017">
