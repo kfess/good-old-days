@@ -371,4 +371,6 @@ const iphone: StageScene = {
   },
 };
 
-export const STAGE_PROLOGUE: StageScene[] = [lamp, flash, ajax, iphone];
+/** Split around the 2001–2005 homepage, FTP and deploy blocks, so the years only ever move forward. */
+export const STAGE_PROLOGUE: StageScene[] = [lamp, flash];
+export const STAGE_PROLOGUE_LATE: StageScene[] = [ajax, iphone];

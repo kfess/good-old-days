@@ -12,7 +12,7 @@ import { buildFtp } from './ftp';
 import { buildHomepage } from './homepage';
 import { createLiveSite } from './live';
 import { crt, phone, puzzle } from './pixel';
-import { STAGE_PROLOGUE } from './stage';
+import { STAGE_PROLOGUE, STAGE_PROLOGUE_LATE } from './stage';
 import './style.css';
 
 function buildIntro(): HTMLElement {
@@ -191,6 +191,9 @@ export const era: Era = {
       ],
       'The stack of the day — 2005',
     );
+
+    // Ajax and the iPhone come after the 2005 stack, so the HUD's year never rolls back
+    createStage(section, STAGE_PROLOGUE_LATE);
 
     const bridge = buildBridge();
     section.appendChild(bridge);

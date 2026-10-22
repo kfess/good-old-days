@@ -12,9 +12,9 @@ const AMIS = [
 /** Renting servers by the hour: an instance launch wizard next to the LAMP stack. */
 export function buildCloud(): HTMLElement {
   const el = h(`
-    <div class="w-block w-cloud" data-hud-year="2010">
+    <div class="w-block w-cloud" data-hud-year="2011">
       <header class="w-sechead">
-        <p class="w-kicker">Infra · 2010</p>
+        <p class="w-kicker">Infra · 2011</p>
         <h3 class="w-h3">Servers became something you rent by the hour.</h3>
         <p class="w-lead">m1.small, $0.085 an hour. Three of them in one click.</p>
       </header>
