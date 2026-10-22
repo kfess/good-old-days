@@ -77,8 +77,8 @@ const gpt4: StageScene = {
     spans.forEach((s, i) => {
       tl.fromTo(
         s,
-        { opacity: 0, y: 18, filter: 'blur(8px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12, ease: 'power2.out' },
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.12, ease: 'power2.out' },
         t0 + (i / spans.length) * span,
       );
     });

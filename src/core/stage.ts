@@ -90,9 +90,9 @@ export function holdHudYear(year: number | null): void {
 }
 
 /**
- * Stretches of an era that are dated (a pinned stage, the Terraform scene): `first` where the trigger
- * starts, `last` where it ends. The era's scroll progress interpolates between these and the era's own
- * bounds, so the HUD never rolls back to an earlier year once a dated stretch has passed.
+ * Stretches of an era that are dated (a pinned stage, the Terraform scene, any block marked
+ * `data-hud-year`): `first` where the trigger starts, `last` where it ends. The era's scroll progress
+ * interpolates between these and the era's own bounds, so the HUD agrees with the year on screen.
  */
 const yearSpans: { trigger: ScrollTrigger; first: number; last: number }[] = [];
 export function dateHudSpan(trigger: ScrollTrigger, first: number, last: number): void {
@@ -155,6 +155,17 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
     app.appendChild(section);
     era.render(section);
 
+    // blocks that name their year ("Showcase · 2001", "The stack of the day — 2005") date the HUD too, from
+    // when their heading is well into view; measured after the section's pins, like the HUD trigger below
+    for (const el of section.querySelectorAll<HTMLElement>('[data-hud-year]')) {
+      const year = Number(el.dataset.hudYear);
+      dateHudSpan(
+        ScrollTrigger.create({ trigger: el, start: 'top 70%', end: 'bottom 70%', refreshPriority: -1 }),
+        year,
+        year,
+      );
+    }
+
     const tick = document.createElement('button');
     tick.type = 'button';
     tick.dataset.era = era.id;
@@ -172,18 +183,29 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
   // the year at scroll position `y` in era `i`: piecewise linear through the era's dated stretches
   const eraYear = (i: number, t: ScrollTrigger, y: number): number => {
     const [from, to] = eras[i].years;
-    const pts: [number, number][] = [[t.start, from]];
-    for (const s of yearSpans) {
-      if (s.trigger.start >= t.start && s.trigger.end <= t.end)
-        pts.push([s.trigger.start, s.first], [s.trigger.end, s.last]);
-    }
-    pts.push([t.end, to + 1]);
-    pts.sort((a, b) => a[0] - b[0]);
+    const spans = yearSpans
+      .filter((s) => s.trigger.start >= t.start && s.trigger.end <= t.end)
+      .map((s) => ({ start: s.trigger.start, end: s.trigger.end, first: s.first, last: s.last }))
+      .sort((a, b) => a.start - b.start);
+    // a dated block inside another (the 2014 stack inside the 2013 deploy) takes over where it starts
+    spans.forEach((s, k) => {
+      if (k + 1 < spans.length) s.end = Math.min(s.end, spans[k + 1].start);
+    });
+    const pts: [number, number][] = [
+      [t.start, from],
+      ...spans.flatMap((s): [number, number][] => [
+        [s.start, s.first],
+        [s.end, s.last],
+      ]),
+      [t.end, to + 1],
+    ];
     let k = 0;
     while (k < pts.length - 2 && y >= pts[k + 1][0]) k++;
     const [p0, y0] = pts[k];
     const [p1, y1] = pts[k + 1];
-    const f = p1 > p0 ? Math.min(1, Math.max(0, (y - p0) / (p1 - p0))) : 1;
+    // going back in time (a 2001 showcase after a stage that reached 2007) rolls back in one step where
+    // the earlier year begins, rather than counting down on the way there
+    const f = y1 < y0 ? 0 : p1 > p0 ? Math.min(1, Math.max(0, (y - p0) / (p1 - p0))) : 1;
     return Math.min(to, Math.max(from, Math.floor(y0 + f * (y1 - y0))));
   };
 

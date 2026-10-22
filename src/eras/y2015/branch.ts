@@ -58,7 +58,7 @@ const KEYS = Object.keys(ROUTES) as Framework[];
  */
 export function mountBranch(parent: HTMLElement): void {
   const el = h(`
-    <section class="y15-panel y15-branch">
+    <section class="y15-panel y15-branch" data-hud-year="2016">
       <div class="y15-branch__pin">
         <header class="y15-head">
           <p class="y15-kicker">2016 · Three roads</p>

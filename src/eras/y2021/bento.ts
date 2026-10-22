@@ -170,7 +170,7 @@ Cached:    3 cached, 3 total
 }
 
 async function initClay(tile: HTMLElement, canvas: HTMLCanvasElement): Promise<void> {
-  const THREE = await import('three');
+  const THREE = await import('./three-parts');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;

@@ -48,12 +48,12 @@
   opacity: 0.15;
 }
 
+/* soft from the gradient alone: a blur filter on a drifting layer stutters in Safari */
 .era--y2021 .y21-aurora i {
   position: absolute;
   width: 70vw;
   height: 40vw;
   border-radius: 50%;
-  filter: blur(90px);
   opacity: 0.55;
   mix-blend-mode: screen;
   animation: y21-aurora 18s ease-in-out infinite alternate;
@@ -62,18 +62,18 @@
 .era--y2021 .y21-aurora i:nth-child(1) {
   top: 15%;
   left: -10%;
-  background: #7c3aed;
+  background: radial-gradient(closest-side, #7c3aed 20%, transparent);
 }
 .era--y2021 .y21-aurora i:nth-child(2) {
   top: 30%;
   right: -15%;
-  background: #0ea5e9;
+  background: radial-gradient(closest-side, #0ea5e9 20%, transparent);
   animation-delay: -6s;
 }
 .era--y2021 .y21-aurora i:nth-child(3) {
   bottom: 10%;
   left: 20%;
-  background: #db2777;
+  background: radial-gradient(closest-side, #db2777 20%, transparent);
   opacity: 0.35;
   animation-delay: -11s;
 }
@@ -124,6 +124,9 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* text-clipped backgrounds paint only inside the box: room below for descenders (j, p, y), taken back by the margin */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .era--y2021 .y21-sub {
@@ -1013,6 +1016,9 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* text-clipped backgrounds paint only inside the box: room below for descenders (j, p, y), taken back by the margin */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .era--y2021 .stage__kicker {
@@ -1043,13 +1049,8 @@
   position: absolute;
   inset: 4%;
   border-radius: 34%;
-  background: radial-gradient(
-    circle at 35% 30%,
-    color-mix(in srgb, var(--c) 90%, #fff),
-    var(--c) 45%,
-    color-mix(in srgb, var(--c) 50%, #000)
-  );
-  filter: blur(26px);
+  /* the coloured shadow under the glass, soft by gradient rather than a blur filter (Safari) */
+  background: radial-gradient(closest-side, var(--c) 35%, transparent);
   opacity: 0.7;
   transform: translate(8%, 10%);
 }

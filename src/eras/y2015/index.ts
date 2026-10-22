@@ -136,7 +136,7 @@ export const era: Era = {
     createThread(section, 'y2015');
 
     const ship = h(`
-      <section class="y15-panel y15-ship">
+      <section class="y15-panel y15-ship" data-hud-year="2017">
         <header class="y15-head">
           <p class="y15-kicker">Deploy, 2017</p>
           <h3 class="y15-title">docker build. docker push.</h3>

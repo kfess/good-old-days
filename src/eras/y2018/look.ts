@@ -18,7 +18,7 @@ const QUICK = ['Pricing', 'Talk to sales', 'Something else'];
 /** A 2019 SaaS landing page in a browser frame: mesh gradient, CSS Grid magazine, neumorphism, dark mode, chatbot. */
 export function createLook(parent: HTMLElement): void {
   const el = h(`
-    <div class="look">
+    <div class="look" data-hud-year="2019">
       <div class="look__copy">
         <p class="look__kicker">The look of 2019</p>
         <h3 class="look__title">Dark mode, blobs, and a chatbot.</h3>

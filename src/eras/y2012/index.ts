@@ -25,7 +25,7 @@ function mountBridge(parent: HTMLElement): void {
     ['#e74c3c', '#e91e63', '16dp'],
   ];
   const el = h(`
-    <section class="y12-bridge">
+    <section class="y12-bridge" data-hud-year="2014">
       <div class="y12-bridge__copy">
         <p class="y12-kicker">2014 · Material Design</p>
         <h3 class="y12-title y12-bridge__title">Then, paper<br />got depth.</h3>
@@ -121,11 +121,11 @@ export const era: Era = {
     createThread(section, 'y2012');
 
     const ship = h(`
-      <section class="y12-panel y12-ship">
+      <section class="y12-panel y12-ship" data-hud-year="2013">
         <header class="y12-head">
           <p class="y12-kicker">Deploy, 2013</p>
           <h3 class="y12-title">vagrant up. cap deploy.</h3>
-          <p class="y12-jp">Spin up the same VM locally. Ship to every server at once with Capistrano.</p>
+          <p class="y12-jp">Spin up the same VM locally. Ship to every server at once with Capistrano. Changing the schema? Put up the maintenance page first.</p>
         </header>
         <div class="y12-ship__deploy"></div>
         <div class="y12-ship__vim"></div>
@@ -145,14 +145,23 @@ export const era: Era = {
         { text: '[default] Booting VM...' },
         { kind: 'progress', text: '[default] Running provisioner: chef_solo...', delay: 1300 },
         { kind: 'ok', text: '[2013-06-11T10:41:52+00:00] INFO: Chef Run complete in 38.204 seconds' },
-        { kind: 'cmd', text: 'cap production deploy' },
-        { text: "  * 2013-06-11 10:42:07 executing `deploy'" },
-        { text: "  * 2013-06-11 10:42:07 executing `deploy:update'" },
+        // Capistrano 2: a schema change meant downtime, so the site said so (public/system/maintenance.html)
+        { kind: 'cmd', text: 'cap production deploy:web:disable REASON="a database upgrade" UNTIL="10:55 UTC"' },
+        { text: "  * 2013-06-11 10:42:03 executing `deploy:web:disable'" },
+        { kind: 'cmd', text: 'cap production deploy:migrations' },
+        { text: "  * 2013-06-11 10:42:07 executing `deploy:migrations'" },
         { text: "  * 2013-06-11 10:42:07 executing `deploy:update_code'" },
         { text: '    servers: ["web-001", "web-002", … "web-012"]' },
-        { kind: 'progress', text: "  * 2013-06-11 10:42:40 executing `deploy:create_symlink'", delay: 900 },
-        { text: "  * 2013-06-11 10:42:41 executing `deploy:restart'" },
-        { kind: 'ok', text: '    command finished in 2841ms' },
+        { text: "  * 2013-06-11 10:42:31 executing `deploy:migrate'" },
+        { text: '==  AddIndexToOrders: migrating ================================' },
+        { kind: 'progress', text: '-- add_index(:orders, :customer_id)', delay: 1400 },
+        { text: '   -> 412.3069s' },
+        { text: '==  AddIndexToOrders: migrated (412.3071s) =======================' },
+        { text: "  * 2013-06-11 10:49:24 executing `deploy:create_symlink'" },
+        { text: "  * 2013-06-11 10:49:25 executing `deploy:restart'" },
+        { kind: 'cmd', text: 'cap production deploy:web:enable' },
+        { text: "  * 2013-06-11 10:49:31 executing `deploy:web:enable'" },
+        { kind: 'ok', text: '    command finished in 186ms' },
       ],
     });
     createStack(ship.querySelector<HTMLElement>('.y12-ship__stack')!, [

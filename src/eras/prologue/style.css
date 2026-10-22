@@ -1795,6 +1795,114 @@
   background: repeating-linear-gradient(90deg, #c0c0c0 0 6px, transparent 6px 8px);
 }
 
+/* ---------- deploy: the live site, from the visitor's side ---------- */
+
+.era--prologue .p-deploy-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  width: min(1120px, 100%);
+}
+
+.era--prologue .p-deploy-term .deploy {
+  max-width: none;
+}
+
+/* lines the site's window up with the DOS window, below the Upload! button */
+.era--prologue .p-live {
+  display: grid;
+  gap: 14px;
+  margin-top: 66px;
+}
+
+/* the FTP block's browser sits in a named grid area; this one is just the first row */
+.era--prologue .p-live .p-browser {
+  grid-area: auto;
+}
+
+.era--prologue .p-live__site .p-win__title {
+  display: flex;
+  align-items: center;
+}
+
+.era--prologue .p-live__tag {
+  margin: 0 8px 0 auto;
+  color: #ff2020;
+  font:
+    700 11px Tahoma,
+    Arial,
+    sans-serif;
+  visibility: hidden;
+}
+
+.era--prologue .p-live.is-live .p-live__tag {
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .era--prologue .p-live.is-live .p-live__tag {
+    animation: p-live-blink 0.8s steps(1) infinite;
+  }
+}
+
+@keyframes p-live-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.era--prologue .p-live__view {
+  min-height: 214px;
+}
+
+.era--prologue .p-live__new {
+  font-size: 13px;
+  text-align: left;
+}
+
+.era--prologue .p-live__new b {
+  margin-right: 6px;
+  color: #00ff66;
+}
+
+.era--prologue .p-live__foot {
+  font-size: 11px;
+  color: #9999cc;
+}
+
+.era--prologue .p-live__log {
+  height: 150px;
+  overflow: auto;
+  padding: 8px 10px;
+  border: 2px inset #dfdfdf;
+  background: #000;
+  color: #c0c0c0;
+  font:
+    11px / 1.45 "Courier New",
+    var(--mono);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.era--prologue .p-live__cmd {
+  color: #808080;
+}
+
+.era--prologue .p-live__bad {
+  color: #ff5555;
+}
+
+.era--prologue .p-live__note {
+  color: #ffff00;
+}
+
+.era--prologue .p-live__caption {
+  max-width: 640px;
+  margin: 22px auto 0;
+  text-align: center;
+}
+
 /* ---------- stack ---------- */
 
 .era--prologue .p-stack-wrap {
@@ -1897,6 +2005,16 @@ html[data-era="prologue"] .hud__srv-val {
 }
 
 /* ---------- mobile ---------- */
+
+@media (max-width: 759.98px) {
+  .era--prologue .p-deploy-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .era--prologue .p-live {
+    margin-top: 0;
+  }
+}
 
 @media (max-width: 759.98px) {
   .era--prologue .p-table,

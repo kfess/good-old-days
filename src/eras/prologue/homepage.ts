@@ -18,7 +18,7 @@ export function buildHomepage(): HTMLElement {
     .join('');
 
   const el = h(`
-    <div class="p-block p-home-wrap">
+    <div class="p-block p-home-wrap" data-hud-year="2001">
       <header class="p-sechead">
         <p class="p-kicker">Showcase · 2001</p>
         <h3 class="p-h3">Welcome to my homepage.</h3>

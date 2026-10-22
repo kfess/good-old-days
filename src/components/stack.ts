@@ -365,7 +365,7 @@ export function createStack(parent: HTMLElement, items: StackItem[], title?: str
   };
 
   const el = h(`
-    <div class="stack sd sd--${eraId}" id="stack-${eraId}">
+    <div class="stack sd sd--${eraId}" id="stack-${eraId}" data-hud-year="${Number.parseInt(topo.year, 10)}">
       <header class="stack__head">
         <p class="stack__title">${esc(title ?? `The stack of the day — ${topo.year}`)}</p>
         <p class="stack__meta">${

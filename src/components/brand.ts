@@ -161,6 +161,34 @@ export const BRANDS: Record<string, Brand> = {
   'Gemini 3': GFLEX,
 };
 
+/**
+ * Typefaces the page sets nothing but brand names in. index.html doesn't load them: loadNameFonts()
+ * asks Google Fonts for just the glyphs of those names (`text=`), a few KB instead of a full latin set.
+ */
+const NAME_ONLY = ['Ubuntu', 'Mona Sans', 'Google Sans', 'Google Sans Flex', 'Source Sans 3', 'Questrial', 'Archivo'];
+
+export function loadNameFonts(): void {
+  const weights = new Map<string, Set<number>>();
+  let text = '';
+  for (const [name, b] of Object.entries(BRANDS)) {
+    const family = b.font?.match(/'([^']+)'/)?.[1];
+    if (!family || !NAME_ONLY.includes(family)) continue;
+    if (!weights.has(family)) weights.set(family, new Set());
+    weights.get(family)!.add(b.weight ?? 600);
+    const shown = name + (b.suffix ?? '');
+    text += b.transform === 'uppercase' ? shown.toUpperCase() : shown;
+  }
+  if (!weights.size) return;
+  const families = [...weights]
+    .map(([f, w]) => `family=${f.replace(/ /g, '+')}:wght@${[...w].sort((a, b) => a - b).join(';')}`)
+    .join('&');
+  const glyphs = [...new Set(text)].sort().join('');
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = `https://fonts.googleapis.com/css2?${families}&text=${encodeURIComponent(glyphs)}&display=swap`;
+  document.head.appendChild(link);
+}
+
 const img = (src: string, cls: string) => `<img class="bmark ${cls}" src="${src}" alt="" draggable="false" />`;
 
 function markHtml(m: Mark): string {

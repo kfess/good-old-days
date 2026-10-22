@@ -1020,7 +1020,6 @@
   margin: -40vmin 0 0 -40vmin;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 226, 210, 0.55) 0%, rgba(217, 119, 87, 0.22) 38%, transparent 70%);
-  filter: blur(24px);
 }
 
 .era--y2025 .y25s-horizon {

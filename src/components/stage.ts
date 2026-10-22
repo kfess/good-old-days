@@ -137,8 +137,8 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
     const at = i === 0 ? 0 : t;
     enter.fromTo(
       sc,
-      { autoAlpha: 0, scale: 0.92, filter: 'blur(18px)' },
-      { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: ENTER, ease: 'power2.out' },
+      { autoAlpha: 0, scale: 0.92 },
+      { autoAlpha: 1, scale: 1, duration: ENTER, ease: 'power2.out' },
       at,
     );
     enter.fromTo(
@@ -161,8 +161,8 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
       // rendered (e.g. still hidden after a deep link or a rail jump) and restore that on the way back up
       master.fromTo(
         sc,
-        { autoAlpha: 1, scale: 1, filter: 'blur(0px)' },
-        { autoAlpha: 0, scale: 1.18, filter: 'blur(16px)', duration: EXIT, ease: 'power2.in', immediateRender: false },
+        { autoAlpha: 1, scale: 1 },
+        { autoAlpha: 0, scale: 1.18, duration: EXIT, ease: 'power2.in', immediateRender: false },
         t,
       );
       if (i === 0) firstExit = t + EXIT;

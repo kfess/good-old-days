@@ -9,6 +9,7 @@ import type { Era } from '../../core/types';
 import { h } from '../../core/util';
 import { buildFtp } from './ftp';
 import { buildHomepage } from './homepage';
+import { createLiveSite } from './live';
 import { crt, phone, puzzle } from './pixel';
 import { STAGE_PROLOGUE } from './stage';
 import './style.css';
@@ -125,19 +126,24 @@ export const era: Era = {
     createThread(section, 'prologue');
 
     const deployWrap = h(`
-      <div class="p-block p-deploy-wrap">
+      <div class="p-block p-deploy-wrap" data-hud-year="2003">
         <header class="p-sechead">
           <p class="p-kicker">Deploy · 2003</p>
           <h3 class="p-h3">Upload = production release.</h3>
           <p class="p-lead">Backups? Append _old to the filename.</p>
         </header>
+        <div class="p-deploy-grid"><div class="p-deploy-term"></div></div>
+        <p class="p-lead p-live__caption">No staging, no rollback. Whoever loaded the page in those three seconds got half of it.</p>
       </div>`);
     section.appendChild(deployWrap);
-    createDeploy(deployWrap, {
+    const live = createLiveSite();
+    deployWrap.querySelector('.p-deploy-grid')!.appendChild(live.el);
+    createDeploy(deployWrap.querySelector<HTMLElement>('.p-deploy-term')!, {
       label: 'Upload!',
       doneLabel: 'Uploaded ✓',
       title: 'C:\\WINDOWS\\system32\\cmd.exe - ftp',
       prompt: 'ftp>',
+      onRun: live.reset,
       steps: [
         { kind: 'out', text: 'C:\\homepage>ftp ftp.zeus-hosting.example' },
         { kind: 'out', text: 'Connected to ftp.zeus-hosting.example.' },
@@ -151,17 +157,18 @@ export const era: Era = {
         { kind: 'cmd', text: 'put index.html' },
         { kind: 'out', text: '200 PORT command successful.' },
         { kind: 'out', text: '150 Opening ASCII mode data connection for index.html.' },
-        { kind: 'progress', text: 'index.html', delay: 1600 },
-        { kind: 'out', text: '226 Transfer complete.' },
+        // overwritten in place, at the 1.5 KB/s the log reports: the live page is half there for a while
+        { kind: 'progress', text: 'index.html', delay: 3200, onProgress: live.index },
+        { kind: 'out', text: '226 Transfer complete.', onStart: () => live.index(1) },
         { kind: 'out', text: 'ftp: 4812 bytes sent in 3.21Seconds 1.50Kbytes/sec.' },
         { kind: 'cmd', text: 'put counter.cgi' },
         { kind: 'out', text: '200 PORT command successful.' },
         { kind: 'out', text: '150 Opening ASCII mode data connection for counter.cgi.' },
-        { kind: 'progress', text: 'counter.cgi', delay: 900 },
+        { kind: 'progress', text: 'counter.cgi', delay: 980, onStart: () => live.counter('broken') },
         { kind: 'out', text: '226 Transfer complete.' },
         { kind: 'out', text: 'ftp: 2133 bytes sent in 0.98Seconds 2.18Kbytes/sec.' },
         { kind: 'cmd', text: 'quote site chmod 755 counter.cgi' },
-        { kind: 'ok', text: '200 SITE CHMOD command successful' },
+        { kind: 'ok', text: '200 SITE CHMOD command successful', onStart: () => live.counter('ok') },
         { kind: 'cmd', text: 'bye' },
         { kind: 'out', text: '221 Goodbye.' },
       ],

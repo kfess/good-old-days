@@ -22,7 +22,6 @@
 @keyframes y23-tok {
   from {
     opacity: 0;
-    filter: blur(3px);
   }
 }
 
@@ -185,27 +184,27 @@
   mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
 }
 
+/* soft from the gradient alone: a blur filter on a drifting layer stutters in Safari */
 .era--y2023 .y23-orb i {
   position: absolute;
   inset: 22%;
   border-radius: 50%;
-  filter: blur(48px);
   opacity: 0.55;
   animation: y23-orbit 14s ease-in-out infinite;
 }
 
 .era--y2023 .y23-orb i:nth-child(1) {
-  background: #f4a582;
+  background: radial-gradient(closest-side, #f4a582 30%, transparent);
 }
 
 .era--y2023 .y23-orb i:nth-child(2) {
-  background: #c4b5fd;
+  background: radial-gradient(closest-side, #c4b5fd 30%, transparent);
   animation-delay: -4s;
   animation-direction: reverse;
 }
 
 .era--y2023 .y23-orb i:nth-child(3) {
-  background: #93c5fd;
+  background: radial-gradient(closest-side, #93c5fd 30%, transparent);
   inset: 30%;
   animation-delay: -8s;
 }
@@ -1095,7 +1094,6 @@
     radial-gradient(circle at 34% 34%, color-mix(in srgb, var(--tone) 50%, #fff) 0, transparent 58%),
     radial-gradient(circle at 72% 66%, rgba(139, 92, 246, 0.38), transparent 56%),
     radial-gradient(circle at 28% 76%, rgba(242, 181, 107, 0.5), transparent 54%);
-  filter: blur(26px);
 }
 
 .era--y2023 .y23s-orb__ring {
@@ -2034,6 +2032,8 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* text-clipped: inline padding widens the painted area for the descenders, the line box stays put */
+  padding-bottom: 0.2em;
 }
 
 .era--y2023 .y23-ar.is-in :is(.y23-ar__count, .y23-ar__punch) {

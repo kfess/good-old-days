@@ -17,7 +17,7 @@ const FILES: FileInfo[] = [
 /** Rental server "zeus" + a two-pane FTP client you can drag files across (and chmod 755). */
 export function buildFtp(): HTMLElement {
   const el = h(`
-    <div class="p-block p-ftp-wrap">
+    <div class="p-block p-ftp-wrap" data-hud-year="2001">
       <header class="p-sechead">
         <p class="p-kicker">Infra · 2001</p>
         <h3 class="p-h3">Servers were something you rented.</h3>

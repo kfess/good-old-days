@@ -230,6 +230,10 @@ export function mountMesh(parent: HTMLElement): void {
         <button type="button" class="y15-raised rp" data-run="ok">Send POST /orders</button>
         <button type="button" class="y15-raised y15-raised--pink rp" data-run="fail">Slow down payments</button>
       </div>
+      <blockquote class="y15-mesh__quote">
+        <p>“We replaced our monolith with micro services so that every outage could be more like a murder mystery.”</p>
+        <footer>— @honest_update, October 2015</footer>
+      </blockquote>
     </div>`);
   parent.appendChild(el);
   ripples(el);
@@ -243,6 +247,7 @@ export function mountMesh(parent: HTMLElement): void {
   const bstate = el.querySelector<SVGTSpanElement>('.y15-mesh__bstate')!;
   const payNode = svg.querySelector<SVGGElement>('[data-node="payments"]')!;
   const status = el.querySelector<HTMLElement>('.y15-mesh__status')!;
+  const quote = el.querySelector<HTMLElement>('.y15-mesh__quote')!;
   const path = (id: string) => svg.querySelector<SVGPathElement>(`#y15-e-${id}`)!;
 
   const COLORS = { req: MD.indigo, res: MD.green, event: MD.amber, err: '#e53935' };
@@ -329,6 +334,8 @@ export function mountMesh(parent: HTMLElement): void {
     payNode.classList.add('is-slow');
     status.textContent = 'payments p99: 4.2 s';
     const tl = gsap.timeline();
+    // the outage starts somewhere in five services: the joke of the day arrives with it, and stays
+    tl.call(() => quote.classList.add('is-shown'), [], 0.6);
     // a burst of calls to payments time out (Hystrix timeout configured to 800 ms) and pile up
     for (let k = 0; k < 6; k++) {
       travel(tl, 'o-pay', COLORS.req, k * 0.22, 0.5);
@@ -390,6 +397,7 @@ export function mountMesh(parent: HTMLElement): void {
 
   if (reducedMotion) {
     run('ok');
+    quote.classList.add('is-shown');
     return;
   }
   // first view: a normal request, then the failure story

@@ -140,7 +140,7 @@ export const era: Era = {
     createThread(section, 'y2010');
 
     const deployWrap = h(`
-      <div class="w-block w-deploy-wrap">
+      <div class="w-block w-deploy-wrap" data-hud-year="2010">
         <header class="w-sechead">
           <p class="w-kicker">Deploy · 2010</p>
           <h3 class="w-h3">git push to production.</h3>

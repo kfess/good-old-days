@@ -6,6 +6,10 @@ export interface DeployStep {
   kind?: 'cmd' | 'out' | 'ok' | 'err' | 'progress';
   /** pause after this line (ms); for `progress` it is how long the bar takes to fill */
   delay?: number;
+  /** called as the line appears, to sync something else on the page with the log */
+  onStart?: () => void;
+  /** `progress` only: called with 0–1 as the bar fills */
+  onProgress?: (p: number) => void;
 }
 
 export interface DeployOptions {
@@ -18,6 +22,8 @@ export interface DeployOptions {
   steps: DeployStep[];
   /** label shown on the button when the run completes */
   doneLabel?: string;
+  /** called as each run (or replay) starts, before the first line */
+  onRun?: () => void;
 }
 
 /** The recurring Deploy block: every era deploys the way that era deployed. It plays once on view; the button replays. */
@@ -48,8 +54,10 @@ export function createDeploy(parent: HTMLElement, opts: DeployOptions): HTMLElem
     log.classList.remove('is-scrolled');
     // typed a character at a time: let screen readers hear the finished log, not every keystroke
     log.setAttribute('aria-busy', 'true');
+    opts.onRun?.();
 
     for (const step of opts.steps) {
+      step.onStart?.();
       const kind = step.kind ?? 'out';
       const line = document.createElement('div');
       line.className = `deploy__line deploy__line--${kind}`;
@@ -71,6 +79,7 @@ export function createDeploy(parent: HTMLElement, opts: DeployOptions): HTMLElem
             const p = Math.min(1, (now - t0) / Math.max(1, total));
             bar.style.transform = `scaleX(${p})`;
             pct.textContent = `${Math.round(p * 100)}%`;
+            step.onProgress?.(p);
             if (p < 1) requestAnimationFrame(tick);
             else resolve();
           };

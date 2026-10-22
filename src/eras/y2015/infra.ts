@@ -1,5 +1,6 @@
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h, onceInView } from '../../core/util';
+import { mountDeathStar } from './deathstar';
 import { type Box, MD, P, scene } from './isometric';
 import { mountMesh } from './mesh';
 import { ripples } from './ripple';
@@ -207,4 +208,5 @@ export function mountInfra(parent: HTMLElement): void {
   mountSplit(grid);
   mountLambda(grid);
   mountMesh(el);
+  mountDeathStar(el);
 }
