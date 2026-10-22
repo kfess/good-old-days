@@ -96,7 +96,16 @@ const bootstrap2: StageScene = {
     const page = art.querySelector<HTMLElement>('.y12-bs__page')!;
     const cols = art.querySelectorAll('.y12-bs__grid i');
     const code1 = '<link href="bootstrap.css" rel="stylesheet">';
-    const code2 = '<link href="bootstrap.css" rel="stylesheet">\n<div class="row">\n  <div class="span4">…</div>';
+    // the retype slips in the override every Bootstrap site grew sooner or later
+    const code2 = [
+      code1,
+      '<style>',
+      "  /* don't touch this. it works. */",
+      '  .navbar { z-index: 99999 !important; }',
+      '</style>',
+      '<div class="row">',
+      '  <div class="span4">…</div>',
+    ].join('\n');
 
     dock(tl, tile);
     tl.from(art.querySelector('.y12-bs'), { opacity: 0, y: 40, duration: 0.3 }, 0.3);
@@ -109,7 +118,7 @@ const bootstrap2: StageScene = {
       { scaleY: 1, stagger: 0.03, duration: 0.3, ease: 'power2.out', transformOrigin: 'top' },
       1.3,
     );
-    scrubType(tl, typed, code2, 0.5, 1.5);
+    scrubType(tl, typed, code2, 0.7, 1.5);
     toggleAt(tl, page, 'is-grid', 1.65);
     tl.to(cols, { opacity: 0, duration: 0.3 }, 2.25);
     tl.to({}, { duration: 0.3 });

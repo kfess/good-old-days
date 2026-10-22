@@ -707,6 +707,34 @@
   font-weight: 700;
 }
 
+/* the code behind the Answer step, quiet under the pipeline */
+.era--y2023 .y23-rag__code {
+  margin: 14px 0 0;
+  padding: 8px 12px;
+  border: 1px solid var(--y23-line);
+  border-radius: 12px;
+  background: #faf8f4;
+  font:
+    400 11px / 1.5 "Geist Mono",
+    monospace;
+  color: rgba(31, 30, 29, 0.72);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.era--y2023 .y23-rag__code .c {
+  color: var(--muted);
+}
+
+.era--y2023 .y23-rag__code samp {
+  display: block;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--y23-line);
+  font: inherit;
+  color: #c2410c;
+}
+
 /* ---------------- infra: GPUs ---------------- */
 
 .era--y2023 .y23-gpu {

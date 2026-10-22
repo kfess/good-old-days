@@ -132,6 +132,13 @@ export function buildShowcase(): HTMLElement {
           <li><code>    <b>$</b>(<em>this</em>).<i>next</i>().<i>slideToggle</i>(<s>'fast'</s>);</code></li>
           <li><code>  });</code></li>
           <li><code>});</code></li>
+          <li><code></code></li>
+          <li><code><b>$</b>(document).<i>ready</i>(<em>function</em>(){</code></li>
+          <li><code>  <u>// don't touch this. it works.</u></code></li>
+          <li><code>  setTimeout(<em>function</em>(){</code></li>
+          <li><code>    <b>$</b>(<s>'#tabs'</s>).<i>tabs</i>();</code></li>
+          <li><code>  }, 0);</code></li>
+          <li><code>});</code></li>
         </ol>
       </div>
 

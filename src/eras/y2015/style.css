@@ -938,6 +938,10 @@
   color: #a5d6a7;
 }
 
+.era--y2015 .deploy__line--err {
+  color: #ef9a9a;
+}
+
 /* ---------------- bridge → dark ---------------- */
 
 .era--y2015 .y15-bridge {

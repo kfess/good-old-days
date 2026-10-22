@@ -124,6 +124,7 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+          # don't touch this. it works.
           readinessProbe:
             httpGet:
               path: /healthz

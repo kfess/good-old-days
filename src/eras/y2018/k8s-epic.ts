@@ -256,7 +256,12 @@ const BEATS: Beat[] = [
     at: 0.915,
     title: 'You declare. It reconciles. Forever.',
     sub: 'Click any node to kill it.',
-    term: ['$ kubectl get pods -A -w'],
+    term: [
+      '$ kubectl get pods -w',
+      'NAME                  READY   STATUS             RESTARTS   AGE',
+      'web-7d9f8c6b5-x2k8p   0/1     CrashLoopBackOff   5          3m',
+      'web-7d9f8c6b5-x2k8p   1/1     Running            6          6m',
+    ],
   },
 ];
 

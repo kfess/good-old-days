@@ -1050,6 +1050,11 @@
   color: #0000ff;
 }
 
+.era--y2010 .w-code u {
+  text-decoration: none;
+  color: #008200;
+}
+
 /* Lightbox */
 .era--y2010 .w-lb {
   position: fixed;

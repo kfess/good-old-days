@@ -172,6 +172,8 @@ const vite: StageScene = {
 const COPILOT_TYPED_1 = 'const copilot: StageScene = {';
 const COPILOT_GHOST_1 = "  name: 'GitHub Copilot',\n  line: 'Gray text started writing what comes next.',";
 const COPILOT_TYPED_2 = '  play({ art, tl }) {';
+// Copilot learned from our code, so it suggests the ignore too (`context` is never declared)
+const COPILOT_IGNORE = "// @ts-ignore — don't touch this. it works.";
 const COPILOT_GHOST_2 =
   '    const ghost = suggest(art, context);\n    tl.to(ghost, { opacity: 1 });\n    onTab(() => ghost.accept());\n  },\n};';
 
@@ -191,7 +193,8 @@ const copilot: StageScene = {
 <span class="y21-ed__t1"></span><span class="y21-ed__caret c1"></span>
 <span class="y21-ed__g g1">${esc(COPILOT_GHOST_1)}</span>
 <span class="y21-ed__t2"></span><span class="y21-ed__caret c2"></span>
-<span class="y21-ed__g g2">${esc(COPILOT_GHOST_2)}</span></code></pre>
+<span class="y21-ed__g g2">    <span class="y21-ed__cm">${esc(COPILOT_IGNORE)}</span>
+${esc(COPILOT_GHOST_2)}</span></code></pre>
         <span class="y21-ed__tab">Tab ⇥</span>
       </div>`;
 

@@ -191,6 +191,15 @@ function embCard(): HTMLElement {
 
 /* ---------------- showcase: RAG ---------------- */
 
+/** The Answer step as it was usually wired in 2023: beg for JSON, strip the fences, parse, and the model opens with "Sure!" anyway. */
+const RAG_CODE = [
+  "const reply = await llm(prompt + '\\nRespond ONLY with valid JSON. No prose. Please.');",
+  "// don't touch this. it works.",
+  "const { answer, sources } = JSON.parse(reply.replace(/```json|```/g, ''));",
+];
+// V8's JSON.parse wording from mid-2022 on (Chrome, Node 20)
+const RAG_ERR = `SyntaxError: Unexpected token 'S', "Sure! Here"... is not valid JSON`;
+
 function ragCard(): HTMLElement {
   const el = h(`
     <article class="y23-card y23-card--rag">
@@ -203,6 +212,7 @@ function ragCard(): HTMLElement {
         <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__topk">${'<i></i>'.repeat(6)}</div><b>Retrieve</b><span>top-k = 3</span></div>
         <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__ans"><p>Refunds are available within 30 days.<sup>[1]</sup><sup>[2]</sup></p></div><b>Answer</b><span>with citations</span></div>
       </div>
+      <pre class="y23-rag__code"><code>${RAG_CODE.map((l) => `<span${l.startsWith('//') ? ' class="c"' : ''}>${esc(l)}</span>`).join('\n')}</code><samp>${esc(RAG_ERR)}</samp></pre>
     </article>`);
   const steps = Array.from(el.querySelectorAll('.y23-rag__st'));
   if (reducedMotion) {

@@ -503,6 +503,13 @@
   white-space: normal;
 }
 
+/* nothing types it out when motion is reduced: show the whole transcript, not just its tail */
+@media (prefers-reduced-motion: reduce) {
+  .era--y2025 .y25-term__body {
+    height: auto;
+  }
+}
+
 .era--y2025 .y25-l {
   white-space: pre-wrap;
 }

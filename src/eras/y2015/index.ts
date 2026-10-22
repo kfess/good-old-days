@@ -151,10 +151,25 @@ export const era: Era = {
       title: 'bash — docker',
       label: 'Deploy',
       steps: [
+        // no .dockerignore yet: `COPY . .` (step 3) ships the Mac's node_modules, so npm install keeps its
+        // macOS node-sass binary and the webpack build can't load it on Linux
         { kind: 'cmd', text: 'docker build -t acme/web:1.4.2 .' },
-        { text: 'Sending build context to Docker daemon  4.096MB' },
+        { text: 'Sending build context to Docker daemon  187.6MB' },
         { text: 'Step 1/6 : FROM node:6' },
         { kind: 'progress', text: 'Step 4/6 : RUN npm install', delay: 1400 },
+        { text: 'Step 5/6 : RUN npm run build' },
+        {
+          kind: 'err',
+          text: 'Module build failed: Error: Missing binding /app/node_modules/node-sass/vendor/linux-x64-48/binding.node',
+        },
+        {
+          kind: 'err',
+          text: 'Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 6.x',
+          delay: 600,
+        },
+        { kind: 'cmd', text: 'echo node_modules > .dockerignore && docker build -t acme/web:1.4.2 .' },
+        { text: 'Sending build context to Docker daemon  4.096MB' },
+        { kind: 'progress', text: 'Step 4/6 : RUN npm install', delay: 800 },
         { text: 'Successfully built 9f2c3a1b7e44' },
         { kind: 'cmd', text: 'docker push acme/web:1.4.2' },
         { text: 'The push refers to a repository [docker.io/acme/web]' },

@@ -59,6 +59,10 @@ const SESSION: Line[] = [
   },
   { html: '<span class="y25-dot">⏺</span> <b>Read</b>(src/theme.ts)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Read 48 lines</span>', todo: 0 },
+  {
+    html: '<span class="y25-txt">⏺</span> Line 14: `// don\'t touch this. it works.` — git blame: you, 2010. Keep it?',
+  },
+  { html: '<span class="y25-user">&gt; keep it.</span>' },
   { html: '<span class="y25-dot">⏺</span> <b>Update</b>(src/theme.ts)' },
   {
     html: '<span class="y25-gut">⎿</span><span class="y25-dim">Updated src/theme.ts with 4 additions and 1 removal</span>',

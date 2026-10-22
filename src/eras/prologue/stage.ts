@@ -135,7 +135,7 @@ const lamp: StageScene = {
     const nEl = art.querySelector<HTMLElement>('.p-php__n')!;
     const log = art.querySelector<HTMLElement>('.p-php__log')!;
     const code =
-      '<?php\n  mysql_query("UPDATE hits SET n = n + 1");\n  $r = mysql_query("SELECT n FROM hits");\n?>\nYou are visitor #<?php echo mysql_result($r, 0); ?>';
+      '<!-- don\'t touch this. it works. -->\n<?php\n  mysql_query("UPDATE hits SET n = n + 1");\n  $r = mysql_query("SELECT n FROM hits");\n?>\nYou are visitor #<?php echo mysql_result($r, 0); ?>';
 
     const paint = (n: number) => {
       const s = String(Math.floor(n)).padStart(7, '0');

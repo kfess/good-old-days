@@ -17,6 +17,7 @@ const ROUTES: Record<
     line: 'JSX felt weird. Then you couldn’t live without it.',
     code: `class Hello extends React.Component {
   render() {
+    // don't touch this. it works.
     return <h1>Hello, {this.props.name}</h1>;
   }
 }`,
