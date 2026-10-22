@@ -16,6 +16,8 @@ I miss the good old days. Strongly.
 
 https://kfess.github.io/good-old-days/
 
+![Scrolling through the page: a PHP hit counter, a 1999 homepage, the Docker whale, the framework war, Kubernetes at scale, and agents](docs/good-old-days.gif)
+
 ---
 
 All product names, logos and brands are property of their respective owners, used for identification only; no endorsement is implied. Logo licences and trademark notices are listed in the page footer.
