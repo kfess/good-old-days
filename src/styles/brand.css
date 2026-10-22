@@ -75,6 +75,21 @@
   background: #000033;
 }
 
+.coda__consent {
+  display: block;
+  margin: 14px auto 0;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  font:
+    400 11px / 1.5 "Inter",
+    system-ui,
+    sans-serif;
+  color: rgba(200, 200, 230, 0.75);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .coda__legal {
   max-width: 760px;
   margin: 0 auto;

@@ -5,17 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Good Old Days</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000033'/%3E%3Ctext x='8' y='12' font-size='10' text-anchor='middle' fill='%23ffff00' font-family='monospace'%3E$%3C/text%3E%3C/svg%3E" />
-    <meta name="description" content="From 2010 to 2026. From jQuery to Kubernetes to LLMs. A scrolling history of web development." />
+    <meta name="description" content="From 1995 to 2026. From table layouts to jQuery to Kubernetes to LLMs. A scrolling history of web development." />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <!-- link previews: crawlers need absolute URLs -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kfess.github.io/good-old-days/" />
+    <meta property="og:site_name" content="Good Old Days" />
+    <meta property="og:title" content="Good Old Days" />
+    <meta property="og:description" content="From 1995 to 2026. From table layouts to jQuery to Kubernetes to LLMs. A scrolling history of web development." />
+    <meta property="og:image" content="https://kfess.github.io/good-old-days/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A pixel-art computer under the words “Welcome to my homepage!”" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Lato:wght@300;400;700;900&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&family=Poppins:wght@400;600;800&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&family=Geist:wght@300;400;600;800&family=Geist+Mono:wght@400;600&family=JetBrains+Mono:wght@400;700&family=Ubuntu:wght@700&family=Mona+Sans:wght@700&family=Google+Sans:wght@500&family=Google+Sans+Flex:wght@500&family=Alfa+Slab+One&family=Source+Sans+3:wght@700&family=Questrial&family=Archivo:wght@700;800&family=Alegreya+Sans:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Lato:wght@300;400;700;900&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&family=Poppins:wght@400;600;800&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&family=Geist:wght@300;400;600;800&family=Geist+Mono:wght@400;600&family=JetBrains+Mono:wght@400;700&family=Ubuntu:wght@700&family=Mona+Sans:wght@700&family=Google+Sans:wght@500&family=Google+Sans+Flex:wght@500&family=Source+Sans+3:wght@700&family=Questrial&family=Archivo:wght@700;800&display=swap"
     />
   </head>
   <body>
     <div id="stage-bg" aria-hidden="true"></div>
     <main id="app"></main>
+    <!-- the page is built by script; without it, say so in the 1999 colors (inline: the CSP allows no <style>) -->
+    <noscript>
+      <div style="min-height: 100vh; background: #000033">
+        <div style="max-width: 640px; margin: 0 auto; padding: 48px 16px; text-align: center; color: #e6e6ff; font-family: system-ui, sans-serif">
+          <h1 style="margin: 0 0 8px; color: #ffff00; font-size: 32px">Good Old Days</h1>
+          <p style="margin: 0 0 24px">A scrolling history of web development, 1995–2026.</p>
+          <img src="./og.png" width="1200" height="630" alt="A pixel-art computer under the words “Welcome to my homepage!”" style="width: 100%; height: auto; border: 2px solid #c0c0c0" />
+          <p style="margin: 24px 0 0">This page is one long animation, and it needs JavaScript.<br />Please turn it on and reload.</p>
+          <p style="margin: 8px 0 0; color: #9999cc; font-size: 14px">Back in the day it would have said: best viewed with JavaScript enabled.</p>
+        </div>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

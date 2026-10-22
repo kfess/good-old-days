@@ -1,7 +1,7 @@
 {
   "name": "good-old-days",
   "version": "1.0.0",
-  "description": "Good old days — a scrolling history of web development, 2010–2026",
+  "description": "Good old days — a scrolling history of web development, 1995–2026",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

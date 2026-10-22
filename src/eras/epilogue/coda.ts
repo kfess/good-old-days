@@ -3,6 +3,7 @@ import { gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger, scrollToEl } from '..
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
 import { clawd } from '../../components/clawd';
+import { hasAnalytics, openConsent } from '../../core/analytics';
 import { h } from '../../core/util';
 
 const CENTER_TRICKS = [
@@ -83,10 +84,11 @@ export function buildCoda(): HTMLElement {
 
       </div>
     </div>
-      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio, Argo and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; the Claude Code mascot (Clawd) © Anthropic. GPT, ChatGPT and Codex are trademarks of OpenAI; Gemini and Google Chrome of Google LLC; Llama of Meta Platforms, Inc.; GitHub and Copilot of GitHub, Inc.; TypeScript and Visual Studio Code of Microsoft Corporation; Cursor of Anysphere, Inc.; Firefox of the Mozilla Foundation; Grok of xAI; DeepSeek, Qwen and Mistral of their respective companies. Icons via Simple Icons (CC0); where a brand licenses its logo, that licence applies: Vue.js logo by Evan You (CC BY-NC-SA 4.0), HTML5 logo by W3C (CC BY 3.0), Jenkins logo (CC BY-SA 3.0), OpenTelemetry and WebGPU logos (CC BY 4.0), Apache Kafka, Fluentd and Rook logos (Apache 2.0), Backbone.js, Deno, JavaScript, Storybook and GitHub Copilot icons (MIT).</p></footer>
+      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio, Argo, Harbor and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; the Claude Code mascot (Clawd) © Anthropic. GPT, ChatGPT and Codex are trademarks of OpenAI; Gemini and Google Chrome of Google LLC; Llama of Meta Platforms, Inc.; GitHub and Copilot of GitHub, Inc.; TypeScript and Visual Studio Code of Microsoft Corporation; Cursor of Anysphere, Inc.; Firefox of the Mozilla Foundation; Grok of xAI; DeepSeek, Qwen and Mistral of their respective companies. Icons via Simple Icons (CC0); where a brand licenses its logo, that licence applies: Vue.js logo by Evan You (CC BY-NC-SA 4.0), Angular logo by Google (CC BY 4.0), Sass logo by the Sass team (CC BY-NC-SA 3.0), HTML5 logo by W3C (CC BY 3.0), Jenkins logo (CC BY-SA 3.0), OpenTelemetry and WebGPU logos (CC BY 4.0), Apache Kafka, Fluentd and Rook logos (Apache 2.0), Backbone.js, Bootstrap, Deno, JavaScript, Storybook and GitHub Copilot icons (MIT).</p>${hasAnalytics ? '<button type="button" class="coda__consent">Analytics settings</button>' : ''}</footer>
     </div>`);
   const coda = el.querySelector<HTMLElement>('.coda')!;
   el.querySelector('.coda__again')!.addEventListener('click', () => scrollToEl(0));
+  el.querySelector('.coda__consent')?.addEventListener('click', openConsent);
 
   if (reducedMotion) {
     coda.classList.add('is-static');
