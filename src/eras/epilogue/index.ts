@@ -38,12 +38,12 @@ const MINIS: { year: string; log: string; html: string }[] = [
   },
   {
     year: '2013',
-    log: 'flat UI, long shadows, ghost buttons',
+    log: 'flat UI, long shadows, thin type',
     html: `<div class="m13">
       <div class="m13__icon"><span>✓</span></div>
       <h4>Flat is the new black.</h4>
       <p>Responsive · Retina-ready · Parallax</p>
-      <span class="m13__ghost">Learn more</span>
+      <span class="m13__btn">Learn more</span>
     </div>`,
   },
   {
@@ -86,7 +86,7 @@ const MINIS: { year: string; log: string; html: string }[] = [
     year: '2025',
     log: 'agents, in a terminal',
     html: `<div class="m25">
-      <p><b>&gt;</b> ${t('rebuild everything', '全部作り直して')}</p>
+      <p><b>&gt;</b> ${t('rebuild everything since 1999', '1999年から全部作り直して')}</p>
       <p><em>⏺</em> Write(1999/index.html)</p>
       <p><em>⏺</em> Write(2010/lightbox.js)</p>
       <p><em>⏺</em> Bash(argocd app sync 2019)</p>

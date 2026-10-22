@@ -93,15 +93,15 @@ function xhrLogo(): string {
 const lamp: StageScene = {
   year: '1998.06',
   name: 'PHP 3 + MySQL',
-  kicker: 'Server-side, at last',
-  line: 'Servers started assembling the page.',
+  kicker: 'Server-side, made easy',
+  line: 'Code went straight into the HTML.',
   className: 'p-scene p-scene--php',
   logo: phpLogo(),
   length: 1.0,
   play({ art, logo, tl }) {
     art.innerHTML = `
       <div class="p-win p-php__code">
-        <div class="p-win__bar"><span>index.php - Notepad</span><i>_</i><i>□</i><i>×</i></div>
+        <div class="p-win__bar"><span>index.php3 - Notepad</span><i>_</i><i>□</i><i>×</i></div>
         <pre class="p-win__body"><code class="p-php__typed"></code><i class="p-caret"></i></pre>
       </div>
       <div class="p-php__right">
@@ -126,7 +126,7 @@ const lamp: StageScene = {
       if (log.childElementCount !== reqs) {
         log.innerHTML = Array.from(
           { length: reqs },
-          (_, i) => `<li>GET /index.php <b>200</b> <span>${(0.31 + i * 0.07).toFixed(2)}s</span></li>`,
+          (_, i) => `<li>GET /index.php3 <b>200</b> <span>${(0.31 + i * 0.07).toFixed(2)}s</span></li>`,
         ).join('');
       }
     };
@@ -281,7 +281,8 @@ const ajax: StageScene = {
       .to(warn, { '--strike': 1, duration: 0.12, ease: 'power1.in' }, 0.8)
       .to(warn, { autoAlpha: 0, ...none, duration: 0.12 }, 0.95)
       .from(art.querySelector('.p-aj__note'), { autoAlpha: 0, y: -6, duration: 0.12 }, 0.95);
-    scrubType(tl, typed, "xhr.open('GET', '/tile?x=7&y=3', true);", 0.5, 0.5);
+    // the tiles are plain <img>s; what goes over XMLHttpRequest is the search behind the pin
+    scrubType(tl, typed, "xhr.open('GET', '/search?q=pizza', true);", 0.5, 0.5);
     const drag = { p: 0 };
     tl.to(
       drag,

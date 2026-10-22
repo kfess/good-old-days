@@ -64,7 +64,8 @@ function toggleAt(tl: gsap.core.Timeline, el: Element, cls: string, at: number):
 const bootstrap2: StageScene = {
   year: '2012.01',
   name: 'Bootstrap 2',
-  kicker: 'Sleek, intuitive, and powerful',
+  // the 2.0 docs' masthead; "Sleek, intuitive, and powerful" only arrived with 2.1 (Aug 2012)
+  kicker: 'Bootstrap, from Twitter',
   line: 'Even engineers could build a decent-looking site.',
   className: 'y12-scene y12-scene--bs',
   logo: longShadowBadge(bootstrapGrid, FLAT.amethyst),
@@ -252,7 +253,7 @@ const docker: StageScene = {
 
     dock(tl, logo, 0);
     tl.from(art.querySelector('.y12-dk__cmd'), { opacity: 0, y: 20, duration: 0.2 }, 0.1);
-    scrubType(tl, art.querySelector<HTMLElement>('.y12-dk__typed')!, '$ docker run -d -p 80:80 whale', 0.5, 0.2);
+    scrubType(tl, art.querySelector<HTMLElement>('.y12-dk__typed')!, '$ sudo docker run -d -p 80:80 whale', 0.5, 0.2);
     tl.from(art.querySelector('.y12-dk__waves'), { yPercent: 60, opacity: 0, duration: 0.3 }, 0.2);
     // containers drop in, bottom row first
     tl.from(boxEls, { y: -420, opacity: 0, duration: 0.28, ease: 'bounce.out', stagger: 0.022 }, 0.5);

@@ -50,7 +50,7 @@ function buildBridge(): HTMLElement {
     <div class="w-bridge">
       <div class="w-bridge__sticky">
         <div class="w-bridge__row">
-          <div class="w-linen"><span class="w-stitch">Notes</span></div>
+          <div class="w-legal"><span class="w-legal__ink">Notes</span></div>
           <a href="#" class="w-flatten" tabindex="-1" aria-hidden="true"><i class="w-flatten__gloss"></i><span>Sign up — it's free!</span></a>
           <div class="w-leather"><span>Calendar</span></div>
         </div>
@@ -62,6 +62,7 @@ function buildBridge(): HTMLElement {
   if (reducedMotion) return el;
 
   const btn = el.querySelector<HTMLElement>('.w-flatten')!;
+  const pad = el.querySelector<HTMLElement>('.w-legal')!;
   // the glossy row is already there as the bridge scrolls in, so the screen never sits empty
   gsap.from(el.querySelector('.w-bridge__row'), {
     opacity: 0,
@@ -75,7 +76,10 @@ function buildBridge(): HTMLElement {
       start: 'top top',
       end: 'bottom bottom',
       scrub: 0.8,
-      onUpdate: (self) => btn.classList.toggle('is-flat', self.progress > 0.5),
+      onUpdate: (self) => {
+        btn.classList.toggle('is-flat', self.progress > 0.5);
+        pad.classList.toggle('is-flat', self.progress > 0.5);
+      },
     },
   });
   tl.to(el.querySelector('.w-flatten__gloss'), { yPercent: -160, opacity: 0, duration: 1 }, 0)
@@ -90,7 +94,7 @@ function buildBridge(): HTMLElement {
       0.3,
     )
     .to(
-      el.querySelectorAll('.w-linen, .w-leather'),
+      el.querySelectorAll('.w-legal, .w-leather'),
       { '--tex': 0, borderRadius: 4, boxShadow: '0 0px 0px rgba(0,0,0,0)', duration: 1 },
       0.3,
     )

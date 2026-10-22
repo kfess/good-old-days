@@ -76,11 +76,12 @@ function tree(s: State): VNode[] {
   const nodes: VNode[] = [
     { key: 'app', depth: 0, label: '<App>' },
     { key: 'bar', depth: 1, label: '<AppBar title="Feed">' },
-    { key: 'menu', depth: 2, label: `<MenuIcon open={${s.drawer}} />` },
+    // material-ui 0.x icons: the burger turns into a close icon while the drawer is open
+    { key: 'menu', depth: 2, label: s.drawer ? '<NavigationClose />' : '<NavigationMenu />' },
     { key: 'drawer', depth: 1, label: `<Drawer open={${s.drawer}} />` },
     { key: 'list', depth: 1, label: `<CardList loading={${s.loading}}>` },
   ];
-  if (s.loading) nodes.push({ key: 'skel', depth: 2, label: '<Skeleton count={3} />' });
+  if (s.loading) nodes.push({ key: 'skel', depth: 2, label: '<CardPlaceholder count={3} />' });
   else
     s.cards.forEach((c) =>
       nodes.push({ key: `card${c.id}`, depth: 2, label: `<Card key={${c.id}} liked={${c.liked}} />` }),

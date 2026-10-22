@@ -5,8 +5,10 @@
   --ts: #007acc;
   --card: rgba(255, 255, 255, 0.035);
   --line: rgba(255, 255, 255, 0.09);
+  /* JetBrains Mono only arrived in 2020-01: the 2018–2019 scenes (editors, the 2019 look) code in Roboto Mono */
+  --mono-pre2020: "Roboto Mono", Menlo, Consolas, monospace;
   font-family: "Poppins", "Inter", var(--jp);
-  /* code reads as typed: no "~>" / "=>" / "->" arrows from JetBrains Mono's and Inter's contextual ligatures */
+  /* code reads as typed: no "~>" / "=>" / "->" arrows from JetBrains Mono's (the 2020 scenes) and Inter's contextual ligatures */
   font-variant-ligatures: no-contextual;
 }
 
@@ -341,7 +343,7 @@
 
 .era--y2018 .look__kicker {
   margin: 0 0 10px;
-  font-family: var(--mono);
+  font-family: var(--mono-pre2020);
   font-size: 13px;
   color: #8fb0ff;
 }
@@ -655,37 +657,23 @@
   line-height: 1.35;
 }
 
-.era--y2018 .look__card.is-neu {
+/* 2019's isometric illustration craze: everything drawn as 30° cubes */
+.era--y2018 .look__card.is-iso {
   position: relative;
-  background: #e0e5ec;
-  box-shadow:
-    9px 9px 16px rgba(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.6);
 }
 
-.era--y2018 .look__page.is-dark .look__card.is-neu {
-  background: #1b2029;
-  box-shadow:
-    8px 8px 16px #0a0d12,
-    -8px -8px 16px #262d39;
+.era--y2018 .look__card.is-iso h5 {
+  /* narrow cells: the word stays on one line beside the cube */
+  font-size: clamp(16px, 1.7vw, 22px);
 }
 
-.era--y2018 .look__knob {
+.era--y2018 .look__cube {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  box-shadow:
-    inset 4px 4px 8px rgba(163, 177, 198, 0.7),
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8);
-}
-
-.era--y2018 .look__page.is-dark .look__knob {
-  box-shadow:
-    inset 4px 4px 8px #0a0d12,
-    inset -4px -4px 8px #2a3240;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 6px 6px rgba(50, 50, 93, 0.25));
 }
 
 /* chatbot */
@@ -1247,7 +1235,7 @@
   box-shadow:
     0 30px 80px rgba(0, 0, 0, 0.45),
     0 0 0 1px rgba(91, 60, 255, 0.08);
-  font-family: "JetBrains Mono", var(--mono);
+  font-family: var(--mono-pre2020);
   color: #d6dcf0;
 }
 

@@ -127,14 +127,15 @@ const node: StageScene = {
   logo: `<span class="w-tile w-tile--node">${logo('node')}</span>`,
   length: 1.1,
   play({ art, logo: tile, tl }) {
-    const THREADS = 6;
+    // Apache 2.2 with mod_php means the prefork MPM: one httpd child process per request
+    const PROCS = 6;
     const REQS = 14;
     art.innerHTML = `
       <div class="w-jq__code w-node__code"><code class="w-jq__typed"></code><i class="w-caret"></i></div>
       <div class="w-node">
         <section class="w-node__col w-node__col--apache">
-          <header><b>Thread per request</b><span>MaxClients 6</span></header>
-          <ol class="w-node__threads">${Array.from({ length: THREADS }, (_, i) => `<li><span>thread ${i + 1}</span><i class="w-node__bar"></i><em>blocked</em></li>`).join('')}</ol>
+          <header><b>Process per request</b><span>MaxClients 6</span></header>
+          <ol class="w-node__threads">${Array.from({ length: PROCS }, (_, i) => `<li><span>httpd ${i + 1}</span><i class="w-node__bar"></i><em>blocked</em></li>`).join('')}</ol>
           <p class="w-node__queue">queued: <b>0</b></p>
           <p class="w-node__mem">RAM <i><b></b></i> <span>0 MB</span></p>
         </section>
@@ -181,16 +182,16 @@ const node: StageScene = {
         onUpdate: () => {
           const p = load.p;
           const incoming = Math.round(p * 600);
-          // Apache: each request holds a worker while it waits on I/O; with all MaxClients busy,
-          // everyone else waits in line. RAM tops out at MaxClients × one worker (~32 MB with mod_php).
-          const busy = Math.min(THREADS, incoming);
+          // Apache: each request holds a child process while it waits on I/O; with all MaxClients busy,
+          // everyone else waits in line. RAM tops out at MaxClients × one child (~32 MB with mod_php).
+          const busy = Math.min(PROCS, incoming);
           bars.forEach((b, i) => {
             const on = i < busy;
             b.classList.toggle('is-busy', on);
             b.style.setProperty('--f', String(on ? 0.25 + 0.75 * ((p * 3 + i * 0.17) % 1) : 0));
           });
-          queue.textContent = String(Math.max(0, incoming - THREADS));
-          memBar.style.transform = `scaleX(${busy / THREADS})`;
+          queue.textContent = String(Math.max(0, incoming - PROCS));
+          memBar.style.transform = `scaleX(${busy / PROCS})`;
           memTxt.textContent = `${busy * 32} MB`;
           // Node: one loop spins, requests come in and are answered without waiting
           spin.style.strokeDashoffset = String(-p * 4200);

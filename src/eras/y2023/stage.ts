@@ -32,8 +32,8 @@ const CARET_MARK = `<svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><re
 /* ---------------- GPT-4: tokens, one at a time ---------------- */
 
 const HAIKU = t(
-  'Sure! A haiku about the web:\nTags became pages,\npages learned to move and speak —\nnow they answer back.',
-  'もちろんです！Webの俳句です:\nタグ並べ\nページは動き\n返事する',
+  'Sure! A haiku about the web:\nTake the JSON in,\npass it to the other side —\nsuch is my career.',
+  'もちろんです！Webの俳句です:\nJSONを\n右から左\n流す日々',
 );
 
 const gpt4: StageScene = {

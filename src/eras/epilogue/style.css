@@ -355,10 +355,12 @@
     28px 28px #c0392b;
 }
 
+/* iOS 7 thin type */
 .era--epilogue .m13 h4 {
   margin: 6px 0 0;
-  font-size: 28px;
-  font-weight: 900;
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
 }
 
 .era--epilogue .m13 p {
@@ -367,11 +369,12 @@
   opacity: 0.9;
 }
 
-.era--epilogue .m13__ghost {
+/* a solid flat button: no gradient, no bevel, no outline */
+.era--epilogue .m13__btn {
   margin-top: 6px;
-  padding: 8px 22px;
-  border: 2px solid #fff;
+  padding: 10px 24px;
   border-radius: 4px;
+  background: #34495e;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;

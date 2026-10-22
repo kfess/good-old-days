@@ -1,7 +1,7 @@
 import type { SimpleIcon } from 'simple-icons';
 
 /**
- * The classic Angular shield (AngularJS 2010–2016, Angular 2+ until the 2023 rebrand), traced in a 24×24 box.
+ * The classic Angular shield (AngularJS from 2012 to 2016, Angular 2+ until the 2023 rebrand), traced in a 24×24 box.
  * simple-icons now ships only the 2023 mark, which would be an anachronism in the 2012 and 2016 scenes.
  * Winding is set so the default nonzero fill cuts the "A" out of the shield and keeps its counter.
  */

@@ -1604,7 +1604,7 @@
   background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
 }
 
-.era--y2010 .w-linen,
+.era--y2010 .w-legal,
 .era--y2010 .w-leather {
   --tex: 1;
   position: relative;
@@ -1618,32 +1618,35 @@
   font: 700 clamp(12px, 1.3vw, 16px) var(--w-head);
 }
 
-.era--y2010 .w-linen {
+/* iPad Notes (iOS 3.2–6): Marker Felt on a yellow legal pad, bound in leather along the top */
+.era--y2010 .w-legal {
   background: #3498db;
   color: #fff;
 }
 
-.era--y2010 .w-linen::before {
+.era--y2010 .w-legal::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(0deg, rgba(120, 100, 60, 0.12) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(120, 100, 60, 0.1) 0 1px, transparent 1px 3px),
-    linear-gradient(#f4ecd8, #e6dcc2);
+    linear-gradient(#7a4f2a, #4f3018) top / 100% 22% no-repeat,
+    linear-gradient(90deg, transparent 16%, rgba(200, 70, 70, 0.5) 16% calc(16% + 1px), transparent 0),
+    repeating-linear-gradient(transparent 0 12px, rgba(110, 140, 190, 0.45) 12px 13px),
+    #fbec8f;
   opacity: var(--tex);
 }
 
-.era--y2010 .w-stitch {
+.era--y2010 .w-legal__ink {
   position: relative;
-  padding: 6px 12px;
-  border: 2px dashed rgba(255, 255, 255, calc(1 - var(--tex)));
-  color: #fff;
+  transform: translateY(calc(var(--tex) * 0.5em));
+  color: color-mix(in srgb, #4a3418 calc(var(--tex) * 100%), #fff);
+  font:
+    400 1.3em "Marker Felt",
+    var(--w-head);
 }
 
-.era--y2010 .w-linen .w-stitch {
-  border-color: rgba(140, 110, 60, var(--tex));
-  color: color-mix(in srgb, #7a5a2a calc(var(--tex) * 100%), #fff);
+.era--y2010 .w-legal.is-flat .w-legal__ink {
+  font: inherit;
 }
 
 .era--y2010 .w-leather {

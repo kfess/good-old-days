@@ -8,7 +8,7 @@ export interface BentoActions {
   toggleAurora: () => void;
 }
 
-/** Bento grid of 2021 UI tropes, with a real ⌘K palette and a clay three.js object. */
+/** Bento grid of 2022 UI tropes, with a real ⌘K palette and a clay three.js object. */
 export function createBento(parent: HTMLElement, section: HTMLElement, actions: BentoActions): void {
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform);
   const mod = isMac ? '⌘' : 'Ctrl';

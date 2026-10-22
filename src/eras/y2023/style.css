@@ -87,8 +87,12 @@
 }
 
 .era--y2023 .y23-input__text:empty::before {
-  content: "Ask anything…";
+  content: "Send a message…";
   color: #a8a29e;
+}
+
+:root:lang(ja) .era--y2023 .y23-input__text:empty::before {
+  content: "メッセージを送信…";
 }
 
 .era--y2023 .y23-send {

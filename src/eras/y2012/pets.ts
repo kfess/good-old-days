@@ -32,7 +32,7 @@ function mountHerd(parent: HTMLElement): void {
         <p class="y12-herd__line y12-herd__line--pets">Named them. Raised them by hand.<small>uptime 847 days · don’t touch zeus</small></p>
         <p class="y12-herd__line y12-herd__line--cattle">Numbered them. Replaced them when they broke.<small>click a server to terminate it</small></p>
         <button type="button" class="y12-btn y12-herd__go">knife ec2 server create ×12</button>
-        <div class="y12-herd__stats"><span>replaced <b class="y12-herd__count">0</b></span><span>avg. recovery <b>42s</b></span></div>
+        <div class="y12-herd__stats"><span>replaced <b class="y12-herd__count">0</b></span><span>avg. recovery <b>~4 min</b></span></div>
       </div>
       <div class="y12-herd__grid">
         ${PETS.map((n) => `<div class="y12-srv is-pet" data-flip-id="${n}"><span class="y12-srv__heart">♥</span>${server()}<span class="y12-srv__tag">${n}</span></div>`).join('')}

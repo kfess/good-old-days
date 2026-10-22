@@ -9,7 +9,7 @@ const PINS: [string, FlatColor, keyof typeof ICONS, number][] = [
   ['Long shadow icon set', 'turquoise', 'chart', 150],
   ['Minimal workspace', 'concrete', 'laptop', 250],
   ['Parallax inspiration', 'amethyst', 'cloud', 180],
-  ['Ghost buttons, done right', 'alizarin', 'mail', 140],
+  ['Skeuomorphic vs. flat', 'alizarin', 'mail', 140],
   ['Flat UI color palette', 'emerald', 'tablet', 220],
   ['Retina-ready wallpapers', 'asphalt', 'laptop', 170],
   ['One-page portfolio themes', 'carrot', 'chart', 230],

@@ -51,6 +51,7 @@ const typescript: StageScene = {
   logo: glow('TS', '#007acc'),
   length: 1.4,
   play({ art, logo: mark, tl }) {
+    // 2018 VS Code hovers led with the source, "[ts] …"; the trailing "ts(2551)" code came later
     art.innerHTML = `
       <div class="y18-ts__merge">
         <p class="y18-ts__lead">React, Angular, Vue →</p>
@@ -58,10 +59,10 @@ const typescript: StageScene = {
       </div>
       <div class="y18-ed">
         <div class="y18-ed__tabs"><span class="y18-ed__file">user<b class="y18-ed__ext">.js</b></span></div>
-        <pre class="y18-ed__code"><code><span class="y18-ed__iface"></span><span class="k">async function</span> <span class="f">getUser</span>(<span class="sq" data-msg="Parameter 'id' implicitly has an 'any' type. ts(7006)">id</span><span class="t a1"></span>)<span class="t a2"></span> {
+        <pre class="y18-ed__code"><code><span class="y18-ed__iface"></span><span class="k">async function</span> <span class="f">getUser</span>(<span class="sq" data-msg="[ts] Parameter 'id' implicitly has an 'any' type.">id</span><span class="t a1"></span>)<span class="t a2"></span> {
   <span class="k">const</span> res = <span class="k">await</span> fetch(<span class="s">\`/api/users/\${id}\`</span>);
   <span class="k">const</span> user<span class="t a3"></span> = <span class="k">await</span> res.json();
-  <span class="k">return</span> user.name.<span class="sq y18-ed__typo" data-msg="Property 'toUppercase' does not exist on type 'string'. Did you mean 'toUpperCase'? ts(2551)">toUppercase</span>();
+  <span class="k">return</span> user.name.<span class="sq y18-ed__typo" data-msg="[ts] Property 'toUppercase' does not exist on type 'string'. Did you mean 'toUpperCase'?">toUppercase</span>();
 }</code></pre>
         <div class="y18-ed__tip"></div>
         <div class="y18-ed__console"><b>production · console</b>Uncaught (in promise) TypeError: user.name.toUppercase is not a function</div>
