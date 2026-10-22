@@ -1,6 +1,7 @@
 import { type SimpleIcon, siReact } from 'simple-icons';
 import { angularShield, dockerWhale2013 } from '../../components/marks';
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY, reducedMotion } from '../../core/scroll';
 import { bootstrapGrid, FLAT } from './art';
 
@@ -100,7 +101,7 @@ const bootstrap2: StageScene = {
     const code2 = [
       code1,
       '<style>',
-      "  /* don't touch this. it works. */",
+      t("  /* don't touch this. it works. */", '  /* ここ触るな。なぜか動いてる。 */'),
       '  .navbar { z-index: 99999 !important; }',
       '</style>',
       '<div class="row">',

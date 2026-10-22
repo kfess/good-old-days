@@ -28,6 +28,7 @@ import { logo } from '../../components/logo';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion, scrollToEl } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h, onceInView, sleep } from '../../core/util';
@@ -266,7 +267,7 @@ export const era: Era = {
       end.querySelector('.y21-end__box')!,
       async () => {
         await sleep(600);
-        for (const ch of 'Explain quantum computing in simple terms') {
+        for (const ch of t('Explain quantum computing in simple terms', '量子コンピュータをわかりやすく説明して')) {
           text.textContent += ch;
           await sleep(55 + Math.random() * 60);
         }

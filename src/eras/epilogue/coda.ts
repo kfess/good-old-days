@@ -4,6 +4,7 @@ const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
 import { clawd } from '../../components/clawd';
 import { hasAnalytics, openConsent } from '../../core/analytics';
+import { t } from '../../core/i18n';
 import { h } from '../../core/util';
 
 const CENTER_TRICKS = [
@@ -14,25 +15,46 @@ const CENTER_TRICKS = [
 ];
 
 /** The struggles we put up with, and loved. Each one was everyday reality in its year. */
-const PAINS: [string, string, string][] = [
-  ['1999', 'Slicing PSDs into table cells.', 'Pixel-perfect in exactly one browser.'],
-  ['2001', 'View Source was the only tutorial.', 'Copy. Paste. Ship.'],
-  ['2003', 'FTP straight to production.', 'Backup: index_old_final2.html'],
-  ['2006', 'Debugging IE6 with alert().', 'OK. OK. OK. OK.'],
-  ['2008', 'Rounded corners?', 'Four GIF images.'],
-  ['2009', 'Clearfix.', 'Always clearfix.'],
-  ['2010', '“It works on my machine.”', 'Closed: WORKSFORME.'],
-  ['2011', 'Centering a div. Vertically.', ''],
-  ['2012', 'Deploying on Friday at 5 p.m.', 'Weekend: cancelled.'],
-  ['2013', 'SSH into prod at 2 a.m.', 'tail -f and pray.'],
-  ['2014', '“Who wrote this garbage?” git blame.', 'It was me.'],
-  ['2016', 'npm install.', 'Make coffee. Still installing.'],
-  ['2017', 'A 400-line webpack.config.js.', 'Nobody dared touch it.'],
-  ['2018', 'Day 1: I fully understand Kubernetes.', 'Day 30: I understand nothing.'],
-  ['2019', 'YAML until midnight.', 'One space off.'],
-  ['2020', 'Standup on Zoom.', '“You’re on mute.”'],
-  ['2022', 'npm audit: 1,337 vulnerabilities.', 'npm audit fix --force. Everything broke.'],
-];
+const PAINS: [string, string, string][] = t(
+  [
+    ['1999', 'Slicing PSDs into table cells.', 'Pixel-perfect in exactly one browser.'],
+    ['2001', 'View Source was the only tutorial.', 'Copy. Paste. Ship.'],
+    ['2003', 'FTP straight to production.', 'Backup: index_old_final2.html'],
+    ['2006', 'Debugging IE6 with alert().', 'OK. OK. OK. OK.'],
+    ['2008', 'Rounded corners?', 'Four GIF images.'],
+    ['2009', 'Clearfix.', 'Always clearfix.'],
+    ['2010', '“It works on my machine.”', 'Closed: WORKSFORME.'],
+    ['2011', 'Centering a div. Vertically.', ''],
+    ['2012', 'Deploying on Friday at 5 p.m.', 'Weekend: cancelled.'],
+    ['2013', 'SSH into prod at 2 a.m.', 'tail -f and pray.'],
+    ['2014', '“Who wrote this garbage?” git blame.', 'It was me.'],
+    ['2016', 'npm install.', 'Make coffee. Still installing.'],
+    ['2017', 'A 400-line webpack.config.js.', 'Nobody dared touch it.'],
+    ['2018', 'Day 1: I fully understand Kubernetes.', 'Day 30: I understand nothing.'],
+    ['2019', 'YAML until midnight.', 'One space off.'],
+    ['2020', 'Standup on Zoom.', '“You’re on mute.”'],
+    ['2022', 'npm audit: 1,337 vulnerabilities.', 'npm audit fix --force. Everything broke.'],
+  ],
+  [
+    ['1999', 'PSDをテーブルのセルに切り分ける。', '崩れないのはひとつのブラウザだけ。'],
+    ['2001', '「ソースを表示」が唯一の教科書。', 'コピペして公開。'],
+    ['2003', 'FTPで本番に直接アップ。', 'バックアップ: index_old_final2.html'],
+    ['2006', 'IE6をalert()でデバッグ。', 'OK。OK。OK。OK。'],
+    ['2008', '角丸？', 'GIF画像を4枚。'],
+    ['2009', 'clearfix。', 'とりあえずclearfix。'],
+    ['2010', '「私の環境では動きました」', 'Closed: WORKSFORME.'],
+    ['2011', 'divを上下中央に置く。', ''],
+    ['2012', '金曜17時にデプロイ。', '週末は消えた。'],
+    ['2013', '深夜2時に本番サーバーへSSH。', 'tail -f して祈る。'],
+    ['2014', '「このクソコード書いたの誰だよ」でgit blame。', '自分だった。'],
+    ['2016', 'npm install。', 'コーヒーを淹れる。まだ終わらない。'],
+    ['2017', '400行のwebpack.config.js。', '誰も触れなかった。'],
+    ['2018', 'Day 1: Kubernetes完全に理解した。', 'Day 30: なにもわからない。'],
+    ['2019', '深夜までYAML。', 'スペースがひとつずれてた。'],
+    ['2020', 'Zoomで朝会。', '「ミュートになってますよ」'],
+    ['2022', 'npm audit: 脆弱性 1,337件。', 'npm audit fix --force。全部壊れた。'],
+  ],
+);
 
 /**
  * The last word after "What will you build next?": back to the 1999 starfield,
@@ -51,11 +73,11 @@ export function buildCoda(): HTMLElement {
         </div>
         <div class="coda__pains">
           <p class="coda__then">Back then:</p>
-          <ol class="coda__list">${PAINS.map(([y, t, punch]) =>
+          <ol class="coda__list">${PAINS.map(([y, line, punch]) =>
             y === '2011'
               ? // the one line that never quite lands in the middle, whatever trick it tries
-                `<li class="coda__center"><b>${y}</b><span class="coda__ctr"><span class="coda__ctr-t">${t}</span>${CENTER_TRICKS.map((c, i) => `<i style="--i:${i}">✗ ${c}</i>`).join('')}</span></li>`
-              : `<li><b>${y}</b><span>${t}${punch ? ` <em>${punch}</em>` : ''}</span></li>`,
+                `<li class="coda__center"><b>${y}</b><span class="coda__ctr"><span class="coda__ctr-t">${line}</span>${CENTER_TRICKS.map((c, i) => `<i style="--i:${i}">✗ ${c}</i>`).join('')}</span></li>`
+              : `<li><b>${y}</b><span>${line}${punch ? ` <em>${punch}</em>` : ''}</span></li>`,
           ).join('')}</ol>
         </div>
         <div class="coda__joy" aria-hidden="true">
@@ -73,10 +95,10 @@ export function buildCoda(): HTMLElement {
         <div class="coda__irony">
           <p class="coda__i1">The irony?</p>
           <p class="coda__i2">I couldn’t build a page about the good old days <br /><em>without AI.</em></p>
-          <p class="coda__i3">By hand, this page would have taken my entire life.<span class="coda__off"><span class="coda__off-t">(I’d still be centering the div.)</span><code class="coda__fix">display: grid; place-items: center;</code></span></p>
-          <div class="coda__clawd">${clawd('', 'wave')}<p class="coda__bubble">Hi, I’m Claude.<br />I centered the div for you.</p></div>
+          <p class="coda__i3">By hand, this page would have taken my entire life.<span class="coda__off"><span class="coda__off-t">${t('(I’d still be centering the div.)', '（たぶん、まだdivを中央寄せしてる）')}</span><code class="coda__fix">display: grid; place-items: center;</code></span></p>
+          <div class="coda__clawd">${clawd('', 'wave')}<p class="coda__bubble">${t('Hi, I’m Claude.<br />I centered the div for you.', 'こんにちは、Claudeです。<br />divを中央寄せしておきました。')}</p></div>
           <div class="coda__bye">
-          <p class="coda__counter">You are visitor <b>0000001</b></p>
+          <p class="coda__counter">${t('You are visitor <b>0000001</b>', 'あなたは <b>0000001</b> 人目の訪問者です')}</p>
           <button type="button" class="coda__again">↺ Back to 1999</button>
           <p class="coda__small">Made with AI, 2026. Best viewed in any browser.</p>
         </div>
@@ -84,7 +106,7 @@ export function buildCoda(): HTMLElement {
 
       </div>
     </div>
-      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio, Argo, Harbor and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; the Claude Code mascot (Clawd) © Anthropic. GPT, ChatGPT and Codex are trademarks of OpenAI; Gemini and Google Chrome of Google LLC; Llama of Meta Platforms, Inc.; GitHub and Copilot of GitHub, Inc.; TypeScript and Visual Studio Code of Microsoft Corporation; Cursor of Anysphere, Inc.; Firefox of the Mozilla Foundation; Grok of xAI; DeepSeek, Qwen and Mistral of their respective companies. Icons via Simple Icons (CC0); where a brand licenses its logo, that licence applies: Vue.js logo by Evan You (CC BY-NC-SA 4.0), Angular logo by Google (CC BY 4.0), Sass logo by the Sass team (CC BY-NC-SA 3.0), HTML5 logo by W3C (CC BY 3.0), Jenkins logo (CC BY-SA 3.0), OpenTelemetry and WebGPU logos (CC BY 4.0), Apache Kafka, Fluentd and Rook logos (Apache 2.0), Backbone.js, Bootstrap, Deno, JavaScript, Storybook and GitHub Copilot icons (MIT).</p>${hasAnalytics ? '<button type="button" class="coda__consent">Analytics settings</button>' : ''}</footer>
+      <footer class="coda__footer"><p class="coda__legal">All product names, logos and brands are property of their respective owners, used here for identification only; no endorsement is implied. Kubernetes, Helm, Istio, Argo, Harbor and GraphQL are trademarks of The Linux Foundation. jQuery, jQuery UI, webpack, Express and Node.js are trademarks of the OpenJS Foundation. Vercel, Next.js and Turborepo are trademarks of Vercel, Inc. Docker is a trademark of Docker, Inc. Go is a trademark of Google LLC. npm is a trademark of npm, Inc. Tailwind CSS is a trademark of Tailwind Labs Inc. Go gopher by Renée French (CC BY 4.0). Git logo by Jason Long (CC BY 3.0). Yarn logo by the Yarn project (CC BY 4.0). PHP logo by Colin Viebrock (CC BY-SA 4.0). Rust logo by the Rust Foundation (CC BY). Claude and Claude Code are trademarks of Anthropic, PBC; the Claude Code mascot (Clawd) © Anthropic. GPT, ChatGPT and Codex are trademarks of OpenAI; Gemini and Google Chrome of Google LLC; Llama of Meta Platforms, Inc.; GitHub and Copilot of GitHub, Inc.; TypeScript and Visual Studio Code of Microsoft Corporation; Cursor of Anysphere, Inc.; Firefox of the Mozilla Foundation; Grok of xAI; DeepSeek, Qwen and Mistral of their respective companies. Icons via Simple Icons (CC0); where a brand licenses its logo, that licence applies: Vue.js logo by Evan You (CC BY-NC-SA 4.0), Angular logo by Google (CC BY 4.0), Sass logo by the Sass team (CC BY-NC-SA 3.0), HTML5 logo by W3C (CC BY 3.0), Jenkins logo (CC BY-SA 3.0), OpenTelemetry and WebGPU logos (CC BY 4.0), Apache Kafka, Fluentd and Rook logos (Apache 2.0), Backbone.js, Bootstrap, Deno, JavaScript, Storybook and GitHub Copilot icons (MIT).</p>${hasAnalytics ? `<button type="button" class="coda__consent">${t('Analytics settings', 'アクセス解析の設定')}</button>` : ''}</footer>
     </div>`);
   const coda = el.querySelector<HTMLElement>('.coda')!;
   el.querySelector('.coda__again')!.addEventListener('click', () => scrollToEl(0));

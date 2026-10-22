@@ -5,6 +5,7 @@ import { parodyBook } from '../../components/parody-book';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { esc, h, onceInView } from '../../core/util';
@@ -43,7 +44,7 @@ function appRouterCard(): HTMLElement {
         ).join('')}</pre>
         <p class="y23-ar__count"><b>${files}</b> files · <b>${directives}</b> directives · for <b>1</b> page</p>
       </div>
-      <p class="y23-ar__punch">I just wanted<br /><span>a page.</span></p>
+      <p class="y23-ar__punch">${t('I just wanted<br /><span>a page.</span>', 'ページを1枚<br /><span>作りたかっただけなのに。</span>')}</p>
     </aside>`);
   if (reducedMotion) {
     el.classList.add('is-in');
@@ -62,7 +63,7 @@ function intro(section: HTMLElement): void {
       <div class="y23-intro__chat">
         <p class="y23-intro__date">2022.11.30 →</p>
         <div class="y23-input y23-input--sent">
-          <span class="y23-input__text">Explain quantum computing in simple terms</span>
+          <span class="y23-input__text">${t('Explain quantum computing in simple terms', '量子コンピュータをわかりやすく説明して')}</span>
           <span class="y23-send" aria-hidden="true">↑</span>
         </div>
         <div class="y23-reply">
@@ -85,7 +86,10 @@ function intro(section: HTMLElement): void {
       reply.innerHTML = '';
       await streamInto(
         reply,
-        'Sure! A normal bit is a coin lying flat: heads or tails. A qubit is a coin still spinning, a bit of both until you look.',
+        t(
+          'Sure! A normal bit is a coin lying flat: heads or tails. A qubit is a coin still spinning, a bit of both until you look.',
+          'もちろんです！普通のビットは、机に置いたコインのようなものです。表か裏のどちらかです。量子ビットは回っている最中のコインで、見るまでは表でもあり裏でもあります。',
+        ),
         { tps: 22 },
       );
     },
@@ -104,13 +108,18 @@ function intro(section: HTMLElement): void {
 
 /* ---------------- showcase: tool use ---------------- */
 
+const WEATHER = t(
+  "It's 18°C and cloudy in Paris. Bring a light jacket.",
+  'パリは18°Cでくもりです。薄手の上着があると安心です。',
+);
+
 function toolCard(): HTMLElement {
   const el = h(`
     <article class="y23-card y23-card--tool">
       <p class="y23-card__k">02 — Tool use</p>
       <h4 class="y23-card__h">AI started calling functions.</h4>
       <ol class="y23-tool">
-        <li><span class="y23-tool__who">user</span><p>What's the weather in Paris?</p></li>
+        <li><span class="y23-tool__who">user</span><p>${t("What's the weather in Paris?", 'パリの天気は？')}</p></li>
         <li><span class="y23-tool__who y23-tool__who--call">tool_use</span><pre>get_weather({ "city": "Paris" })</pre></li>
         <li><span class="y23-tool__who y23-tool__who--res">tool_result</span><pre>{ "temp_c": 18, "sky": "cloudy" }</pre></li>
         <li><span class="y23-tool__who">assistant</span><p class="y23-tool__ans"></p></li>
@@ -132,13 +141,13 @@ function toolCard(): HTMLElement {
       }
       if (!alive()) return;
       steps[3].classList.add('is-on');
-      await streamInto(ans, "It's 18°C and cloudy in Paris. Bring a light jacket.", { tps: 24, alive });
+      await streamInto(ans, WEATHER, { tps: 24, alive });
       await wait(2600);
     }
   };
   if (reducedMotion) {
     steps.forEach((s) => s.classList.add('is-on'));
-    ans.textContent = "It's 18°C and cloudy in Paris. Bring a light jacket.";
+    ans.textContent = WEATHER;
   } else {
     whenVisible(el, loop, () => run.next());
   }
@@ -147,13 +156,23 @@ function toolCard(): HTMLElement {
 
 /* ---------------- showcase: ✨ buttons ---------------- */
 
-const MAGIC: Record<string, string> = {
-  sum: 'Q3: faster, smaller, hooks everywhere.',
-  fun: 'Q3 🚀 speed it up, slim it down, hook ALL the things 🎣',
-  tr: 'T3: más rápido, más ligero y todo con hooks.',
-};
-const ORIGINAL =
-  'Our Q3 roadmap focuses on improving page performance, reducing the JavaScript bundle size, and migrating the remaining class components to hooks.';
+const MAGIC: Record<string, string> = t(
+  {
+    sum: 'Q3: faster, smaller, hooks everywhere.',
+    fun: 'Q3 🚀 speed it up, slim it down, hook ALL the things 🎣',
+    tr: 'T3: más rápido, más ligero y todo con hooks.',
+  },
+  // in Japanese the third button translates into English
+  {
+    sum: 'Q3: 速く、軽く、全部hooksに。',
+    fun: 'Q3 🚀 爆速化・ダイエット・全部hooksでいくぞ 🎣',
+    tr: 'Q3: faster pages, a smaller bundle, hooks everywhere.',
+  },
+);
+const ORIGINAL = t(
+  'Our Q3 roadmap focuses on improving page performance, reducing the JavaScript bundle size, and migrating the remaining class components to hooks.',
+  'Q3のロードマップでは、ページ表示速度の改善、JavaScriptバンドルサイズの削減、残っているクラスコンポーネントのhooksへの移行に注力します。',
+);
 
 function magicCard(): HTMLElement {
   const el = h(`
@@ -162,9 +181,9 @@ function magicCard(): HTMLElement {
       <h4 class="y23-card__h">A sparkle button in every app.</h4>
       <p class="y23-magic__text">${ORIGINAL}</p>
       <div class="y23-magic__btns">
-        <button type="button" class="y23-ai-btn" data-m="sum">✨ Summarize</button>
-        <button type="button" class="y23-ai-btn" data-m="fun">✨ Make it fun</button>
-        <button type="button" class="y23-ai-btn" data-m="tr">✨ Translate to Spanish</button>
+        <button type="button" class="y23-ai-btn" data-m="sum">${t('✨ Summarize', '✨ 要約する')}</button>
+        <button type="button" class="y23-ai-btn" data-m="fun">${t('✨ Make it fun', '✨ 楽しくする')}</button>
+        <button type="button" class="y23-ai-btn" data-m="tr">${t('✨ Translate to Spanish', '✨ 英語に翻訳')}</button>
       </div>
     </article>`);
   const text = el.querySelector<HTMLElement>('.y23-magic__text')!;
@@ -172,7 +191,7 @@ function magicCard(): HTMLElement {
   el.querySelectorAll<HTMLButtonElement>('[data-m]').forEach((b) =>
     b.addEventListener('click', async () => {
       const id = run.next();
-      text.innerHTML = '<span class="y23-shimmer">Rewriting…</span>';
+      text.innerHTML = `<span class="y23-shimmer">${t('Rewriting…', '書き直し中…')}</span>`;
       await wait(800);
       if (!run.alive(id)) return;
       text.textContent = '';
@@ -198,12 +217,18 @@ function embCard(): HTMLElement {
 
 /** The Answer step as it was usually wired in 2023: beg for JSON, strip the fences, parse, and the model opens with "Sure!" anyway. */
 const RAG_CODE = [
-  "const reply = await llm(prompt + '\\nRespond ONLY with valid JSON. No prose. Please.');",
-  "// don't touch this. it works.",
+  t(
+    "const reply = await llm(prompt + '\\nRespond ONLY with valid JSON. No prose. Please.');",
+    "const reply = await llm(prompt + '\\nJSONのみで回答してください。説明は不要です。お願いします。');",
+  ),
+  t("// don't touch this. it works.", '// ここ触るな。なぜか動いてる。'),
   "const { answer, sources } = JSON.parse(reply.replace(/```json|```/g, ''));",
 ];
 // V8's JSON.parse wording from mid-2022 on (Chrome, Node 20)
-const RAG_ERR = `SyntaxError: Unexpected token 'S', "Sure! Here"... is not valid JSON`;
+const RAG_ERR = t(
+  `SyntaxError: Unexpected token 'S', "Sure! Here"... is not valid JSON`,
+  `SyntaxError: Unexpected token 'も', "もちろんです！こちら"... is not valid JSON`,
+);
 
 function ragCard(): HTMLElement {
   const el = h(`
@@ -215,7 +240,7 @@ function ragCard(): HTMLElement {
         <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__chunks">${'<i></i>'.repeat(8)}</div><b>Chunk</b><span>512 tokens each</span></div>
         <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__vecs"><code>[0.12, −0.53, 0.88,</code><code> 0.07, −0.31, …]</code></div><b>Embed</b><span>1,536 dims</span></div>
         <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__topk">${'<i></i>'.repeat(6)}</div><b>Retrieve</b><span>top-k = 3</span></div>
-        <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__ans"><p>Refunds are available within 30 days.<sup>[1]</sup><sup>[2]</sup></p></div><b>Answer</b><span>with citations</span></div>
+        <div class="y23-rag__st"><div class="y23-rag__vis y23-rag__ans"><p>${t('Refunds are available within 30 days.', '返金は購入から30日以内であれば可能です。')}<sup>[1]</sup><sup>[2]</sup></p></div><b>Answer</b><span>with citations</span></div>
       </div>
       <pre class="y23-rag__code"><code>${RAG_CODE.map((l) => `<span${l.startsWith('//') ? ' class="c"' : ''}>${esc(l)}</span>`).join('\n')}</code><samp>${esc(RAG_ERR)}</samp></pre>
     </article>`);
@@ -247,36 +272,79 @@ function ragCard(): HTMLElement {
 
 /* ---------------- infra: GPUs ---------------- */
 
-const TOKENS = [
-  ' The',
-  ' web',
-  ' is',
-  ' a',
-  ' conversation',
-  ' now',
-  '.',
-  ' Hello',
-  '!',
-  ' How',
-  ' can',
-  ' I',
-  ' help',
-  '?',
-  ' Sure',
-  ',',
-  ' here',
-  "'s",
-  ' a',
-  ' React',
-  ' component',
-  ' that',
-  ' streams',
-  ' tokens',
-  ' from',
-  ' the',
-  ' GPU',
-  '…',
-];
+const TOKENS = t(
+  [
+    ' The',
+    ' web',
+    ' is',
+    ' a',
+    ' conversation',
+    ' now',
+    '.',
+    ' Hello',
+    '!',
+    ' How',
+    ' can',
+    ' I',
+    ' help',
+    '?',
+    ' Sure',
+    ',',
+    ' here',
+    "'s",
+    ' a',
+    ' React',
+    ' component',
+    ' that',
+    ' streams',
+    ' tokens',
+    ' from',
+    ' the',
+    ' GPU',
+    '…',
+  ],
+  [
+    ' Web',
+    'は',
+    'もう',
+    '会話',
+    'に',
+    'なった',
+    '。',
+    'こんに',
+    'ちは',
+    '！',
+    '何か',
+    'お手',
+    '伝い',
+    'できる',
+    'こと',
+    'は',
+    'あり',
+    'ます',
+    'か',
+    '？',
+    'もちろん',
+    'です',
+    '、',
+    'GPU',
+    'から',
+    'トーク',
+    'ン',
+    'を',
+    'ストリ',
+    'ーミング',
+    'する',
+    'React',
+    'コン',
+    'ポー',
+    'ネント',
+    'は',
+    'こちら',
+    'です',
+    '…',
+  ],
+);
 
 function gpuPanel(section: HTMLElement): void {
   const rows = [0, 1, 2, 3]
@@ -336,16 +404,18 @@ function gpuPanel(section: HTMLElement): void {
 
 /* ---------------- bridge: chat → terminal ---------------- */
 
+const ASK = t('Ask anything…', 'なんでも聞いてください…');
+
 function bridge(section: HTMLElement): void {
   const el = h(`
     <div class="y23-bridge">
       <div class="y23-bridge__win">
         <div class="y23-bridge__bar"><i></i><i></i><i></i><span class="y23-bridge__title">Chat</span></div>
         <div class="y23-bridge__body">
-          <div class="y23-msg y23-msg--user">Can you just… do it for me?</div>
-          <div class="y23-msg y23-msg--ai">Sure. Give me a terminal.</div>
+          <div class="y23-msg y23-msg--user">${t('Can you just… do it for me?', 'もう…全部やってくれない？')}</div>
+          <div class="y23-msg y23-msg--ai">${t('Sure. Give me a terminal.', 'いいですよ。ターミナルをください。')}</div>
         </div>
-        <div class="y23-bridge__prompt"><span class="y23-bridge__ps">Ask anything…</span><span class="y23-bridge__caret"></span></div>
+        <div class="y23-bridge__prompt"><span class="y23-bridge__ps">${ASK}</span><span class="y23-bridge__caret"></span></div>
       </div>
       <p class="y23-bridge__cap">After chat came the terminal.</p>
     </div>`);
@@ -368,7 +438,7 @@ function bridge(section: HTMLElement): void {
       onUpdate: (self) => {
         const term = self.progress > 0.55;
         el.classList.toggle('is-term', term);
-        ps.textContent = term ? '>' : 'Ask anything…';
+        ps.textContent = term ? '>' : ASK;
         title.textContent = term ? '~ — zsh' : 'Chat';
       },
     },

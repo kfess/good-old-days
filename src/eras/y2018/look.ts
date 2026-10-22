@@ -1,19 +1,44 @@
+import { t } from '../../core/i18n';
 import { reducedMotion } from '../../core/scroll';
 import { esc, h, onceInView, sleep } from '../../core/util';
 
-const FALLBACK = 'Sorry, I didn’t understand that. 🤖';
+const FALLBACK = t('Sorry, I didn’t understand that. 🤖', '申し訳ございません。よくわかりませんでした🤖');
+const HANDOFF = t('Would you like to talk to a human?', '有人チャットに切り替えますか？');
 
-const RULES: { match: RegExp; reply: string }[] = [
-  { match: /price|pricing|cost|plan/i, reply: 'Our plans start at $29/month. Would you like to see the pricing page?' },
-  {
-    match: /sales|demo|contact/i,
-    reply: 'Great! Please leave your email and our team will get back to you within 1–2 business days.',
-  },
-  { match: /^(hi|hello|hey)/i, reply: 'Hello! 👋 Please choose one of the options below.' },
-  { match: /human|person/i, reply: 'Our support team is available Mon–Fri, 9am–5pm (PST).' },
-];
+const RULES: { match: RegExp; reply: string }[] = t(
+  [
+    {
+      match: /price|pricing|cost|plan/i,
+      reply: 'Our plans start at $29/month. Would you like to see the pricing page?',
+    },
+    {
+      match: /sales|demo|contact/i,
+      reply: 'Great! Please leave your email and our team will get back to you within 1–2 business days.',
+    },
+    { match: /^(hi|hello|hey)/i, reply: 'Hello! 👋 Please choose one of the options below.' },
+    { match: /human|person/i, reply: 'Our support team is available Mon–Fri, 9am–5pm (PST).' },
+  ],
+  // the same bot, as a Japanese SaaS would have scripted it
+  [
+    {
+      match: /料金|価格|プラン/,
+      reply: '料金プランは月額3,980円からご用意しております。料金ページをご覧になりますか？',
+    },
+    {
+      match: /営業|デモ|問い合わせ|相談/,
+      reply: 'ありがとうございます！メールアドレスをご入力いただければ、担当者より1〜2営業日以内にご連絡いたします。',
+    },
+    { match: /^(こんにちは|はじめまして|どうも)/, reply: 'こんにちは！👋 以下のメニューからお選びください。' },
+    {
+      match: /人と話|人間|オペレーター|有人/,
+      reply: 'オペレーター対応時間は平日10:00〜18:00（土日祝・年末年始を除く）です。',
+    },
+  ],
+);
 
-const QUICK = ['Pricing', 'Talk to sales', 'Something else'];
+const QUICK = t(['Pricing', 'Talk to sales', 'Something else'], ['料金について', '営業担当と話したい', 'その他']);
+/** the "Something else" chip: never matches a rule, whatever the language */
+const OTHER = QUICK[2];
 
 /** A 2019 SaaS landing page in a browser frame: mesh gradient, CSS Grid magazine, neumorphism, dark mode, chatbot. */
 export function createLook(parent: HTMLElement): void {
@@ -30,17 +55,17 @@ export function createLook(parent: HTMLElement): void {
           <div class="look__mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           <nav class="look__nav">
             <b class="look__brand">◆ cloudly</b>
-            <span class="look__links"><a>Product</a><a>Pricing</a><a>Docs</a></span>
+            <span class="look__links">${t('<a>Product</a><a>Pricing</a><a>Docs</a>', '<a>プロダクト</a><a>料金</a><a>ドキュメント</a>')}</span>
             <label class="look__toggle">
               <input type="checkbox" class="look__dark" />
               <span class="look__switch" aria-hidden="true"><i></i></span>
-              <span class="look__toggle-label">Dark</span>
+              <span class="look__toggle-label">${t('Dark', 'ダーク')}</span>
             </label>
           </nav>
           <header class="look__hero">
             <h4>Ship faster.<br/>Scale without thinking.</h4>
-            <p>The cloud-native platform for modern teams.</p>
-            <div class="look__ctas"><a class="look__cta">Start free trial</a><a class="look__cta is-ghost">Talk to sales →</a></div>
+            <p>${t('The cloud-native platform for modern teams.', 'モダンなチームのための、クラウドネイティブ・プラットフォーム。')}</p>
+            <div class="look__ctas"><a class="look__cta">${t('Start free trial', '無料で試す')}</a><a class="look__cta is-ghost">${t('Talk to sales →', '営業に問い合わせる →')}</a></div>
           </header>
           <div class="look__grid">
             <article class="look__card is-feature">
@@ -52,18 +77,18 @@ export function createLook(parent: HTMLElement): void {
                 <path d="M90 64 q30 -10 48 -26" stroke="#7c5cff" stroke-width="9" stroke-linecap="round" fill="none"/>
                 <path d="M118 104 q4 -30 30 -30 q22 6 18 30 z" fill="#ff7a59"/>
               </svg>
-              <h5>Autoscaling</h5><p>From zero to millions.</p>
+              <h5>${t('Autoscaling', 'オートスケール')}</h5><p>${t('From zero to millions.', 'ゼロから数百万まで。')}</p>
             </article>
-            <article class="look__card"><h5>99.99%</h5><p>uptime SLA</p></article>
-            <article class="look__card is-neu"><span class="look__knob" aria-hidden="true"></span><h5>Soft UI</h5><p>Neumorphism, 2020.</p></article>
-            <article class="look__card is-wide"><h5>“We moved to Kubernetes in a weekend.”</h5><p>— a very optimistic CTO</p></article>
+            <article class="look__card"><h5>99.99%</h5><p>${t('uptime SLA', '稼働率SLA')}</p></article>
+            <article class="look__card is-neu"><span class="look__knob" aria-hidden="true"></span><h5>Soft UI</h5><p>${t('Neumorphism, 2020.', 'ニューモーフィズム、2020年。')}</p></article>
+            <article class="look__card is-wide"><h5>${t('“We moved to Kubernetes in a weekend.”', '「週末でKubernetesに移行しました」')}</h5><p>${t('— a very optimistic CTO', '— ちょっと楽観的なCTO')}</p></article>
           </div>
           <div class="look__bot">
             <div class="bot__win" hidden>
-              <div class="bot__head"><span class="bot__avatar">🤖</span><div><b>CloudlyBot</b><small>Typically replies instantly</small></div><button type="button" class="bot__x" aria-label="close">×</button></div>
+              <div class="bot__head"><span class="bot__avatar">🤖</span><div><b>CloudlyBot</b><small>${t('Typically replies instantly', '通常すぐに返信します')}</small></div><button type="button" class="bot__x" aria-label="close">×</button></div>
               <div class="bot__log" aria-live="polite"></div>
               <div class="bot__quick"></div>
-              <form class="bot__form"><input class="bot__input" placeholder="Type a message…" aria-label="message"/><button type="submit">➤</button></form>
+              <form class="bot__form"><input class="bot__input" placeholder="${t('Type a message…', 'メッセージを入力…')}" aria-label="message"/><button type="submit">➤</button></form>
             </div>
             <button type="button" class="bot__launcher" aria-label="Open chat">💬<span class="bot__badge">1</span></button>
           </div>
@@ -96,13 +121,13 @@ export function createLook(parent: HTMLElement): void {
     logEl.scrollTop = logEl.scrollHeight;
   };
   const typing = async () => {
-    const t = document.createElement('div');
-    t.className = 'bot__msg is-bot is-typing';
-    t.innerHTML = '<i></i><i></i><i></i>';
-    logEl.appendChild(t);
+    const dots = document.createElement('div');
+    dots.className = 'bot__msg is-bot is-typing';
+    dots.innerHTML = '<i></i><i></i><i></i>';
+    logEl.appendChild(dots);
     logEl.scrollTop = logEl.scrollHeight;
     await sleep(700);
-    t.remove();
+    dots.remove();
   };
   const setQuick = (opts: string[]) => {
     quick.innerHTML = opts.map((o) => `<button type="button">${esc(o)}</button>`).join('');
@@ -113,13 +138,13 @@ export function createLook(parent: HTMLElement): void {
     say('me', text);
     setQuick([]);
     await typing();
-    const rule = text === 'Something else' ? null : RULES.find((r) => r.match.test(text));
+    const rule = text === OTHER ? null : RULES.find((r) => r.match.test(text));
     if (rule) {
       misses = 0;
       say('bot', rule.reply);
     } else {
       misses++;
-      say('bot', misses >= 2 ? `${FALLBACK}\nWould you like to talk to a human?` : FALLBACK);
+      say('bot', misses >= 2 ? `${FALLBACK}\n${HANDOFF}` : FALLBACK);
     }
     setQuick(QUICK);
   };
@@ -131,7 +156,13 @@ export function createLook(parent: HTMLElement): void {
     if (show && !greeted) {
       greeted = true;
       await typing();
-      say('bot', 'Hi there 👋 I’m CloudlyBot. How can I help you today?');
+      say(
+        'bot',
+        t(
+          'Hi there 👋 I’m CloudlyBot. How can I help you today?',
+          'こんにちは👋 CloudlyBotです。本日はどのようなご用件でしょうか？',
+        ),
+      );
       setQuick(QUICK);
     }
   };
@@ -150,11 +181,10 @@ export function createLook(parent: HTMLElement): void {
       await sleep(reducedMotion ? 0 : 1400);
       if (!auto) return;
       await toggle(true);
-      for (const msg of [
-        'Pricing',
-        'Can I migrate my Postgres to Aurora with zero downtime?',
-        'Can I talk to a human?',
-      ]) {
+      for (const msg of t(
+        ['Pricing', 'Can I migrate my Postgres to Aurora with zero downtime?', 'Can I talk to a human?'],
+        ['料金について', 'PostgresからAuroraにダウンタイムなしで移行できますか？', '人と話せますか？'],
+      )) {
         await sleep(reducedMotion ? 0 : 1600);
         if (!auto) return;
         await answer(msg);

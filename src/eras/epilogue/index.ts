@@ -1,3 +1,4 @@
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
@@ -15,11 +16,14 @@ const MINIS: { year: string; log: string; html: string }[] = [
     year: '1999',
     log: '<marquee>, hit counter, webring',
     html: `<div class="m99">
-      <p class="m99__mq"><span>★ Welcome to my homepage!! ★ Sign my guestbook ★ Best viewed in 800×600 ★ </span></p>
+      <p class="m99__mq"><span>${t('★ Welcome to my homepage!! ★ Sign my guestbook ★ Best viewed in 800×600 ★ ', '★ ようこそ私のホームページへ！！ ★ ゲストブックに記帳してね ★ 800×600 推奨 ★ ')}</span></p>
       <h4 class="m99__h">~*~ My Cool Page ~*~</h4>
-      <p class="m99__c">You are visitor <span>0</span><span>0</span><span>1</span><span>9</span><span>9</span><span>9</span></p>
+      <p class="m99__c">${t(
+        'You are visitor <span>0</span><span>0</span><span>1</span><span>9</span><span>9</span><span>9</span>',
+        'あなたは <span>0</span><span>0</span><span>1</span><span>9</span><span>9</span><span>9</span> 人目の訪問者です',
+      )}</p>
       <div class="m99__uc">UNDER CONSTRUCTION</div>
-      <p class="m99__links"><u>Links</u> | <u>Guestbook</u> | <u>Webring »</u></p>
+      <p class="m99__links">${t('<u>Links</u> | <u>Guestbook</u> | <u>Webring »</u>', '<u>リンク</u> | <u>ゲストブック</u> | <u>ウェブリング »</u>')}</p>
     </div>`,
   },
   {
@@ -73,16 +77,16 @@ const MINIS: { year: string; log: string; html: string }[] = [
     year: '2024',
     log: 'streaming tokens, ✨',
     html: `<div class="m24">
-      <div class="m24__u">Rebuild the web.</div>
-      <div class="m24__a"><span class="m24__av">✦</span><p>Sure — starting with <code>&lt;marquee&gt;</code> and a hit counter<i></i></p></div>
-      <div class="m24__in">Ask anything… <span>✨</span></div>
+      <div class="m24__u">${t('Rebuild the web.', 'Webを作り直して。')}</div>
+      <div class="m24__a"><span class="m24__av">✦</span><p>${t('Sure — starting with <code>&lt;marquee&gt;</code> and a hit counter', 'もちろんです。まずは<code>&lt;marquee&gt;</code>とアクセスカウンターから')}<i></i></p></div>
+      <div class="m24__in">${t('Ask anything…', 'なんでも聞いてください…')} <span>✨</span></div>
     </div>`,
   },
   {
     year: '2025',
     log: 'agents, in a terminal',
     html: `<div class="m25">
-      <p><b>&gt;</b> rebuild everything</p>
+      <p><b>&gt;</b> ${t('rebuild everything', '全部作り直して')}</p>
       <p><em>⏺</em> Write(1999/index.html)</p>
       <p><em>⏺</em> Write(2010/lightbox.js)</p>
       <p><em>⏺</em> Bash(argocd app sync 2019)</p>

@@ -16,6 +16,7 @@ import { logo } from '../../components/logo';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
+import { t } from '../../core/i18n';
 import { DESKTOP_QUERY, gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h, onceInView } from '../../core/util';
@@ -53,16 +54,18 @@ interface Line {
 }
 
 const SESSION: Line[] = [
-  { html: '<span class="y25-user">&gt; add dark mode to the todo app, then ship it</span>' },
   {
-    html: '<span class="y25-dot">⏺</span> I\'ll add a theme toggle, run the tests, open a PR, merge it and let CD roll it out.',
+    html: `<span class="y25-user">${t('&gt; add dark mode to the todo app, then ship it', '&gt; TODOアプリにダークモード追加して、そのままリリースまでお願い')}</span>`,
+  },
+  {
+    html: `<span class="y25-dot">⏺</span> ${t("I'll add a theme toggle, run the tests, open a PR, merge it and let CD roll it out.", 'テーマ切り替えを追加して、テスト実行、PR作成、マージまで行い、CDでリリースします。')}`,
   },
   { html: '<span class="y25-dot">⏺</span> <b>Read</b>(src/theme.ts)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Read 48 lines</span>', todo: 0 },
   {
-    html: '<span class="y25-txt">⏺</span> Line 14: `// don\'t touch this. it works.` — git blame: you, 2010. Keep it?',
+    html: `<span class="y25-txt">⏺</span> ${t("Line 14: `// don't touch this. it works.` — git blame: you, 2010. Keep it?", '14行目: `// ここ触るな。なぜか動いてる。` — git blame: あなた, 2010年。残しますか？')}`,
   },
-  { html: '<span class="y25-user">&gt; keep it.</span>' },
+  { html: `<span class="y25-user">${t('&gt; keep it.', '&gt; 残して。')}</span>` },
   { html: '<span class="y25-dot">⏺</span> <b>Update</b>(src/theme.ts)' },
   {
     html: '<span class="y25-gut">⎿</span><span class="y25-dim">Updated src/theme.ts with 4 additions and 1 removal</span>',
@@ -107,17 +110,25 @@ const SESSION: Line[] = [
     html: '<span class="y25-gut">⎿</span><span class="y25-dim">deployment "todo-app" successfully rolled out</span>',
     pipe: 4,
   },
-  { html: '<span class="y25-dot">⏺</span> Live in production. Dark mode is out.', todo: 4 },
-  { html: '<span class="y25-acc">✻</span> Done in 3m 12s. Anything else?' },
+  {
+    html: `<span class="y25-dot">⏺</span> ${t('Live in production. Dark mode is out.', '本番にリリースしました。ダークモード公開済みです。')}`,
+    todo: 4,
+  },
+  {
+    html: `<span class="y25-acc">✻</span> ${t('Done in 3m 12s. Anything else?', '3分12秒で完了しました。他にありますか？')}`,
+  },
 ];
 
-const TODOS = [
-  'Read the theme setup',
-  'Add a dark theme + toggle',
-  'Run the test suite',
-  'Open a pull request',
-  'Ship it to production',
-];
+const TODOS = t(
+  [
+    'Read the theme setup',
+    'Add a dark theme + toggle',
+    'Run the test suite',
+    'Open a pull request',
+    'Ship it to production',
+  ],
+  ['テーマ設定を読む', 'ダークテーマと切り替えを追加', 'テストを実行', 'PRを作成', '本番にリリース'],
+);
 const PIPE = ['PR #42', 'CI', 'Merge', 'Argo CD', 'Kubernetes'];
 
 function session(section: HTMLElement): void {
@@ -140,7 +151,7 @@ function session(section: HTMLElement): void {
           <aside class="y25-side">
             <div class="y25-box">
               <p class="y25-box__t">Todos</p>
-              <ul class="y25-todos">${TODOS.map((t) => `<li><span class="y25-check">☐</span>${t}</li>`).join('')}</ul>
+              <ul class="y25-todos">${TODOS.map((todo) => `<li><span class="y25-check">☐</span>${todo}</li>`).join('')}</ul>
             </div>
             <div class="y25-box">
               <p class="y25-box__t">localhost:3000</p>
@@ -233,11 +244,11 @@ function bridge(section: HTMLElement): void {
   const el = h(`
     <div class="y25-bridge">
       <p class="y25-bridge__line"><span class="y25-acc">&gt;</span> <span class="y25-bridge__typed"></span><span class="y25-caret"></span></p>
-      <p class="y25-bridge__out"><span class="y25-dot">⏺</span> Starting from 1999…</p>
+      <p class="y25-bridge__out"><span class="y25-dot">⏺</span> ${t('Starting from 1999…', '1999年から始めます…')}</p>
     </div>`);
   section.appendChild(el);
   const typed = el.querySelector<HTMLElement>('.y25-bridge__typed')!;
-  const text = 'rebuild everything, from the beginning.';
+  const text = t('rebuild everything, from the beginning.', '全部作り直して。最初から。');
   if (reducedMotion) {
     typed.textContent = text;
     el.classList.add('is-done');
@@ -342,21 +353,35 @@ export const era: Era = {
       title: 'claude — ~/todo-app',
       steps: [
         { kind: 'cmd', text: 'claude "ship it"' },
-        { kind: 'out', text: '⏺ Running the tests, opening a PR, then shipping it through CD.', delay: 400 },
+        {
+          kind: 'out',
+          text: t(
+            '⏺ Running the tests, opening a PR, then shipping it through CD.',
+            '⏺ テストを実行して、PRを作成し、CDでリリースします。',
+          ),
+          delay: 400,
+        },
         { kind: 'out', text: '⏺ Bash(npm test)  ⎿ ✓ 128 passed' },
         { kind: 'out', text: '⏺ Bash(gh pr create --fill)  ⎿ https://github.com/you/todo-app/pull/43' },
         { kind: 'out', text: '  GitHub ▸ PR #43 · +4,812 −2,397 across 63 files' },
         { kind: 'progress', text: '⏺ Bash(gh pr checks 43 --watch)', delay: 1300 },
         // easter egg: the bigger the diff, the shorter the review
         { kind: 'out', text: '  GitHub ▸ @sam approved: “LGTM 👍”', delay: 500 },
-        { kind: 'out', text: '  (last week, PR #41 changed 10 lines and got 20 comments)', delay: 500 },
+        {
+          kind: 'out',
+          text: t(
+            '  (last week, PR #41 changed 10 lines and got 20 comments)',
+            '  (先週、10行だけのPR #41には20件コメントがついた)',
+          ),
+          delay: 500,
+        },
         { kind: 'out', text: '⏺ Bash(gh pr merge 43 --squash)  ⎿ ✓ Squashed and merged pull request #43' },
         { kind: 'progress', text: '  CI ▸ build & push image todo-app:1.9.0', delay: 1000 },
         { kind: 'out', text: '  CI ▸ config repo: image tag bumped to 1.9.0' },
         { kind: 'progress', text: '  Argo CD ▸ todo-app OutOfSync → syncing', delay: 1100 },
         { kind: 'out', text: '⏺ Bash(argocd app wait todo-app --health)  ⎿ Synced · Healthy' },
         { kind: 'ok', text: '✓ Live in production · zero downtime rollout' },
-        { kind: 'out', text: '✻ Shipped. Anything else?' },
+        { kind: 'out', text: t('✻ Shipped. Anything else?', '✻ リリースしました。他にありますか？') },
       ],
       doneLabel: '✓ shipped',
     });

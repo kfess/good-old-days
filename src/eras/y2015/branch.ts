@@ -1,6 +1,7 @@
 import { siReact, siVuedotjs } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { angularShield } from '../../components/marks';
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { esc, h } from '../../core/util';
 
@@ -17,7 +18,7 @@ const ROUTES: Record<
     line: 'JSX felt weird. Then you couldn’t live without it.',
     code: `class Hello extends React.Component {
   render() {
-    // don't touch this. it works.
+    ${t("// don't touch this. it works.", '// ここ触るな。なぜか動いてる。')}
     return <h1>Hello, {this.props.name}</h1>;
   }
 }`,
@@ -52,24 +53,61 @@ export default { data: () => ({ name: 'Vue' }) }
 
 const KEYS = Object.keys(ROUTES) as Framework[];
 
+type Reply = { who: string; text: string; score: number; d: number };
+
 /** The argument every 2016 forum had, more or less word for word. `d` is the reply depth. */
-const THREAD: { who: string; text: string; score: number; d: number }[] = [
-  { who: 'react_fan', text: 'React. It’s just JavaScript.', score: 214, d: 0 },
-  {
-    who: 'separation_of_concerns',
-    text: 'JSX puts HTML in your JavaScript. Whatever happened to separation of concerns?',
-    score: 187,
-    d: 1,
-  },
-  { who: 'react_fan', text: 'Components are the separation of concerns.', score: 96, d: 2 },
-  { who: 'ng2_or_bust', text: 'Angular 2. TypeScript, DI, a CLI. Real apps need a real framework.', score: 142, d: 0 },
-  { who: 'angularjs_veteran', text: 'Angular 2 isn’t even AngularJS. They rewrote everything.', score: 201, d: 1 },
-  { who: 'vue_curious', text: 'Vue. Read the docs in an afternoon, shipped by the evening.', score: 133, d: 0 },
-  { who: 'enterprise_architect', text: 'Vue is a toy for small projects.', score: 38, d: 1 },
-  { who: 'perf_nerd', text: 'The virtual DOM is pure overhead. Look at the benchmarks.', score: 57, d: 0 },
-  { who: 'old_timer', text: 'Just use jQuery.', score: -23, d: 0 },
-  { who: 'tired_dev', text: 'By the time you’ve decided, there’ll be a fourth one.', score: 312, d: 0 },
-];
+const THREAD: Reply[] = t(
+  [
+    { who: 'react_fan', text: 'React. It’s just JavaScript.', score: 214, d: 0 },
+    {
+      who: 'separation_of_concerns',
+      text: 'JSX puts HTML in your JavaScript. Whatever happened to separation of concerns?',
+      score: 187,
+      d: 1,
+    },
+    { who: 'react_fan', text: 'Components are the separation of concerns.', score: 96, d: 2 },
+    {
+      who: 'ng2_or_bust',
+      text: 'Angular 2. TypeScript, DI, a CLI. Real apps need a real framework.',
+      score: 142,
+      d: 0,
+    },
+    { who: 'angularjs_veteran', text: 'Angular 2 isn’t even AngularJS. They rewrote everything.', score: 201, d: 1 },
+    { who: 'vue_curious', text: 'Vue. Read the docs in an afternoon, shipped by the evening.', score: 133, d: 0 },
+    { who: 'enterprise_architect', text: 'Vue is a toy for small projects.', score: 38, d: 1 },
+    { who: 'perf_nerd', text: 'The virtual DOM is pure overhead. Look at the benchmarks.', score: 57, d: 0 },
+    { who: 'old_timer', text: 'Just use jQuery.', score: -23, d: 0 },
+    { who: 'tired_dev', text: 'By the time you’ve decided, there’ll be a fourth one.', score: 312, d: 0 },
+  ],
+  // the same fight on Japanese Twitter, Qiita and はてブ
+  [
+    { who: 'react_shinja', text: 'React一択。ただのJavaScriptだし', score: 214, d: 0 },
+    { who: 'jsx_muri', text: 'JSXが生理的に無理。HTMLとJS混ぜるとか関心の分離どこいった', score: 187, d: 1 },
+    { who: 'react_shinja', text: 'コンポーネント単位で分離してるんだが？', score: 96, d: 2 },
+    {
+      who: 'sier_naka_no_hito',
+      text: '業務ならAngular 2。TypeScript、DI、CLI全部入り。大規模ならこれしかない',
+      score: 142,
+      d: 0,
+    },
+    { who: 'angularjs_higaisha', text: 'AngularJSから互換性ゼロで作り直したの、まだ許してない', score: 201, d: 1 },
+    {
+      who: 'vue_hajimemashita',
+      text: 'Vueでいいよ。公式ドキュメントが日本語だし、午後読んで夕方には動いてた',
+      score: 133,
+      d: 0,
+    },
+    { who: 'sier_naka_no_hito', text: 'Vueって小規模向けのおもちゃって聞いたけど', score: 38, d: 1 },
+    { who: 'bench_ojisan', text: '仮想DOMが速いって信じてる人まだいるの？ベンチ見てから言って', score: 57, d: 0 },
+    { who: 'jquery_de_ii', text: 'jQueryで十分', score: -23, d: 0 },
+    {
+      who: 'tsukareta',
+      text: 'またフロントエンド宗教戦争やってる……迷ってる間に次のが出るので考えるのやめました',
+      score: 312,
+      d: 0,
+    },
+  ],
+);
 
 /**
  * The 2016 fork in the road, shown rather than picked: as you scroll, React, Angular 2 and Vue 2
@@ -105,13 +143,19 @@ export function mountBranch(parent: HTMLElement): void {
           ).join('')}
           <div class="y15-war">
             <div class="y15-war__q">
-              <b class="y15-war__title">Which is better: React, Angular or Vue?</b>
+              <b class="y15-war__title">${t('Which is better: React, Angular or Vue?', 'React、Angular、Vue どれを選ぶべき？')}</b>
               <div class="y15-war__meta">
                 <div>
-                  <p class="y15-war__ask">Starting a new project. Which one should I learn?</p>
+                  <p class="y15-war__ask">${t(
+                    'Starting a new project. Which one should I learn?',
+                    '新規案件でフロントのフレームワークを選定中です。どれを勉強するのがいいでしょうか。',
+                  )}</p>
                   <p class="y15-war__tags"><span>javascript</span><span>reactjs</span><span>angular2</span><span>vue.js</span></p>
                 </div>
-                <p class="y15-war__closed"><b>closed as primarily opinion-based</b> Answers to this question tend to be based on opinions rather than facts.</p>
+                <p class="y15-war__closed">${t(
+                  '<b>closed as primarily opinion-based</b> Answers to this question tend to be based on opinions rather than facts.',
+                  '<b>「主に意見に基づく」質問としてクローズ済み</b> この質問への回答は、事実ではなく意見に基づくものになりがちです。',
+                )}</p>
               </div>
             </div>
             <div class="y15-war__clip">
@@ -127,7 +171,10 @@ export function mountBranch(parent: HTMLElement): void {
           </div>
           <p class="y15-route__next">→ 2018 · Every road merges into TypeScript.</p>
         </div>
-        <p class="y15-fatigue" aria-live="off">New JavaScript frameworks released since you opened this page: <b>0</b> <span class="y15-fatigue__sigh">…and I still haven’t caught up with the last one.</span></p>
+        <p class="y15-fatigue" aria-live="off">${t(
+          'New JavaScript frameworks released since you opened this page: <b>0</b> <span class="y15-fatigue__sigh">…and I still haven’t caught up with the last one.</span>',
+          'このページを開いてから出た新しいJSフレームワーク: <b>0</b> <span class="y15-fatigue__sigh">……前のやつもまだ触れてない</span>',
+        )}</p>
       </div>
     </section>`);
   parent.appendChild(el);

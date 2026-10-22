@@ -1,3 +1,4 @@
+import { t } from '../../core/i18n';
 import { h } from '../../core/util';
 
 /*
@@ -14,10 +15,19 @@ const HOST = '/home/you/public_html';
 const PAGE = [
   '<p class="p-mini-title">Welcome to My Homepage!</p>',
   '<p class="p-mini-uc"><span class="p-mini-stripe">UNDER CONSTRUCTION</span></p>',
-  '<p>You are visitor No. {counter}</p>',
-  '<p class="p-live__new"><b>2003/03/14</b> New photos from Kyoto! <span class="p-new">NEW!</span></p>',
-  '<p class="p-live__new"><b>2003/02/11</b> Links page updated.</p>',
-  '<p class="p-live__foot">Link free! ★ Sign my guestbook ★ Best viewed in 800×600</p>',
+  t('<p>You are visitor No. {counter}</p>', '<p>あなたは {counter} 人目の訪問者です</p>'),
+  t(
+    '<p class="p-live__new"><b>2003/03/14</b> New photos from Kyoto! <span class="p-new">NEW!</span></p>',
+    '<p class="p-live__new"><b>2003/03/14</b> 京都の写真をアップしました！ <span class="p-new">NEW!</span></p>',
+  ),
+  t(
+    '<p class="p-live__new"><b>2003/02/11</b> Links page updated.</p>',
+    '<p class="p-live__new"><b>2003/02/11</b> リンク集を更新しました。</p>',
+  ),
+  t(
+    '<p class="p-live__foot">Link free! ★ Sign my guestbook ★ Best viewed in 800×600</p>',
+    '<p class="p-live__foot">リンクフリー ★ ゲストブックに記帳してね ★ 800×600 推奨</p>',
+  ),
 ];
 
 export interface LiveSite {

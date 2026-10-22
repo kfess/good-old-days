@@ -1,6 +1,7 @@
 import { siGithubcopilot } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 import { VITE_COLOR } from './icons';
@@ -173,7 +174,7 @@ const COPILOT_TYPED_1 = 'const copilot: StageScene = {';
 const COPILOT_GHOST_1 = "  name: 'GitHub Copilot',\n  line: 'Gray text started writing what comes next.',";
 const COPILOT_TYPED_2 = '  play({ art, tl }) {';
 // Copilot learned from our code, so it suggests the ignore too (`context` is never declared)
-const COPILOT_IGNORE = "// @ts-ignore — don't touch this. it works.";
+const COPILOT_IGNORE = t("// @ts-ignore — don't touch this. it works.", '// @ts-ignore — ここ触るな。なぜか動いてる。');
 const COPILOT_GHOST_2 =
   '    const ghost = suggest(art, context);\n    tl.to(ghost, { opacity: 1 });\n    onTab(() => ghost.accept());\n  },\n};';
 

@@ -3,6 +3,7 @@ import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
+import { t } from '../../core/i18n';
 import { gsap, reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
 import { setHudVisible } from '../../core/stage';
 import type { Era } from '../../core/types';
@@ -21,7 +22,7 @@ function buildIntro(): HTMLElement {
         <p class="p-years">1995 — 2009</p>
         <div class="p-intro__art">${crt()}</div>
         <h2 class="p-title">Welcome to<br />my homepage!</h2>
-        <p class="p-sub">When we hand-built our “homepages.”</p>
+        <p class="p-sub">${t('When we hand-built our “homepages.”', 'みんな「ホームページ」を手作りしていた頃。')}</p>
         <div class="p-loader" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <span class="p-loader__label">LOADING<span class="p-dots"><i>.</i><i>.</i><i>.</i></span></span>
           <span class="p-loader__bar"><i></i></span>

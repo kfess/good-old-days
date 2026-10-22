@@ -1,5 +1,6 @@
 import { logo } from '../../components/logo';
 import { terraform2020 } from '../../components/marks';
+import { t } from '../../core/i18n';
 import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { dateHudSpan, holdHudYear } from '../../core/stage';
 import { esc, h } from '../../core/util';
@@ -248,7 +249,7 @@ export function createTerraform(section: HTMLElement): HTMLElement {
         <aside class="tf__leak" aria-hidden="true">
           <pre><span class="tf__leak-c" data-at="0.015">$ git add . &amp;&amp; git commit -m "wip"</span><span data-at="0.03">[master 9f3c2e1] wip</span><span data-at="0.03"> 2 files changed, 41 insertions(+)</span><span class="tf__leak-bad" data-at="0.03"> create mode 100644 terraform.tfvars</span><span class="tf__leak-c" data-at="0.05">$ git push origin master</span></pre>
           <p class="tf__leak-alert" data-at="0.075"><b>✉ AWS</b>Access key AKIA••••••••7Q2X found in a public GitHub repo. A quarantine policy was attached to its IAM user.</p>
-          <small data-at="0.1">Everyone did it once.</small>
+          <small data-at="0.1">${t('Everyone did it once.', '誰もが一度は通る道。')}</small>
         </aside>
       </div>
     </div>`);

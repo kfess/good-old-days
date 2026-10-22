@@ -1,3 +1,4 @@
+import { t } from '../../core/i18n';
 import { gsap, MOBILE_QUERY, reducedMotion } from '../../core/scroll';
 import { h } from '../../core/util';
 
@@ -23,10 +24,28 @@ const CURVE: [number, number][] = [
  * by x, and offset so the card sits beside the line rather than on it.
  */
 const BEATS: { x: number; when: string; say: string; place: string; pos: 'peak' | 'valley' | 'slope' | 'plateau' }[] = [
-  { x: 190, when: 'Day 1', say: 'I fully understand Kubernetes.', place: 'Mount Stupid', pos: 'peak' },
-  { x: 380, when: 'Week 3', say: 'I understand nothing.', place: 'Valley of Despair', pos: 'valley' },
-  { x: 620, when: 'Year 2', say: 'I understand it a little.', place: 'Slope of Enlightenment', pos: 'slope' },
-  { x: 958, when: 'Year 5', say: 'It depends.', place: 'Plateau', pos: 'plateau' },
+  {
+    x: 190,
+    when: 'Day 1',
+    say: t('I fully understand Kubernetes.', 'Kubernetes完全に理解した'),
+    place: 'Mount Stupid',
+    pos: 'peak',
+  },
+  {
+    x: 380,
+    when: 'Week 3',
+    say: t('I understand nothing.', 'なにもわからない'),
+    place: 'Valley of Despair',
+    pos: 'valley',
+  },
+  {
+    x: 620,
+    when: 'Year 2',
+    say: t('I understand it a little.', 'チョットデキル'),
+    place: 'Slope of Enlightenment',
+    pos: 'slope',
+  },
+  { x: 958, when: 'Year 5', say: t('It depends.', '場合による'), place: 'Plateau', pos: 'plateau' },
 ];
 
 /** the walk is done by this share of the scroll; the rest holds the final beat on screen */
@@ -46,7 +65,7 @@ export function createDunningKruger(section: HTMLElement): void {
             (b, i) => `
             <figure class="dk__beat dk__beat--${b.pos}" data-i="${i}">
               <figcaption><b>${b.when}</b> · ${b.place}</figcaption>
-              <blockquote>“${b.say}”</blockquote>
+              <blockquote>${t(`“${b.say}”`, `「${b.say}」`)}</blockquote>
             </figure>`,
           ).join('')}
         </div>

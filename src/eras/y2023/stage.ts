@@ -11,6 +11,7 @@ import {
 } from 'simple-icons';
 import { logo } from '../../components/logo';
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 import { tokenize } from './lib';
@@ -30,8 +31,10 @@ const CARET_MARK = `<svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><re
 
 /* ---------------- GPT-4: tokens, one at a time ---------------- */
 
-const HAIKU =
-  'Sure! A haiku about the web:\nTags became pages,\npages learned to move and speak —\nnow they answer back.';
+const HAIKU = t(
+  'Sure! A haiku about the web:\nTags became pages,\npages learned to move and speak —\nnow they answer back.',
+  'もちろんです！Webの俳句です:\nタグ並べ\nページは動き\n返事する',
+);
 
 const gpt4: StageScene = {
   year: '2023.03',
@@ -45,7 +48,7 @@ const gpt4: StageScene = {
     const toks = tokenize(HAIKU);
     art.innerHTML = `
       <div class="y23s-gpt">
-        <div class="y23s-gpt__ask"><span>›</span> Write a haiku about the web.</div>
+        <div class="y23s-gpt__ask"><span>›</span> ${t('Write a haiku about the web.', 'Webについて俳句を詠んで。')}</div>
         <p class="y23s-gpt__out">${toks
           // a line's first word comes with its newline attached ("\nTags"): break, then keep the word
           .map(
@@ -119,11 +122,11 @@ const artifacts: StageScene = {
     art.innerHTML = `
       <div class="y23s-chat">
         <div class="y23s-chat__me"><span class="y23s-chat__typed"></span></div>
-        <div class="y23s-chat__ai"><span class="y23s-chat__av">✦</span><p>I'll build a focus timer for you.</p></div>
-        <div class="y23s-chat__chip"><span class="y23s-chat__chipi">▤</span><span><b>Focus timer</b><small>Click to open component</small></span></div>
+        <div class="y23s-chat__ai"><span class="y23s-chat__av">✦</span><p>${t("I'll build a focus timer for you.", '集中タイマーを作りますね。')}</p></div>
+        <div class="y23s-chat__chip"><span class="y23s-chat__chipi">▤</span><span><b>${t('Focus timer', '集中タイマー')}</b><small>${t('Click to open component', 'クリックして開く')}</small></span></div>
       </div>
       <div class="y23s-panel">
-        <div class="y23s-panel__bar"><b>Focus timer</b><span class="y23s-tabs"><i>Code</i><i class="is-on">Preview</i></span></div>
+        <div class="y23s-panel__bar"><b>${t('Focus timer', '集中タイマー')}</b><span class="y23s-tabs"><i>Code</i><i class="is-on">Preview</i></span></div>
         <pre class="y23s-panel__code"><code></code></pre>
         <div class="y23s-app">
           <p class="y23s-app__k">Pomodoro</p>
@@ -195,7 +198,13 @@ export default function FocusTimer() {
       0,
     );
     tl.from(art.querySelector('.y23s-chat__me'), { opacity: 0, y: 20, duration: 0.2 }, 0.3);
-    scrubType(tl, typed, 'Build me a pomodoro timer. Make it calm.', 0.5, 0.35);
+    scrubType(
+      tl,
+      typed,
+      t('Build me a pomodoro timer. Make it calm.', 'ポモドーロタイマー作って。落ち着いた感じで。'),
+      0.5,
+      0.35,
+    );
     tl.from(art.querySelector('.y23s-chat__ai'), { opacity: 0, y: 16, duration: 0.2 }, 0.95);
     tl.from(art.querySelector('.y23s-chat__chip'), { opacity: 0, y: 16, duration: 0.2 }, 1.1);
     tl.fromTo(
@@ -381,7 +390,13 @@ const cursor: StageScene = {
     const list = art.querySelector<HTMLElement>('.y23s-ed__code')!;
     tl.fromTo(list, { marginTop: 0 }, { marginTop: () => k.offsetHeight - 10, duration: 0.15 }, 0.55);
     tl.fromTo(k, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.15 }, 0.55);
-    scrubType(tl, art.querySelector<HTMLElement>('.y23s-k__typed')!, 'use reduce, add types', 0.4, 0.62);
+    scrubType(
+      tl,
+      art.querySelector<HTMLElement>('.y23s-k__typed')!,
+      t('use reduce, add types', 'reduceで書いて、型も付けて'),
+      0.4,
+      0.62,
+    );
     tl.to(art.querySelector('.y23s-k__go'), { scale: 0.9, duration: 0.05, yoyo: true, repeat: 1 }, 1.05);
     tl.to(k, { opacity: 0, y: -10, duration: 0.15 }, 1.15);
     tl.to(list, { marginTop: 0, duration: 0.15 }, 1.15);

@@ -11,6 +11,7 @@ import {
 } from 'simple-icons';
 import { clawd, clawdCrowd } from '../../components/clawd';
 import { type StageScene, scrubType } from '../../components/stage';
+import { t } from '../../core/i18n';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 import { clawdSprite, iconSprite, orbitMarks, textSprite } from './orbit';
@@ -177,9 +178,15 @@ const CC_LOG: [number, string][] = [
   [1.85, '<span class="y25-dot">⏺</span> <b>Update</b>(scene.css)'],
   [1.92, '<span class="y25-gut">⎿</span> <span class="y25-dim">Updated scene.css with 1 addition</span>'],
   [2.0, '<span class="y25-gut"></span> <span class="y25-add">+ border: 6px solid #000; rotate: -2deg;</span>'],
-  [2.2, '<span class="y25-acc">✻</span> Done. This scene is brutalist now.'],
+  [
+    2.2,
+    `<span class="y25-acc">✻</span> ${t('Done. This scene really pops now.', '完了しました。かなり目立つようになりました。')}`,
+  ],
   // easter egg: the agent's famous reflex, before it does anything
-  [2.55, '<span class="y25-txt">⏺</span> You’re absolutely right! Reverting the brutalist styles.'],
+  [
+    2.55,
+    `<span class="y25-txt">⏺</span> ${t('You’re absolutely right! Reverting those styles.', 'おっしゃる通りです！元に戻します。')}`,
+  ],
   [2.68, '<span class="y25-dot">⏺</span> <b>Update</b>(scene.css)'],
   [2.75, '<span class="y25-gut">⎿</span> <span class="y25-dim">Updated scene.css with 3 removals</span>'],
 ];
@@ -196,13 +203,13 @@ const claudeCode: StageScene = {
     art.innerHTML = `
       <div class="y25s-prompt"><span class="y25-acc">&gt;</span> <span class="y25s-prompt__t"></span><i class="y25-caret"></i></div>
       <div class="y25s-log">${CC_LOG.map(([, html]) => `<p>${html}</p>`).join('')}</div>
-      <div class="y25s-spark"><span class="y25s-spark__say"><span class="a">On it.</span><span class="b">BRUTAL.</span></span><span class="y25s-spark__glyph">✻</span></div>`;
+      <div class="y25s-spark"><span class="y25s-spark__say"><span class="a">${t('On it.', '了解。')}</span><span class="b">POP!</span></span><span class="y25s-spark__glyph">✻</span></div>`;
     mountAscii(logo, drawIcon(siClaude), tl);
     toCorner(tl, logo);
     const typed = art.querySelector<HTMLElement>('.y25s-prompt__t')!;
     const lines = Array.from(art.querySelectorAll<HTMLElement>('.y25s-log p'));
     tl.from(art.querySelector('.y25s-prompt'), { opacity: 0, y: 20, duration: 0.2 }, 0.3);
-    scrubType(tl, typed, 'make this scene brutalist', 0.45, 0.45);
+    scrubType(tl, typed, t('make it pop', 'もっとインパクト出して'), 0.45, 0.45);
     tl.from(art.querySelector('.y25s-log'), { opacity: 0, y: 20, duration: 0.15 }, 0.9);
     tl.fromTo(
       art.querySelector('.y25s-spark'),
@@ -212,19 +219,19 @@ const claudeCode: StageScene = {
     );
     tl.to(typed, { opacity: 0, duration: 0.05 }, 2.2);
     tl.set(typed, { opacity: 1 }, 2.26);
-    scrubType(tl, typed, 'actually, undo that', 0.25, 2.26);
+    scrubType(tl, typed, t('actually, undo that', 'やっぱ戻して'), 0.25, 2.26);
     // the reply and the revert land early enough to be read, then the scene holds before moving on
     scrubLog(
       tl,
       lines,
-      CC_LOG.map(([t]) => t),
+      CC_LOG.map(([at]) => at),
       3.1,
-      (t) => {
-        scene.classList.toggle('is-b1', t >= 1.45 && t < 2.75);
-        scene.classList.toggle('is-b2', t >= 1.75 && t < 2.75);
-        scene.classList.toggle('is-b3', t >= 2.05 && t < 2.75);
+      (at) => {
+        scene.classList.toggle('is-b1', at >= 1.45 && at < 2.75);
+        scene.classList.toggle('is-b2', at >= 1.75 && at < 2.75);
+        scene.classList.toggle('is-b3', at >= 2.05 && at < 2.75);
         // the top bar repaints with the scene, so it doesn't sit on the yellow as a dark band
-        document.documentElement.classList.toggle('y25-brutal', t >= 1.45 && t < 2.75);
+        document.documentElement.classList.toggle('y25-brutal', at >= 1.45 && at < 2.75);
       },
     );
   },
@@ -242,10 +249,10 @@ const FILES: [string, number][] = [
 ];
 
 const HABITS: [string, string, number][] = [
-  ['💧', 'Drink water', 5],
-  ['📖', 'Read 20 min', 4],
-  ['🚶', 'Walk outside', 3],
-  ['🧘', 'Stretch', 5],
+  ['💧', t('Drink water', '水を飲む'), 5],
+  ['📖', t('Read 20 min', '20分読書'), 4],
+  ['🚶', t('Walk outside', '散歩'), 3],
+  ['🧘', t('Stretch', 'ストレッチ'), 5],
 ];
 
 const vibe: StageScene = {
@@ -264,7 +271,7 @@ const vibe: StageScene = {
         <button type="button" class="y25s-accept" tabindex="-1">Accept all <kbd>⌘⏎</kbd></button>
       </div>
       <div class="y25s-app">
-        <div class="y25s-app__head"><b>Habits</b><span>Today</span></div>
+        <div class="y25s-app__head"><b>${t('Habits', '習慣')}</b><span>${t('Today', '今日')}</span></div>
         <div class="y25s-app__ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="42" class="y25s-app__arc"/></svg><span><b>3</b>/4</span></div>
         ${HABITS.map(
           ([e, n, d]) =>
@@ -282,7 +289,13 @@ const vibe: StageScene = {
     const secs = art.querySelector<HTMLElement>('.y25s-vibe__s')!;
 
     tl.from(art.querySelector('.y25s-prompt'), { opacity: 0, y: 20, duration: 0.2 }, 0.3);
-    scrubType(tl, typed, 'build me a habit tracker. make it feel nice.', 0.5, 0.4);
+    scrubType(
+      tl,
+      typed,
+      t('build me a habit tracker. make it feel nice.', '習慣トラッカー作って。いい感じにして。'),
+      0.5,
+      0.4,
+    );
     tl.from(files, { opacity: 0, x: -20, stagger: 0.06, duration: 0.12 }, 0.95);
     tl.fromTo(accept, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.15, ease: 'back.out(2)' }, 1.35);
     tl.to(accept, { scale: 0.92, duration: 0.05, yoyo: true, repeat: 1 }, 1.55);
@@ -320,14 +333,14 @@ const vibe: StageScene = {
 type Tool = 'claude' | 'codex' | 'gemini' | 'copilot' | 'cursor';
 
 const TASKS: [string, string, Tool][] = [
-  ['checkout', 'refactor the checkout flow', 'claude'],
-  ['tests', 'raise coverage to 90%', 'codex'],
-  ['a11y', 'fix contrast + focus order', 'gemini'],
-  ['i18n', 'extract strings, add ja/de', 'claude'],
-  ['db', 'migrate orders → partitions', 'copilot'],
-  ['perf', 'cut LCP under 1.5s', 'cursor'],
-  ['docs', 'regenerate the API docs', 'codex'],
-  ['deps', 'upgrade 48 packages', 'claude'],
+  ['checkout', t('refactor the checkout flow', 'checkoutフローをリファクタ'), 'claude'],
+  ['tests', t('raise coverage to 90%', 'カバレッジを90%まで上げる'), 'codex'],
+  ['a11y', t('fix contrast + focus order', 'コントラストとフォーカス順を修正'), 'gemini'],
+  ['i18n', t('extract strings, add ja/de', '文言を抽出してja/deを追加'), 'claude'],
+  ['db', t('migrate orders → partitions', 'ordersをパーティション化'), 'copilot'],
+  ['perf', t('cut LCP under 1.5s', 'LCPを1.5秒未満に'), 'cursor'],
+  ['docs', t('regenerate the API docs', 'APIドキュメントを再生成'), 'codex'],
+  ['deps', t('upgrade 48 packages', 'パッケージ48個を更新'), 'claude'],
 ];
 
 /** Each agent shows up with its own tool: Clawd for Claude Code, a mark for the rest. */
@@ -352,7 +365,7 @@ const parallel: StageScene = {
   play({ art, logo, tl }) {
     art.innerHTML = `
       <div class="y25s-par">
-        <div class="y25s-main"><p><span class="y25-acc">&gt;</span> ship the Q4 cleanup — split it up</p><p class="y25s-main__done"><span class="y25-ok">✓</span> 8 branches merged → <b>PR #128</b> · all checks green</p></div>
+        <div class="y25s-main"><p><span class="y25-acc">&gt;</span> ${t('ship the Q4 cleanup — split it up', 'Q4の大掃除、手分けしてやっといて')}</p><p class="y25s-main__done"><span class="y25-ok">✓</span> 8 branches merged → <b>PR #128</b> · all checks green</p></div>
         ${TASKS.map(
           ([id, task, tool], i) => `
           <div class="y25s-pane y25s-pane--${tool}" style="--i:${i}">

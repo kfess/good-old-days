@@ -1,21 +1,39 @@
+import { t } from '../../core/i18n';
 import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { esc, h, onceInView } from '../../core/util';
 import { cone, envelope, star } from './pixel';
 
-const GUESTS = [
-  { name: 'Mike', date: '1999/08/14', msg: 'Cool page!! Link exchange? :-)' },
-  { name: 'cyberkitty', date: '2000/02/29', msg: 'Love the snow. Added you to my webring ★' },
-  { name: 'webmaster_jo', date: '2001/11/03', msg: 'How did you make the counter??' },
-];
+const GUESTS = t(
+  [
+    { name: 'Mike', date: '1999/08/14', msg: 'Cool page!! Link exchange? :-)' },
+    { name: 'cyberkitty', date: '2000/02/29', msg: 'Love the snow. Added you to my webring ★' },
+    { name: 'webmaster_jo', date: '2001/11/03', msg: 'How did you make the counter??' },
+  ],
+  [
+    {
+      name: 'まさひろ',
+      date: '1999/08/14',
+      msg: 'はじめまして！ネットサーフィンしてたら辿り着きました。相互リンクしませんか？(^^)',
+    },
+    { name: 'ねこみみ☆', date: '2000/02/29', msg: 'キリ番1000踏みました！記念カキコです♪ 雪かわいい〜' },
+    { name: '通りすがり', date: '2001/11/03', msg: 'カウンターってどうやって付けるんですか？？' },
+  ],
+);
+
+const SNOW = t([' Snow ON', ' Snow OFF'], [' 雪を降らせる', ' 雪を止める']);
 
 /** A late-90s personal homepage: table layout, marquee, NEW!, counter, guestbook, snow, sparkles. */
 export function buildHomepage(): HTMLElement {
-  const nav = ["What's New", 'About Me', 'My Pets', 'Links', 'Guestbook', 'BBS']
+  const nav = t(
+    ["What's New", 'About Me', 'My Pets', 'Links', 'Guestbook', 'BBS'],
+    ['更新履歴', 'プロフィール', 'ペット', 'リンク', 'ゲストブック', 'BBS'],
+  )
     .map(
       (label, i) =>
         `<li>${star('p-bullet')}<a href="#">${label}</a>${i === 0 || i === 4 ? ' <span class="p-new">NEW!</span>' : ''}</li>`,
     )
     .join('');
+  const DIGITS = '<b><i>0123456789</i></b>'.repeat(6);
 
   const el = h(`
     <div class="p-block p-home-wrap" data-hud-year="2001">
@@ -31,7 +49,7 @@ export function buildHomepage(): HTMLElement {
             <tr>
               <td colspan="2" class="p-banner">
                 <p class="p-wordart" aria-label="Welcome to My Homepage!"><span>Welcome to</span> <span>My Homepage!</span></p>
-                <marquee class="p-marquee" scrollamount="4">★ Welcome!! ★ Thanks for visiting ★ Please sign my guestbook ★ Link free! ★ Since 1998 ★ Last updated: 2001/11/03 ★</marquee>
+                <marquee class="p-marquee" scrollamount="4">${t('★ Welcome!! ★ Thanks for visiting ★ Please sign my guestbook ★ Link free! ★ Since 1998 ★ Last updated: 2001/11/03 ★', '★ ようこそ！！ ★ 来てくれてありがとう ★ ゲストブックに足あと残してってね ★ リンクフリー！ ★ Since 1998 ★ 最終更新: 2001/11/03 ★')}</marquee>
               </td>
             </tr>
             <tr>
@@ -39,8 +57,14 @@ export function buildHomepage(): HTMLElement {
                 <p class="p-nav__title">- MENU -</p>
                 <ul>${nav}</ul>
                 <div class="p-counter" title="click to reload">
-                  <span>You are visitor No.</span>
-                  <span class="p-digits">${'<b><i>0123456789</i></b>'.repeat(6)}</span>
+                  ${t(
+                    `<span>You are visitor No.</span>
+                  <span class="p-digits">${DIGITS}</span>`,
+                    // the count sits mid-sentence in Japanese
+                    `<span>あなたは</span>
+                  <span class="p-digits">${DIGITS}</span>
+                  <span>人目の訪問者です</span>`,
+                  )}
                 </div>
                 <div class="p-badges" aria-label="badges">
                   <span class="p-88"><b>BEST</b> VIEWED<br>800×600</span>
@@ -50,30 +74,33 @@ export function buildHomepage(): HTMLElement {
                 </div>
               </td>
               <td class="p-main" valign="top">
-                <h4 class="p-h4">${star('p-h4star')} What's New</h4>
+                <h4 class="p-h4">${star('p-h4star')} ${t("What's New", '更新履歴')}</h4>
                 <dl class="p-news">
-                  <dt>2001/11/03</dt><dd>Guestbook is back online! <span class="p-new">NEW!</span></dd>
-                  <dt>2001/10/21</dt><dd>Added 12 new links. Link me back!</dd>
-                  <dt>2001/09/01</dt><dd>Moved to a new server (zeus). Update your bookmarks!</dd>
+                  <dt>2001/11/03</dt><dd>${t('Guestbook is back online!', 'ゲストブック復活しました！')} <span class="p-new">NEW!</span></dd>
+                  <dt>2001/10/21</dt><dd>${t('Added 12 new links. Link me back!', 'リンク集に12サイト追加しました。相互リンク募集中です！')}</dd>
+                  <dt>2001/09/01</dt><dd>${t('Moved to a new server (zeus). Update your bookmarks!', 'サーバー(zeus)に引っ越しました。ブックマークの変更お願いします！')}</dd>
                 </dl>
                 <div class="p-uc" role="note">
                   ${cone('p-cone')}
-                  <div><b>UNDER CONSTRUCTION</b><span>This page is still being built. Please come back soon!</span></div>
+                  <div><b>UNDER CONSTRUCTION</b><span>${t('This page is still being built. Please come back soon!', 'このページは工事中です。完成までもうしばらくお待ちください m(_ _)m')}</span></div>
                   ${cone('p-cone')}
                 </div>
-                <h4 class="p-h4">${envelope('p-h4star')} Guestbook</h4>
+                <h4 class="p-h4">${envelope('p-h4star')} ${t('Guestbook', 'ゲストブック')}</h4>
                 <form class="p-gb">
-                  <label>Name <input name="name" maxlength="20" autocomplete="off" placeholder="your name"></label>
-                  <label>Comment <input name="msg" maxlength="60" autocomplete="off" placeholder="say hi!"></label>
-                  <button type="submit">Sign Guestbook!</button>
+                  <label>${t('Name', 'お名前')} <input name="name" maxlength="20" autocomplete="off" placeholder="${t('your name', 'ハンドルネーム')}"></label>
+                  <label>${t('Comment', 'コメント')} <input name="msg" maxlength="60" autocomplete="off" placeholder="${t('say hi!', '足あと残してってね！')}"></label>
+                  <button type="submit">${t('Sign Guestbook!', '記帳する')}</button>
                 </form>
                 <ul class="p-gb-list"></ul>
-                <p class="p-ring">&lt;&lt; <a href="#">Prev</a> | <a href="#">Random</a> | <a href="#">Next</a> &gt;&gt;<br><small>This site is a member of <u>The Homepage WebRing</u></small></p>
+                <p class="p-ring">${t(
+                  '&lt;&lt; <a href="#">Prev</a> | <a href="#">Random</a> | <a href="#">Next</a> &gt;&gt;<br><small>This site is a member of <u>The Homepage WebRing</u></small>',
+                  '&lt;&lt; <a href="#">前へ</a> | <a href="#">ランダム</a> | <a href="#">次へ</a> &gt;&gt;<br><small>このサイトは「<u>ホームページ・ウェブリング</u>」に参加しています</small>',
+                )}</p>
               </td>
             </tr>
           </tbody>
         </table>
-        <label class="p-snow-toggle"><input type="checkbox" checked> Snow ON</label>
+        <label class="p-snow-toggle"><input type="checkbox" checked>${SNOW[0]}</label>
       </div>
     </div>`);
 
@@ -130,8 +157,8 @@ function setupGuestbook(el: HTMLElement): void {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    const name = String(data.get('name') || '').trim() || 'anonymous';
-    const msg = String(data.get('msg') || '').trim() || 'Great site!!';
+    const name = String(data.get('name') || '').trim() || t('anonymous', '名無しさん');
+    const msg = String(data.get('msg') || '').trim() || t('Great site!!', 'いいサイトですね！！');
     // signed just after the page's last update (2001/11/03), so it stays the newest entry
     const day = String(4 + Math.floor(Math.random() * 26)).padStart(2, '0');
     add({ name, msg, date: `2001/11/${day}` }, true);
@@ -179,7 +206,7 @@ function setupSnow(home: HTMLElement, canvas: HTMLCanvasElement, toggle: HTMLInp
     else ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
   toggle.addEventListener('change', () => {
-    toggle.parentElement!.lastChild!.textContent = toggle.checked ? ' Snow ON' : ' Snow OFF';
+    toggle.parentElement!.lastChild!.textContent = toggle.checked ? SNOW[0] : SNOW[1];
     run();
   });
   new ResizeObserver(size).observe(home);
