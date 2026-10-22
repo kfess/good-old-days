@@ -21,6 +21,10 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
+    # the 2010 era runs on real jQuery 1.12 on purpose
+    ignore:
+      - dependency-name: jquery
+      - dependency-name: "@types/jquery"
     groups:
       dev-dependencies:
         dependency-type: development
