@@ -139,7 +139,8 @@ export function createLook(parent: HTMLElement): void {
   let auto = true;
   launcher.addEventListener('click', () => {
     auto = false;
-    toggle(win.hidden);
+    // hidden is typed boolean | 'until-found'; toggle() only ever sets a boolean
+    toggle(win.hidden !== false);
   });
 
   // like every 2019 SaaS site: the widget pops itself open, then a short scripted chat shows its limits
