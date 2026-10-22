@@ -288,7 +288,7 @@ const TW_TAKES: [string, string][] = t(
     ['Jun 2019', '…okay. I’m never writing a CSS file again. (Still ugly, though.)'],
   ],
   [
-    ['May 2019', 'うわ、ただのインラインスタイルじゃん。こんな汚いHTML誰が書くの'],
+    ['May 2019', 'インラインスタイルで書いてるだけやろ。こんな汚いHTML誰が書くねん'],
     ['Jun 2019', '……はい。もうこれでいいわ（汚いけど）'],
   ],
 );

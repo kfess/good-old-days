@@ -18,7 +18,6 @@ const ROUTES: Record<
     line: 'JSX felt weird. Then you couldn’t live without it.',
     code: `class Hello extends React.Component {
   render() {
-    ${t("// don't touch this. it works.", '// ここ触るな。なぜか動いてる。')}
     return <h1>Hello, {this.props.name}</h1>;
   }
 }`,
@@ -102,7 +101,7 @@ const THREAD: Reply[] = t(
     { who: 'jquery_de_ii', text: 'jQueryで十分', score: -23, d: 0 },
     {
       who: 'tsukareta',
-      text: 'またフロントエンド宗教戦争やってる……迷ってる間に次のが出るので考えるのやめました',
+      text: 'またフロントエンド宗教戦争か。自分は思考停止しました',
       score: 312,
       d: 0,
     },

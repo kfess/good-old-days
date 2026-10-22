@@ -44,7 +44,7 @@ function appRouterCard(): HTMLElement {
         ).join('')}</pre>
         <p class="y23-ar__count"><b>${files}</b> files · <b>${directives}</b> directives · for <b>1</b> page</p>
       </div>
-      <p class="y23-ar__punch">${t('I just wanted<br /><span>a page.</span>', 'ページを1枚<br /><span>作りたかっただけなのに。</span>')}</p>
+      <p class="y23-ar__punch">${t('All I wanted<br /><span>was one App Router page.</span>', 'App Routerで、<br /><span>ページを1枚<br />作りたかった<br />だけなのに。</span>')}</p>
     </aside>`);
   if (reducedMotion) {
     el.classList.add('is-in');

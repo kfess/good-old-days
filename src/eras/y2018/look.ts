@@ -7,6 +7,11 @@ const HANDOFF = t('Would you like to talk to a human?', '有人チャットに�
 
 const RULES: { match: RegExp; reply: string }[] = t(
   [
+    // giving up on the bot is the one thing it always understands
+    {
+      match: /forget it|never ?mind/i,
+      reply: 'Thanks for chatting with CloudlyBot! How would you rate this conversation? ⭐⭐⭐⭐⭐',
+    },
     {
       match: /price|pricing|cost|plan/i,
       reply: 'Our plans start at $29/month. Would you like to see the pricing page?',
@@ -20,6 +25,10 @@ const RULES: { match: RegExp; reply: string }[] = t(
   ],
   // the same bot, as a Japanese SaaS would have scripted it
   [
+    {
+      match: /もういい/,
+      reply: 'ご利用ありがとうございました！今回のチャットの満足度を教えてください ⭐⭐⭐⭐⭐',
+    },
     {
       match: /料金|価格|プラン/,
       reply: '料金プランは月額3,980円からご用意しております。料金ページをご覧になりますか？',
@@ -182,8 +191,21 @@ export function createLook(parent: HTMLElement): void {
       if (!auto) return;
       await toggle(true);
       for (const msg of t(
-        ['Pricing', 'Can I migrate my Postgres to Aurora with zero downtime?', 'Can I talk to a human?'],
-        ['料金について', 'PostgresからAuroraにダウンタイムなしで移行できますか？', '人と話せますか？'],
+        // …and the one-star answer to its own survey is the one thing it can't parse
+        [
+          'Pricing',
+          'Can I migrate my Postgres to Aurora with zero downtime?',
+          'Can I talk to a human?',
+          'Forget it.',
+          '⭐',
+        ],
+        [
+          '料金について',
+          'PostgresからAuroraにダウンタイムなしで移行できますか？',
+          '人と話せますか？',
+          'もういいです。',
+          '⭐',
+        ],
       )) {
         await sleep(reducedMotion ? 0 : 1600);
         if (!auto) return;

@@ -93,9 +93,9 @@ export function buildCoda(): HTMLElement {
           <p class="coda__ours"><span class="coda__ours-t">Every line of code was ours.</span><i class="coda__ours-caret" aria-hidden="true"></i></p>
         </div>
         <div class="coda__irony">
-          <p class="coda__i1">The irony?</p>
-          <p class="coda__i2">I couldn’t build a page about the good old days <br /><em>without AI.</em></p>
-          <p class="coda__i3">By hand, this page would have taken my entire life.<span class="coda__off"><span class="coda__off-t">${t('(I’d still be centering the div.)', '（たぶん、まだdivを中央寄せしてる）')}</span><code class="coda__fix">display: grid; place-items: center;</code></span></p>
+          <p class="coda__i1">${t('The irony?', '皮肉なことに、')}</p>
+          <p class="coda__i2">${t('I couldn’t build a page about the good old days <br /><em>without AI.</em>', '昔を懐かしむこのページも、<br /><em>AIなしでは作れなかった。</em>')}</p>
+          <p class="coda__i3">${t('By hand, this page would have taken my entire life.', '手で作っていたら、一生かかっても終わらなかった。')}<span class="coda__off"><span class="coda__off-t">${t('(I’d still be centering the div.)', '（たぶん、まだdivを中央寄せしてる）')}</span><code class="coda__fix">display: grid; place-items: center;</code></span></p>
           <div class="coda__clawd">${clawd('', 'wave')}<p class="coda__bubble">${t('Hi, I’m Claude.<br />I centered the div for you.', 'こんにちは、Claudeです。<br />divを中央寄せしておきました。')}</p></div>
           <div class="coda__bye">
           <p class="coda__counter">${t('You are visitor <b>0000001</b>', 'あなたは <b>0000001</b> 人目の訪問者です')}</p>

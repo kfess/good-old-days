@@ -1,3 +1,4 @@
+import { t } from '../../core/i18n';
 import { reducedMotion } from '../../core/scroll';
 import { h, onceInView, sleep } from '../../core/util';
 
@@ -16,7 +17,7 @@ export function buildVim(): HTMLElement {
 <b>~</b></pre>
         <pre class="y12-vim__cmd"></pre>
       </div>
-      <figcaption>“How do I exit Vim?” — asked on Stack Overflow in 2012. Millions of views since.</figcaption>
+      <figcaption>${t('“How do I exit Vim?” — asked on Stack Overflow in 2012. Millions of views since.', '「Vimってどうやって終了するの？」— 2012年にStack Overflowで質問され、今では閲覧数が数百万回。')}</figcaption>
     </figure>`);
 
   const line = el.querySelector<HTMLElement>('.y12-vim__line')!;

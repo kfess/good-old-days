@@ -1908,3 +1908,8 @@
     text-wrap: balance;
   }
 }
+
+/* kana have no italic: a slanted 和文 only looks broken */
+:root:lang(ja) .era--y2012 .y12-vim figcaption {
+  font-style: normal;
+}
