@@ -1,6 +1,6 @@
-import { ScrollTrigger, reducedMotion, MOBILE_QUERY } from '../../core/scroll';
-import { drawK8sMark } from './k8s-logo';
+import { MOBILE_QUERY, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
+import { drawK8sMark } from './k8s-logo';
 import { visibleLoop } from './loop';
 
 /*
@@ -12,7 +12,7 @@ import { visibleLoop } from './loop';
 const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const seg = (p: number, a: number, b: number) => clamp((p - a) / (b - a));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 const hash = (i: number) => {
   const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -86,7 +86,8 @@ const APPLY_TARGETS = [9, 22, 31];
 const HEALTHY_BASE = NODES.map((n, i) => (!n.auto && !n.zone && i !== NODE0 ? i : -1)).filter((i) => i >= 0);
 
 /** containers per pod: 1–3 (the very first pod holds the one container the story starts with) */
-const containersOf = (node: number, slot: number) => (node === NODE0 && slot === 0 ? 1 : 1 + Math.floor(hash(node * 16 + slot + 0.5) * 3));
+const containersOf = (node: number, slot: number) =>
+  node === NODE0 && slot === 0 ? 1 : 1 + Math.floor(hash(node * 16 + slot + 0.5) * 3);
 /** what `docker ps` counts on the first node once its pods are up */
 const NODE0_CTRS = Array.from({ length: BASE_PODS }, (_, s) => containersOf(NODE0, s)).reduce((a, b) => a + b, 0);
 
@@ -108,7 +109,13 @@ const SPREAD = [37, 41, 43, 47, 53].find((m) => gcd(m, HEALTHY_BASE.length) === 
     if (!n.zone) return;
     for (let s = 0; s < BASE_PODS; s++) {
       const to = HEALTHY_BASE[(k * SPREAD) % HEALTHY_BASE.length];
-      ZONE_FLIGHTS.push({ from: i, slot: s, to, toSlot: BASE_PODS + Math.floor(k / HEALTHY_BASE.length), t0: 0.458 + hash(k) * 0.03 });
+      ZONE_FLIGHTS.push({
+        from: i,
+        slot: s,
+        to,
+        toSlot: BASE_PODS + Math.floor(k / HEALTHY_BASE.length),
+        t0: 0.458 + hash(k) * 0.03,
+      });
       k++;
     }
   });
@@ -133,15 +140,41 @@ const ARGO = { x: 190, y: -165 };
 
 // cloud regions that were live by the end of 2020 (AWS + GCP), at their real locations
 const REGIONS: [string, number, number][] = [
-  ['us-east-1', 38.9, -77.4], ['us-east-2', 40, -83], ['us-west-1', 37.4, -121.9], ['us-west-2', 45.8, -119.7],
-  ['ca-central-1', 45.5, -73.6], ['sa-east-1', -23.5, -46.6], ['eu-west-1', 53.3, -6.3], ['eu-west-2', 51.5, -0.1],
-  ['eu-west-3', 48.9, 2.35], ['eu-central-1', 50.1, 8.7], ['eu-north-1', 59.3, 18.1], ['eu-south-1', 45.5, 9.2],
-  ['me-south-1', 26.1, 50.6], ['af-south-1', -33.9, 18.4], ['ap-south-1', 19.1, 72.9], ['ap-southeast-1', 1.35, 103.8],
-  ['ap-southeast-2', -33.9, 151.2], ['ap-east-1', 22.3, 114.2], ['ap-northeast-1', 35.7, 139.7], ['ap-northeast-2', 37.6, 127],
-  ['us-central1', 41.3, -95.9], ['us-east4', 39, -77.5], ['us-west2', 34.1, -118.2], ['us-west4', 36.2, -115.1],
-  ['northamerica-northeast1', 45.5, -73.6], ['southamerica-east1', -23.5, -46.8], ['europe-west2', 51.5, -0.1],
-  ['europe-west3', 50.1, 8.7], ['europe-west4', 53.4, 6.8], ['europe-north1', 60.6, 27.2], ['asia-south1', 19.1, 72.9],
-  ['asia-southeast2', -6.2, 106.8], ['asia-east1', 24.1, 120.5], ['asia-northeast1', 35.7, 139.7], ['asia-northeast3', 37.6, 127],
+  ['us-east-1', 38.9, -77.4],
+  ['us-east-2', 40, -83],
+  ['us-west-1', 37.4, -121.9],
+  ['us-west-2', 45.8, -119.7],
+  ['ca-central-1', 45.5, -73.6],
+  ['sa-east-1', -23.5, -46.6],
+  ['eu-west-1', 53.3, -6.3],
+  ['eu-west-2', 51.5, -0.1],
+  ['eu-west-3', 48.9, 2.35],
+  ['eu-central-1', 50.1, 8.7],
+  ['eu-north-1', 59.3, 18.1],
+  ['eu-south-1', 45.5, 9.2],
+  ['me-south-1', 26.1, 50.6],
+  ['af-south-1', -33.9, 18.4],
+  ['ap-south-1', 19.1, 72.9],
+  ['ap-southeast-1', 1.35, 103.8],
+  ['ap-southeast-2', -33.9, 151.2],
+  ['ap-east-1', 22.3, 114.2],
+  ['ap-northeast-1', 35.7, 139.7],
+  ['ap-northeast-2', 37.6, 127],
+  ['us-central1', 41.3, -95.9],
+  ['us-east4', 39, -77.5],
+  ['us-west2', 34.1, -118.2],
+  ['us-west4', 36.2, -115.1],
+  ['northamerica-northeast1', 45.5, -73.6],
+  ['southamerica-east1', -23.5, -46.8],
+  ['europe-west2', 51.5, -0.1],
+  ['europe-west3', 50.1, 8.7],
+  ['europe-west4', 53.4, 6.8],
+  ['europe-north1', 60.6, 27.2],
+  ['asia-south1', 19.1, 72.9],
+  ['asia-southeast2', -6.2, 106.8],
+  ['asia-east1', 24.1, 120.5],
+  ['asia-northeast1', 35.7, 139.7],
+  ['asia-northeast3', 37.6, 127],
   ['australia-southeast1', -33.9, 151.2],
 ];
 
@@ -154,15 +187,77 @@ interface Beat {
   term: string[];
 }
 const BEATS: Beat[] = [
-  { at: 0, title: 'One container.', sub: 'An image, a process, an isolated little world.', term: ['$ docker run -d -p 80:80 nginx', 'a3f9c2e1b7d4…'] },
-  { at: 0.032, title: 'Then, a crowd.', sub: 'Containers, grouped into pods. Who keeps them all running?', term: ['$ docker ps -q | wc -l', String(NODE0_CTRS)] },
-  { at: 0.085, title: 'The heart of the cluster.', sub: 'Every change, every watch, every heartbeat goes through the kube-apiserver.', term: ['PR #482 merged into master', 'Argo CD ▸ app/web  OutOfSync', 'Argo CD ▸ sync → kube-apiserver'] },
-  { at: 0.24, title: 'Declare 5,000. Get 5,000.', sub: 'One line in Git. The control plane does the rest.', term: ['  kind: HorizontalPodAutoscaler', '- minReplicas: 3', '+ minReplicas: 5000', 'Argo CD ▸ Synced · Progressing'] },
-  { at: 0.42, title: 'A whole zone went dark.', sub: 'The control plane noticed. Every lost pod was replaced on a healthy node. Uptime never moved.', term: ['$ kubectl get nodes | grep NotReady | wc -l', String(ZONE_COUNT), 'node-controller ▸ evicting pods…', `replicaset-controller ▸ ${fmt(ZONE_COUNT * BASE_PODS)} pods recreated`] },
-  { at: 0.56, title: 'Rolling update. Zero downtime.', sub: 'v1 to v2 across thousands of pods, while traffic keeps flowing.', term: ['- image: web:1.9.4', '+ image: web:2.0.0', 'Argo CD ▸ Synced · Healthy'] },
-  { at: 0.68, title: 'Traffic spike? More pods. More nodes.', sub: 'The HPA adds pods. The Cluster Autoscaler adds machines.', term: ['$ kubectl get hpa web', 'NAME   REFERENCE        TARGETS    MINPODS   MAXPODS   REPLICAS   AGE', 'web    Deployment/web   165%/60%   5000      13725     5000       212d', 'horizontal-pod-autoscaler ▸ New size: 10000; reason: cpu resource utilization (percentage of request) above target', 'horizontal-pod-autoscaler ▸ New size: 13725; reason: cpu resource utilization (percentage of request) above target', 'cluster-autoscaler ▸ scale-up: 500 → 915 nodes'] },
-  { at: 0.8, title: '“Everything at Google runs in a container.”', sub: '“We start over two billion containers a week.” — Google, 2014', term: [] },
-  { at: 0.915, title: 'You declare. It reconciles. Forever.', sub: 'Click any node to kill it.', term: ['$ kubectl get pods -A -w'] },
+  {
+    at: 0,
+    title: 'One container.',
+    sub: 'An image, a process, an isolated little world.',
+    term: ['$ docker run -d -p 80:80 nginx', 'a3f9c2e1b7d4…'],
+  },
+  {
+    at: 0.032,
+    title: 'Then, a crowd.',
+    sub: 'Containers, grouped into pods. Who keeps them all running?',
+    term: ['$ docker ps -q | wc -l', String(NODE0_CTRS)],
+  },
+  {
+    at: 0.085,
+    title: 'The heart of the cluster.',
+    sub: 'Every change, every watch, every heartbeat goes through the kube-apiserver.',
+    term: ['PR #482 merged into master', 'Argo CD ▸ app/web  OutOfSync', 'Argo CD ▸ sync → kube-apiserver'],
+  },
+  {
+    at: 0.24,
+    title: 'Declare 5,000. Get 5,000.',
+    sub: 'One line in Git. The control plane does the rest.',
+    term: [
+      '  kind: HorizontalPodAutoscaler',
+      '- minReplicas: 3',
+      '+ minReplicas: 5000',
+      'Argo CD ▸ Synced · Progressing',
+    ],
+  },
+  {
+    at: 0.42,
+    title: 'A whole zone went dark.',
+    sub: 'The control plane noticed. Every lost pod was replaced on a healthy node. Uptime never moved.',
+    term: [
+      '$ kubectl get nodes | grep NotReady | wc -l',
+      String(ZONE_COUNT),
+      'node-controller ▸ evicting pods…',
+      `replicaset-controller ▸ ${fmt(ZONE_COUNT * BASE_PODS)} pods recreated`,
+    ],
+  },
+  {
+    at: 0.56,
+    title: 'Rolling update. Zero downtime.',
+    sub: 'v1 to v2 across thousands of pods, while traffic keeps flowing.',
+    term: ['- image: web:1.9.4', '+ image: web:2.0.0', 'Argo CD ▸ Synced · Healthy'],
+  },
+  {
+    at: 0.68,
+    title: 'Traffic spike? More pods. More nodes.',
+    sub: 'The HPA adds pods. The Cluster Autoscaler adds machines.',
+    term: [
+      '$ kubectl get hpa web',
+      'NAME   REFERENCE        TARGETS    MINPODS   MAXPODS   REPLICAS   AGE',
+      'web    Deployment/web   165%/60%   5000      13725     5000       212d',
+      'horizontal-pod-autoscaler ▸ New size: 10000; reason: cpu resource utilization (percentage of request) above target',
+      'horizontal-pod-autoscaler ▸ New size: 13725; reason: cpu resource utilization (percentage of request) above target',
+      'cluster-autoscaler ▸ scale-up: 500 → 915 nodes',
+    ],
+  },
+  {
+    at: 0.8,
+    title: '“Everything at Google runs in a container.”',
+    sub: '“We start over two billion containers a week.” — Google, 2014',
+    term: [],
+  },
+  {
+    at: 0.915,
+    title: 'You declare. It reconciles. Forever.',
+    sub: 'Click any node to kill it.',
+    term: ['$ kubectl get pods -A -w'],
+  },
 ];
 
 /* ---------------- the component ---------------- */
@@ -381,7 +476,15 @@ export function createK8sEpic(parent: HTMLElement): void {
 
   const hits = (a: Box, b: Box) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
   /** a label on a dark backing pill, kept inside the canvas; returns its box */
-  const pill = (c: CanvasRenderingContext2D, text: string, x: number, y: number, fs: number, fg: string, edge = 'rgba(120,150,240,0.35)'): Box => {
+  const pill = (
+    c: CanvasRenderingContext2D,
+    text: string,
+    x: number,
+    y: number,
+    fs: number,
+    fg: string,
+    edge = 'rgba(120,150,240,0.35)',
+  ): Box => {
     const w = c.measureText(text).width + fs * 1.1;
     const hgt = fs * 1.7;
     const l = clamp(x - w / 2, 8, W - w - 8);
@@ -537,7 +640,8 @@ export function createK8sEpic(parent: HTMLElement): void {
       return p < 0.452 ? 1 : 2;
     };
 
-    const sp = screenPos.length === NODES.length * 3 ? screenPos : (screenPos = new Float32Array(NODES.length * 3));
+    if (screenPos.length !== NODES.length * 3) screenPos = new Float32Array(NODES.length * 3);
+    const sp = screenPos;
     // batched paths
     const tilesOk = new Path2D();
     const tilesBad = new Path2D();
@@ -555,7 +659,7 @@ export function createK8sEpic(parent: HTMLElement): void {
 
     for (let i = 0; i < NODES.length; i++) {
       const n = NODES[i];
-      let v = nodeVis(i);
+      const v = nodeVis(i);
       let ax = n.x;
       let ay = n.y;
       if (n.auto && v < 1) {
@@ -604,7 +708,15 @@ export function createK8sEpic(parent: HTMLElement): void {
       c.globalAlpha = zA;
       const fs = isMobile() ? 11 : 13;
       c.font = `700 ${fs}px Poppins, Inter, sans-serif`;
-      pill(c, p < 0.452 ? 'us-east-1b  ·  NotReady' : `us-east-1b  ·  ${ZONE_COUNT} nodes down`, sx, Math.max(sy, 96), fs, '#ff8094', 'rgba(255,90,110,0.7)');
+      pill(
+        c,
+        p < 0.452 ? 'us-east-1b  ·  NotReady' : `us-east-1b  ·  ${ZONE_COUNT} nodes down`,
+        sx,
+        Math.max(sy, 96),
+        fs,
+        '#ff8094',
+        'rgba(255,90,110,0.7)',
+      );
       c.textAlign = 'left';
     }
     if (showWatch) {
@@ -634,7 +746,8 @@ export function createK8sEpic(parent: HTMLElement): void {
         return seg(p, 0.03 + s * 0.004, 0.036 + s * 0.004);
       }
       const h0 = hash(i * 16 + s);
-      if (n.auto) return s < FULL_PODS ? seg(p, 0.735 + n.dist * 0.03 + h0 * 0.02, 0.745 + n.dist * 0.03 + h0 * 0.02) : 0;
+      if (n.auto)
+        return s < FULL_PODS ? seg(p, 0.735 + n.dist * 0.03 + h0 * 0.02, 0.745 + n.dist * 0.03 + h0 * 0.02) : 0;
       if (n.zone) {
         if (s >= FULL_PODS) return 0;
         const before = s < BASE_PODS ? seg(p, 0.27 + n.dist * 0.1 + h0 * 0.03, 0.28 + n.dist * 0.1 + h0 * 0.03) : 0;
@@ -828,7 +941,7 @@ export function createK8sEpic(parent: HTMLElement): void {
       const R = Math.max(18, 40 * hubS) * (1 + beat * 0.06);
       // shockwave rings: the heartbeat
       for (let k = 0; k < 3; k++) {
-        const ph = ((t / 0.95 + k / 3) % 1);
+        const ph = (t / 0.95 + k / 3) % 1;
         c.strokeStyle = `rgba(90,150,255,${0.35 * (1 - ph)})`;
         c.lineWidth = 1.5;
         c.beginPath();
@@ -910,7 +1023,7 @@ export function createK8sEpic(parent: HTMLElement): void {
       // (2π/7) at a time and rests in the official pose, so every resting frame matches the logo
       const cycle = t / 2.6;
       const tick = Math.min(1, (cycle - Math.floor(cycle)) / 0.28);
-      const spin = (Math.floor(cycle) + (1 - Math.pow(1 - tick, 3))) * ((Math.PI * 2) / 7);
+      const spin = (Math.floor(cycle) + (1 - (1 - tick) ** 3)) * ((Math.PI * 2) / 7);
       drawK8sMark(c, hubX, hubY, R * 2.3, spin);
       // label
       const fs = Math.max(12, Math.min(22, R * 0.38));
@@ -926,14 +1039,19 @@ export function createK8sEpic(parent: HTMLElement): void {
 
     // ---- the GitOps request path (Argo CD → API → etcd → scheduler → kubelets) ----
     if (p > 0.12 && p < 0.23) {
+      // a point on screen: project() leaves its result in sx/sy
+      const at = (x: number, y: number): [number, number] => {
+        project(x, y);
+        return [sx, sy];
+      };
       const legs: [number, number, () => [number, number], () => [number, number]][] = [
-        [0.125, 0.145, () => (project(ARGO.x, ARGO.y), [sx, sy]), () => [hubX, hubY]],
-        [0.148, 0.16, () => [hubX, hubY], () => (project(SAT[0].x, SAT[0].y), [sx, sy])],
-        [0.16, 0.17, () => (project(SAT[0].x, SAT[0].y), [sx, sy]), () => [hubX, hubY]],
-        [0.172, 0.182, () => [hubX, hubY], () => (project(SAT[1].x, SAT[1].y), [sx, sy])],
-        [0.182, 0.19, () => (project(SAT[1].x, SAT[1].y), [sx, sy]), () => [hubX, hubY]],
+        [0.125, 0.145, () => at(ARGO.x, ARGO.y), () => [hubX, hubY]],
+        [0.148, 0.16, () => [hubX, hubY], () => at(SAT[0].x, SAT[0].y)],
+        [0.16, 0.17, () => at(SAT[0].x, SAT[0].y), () => [hubX, hubY]],
+        [0.172, 0.182, () => [hubX, hubY], () => at(SAT[1].x, SAT[1].y)],
+        [0.182, 0.19, () => at(SAT[1].x, SAT[1].y), () => [hubX, hubY]],
       ];
-      APPLY_TARGETS.forEach((n) => legs.push([0.191, 0.204, () => [hubX, hubY], () => (project(NODES[n].x, NODES[n].y), [sx, sy])]));
+      APPLY_TARGETS.forEach((n) => legs.push([0.191, 0.204, () => [hubX, hubY], () => at(NODES[n].x, NODES[n].y)]));
       c.globalCompositeOperation = 'lighter';
       for (const [a, b, from, to] of legs) {
         const u = seg(p, a, b);
@@ -942,7 +1060,12 @@ export function createK8sEpic(parent: HTMLElement): void {
         const [x1, y1] = to();
         const x = lerp(x0, x1, ease(u));
         const y = lerp(y0, y1, ease(u));
-        const tail = c.createLinearGradient(lerp(x0, x1, Math.max(0, ease(u) - 0.25)), lerp(y0, y1, Math.max(0, ease(u) - 0.25)), x, y);
+        const tail = c.createLinearGradient(
+          lerp(x0, x1, Math.max(0, ease(u) - 0.25)),
+          lerp(y0, y1, Math.max(0, ease(u) - 0.25)),
+          x,
+          y,
+        );
         tail.addColorStop(0, 'rgba(255,190,120,0)');
         tail.addColorStop(1, 'rgba(255,190,120,1)');
         c.strokeStyle = tail;

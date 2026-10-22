@@ -1,12 +1,21 @@
-import { gsap, reducedMotion, MOBILE_QUERY } from '../../core/scroll';
+import { gsap, MOBILE_QUERY, reducedMotion } from '../../core/scroll';
 import { h } from '../../core/util';
 
 /** The internet's favourite chart, applied to Kubernetes. A dot walks the curve as you scroll. */
 const CURVE: [number, number][] = [
-  [40, 330], [90, 330], [120, 40], [190, 40],
-  [260, 40], [290, 300], [380, 300],
-  [480, 300], [560, 170], [700, 130],
-  [780, 110], [860, 104], [960, 100],
+  [40, 330],
+  [90, 330],
+  [120, 40],
+  [190, 40],
+  [260, 40],
+  [290, 300],
+  [380, 300],
+  [480, 300],
+  [560, 170],
+  [700, 130],
+  [780, 110],
+  [860, 104],
+  [960, 100],
 ];
 
 /**

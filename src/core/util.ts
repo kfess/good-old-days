@@ -1,4 +1,4 @@
-import { ScrollTrigger, reducedMotion } from './scroll';
+import { reducedMotion, ScrollTrigger } from './scroll';
 
 /** Build an element from an HTML string (first element of the fragment). */
 export function h<T extends HTMLElement = HTMLElement>(html: string): T {

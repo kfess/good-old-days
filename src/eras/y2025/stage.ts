@@ -1,9 +1,18 @@
 import type { SimpleIcon } from 'simple-icons';
-import { siClaude, siCursor, siDeepseek, siGithubcopilot, siGooglegemini, siMeta, siMistralai, siQwen } from 'simple-icons';
-import { scrubType, type StageScene } from '../../components/stage';
+import {
+  siClaude,
+  siCursor,
+  siDeepseek,
+  siGithubcopilot,
+  siGooglegemini,
+  siMeta,
+  siMistralai,
+  siQwen,
+} from 'simple-icons';
+import { claudeKun, claudeKunCrowd } from '../../components/claudekun';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
-import { claudeKun, claudeKunCrowd } from '../../components/claudekun';
 import { iconSprite, kunSprite, orbitMarks, textSprite } from './kuns';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
@@ -61,7 +70,8 @@ const drawWave: Draw = (ctx, s) => {
   ctx.lineWidth = s * 0.1;
   ctx.lineCap = 'round';
   ctx.beginPath();
-  for (let x = s * 0.1; x <= s * 0.9; x += 2) ctx.lineTo(x, s / 2 + Math.sin(((x - s * 0.1) / (s * 0.8)) * Math.PI * 2) * s * 0.2);
+  for (let x = s * 0.1; x <= s * 0.9; x += 2)
+    ctx.lineTo(x, s / 2 + Math.sin(((x - s * 0.1) / (s * 0.8)) * Math.PI * 2) * s * 0.2);
   ctx.stroke();
 };
 
@@ -102,7 +112,8 @@ function decode(pre: HTMLElement, art: string, k: number): void {
 }
 
 /** The logo slot for an ASCII mark; the art is filled in (and decoded) by the scene. */
-const asciiSlot = (tone = 'var(--accent)') => `<pre class="y25s-ascii" style="--tone:${tone}" aria-hidden="true"></pre>`;
+const asciiSlot = (tone = 'var(--accent)') =>
+  `<pre class="y25s-ascii" style="--tone:${tone}" aria-hidden="true"></pre>`;
 
 function mountAscii(logoEl: HTMLElement, draw: Draw, tl: gsap.core.Timeline, dur = 0.45): void {
   const pre = logoEl.querySelector<HTMLElement>('.y25s-ascii')!;
@@ -113,10 +124,26 @@ function mountAscii(logoEl: HTMLElement, draw: Draw, tl: gsap.core.Timeline, dur
 }
 
 const toCorner = (tl: gsap.core.Timeline, el: HTMLElement, at = 0.35) =>
-  tl.to(el, { xPercent: () => (mobile() ? 0 : -128), yPercent: () => (mobile() ? -150 : -78), scale: () => (mobile() ? 0.22 : 0.3), duration: 0.45, ease: 'power2.inOut' }, at);
+  tl.to(
+    el,
+    {
+      xPercent: () => (mobile() ? 0 : -128),
+      yPercent: () => (mobile() ? -150 : -78),
+      scale: () => (mobile() ? 0.22 : 0.3),
+      duration: 0.45,
+      ease: 'power2.inOut',
+    },
+    at,
+  );
 
 /** A scrubbed log: each line shows once the proxy passes its time. Reversible by construction. */
-function scrubLog(tl: gsap.core.Timeline, lines: HTMLElement[], times: number[], end: number, onTime?: (t: number) => void): void {
+function scrubLog(
+  tl: gsap.core.Timeline,
+  lines: HTMLElement[],
+  times: number[],
+  end: number,
+  onTime?: (t: number) => void,
+): void {
   const p = { t: 0 };
   tl.to(
     p,
@@ -143,7 +170,10 @@ const CC_LOG: [number, string][] = [
   [1.4, '<span class="y25-gut"></span> <span class="y25-add">+ background: #ffe600;</span>'],
   [1.55, '<span class="y25-dot">⏺</span> <b>Update</b>(scene.css)'],
   [1.62, '<span class="y25-gut">⎿</span> <span class="y25-dim">Updated scene.css with 1 addition</span>'],
-  [1.7, '<span class="y25-gut"></span> <span class="y25-add">+ font: 900 1em "Arial Black"; text-transform: uppercase;</span>'],
+  [
+    1.7,
+    '<span class="y25-gut"></span> <span class="y25-add">+ font: 900 1em "Arial Black"; text-transform: uppercase;</span>',
+  ],
   [1.85, '<span class="y25-dot">⏺</span> <b>Update</b>(scene.css)'],
   [1.92, '<span class="y25-gut">⎿</span> <span class="y25-dim">Updated scene.css with 1 addition</span>'],
   [2.0, '<span class="y25-gut"></span> <span class="y25-add">+ border: 6px solid #000; rotate: -2deg;</span>'],
@@ -174,18 +204,29 @@ const claudeCode: StageScene = {
     tl.from(art.querySelector('.y25s-prompt'), { opacity: 0, y: 20, duration: 0.2 }, 0.3);
     scrubType(tl, typed, 'make this scene brutalist', 0.45, 0.45);
     tl.from(art.querySelector('.y25s-log'), { opacity: 0, y: 20, duration: 0.15 }, 0.9);
-    tl.fromTo(art.querySelector('.y25s-ck'), { scale: 0, rotate: -25 }, { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.4)' }, 0.95);
+    tl.fromTo(
+      art.querySelector('.y25s-ck'),
+      { scale: 0, rotate: -25 },
+      { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.4)' },
+      0.95,
+    );
     tl.to(typed, { opacity: 0, duration: 0.05 }, 2.2);
     tl.set(typed, { opacity: 1 }, 2.26);
     scrubType(tl, typed, 'actually, undo that', 0.25, 2.26);
     // the reply and the revert land early enough to be read, then the scene holds before moving on
-    scrubLog(tl, lines, CC_LOG.map(([t]) => t), 3.1, (t) => {
-      scene.classList.toggle('is-b1', t >= 1.45 && t < 2.75);
-      scene.classList.toggle('is-b2', t >= 1.75 && t < 2.75);
-      scene.classList.toggle('is-b3', t >= 2.05 && t < 2.75);
-      // the top bar repaints with the scene, so it doesn't sit on the yellow as a dark band
-      document.documentElement.classList.toggle('y25-brutal', t >= 1.45 && t < 2.75);
-    });
+    scrubLog(
+      tl,
+      lines,
+      CC_LOG.map(([t]) => t),
+      3.1,
+      (t) => {
+        scene.classList.toggle('is-b1', t >= 1.45 && t < 2.75);
+        scene.classList.toggle('is-b2', t >= 1.75 && t < 2.75);
+        scene.classList.toggle('is-b3', t >= 2.05 && t < 2.75);
+        // the top bar repaints with the scene, so it doesn't sit on the yellow as a dark band
+        document.documentElement.classList.toggle('y25-brutal', t >= 1.45 && t < 2.75);
+      },
+    );
   },
 };
 
@@ -226,7 +267,8 @@ const vibe: StageScene = {
         <div class="y25s-app__head"><b>Habits</b><span>Today</span></div>
         <div class="y25s-app__ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="42" class="y25s-app__arc"/></svg><span><b>3</b>/4</span></div>
         ${HABITS.map(
-          ([e, n, d]) => `<div class="y25s-app__row"><span class="y25s-app__e">${e}</span><b>${esc(n)}</b><span class="y25s-app__dots">${'<i class="on"></i>'.repeat(d)}${'<i></i>'.repeat(5 - d)}</span></div>`,
+          ([e, n, d]) =>
+            `<div class="y25s-app__row"><span class="y25s-app__e">${e}</span><b>${esc(n)}</b><span class="y25s-app__dots">${'<i class="on"></i>'.repeat(d)}${'<i></i>'.repeat(5 - d)}</span></div>`,
         ).join('')}
         <span class="y25s-app__fab">+</span>
       </div>
@@ -244,12 +286,31 @@ const vibe: StageScene = {
     tl.from(files, { opacity: 0, x: -20, stagger: 0.06, duration: 0.12 }, 0.95);
     tl.fromTo(accept, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.15, ease: 'back.out(2)' }, 1.35);
     tl.to(accept, { scale: 0.92, duration: 0.05, yoyo: true, repeat: 1 }, 1.55);
-    tl.fromTo(art.querySelector('.y25s-app'), { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.15 }, 1.62);
-    tl.fromTo(parts, { opacity: 0, x: () => (mobile() ? 0 : -260), y: () => (mobile() ? 40 : 0), rotate: -6 }, { opacity: 1, x: 0, y: 0, rotate: 0, stagger: 0.06, duration: 0.22, ease: 'power3.out' }, 1.65);
-    tl.fromTo(art.querySelector('.y25s-app__arc'), { strokeDashoffset: 264 }, { strokeDashoffset: 66, duration: 0.3, ease: 'power2.out' }, 2.0);
+    tl.fromTo(
+      art.querySelector('.y25s-app'),
+      { opacity: 0, scale: 0.94 },
+      { opacity: 1, scale: 1, duration: 0.15 },
+      1.62,
+    );
+    tl.fromTo(
+      parts,
+      { opacity: 0, x: () => (mobile() ? 0 : -260), y: () => (mobile() ? 40 : 0), rotate: -6 },
+      { opacity: 1, x: 0, y: 0, rotate: 0, stagger: 0.06, duration: 0.22, ease: 'power3.out' },
+      1.65,
+    );
+    tl.fromTo(
+      art.querySelector('.y25s-app__arc'),
+      { strokeDashoffset: 264 },
+      { strokeDashoffset: 66, duration: 0.3, ease: 'power2.out' },
+      2.0,
+    );
     const clock = { s: 0 };
     tl.fromTo(art.querySelector('.y25s-vibe__t'), { opacity: 0 }, { opacity: 1, duration: 0.1 }, 1.6);
-    tl.to(clock, { s: 4.2, duration: 0.6, ease: 'none', onUpdate: () => (secs.textContent = clock.s.toFixed(1)) }, 1.62);
+    tl.to(
+      clock,
+      { s: 4.2, duration: 0.6, ease: 'none', onUpdate: () => (secs.textContent = clock.s.toFixed(1)) },
+      1.62,
+    );
     tl.to({}, { duration: 0.25 });
   },
 };
@@ -317,32 +378,49 @@ const parallel: StageScene = {
     // fan out from the main pane
     tl.fromTo(
       panes,
-      { opacity: 0, scale: 0.2, x: (i: number) => paneOffset(panes[i], main).x, y: (i: number) => paneOffset(panes[i], main).y },
+      {
+        opacity: 0,
+        scale: 0.2,
+        x: (i: number) => paneOffset(panes[i], main).x,
+        y: (i: number) => paneOffset(panes[i], main).y,
+      },
       { opacity: 1, scale: 1, x: 0, y: 0, stagger: 0.04, duration: 0.35, ease: 'power3.out' },
       0.55,
     );
     // the main pane steps aside entirely: a ghost of it would show through the gaps between panes
     tl.to(main, { opacity: 0, duration: 0.2 }, 0.55);
     const work = { k: 0 };
-    tl.to(work, {
-      k: 1,
-      duration: 0.9,
-      ease: 'none',
-      onUpdate: () => {
-        panes.forEach((p, i) => {
-          const rate = 0.75 + hash(i + 3) * 0.6;
-          const v = Math.min(1, work.k * rate * 1.25);
-          bars[i].style.transform = `scaleX(${v})`;
-          const done = v >= 1;
-          p.classList.toggle('is-done', done);
-          spins[i].textContent = done ? '✓' : FR[Math.floor(work.k * 60 + i) % FR.length];
-        });
+    tl.to(
+      work,
+      {
+        k: 1,
+        duration: 0.9,
+        ease: 'none',
+        onUpdate: () => {
+          panes.forEach((p, i) => {
+            const rate = 0.75 + hash(i + 3) * 0.6;
+            const v = Math.min(1, work.k * rate * 1.25);
+            bars[i].style.transform = `scaleX(${v})`;
+            const done = v >= 1;
+            p.classList.toggle('is-done', done);
+            spins[i].textContent = done ? '✓' : FR[Math.floor(work.k * 60 + i) % FR.length];
+          });
+        },
       },
-    }, 0.95);
+      0.95,
+    );
     // merge back
     tl.to(
       panes,
-      { opacity: 0, scale: 0.2, x: (i: number) => paneOffset(panes[i], main).x, y: (i: number) => paneOffset(panes[i], main).y, stagger: 0.03, duration: 0.3, ease: 'power3.in' },
+      {
+        opacity: 0,
+        scale: 0.2,
+        x: (i: number) => paneOffset(panes[i], main).x,
+        y: (i: number) => paneOffset(panes[i], main).y,
+        stagger: 0.03,
+        duration: 0.3,
+        ease: 'power3.in',
+      },
       1.95,
     );
     // the crowd: dozens of Claude-kuns march across while the panes work, then head home
@@ -350,13 +428,37 @@ const parallel: StageScene = {
     const row = art.querySelector<HTMLElement>('.y25s-crowd__row')!;
     const kuns = Array.from(row.children) as HTMLElement[];
     tl.fromTo(crowd, { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.95);
-    tl.fromTo(kuns, { scale: 0, y: 20 }, { scale: 1, y: 0, stagger: 0.008, duration: 0.12, ease: 'back.out(2.2)' }, 0.95);
-    tl.fromTo(row, { x: () => -row.scrollWidth * 0.45 }, { x: () => crowd.clientWidth - row.scrollWidth * 0.55, duration: 1.0, ease: 'none' }, 0.95);
-    tl.to(kuns, { scale: 0, y: -30, opacity: 0, stagger: { each: 0.006, from: 'center' }, duration: 0.14, ease: 'power2.in' }, 1.95);
+    tl.fromTo(
+      kuns,
+      { scale: 0, y: 20 },
+      { scale: 1, y: 0, stagger: 0.008, duration: 0.12, ease: 'back.out(2.2)' },
+      0.95,
+    );
+    tl.fromTo(
+      row,
+      { x: () => -row.scrollWidth * 0.45 },
+      { x: () => crowd.clientWidth - row.scrollWidth * 0.55, duration: 1.0, ease: 'none' },
+      0.95,
+    );
+    tl.to(
+      kuns,
+      { scale: 0, y: -30, opacity: 0, stagger: { each: 0.006, from: 'center' }, duration: 0.14, ease: 'power2.in' },
+      1.95,
+    );
     tl.to(crowd, { opacity: 0, duration: 0.1 }, 2.15);
     tl.to(main, { opacity: 1, scale: 1.08, duration: 0.2 }, 2.2);
-    tl.fromTo(art.querySelector('.y25s-mainck'), { scale: 0, rotate: -30 }, { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.6)' }, 2.25);
-    tl.fromTo(art.querySelector('.y25s-main__done'), { opacity: 0, height: 0 }, { opacity: 1, height: 'auto', duration: 0.15 }, 2.25);
+    tl.fromTo(
+      art.querySelector('.y25s-mainck'),
+      { scale: 0, rotate: -30 },
+      { scale: 1, rotate: 0, duration: 0.2, ease: 'back.out(2.6)' },
+      2.25,
+    );
+    tl.fromTo(
+      art.querySelector('.y25s-main__done'),
+      { opacity: 0, height: 0 },
+      { opacity: 1, height: 'auto', duration: 0.15 },
+      2.25,
+    );
     tl.to({}, { duration: 0.25 });
   },
 };
@@ -422,13 +524,24 @@ const frontier: StageScene = {
       <i class="y25s-horizon"></i>
       <canvas class="y25s-orbit" aria-hidden="true"></canvas>
       <div class="y25s-labs">${LABS.map(
-        (l, i) => `<div class="y25s-lab" style="--i:${i}"><span class="y25s-lab__mark">${l.mark}</span><span class="y25s-lab__t"><b>${esc(l.model)}</b><small>${esc(l.lab)}</small></span></div>`,
+        (l, i) =>
+          `<div class="y25s-lab" style="--i:${i}"><span class="y25s-lab__mark">${l.mark}</span><span class="y25s-lab__t"><b>${esc(l.model)}</b><small>${esc(l.lab)}</small></span></div>`,
       ).join('')}</div>`;
     mountAscii(logo, drawFrontier, tl, 0.6);
     const fieldEl = art.querySelector<HTMLElement>('.y25s-field')!;
     tl.fromTo(fieldEl, { '--r': 0 }, { '--r': 130, duration: 1.4, ease: 'power2.inOut' }, 0.2);
-    tl.fromTo(art.querySelector('.y25s-glow'), { scale: 0.2, opacity: 0 }, { scale: 1.6, opacity: 1, duration: 1.4, ease: 'power2.out' }, 0.2);
-    tl.fromTo(art.querySelector('.y25s-horizon'), { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.9, ease: 'power3.out' }, 0.7);
+    tl.fromTo(
+      art.querySelector('.y25s-glow'),
+      { scale: 0.2, opacity: 0 },
+      { scale: 1.6, opacity: 1, duration: 1.4, ease: 'power2.out' },
+      0.2,
+    );
+    tl.fromTo(
+      art.querySelector('.y25s-horizon'),
+      { scaleX: 0, opacity: 0 },
+      { scaleX: 1, opacity: 1, duration: 0.9, ease: 'power3.out' },
+      0.7,
+    );
     tl.to(logo, { scale: 1.12, filter: 'brightness(1.6)', duration: 1, ease: 'sine.inOut' }, 0.6);
 
     // the labs arrive one by one from far out and settle on a ring around the core
@@ -442,7 +555,15 @@ const frontier: StageScene = {
     tl.fromTo(
       labs,
       { x: (i: number) => place(i).x * 2.6, y: (i: number) => place(i).y * 2.6, opacity: 0, scale: 0.5 },
-      { x: (i: number) => place(i).x, y: (i: number) => place(i).y, opacity: 1, scale: 1, stagger: 0.09, duration: 0.45, ease: 'power3.out' },
+      {
+        x: (i: number) => place(i).x,
+        y: (i: number) => place(i).y,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.09,
+        duration: 0.45,
+        ease: 'power3.out',
+      },
       0.45,
     );
 

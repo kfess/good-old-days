@@ -1,28 +1,25 @@
-import {
-  siBackbonedotjs,
-  siCoffeescript,
-  siNpm,
-  siJquery,
-  siRubyonrails,
-} from 'simple-icons';
-import type { Era } from '../../core/types';
-import { bootstrapB } from '../y2012/art'; // simple-icons only has the 2021 mark
-import { gsap, reducedMotion } from '../../core/scroll';
-import { h } from '../../core/util';
-import { createStage } from '../../components/stage';
+import { siBackbonedotjs, siCoffeescript, siJquery, siNpm, siRubyonrails } from 'simple-icons';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
-import { buildShowcase } from './showcase';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
+import { gsap, reducedMotion } from '../../core/scroll';
+import type { Era } from '../../core/types';
+import { h } from '../../core/util';
+import { bootstrapB } from '../y2012/art'; // simple-icons only has the 2021 mark
 import { buildCloud } from './cloud';
+import { buildShowcase } from './showcase';
 import { STAGE_2010 } from './stage';
 import './style.css';
 
 const GLYPHS = {
-  bubble: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L4.5 21l4.3-2.4c1 .3 2.1.4 3.2.4 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>',
-  heart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 21s-7.5-4.6-9.6-9.2C1 8.7 2.9 5 6.5 5c2.1 0 3.5 1.2 4.5 2.6C12 6.2 13.4 5 15.5 5 19.1 5 21 8.7 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>',
-  cloud: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7 19h10.5a4.5 4.5 0 0 0 .6-9A6 6 0 0 0 6.6 9.2 5 5 0 0 0 7 19z"/></svg>',
+  bubble:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L4.5 21l4.3-2.4c1 .3 2.1.4 3.2.4 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>',
+  heart:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 21s-7.5-4.6-9.6-9.2C1 8.7 2.9 5 6.5 5c2.1 0 3.5 1.2 4.5 2.6C12 6.2 13.4 5 15.5 5 19.1 5 21 8.7 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>',
+  cloud:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7 19h10.5a4.5 4.5 0 0 0 .6-9A6 6 0 0 0 6.6 9.2 5 5 0 0 0 7 19z"/></svg>',
   play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M8 5v14l11-7z"/></svg>',
 };
 
@@ -83,8 +80,21 @@ function buildBridge(): HTMLElement {
     },
   });
   tl.to(el.querySelector('.w-flatten__gloss'), { yPercent: -160, opacity: 0, duration: 1 }, 0)
-    .to(btn, { '--gloss': 0, borderRadius: 3, boxShadow: '0 0px 0px rgba(0,0,0,0), inset 0 0px 0 rgba(255,255,255,0)', duration: 1 }, 0.3)
-    .to(el.querySelectorAll('.w-linen, .w-leather'), { '--tex': 0, borderRadius: 4, boxShadow: '0 0px 0px rgba(0,0,0,0)', duration: 1 }, 0.3)
+    .to(
+      btn,
+      {
+        '--gloss': 0,
+        borderRadius: 3,
+        boxShadow: '0 0px 0px rgba(0,0,0,0), inset 0 0px 0 rgba(255,255,255,0)',
+        duration: 1,
+      },
+      0.3,
+    )
+    .to(
+      el.querySelectorAll('.w-linen, .w-leather'),
+      { '--tex': 0, borderRadius: 4, boxShadow: '0 0px 0px rgba(0,0,0,0)', duration: 1 },
+      0.3,
+    )
     .from(el.querySelector('.w-bridge__line'), { opacity: 0, y: 40, scale: 0.9, duration: 0.6 }, 0.7)
     .to(el.querySelector('.w-bl--gloss'), { opacity: 0, duration: 0.7 }, 1.3)
     .fromTo(el.querySelector('.w-bl--flat'), { opacity: 0 }, { opacity: 1, duration: 0.7 }, 1.3)
@@ -115,8 +125,18 @@ export const era: Era = {
         { year: '2010.05', name: 'Sass 3 (SCSS)', line: 'Plain CSS syntax, plus variables and nesting.' },
         { year: '2010.08', name: 'Rails 3', icon: siRubyonrails, line: 'Standard issue for startups.' },
         { year: '2010.10', name: 'Backbone.js', icon: siBackbonedotjs, line: 'A backbone for jQuery spaghetti.' },
-        { year: '2010.12', name: 'CoffeeScript 1.0', icon: siCoffeescript, line: 'JavaScript without the curly braces.' },
-        { year: '2011.08', name: 'Twitter Bootstrap', icon: bootstrapB, line: 'Twitter’s in-house toolkit, open-sourced.' },
+        {
+          year: '2010.12',
+          name: 'CoffeeScript 1.0',
+          icon: siCoffeescript,
+          line: 'JavaScript without the curly braces.',
+        },
+        {
+          year: '2011.08',
+          name: 'Twitter Bootstrap',
+          icon: bootstrapB,
+          line: 'Twitter’s in-house toolkit, open-sourced.',
+        },
       ],
       'Also starring — 2010–2011',
     );

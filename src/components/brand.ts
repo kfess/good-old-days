@@ -54,7 +54,10 @@ export const BRANDS: Record<string, Brand> = {
   Firefox: {}, // 2004: the Firefox Sharp Sans wordmark only came with the 2019 rebrand
   Git: {}, // 2005: Jason Long's logo is from 2012
   jQuery: { mark: { light: M('jquery-on-light.svg'), dark: M('jquery-on-dark.svg'), scale: 1.35 } },
-  'jQuery 1.4': { mark: { light: M('jquery-on-light.svg'), dark: M('jquery-on-dark.svg'), scale: 1.35 }, suffix: '1.4' },
+  'jQuery 1.4': {
+    mark: { light: M('jquery-on-light.svg'), dark: M('jquery-on-dark.svg'), scale: 1.35 },
+    suffix: '1.4',
+  },
   'Amazon EC2': INTER, // Amazon Ember is proprietary
   GitHub: {}, // 2008: Mona Sans is from 2022
   'Google Chrome': {}, // 2008: Google Sans descends from the 2015 Product Sans

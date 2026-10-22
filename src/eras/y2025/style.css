@@ -1,5 +1,5 @@
 .era--y2025 {
-  --y25-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --y25-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
   --y25-line: #262626;
   --y25-panel: #111111;
   --y25-green: #7ee787;
@@ -83,7 +83,7 @@
 
 .era--y2025 .y25-intro__title {
   margin: 14px 0 0;
-  font-family: 'Geist Mono', var(--y25-mono);
+  font-family: "Geist Mono", var(--y25-mono);
   font-size: clamp(52px, 8vw, 128px);
   font-weight: 600;
   line-height: 0.98;
@@ -287,9 +287,11 @@
   border-radius: 8px;
   background: #fafafa;
   color: #111;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
-  transition: background 0.6s, color 0.6s;
+  transition:
+    background 0.6s,
+    color 0.6s;
 }
 
 .era--y2025 .y25-app__bar {
@@ -310,7 +312,7 @@
 }
 
 .era--y2025 .y25-app__toggle::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -383,7 +385,9 @@
   margin-bottom: 6px;
   border-radius: 3px;
   background: #262626;
-  transition: background 0.4s, box-shadow 0.4s;
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
 }
 
 .era--y2025 .y25-pipe li.is-done {
@@ -415,7 +419,9 @@
   color: var(--accent);
   font-family: var(--y25-mono);
   font-weight: 600;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .era--y2025 .deploy__btn:hover {
@@ -523,7 +529,7 @@
 }
 
 .era--y2025 .stage__kicker::before {
-  content: '// ';
+  content: "// ";
   color: #6f6f6f;
 }
 
@@ -532,7 +538,10 @@
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   letter-spacing: -0.06em;
-  transition: color 0.3s, font-size 0.3s, transform 0.3s;
+  transition:
+    color 0.3s,
+    font-size 0.3s,
+    transform 0.3s;
 }
 
 .era--y2025 .stage__line {
@@ -556,7 +565,9 @@
   letter-spacing: 0;
   white-space: pre;
   text-shadow: 0 0 0.5em color-mix(in srgb, var(--tone) 70%, transparent);
-  transition: color 0.3s, text-shadow 0.3s;
+  transition:
+    color 0.3s,
+    text-shadow 0.3s;
 }
 
 .era--y2025 .y25s-prompt {
@@ -569,7 +580,12 @@
   border-radius: 10px;
   background: #111;
   font-size: clamp(14px, 1.3vw, 19px);
-  transition: background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s, border-radius 0.3s;
+  transition:
+    background 0.3s,
+    border 0.3s,
+    box-shadow 0.3s,
+    color 0.3s,
+    border-radius 0.3s;
 }
 
 .era--y2025 .y25s-log {
@@ -583,7 +599,12 @@
   background: var(--y25-panel);
   font-size: 13px;
   line-height: 1.75;
-  transition: background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s, border-radius 0.3s;
+  transition:
+    background 0.3s,
+    border 0.3s,
+    box-shadow 0.3s,
+    color 0.3s,
+    border-radius 0.3s;
 }
 
 .era--y2025 .y25s-log p {
@@ -593,7 +614,9 @@
   text-overflow: ellipsis;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .era--y2025 .y25s-log p.is-on {
@@ -628,7 +651,7 @@
 }
 
 .era--y2025 .y25s--cc.is-b2 .stage__name {
-  font-family: 'Arial Black', Impact, 'Helvetica Neue', sans-serif;
+  font-family: "Arial Black", Impact, "Helvetica Neue", sans-serif;
   /* height-capped too, so on short screens it never grows up into the terminal log */
   font-size: clamp(44px, min(9vw, 10vh), 150px);
   font-weight: 900;
@@ -758,9 +781,11 @@
   overflow: hidden;
   border-radius: 30px;
   background: linear-gradient(#fff8f3, #fdeef4);
-  box-shadow: 0 30px 80px rgba(232, 121, 166, 0.25), 0 0 0 8px #1a1a1a;
+  box-shadow:
+    0 30px 80px rgba(232, 121, 166, 0.25),
+    0 0 0 8px #1a1a1a;
   color: #2a2230;
-  font-family: 'Geist', 'Inter', sans-serif;
+  font-family: "Geist", "Inter", sans-serif;
 }
 
 .era--y2025 .y25s-app__head {
@@ -965,10 +990,18 @@
   margin: 0;
   overflow: hidden;
   color: rgba(255, 236, 226, 0.55);
-  font: 12px/1 var(--y25-mono);
+  font: 12px / 1 var(--y25-mono);
   white-space: pre;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--r) * 1vmax - 24vmax), transparent calc(var(--r) * 1vmax));
-  mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--r) * 1vmax - 24vmax), transparent calc(var(--r) * 1vmax));
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 calc(var(--r) * 1vmax - 24vmax),
+    transparent calc(var(--r) * 1vmax)
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 calc(var(--r) * 1vmax - 24vmax),
+    transparent calc(var(--r) * 1vmax)
+  );
 }
 
 .era--y2025 .y25s-glow {
@@ -994,12 +1027,14 @@
 }
 
 .era--y2025 .y25s--c5 .y25s-ascii {
-  text-shadow: 0 0 0.6em #fff, 0 0 1.6em rgba(217, 119, 87, 0.9);
+  text-shadow:
+    0 0 0.6em #fff,
+    0 0 1.6em rgba(217, 119, 87, 0.9);
 }
 
 /* the star field runs behind the copy: a dark pool keeps the small lines readable */
 .era--y2025 .y25s--c5 .stage__copy::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -80px -110px -80px -90px;
   z-index: -1;
@@ -1087,7 +1122,7 @@
 }
 
 .era--y2025 .credits__title::before {
-  content: '// ';
+  content: "// ";
 }
 
 .era--y2025 .credit__name {
@@ -1097,7 +1132,7 @@
 }
 
 .era--y2025 .credit:not(:has(.credit__icon)) .credit__name::before {
-  content: '$ ';
+  content: "$ ";
   color: var(--accent);
 }
 
@@ -1124,7 +1159,9 @@
   width: 116px;
   height: 116px;
   filter: drop-shadow(0 0 22px rgba(217, 119, 87, 0.35));
-  transition: filter 0.3s, rotate 0.3s;
+  transition:
+    filter 0.3s,
+    rotate 0.3s;
 }
 
 .era--y2025 .y25s-ck__say {
@@ -1136,8 +1173,12 @@
   border-radius: 6px;
   background: #111;
   color: #e6e6e6;
-  font: 12px/1.3 var(--y25-mono);
-  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s;
+  font: 12px / 1.3 var(--y25-mono);
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border 0.3s,
+    box-shadow 0.3s;
 }
 
 .era--y2025 .y25s-ck__say .b {
@@ -1150,7 +1191,10 @@
   border-radius: 0;
   background: #000;
   color: #ffe600;
-  font: 900 14px/1.2 'Arial Black', Impact, sans-serif;
+  font:
+    900 14px / 1.2 "Arial Black",
+    Impact,
+    sans-serif;
   box-shadow: 5px 5px 0 #fff;
 }
 
@@ -1231,7 +1275,7 @@
   bottom: 0;
   margin: 0;
   color: var(--muted);
-  font: 11px/1 var(--y25-mono);
+  font: 11px / 1 var(--y25-mono);
 }
 
 .era--y2025 .y25s-crowd__n b {
@@ -1352,7 +1396,11 @@
 
 .era--y2025 .y25s-lab__word {
   color: #fff;
-  font: 700 8.5px/1 'Inter', Helvetica, Arial, sans-serif;
+  font:
+    700 8.5px / 1 "Inter",
+    Helvetica,
+    Arial,
+    sans-serif;
   letter-spacing: -0.02em;
 }
 
@@ -1364,12 +1412,14 @@
 
 .era--y2025 .y25s-lab__t b {
   color: #f2f2f2;
-  font: 600 14px/1.15 var(--y25-mono);
+  font: 600 14px / 1.15 var(--y25-mono);
 }
 
 .era--y2025 .y25s-lab__t small {
   color: #8a8a8a;
-  font: 11px/1.2 'Inter', sans-serif;
+  font:
+    11px / 1.2 "Inter",
+    sans-serif;
 }
 
 /* the frontier sits above the old Claude-only center position: keep the core small */
@@ -1396,7 +1446,7 @@
 
 .era--y2025 .y25s-tool--codex {
   color: #e6e6e6;
-  font: 700 12px/1 var(--y25-mono);
+  font: 700 12px / 1 var(--y25-mono);
 }
 
 .era--y2025 .y25s-pane.is-done .y25s-tool {

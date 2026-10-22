@@ -49,10 +49,9 @@ export async function streamInto(
 
 /** Call `onShow` / `onHide` as `el` enters and leaves the viewport. */
 export function whenVisible(el: Element, onShow: () => void, onHide: () => void = () => {}, margin = '0px'): void {
-  new IntersectionObserver(
-    (entries) => entries.forEach((e) => (e.isIntersecting ? onShow() : onHide())),
-    { rootMargin: margin },
-  ).observe(el);
+  new IntersectionObserver((entries) => entries.forEach((e) => (e.isIntersecting ? onShow() : onHide())), {
+    rootMargin: margin,
+  }).observe(el);
 }
 
 /** requestAnimationFrame loop that only runs while `el` is on screen. */

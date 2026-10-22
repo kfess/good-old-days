@@ -1,4 +1,4 @@
-import { gsap, ScrollTrigger, jumpTo, reducedMotion, scrollToEl } from './scroll';
+import { gsap, jumpTo, reducedMotion, ScrollTrigger, scrollToEl } from './scroll';
 import type { Era, EraTheme } from './types';
 
 const root = document.documentElement;
@@ -148,7 +148,7 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
     const tick = document.createElement('button');
     tick.type = 'button';
     tick.dataset.era = era.id;
-    tick.innerHTML = `<span>${era.id === 'prologue' ? '–' + era.years[1] : era.years[0]}</span>`;
+    tick.innerHTML = `<span>${era.id === 'prologue' ? `–${era.years[1]}` : era.years[0]}</span>`;
     tick.title = era.label;
     tick.setAttribute('aria-label', era.id === 'prologue' ? era.label : `${span}: ${era.label}`);
     tick.addEventListener('click', () => scrollToEl(section));
@@ -246,7 +246,8 @@ export function mountEras(app: HTMLElement, eras: Era[]): void {
     refresh();
     // deep links (e.g. #stack-y2018) only land correctly once pins have their final size
     const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
-    if (target) requestAnimationFrame(() => window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 120));
+    if (target)
+      requestAnimationFrame(() => window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 120));
   });
 }
 

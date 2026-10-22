@@ -1,10 +1,16 @@
-import { gsap, ScrollTrigger, reducedMotion, scrollToEl, MOBILE_QUERY } from '../../core/scroll';
+import { gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
-import { h } from '../../core/util';
-import { claudeKun } from '../../components/claudekun';
 
-const CENTER_TRICKS = ['margin: 0 auto;', 'vertical-align: middle;', 'position: absolute; top: 50%;', 'display: table-cell;'];
+import { claudeKun } from '../../components/claudekun';
+import { h } from '../../core/util';
+
+const CENTER_TRICKS = [
+  'margin: 0 auto;',
+  'vertical-align: middle;',
+  'position: absolute; top: 50%;',
+  'display: table-cell;',
+];
 
 /** The struggles we put up with, and loved. Each one was everyday reality in its year. */
 const PAINS: [string, string, string][] = [
@@ -110,7 +116,12 @@ export function buildCoda(): HTMLElement {
       { opacity: 1, clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'steps(14)' },
       1.6,
     )
-    .fromTo(q('.coda__strong'), { opacity: 0, scale: 2.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 3.2)
+    .fromTo(
+      q('.coda__strong'),
+      { opacity: 0, scale: 2.6 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2.2)' },
+      3.2,
+    )
     .fromTo(q('.coda__miss'), { x: 0 }, { keyframes: { x: [0, -10, 9, -6, 4, 0] }, duration: 0.35, ease: 'none' }, 3.45)
     // the confession makes way for what it was actually like
     .to(q('.coda__miss'), { y: '-8vh', opacity: 0, duration: 0.5, ease: 'power2.in' }, 4.4)
@@ -126,28 +137,58 @@ export function buildCoda(): HTMLElement {
     .fromTo(
       [q('.coda__then'), q('.coda__list')],
       { y: 0 },
-      { y: () => -Math.max(0, q('.coda__list').scrollHeight - window.innerHeight * (mobile() ? 0.62 : 0.7)), duration: (PAINS.length - 1) * 0.55, ease: 'none' },
+      {
+        y: () => -Math.max(0, q('.coda__list').scrollHeight - window.innerHeight * (mobile() ? 0.62 : 0.7)),
+        duration: (PAINS.length - 1) * 0.55,
+        ease: 'none',
+      },
       5.3,
     )
     .to([q('.coda__list'), q('.coda__then')], { opacity: 0.06, duration: 0.6 }, 15.25)
     .fromTo(q('.coda__joy'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4 }, 15.35)
     // the whole reward of an evening: one line in the Firebug console
-    .fromTo(q('.coda__fb-typed'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.7, ease: 'steps(24)' }, 15.6)
+    .fromTo(
+      q('.coda__fb-typed'),
+      { clipPath: 'inset(0 100% 0 0)' },
+      { clipPath: 'inset(0 0% 0 0)', duration: 0.7, ease: 'steps(24)' },
+      15.6,
+    )
     .fromTo(q('.coda__fb-out'), { opacity: 0 }, { opacity: 1, duration: 0.05 }, 16.4)
     .fromTo(q('.coda__joy-cap'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 }, 16.55)
     .to(q('.coda__joy'), { opacity: 0, y: -20, duration: 0.4, ease: 'power2.in' }, 17.3)
     .fromTo(q('.coda__l1'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5 }, 17.75)
-    .fromTo(q('.coda__l2'), { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' }, 18.35)
+    .fromTo(
+      q('.coda__l2'),
+      { opacity: 0, scale: 1.8 },
+      { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' },
+      18.35,
+    )
     .to(q('.coda__loved'), { opacity: 0.55, duration: 0.5 }, 19.35)
     .fromTo(q('.coda__ours'), { opacity: 0 }, { opacity: 1, duration: 0.01 }, 19.45)
     // typed out letter by letter, then held on screen before the irony arrives
-    .to(oursType, { n: OURS.length, duration: 1.1, ease: 'none', onUpdate: () => { q('.coda__ours-t').textContent = OURS.slice(0, Math.round(oursType.n)); } }, 19.5)
+    .to(
+      oursType,
+      {
+        n: OURS.length,
+        duration: 1.1,
+        ease: 'none',
+        onUpdate: () => {
+          q('.coda__ours-t').textContent = OURS.slice(0, Math.round(oursType.n));
+        },
+      },
+      19.5,
+    )
     // …and then the irony
     .to([q('.coda__pains'), q('.coda__verdict')], { y: '-10vh', opacity: 0, duration: 0.8, ease: 'power2.in' }, 21.65)
     .fromTo(q('.coda__i1'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 22.35)
     .fromTo(q('.coda__i2'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 22.85)
     .fromTo(q('.coda__i3'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 23.45)
-    .fromTo(q('.coda__ck'), { opacity: 0, scale: 0, rotate: -40 }, { opacity: 1, scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.4)' }, 24.25)
+    .fromTo(
+      q('.coda__ck'),
+      { opacity: 0, scale: 0, rotate: -40 },
+      { opacity: 1, scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.4)' },
+      24.25,
+    )
     // …and the moment Claude says it, the wandering line snaps to dead centre (and un-snaps when scrolling back)
     .addLabel('centred', 24.6)
     .to(q('.coda__irony'), { y: () => (mobile() ? '-=2vh' : '-=4vh'), duration: 1, ease: 'power2.inOut' }, 25.25)

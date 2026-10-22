@@ -81,7 +81,10 @@ function tree(s: State): VNode[] {
     { key: 'list', depth: 1, label: `<CardList loading={${s.loading}}>` },
   ];
   if (s.loading) nodes.push({ key: 'skel', depth: 2, label: '<Skeleton count={3} />' });
-  else s.cards.forEach((c) => nodes.push({ key: `card${c.id}`, depth: 2, label: `<Card key={${c.id}} liked={${c.liked}} />` }));
+  else
+    s.cards.forEach((c) =>
+      nodes.push({ key: `card${c.id}`, depth: 2, label: `<Card key={${c.id}} liked={${c.liked}} />` }),
+    );
   nodes.push({ key: 'fab', depth: 1, label: '<FloatingActionButton><ContentAdd /></FloatingActionButton>' });
   nodes.push({ key: 'snack', depth: 1, label: `<Snackbar open={${s.snack}} />` });
   return nodes;
@@ -109,7 +112,10 @@ function cardHTML(c: Card): string {
     </article>`;
 }
 
-const SKELETON = Array.from({ length: 3 }, () => `<div class="md-skel"><i class="a"></i><i class="b"></i><i class="c"></i></div>`).join('');
+const SKELETON = Array.from(
+  { length: 3 },
+  () => `<div class="md-skel"><i class="a"></i><i class="b"></i><i class="c"></i></div>`,
+).join('');
 
 /**
  * "UI = f(state)": a Material Design app wired to a tiny Redux store. Every interaction
@@ -190,7 +196,9 @@ export function mountApp(parent: HTMLElement): void {
       return;
     }
     // keyed reconciliation: keep existing card elements, create only the new ones
-    const existing = new Map(Array.from(content.querySelectorAll<HTMLElement>('.md-card')).map((n) => [Number(n.dataset.id), n]));
+    const existing = new Map(
+      Array.from(content.querySelectorAll<HTMLElement>('.md-card')).map((n) => [Number(n.dataset.id), n]),
+    );
     const fresh = prev === null || prev.loading;
     if (fresh) content.innerHTML = '';
     const frag = document.createDocumentFragment();
@@ -293,10 +301,14 @@ export function mountApp(parent: HTMLElement): void {
       p.style.strokeDashoffset = `${len}`;
     });
     // first impression: lines draw themselves, then the feed loads with skeletons
-    onceInView(el.querySelector('.y15-app__grid')!, () => {
-      gsap.to(draw, { strokeDashoffset: 0, duration: 0.8, stagger: 0.25, ease: 'power2.inOut' });
-      dispatch({ type: 'REFRESH_REQUEST' });
-      setTimeout(() => dispatch({ type: 'REFRESH_SUCCESS' }), 1600);
-    }, 'top 65%');
+    onceInView(
+      el.querySelector('.y15-app__grid')!,
+      () => {
+        gsap.to(draw, { strokeDashoffset: 0, duration: 0.8, stagger: 0.25, ease: 'power2.inOut' });
+        dispatch({ type: 'REFRESH_REQUEST' });
+        setTimeout(() => dispatch({ type: 'REFRESH_SUCCESS' }), 1600);
+      },
+      'top 65%',
+    );
   }
 }

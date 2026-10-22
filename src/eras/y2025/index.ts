@@ -1,12 +1,23 @@
-import type { Era } from '../../core/types';
-import { siAnthropic, siClaude, siDeepseek, siGithubcopilot, siGooglegemini, siMeta, siQwen, siTailwindcss, siTypescript, siWebgpu } from 'simple-icons';
-import { createStage } from '../../components/stage';
+import {
+  siAnthropic,
+  siClaude,
+  siDeepseek,
+  siGithubcopilot,
+  siGooglegemini,
+  siMeta,
+  siQwen,
+  siTailwindcss,
+  siTypescript,
+  siWebgpu,
+} from 'simple-icons';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
-import { createStack } from '../../components/stack';
 import { logo } from '../../components/logo';
-import { gsap, ScrollTrigger, DESKTOP_QUERY, MOBILE_QUERY, reducedMotion } from '../../core/scroll';
+import { createStack } from '../../components/stack';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
+import { DESKTOP_QUERY, gsap, MOBILE_QUERY, reducedMotion, ScrollTrigger } from '../../core/scroll';
+import type { Era } from '../../core/types';
 import { h, onceInView } from '../../core/util';
 import { Run, wait } from '../y2023/lib';
 import { mountAsciiGlobe } from './ascii';
@@ -43,35 +54,66 @@ interface Line {
 
 const SESSION: Line[] = [
   { html: '<span class="y25-user">&gt; add dark mode to the todo app, then ship it</span>' },
-  { html: '<span class="y25-dot">⏺</span> I\'ll add a theme toggle, run the tests, open a PR, merge it and let CD roll it out.' },
+  {
+    html: '<span class="y25-dot">⏺</span> I\'ll add a theme toggle, run the tests, open a PR, merge it and let CD roll it out.',
+  },
   { html: '<span class="y25-dot">⏺</span> <b>Read</b>(src/theme.ts)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Read 48 lines</span>', todo: 0 },
   { html: '<span class="y25-dot">⏺</span> <b>Update</b>(src/theme.ts)' },
-  { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Updated src/theme.ts with 4 additions and 1 removal</span>' },
-  { html: '<span class="y25-gut"></span><span class="y25-add">+ import { createContext, useContext } from \'react\';</span>' },
-  { html: '<span class="y25-gut"></span><span class="y25-add">+ export const dark = { bg: \'#0c0c0c\', fg: \'#e6e6e6\' };</span>' },
-  { html: '<span class="y25-gut"></span><span class="y25-add">+ export const ThemeContext = createContext(light);</span>' },
-  { html: '<span class="y25-gut"></span><span class="y25-add">+ export const useTheme = () =&gt; useContext(ThemeContext);</span>' },
+  {
+    html: '<span class="y25-gut">⎿</span><span class="y25-dim">Updated src/theme.ts with 4 additions and 1 removal</span>',
+  },
+  {
+    html: '<span class="y25-gut"></span><span class="y25-add">+ import { createContext, useContext } from \'react\';</span>',
+  },
+  {
+    html: '<span class="y25-gut"></span><span class="y25-add">+ export const dark = { bg: \'#0c0c0c\', fg: \'#e6e6e6\' };</span>',
+  },
+  {
+    html: '<span class="y25-gut"></span><span class="y25-add">+ export const ThemeContext = createContext(light);</span>',
+  },
+  {
+    html: '<span class="y25-gut"></span><span class="y25-add">+ export const useTheme = () =&gt; useContext(ThemeContext);</span>',
+  },
   { html: '<span class="y25-gut"></span><span class="y25-del">- export const theme = light;</span>' },
   { html: '<span class="y25-dot">⏺</span> <b>Write</b>(src/components/ThemeToggle.tsx)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-dim">Wrote 31 lines</span>', todo: 1, dark: true },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(npm test)' },
-  { html: '<span class="y25-gut">⎿</span><span class="y25-ok">✓ 128 passed</span> <span class="y25-dim">(2.1s)</span>', todo: 2 },
+  {
+    html: '<span class="y25-gut">⎿</span><span class="y25-ok">✓ 128 passed</span> <span class="y25-dim">(2.1s)</span>',
+    todo: 2,
+  },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(gh pr create --fill)' },
-  { html: '<span class="y25-gut">⎿</span><span class="y25-dim">https://github.com/you/todo-app/pull/42</span>', todo: 3, pipe: 0 },
+  {
+    html: '<span class="y25-gut">⎿</span><span class="y25-dim">https://github.com/you/todo-app/pull/42</span>',
+    todo: 3,
+    pipe: 0,
+  },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(gh pr checks 42 --watch)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-ok">✓ build   ✓ test   ✓ e2e</span>', pipe: 1 },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(gh pr merge 42 --squash)' },
   { html: '<span class="y25-gut">⎿</span><span class="y25-ok">✓ Squashed and merged pull request #42</span>', pipe: 2 },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(argocd app wait todo-app --health)' },
-  { html: '<span class="y25-gut">⎿</span><span class="y25-dim">image todo-app:1.8.0 · Synced · Healthy</span>', pipe: 3 },
+  {
+    html: '<span class="y25-gut">⎿</span><span class="y25-dim">image todo-app:1.8.0 · Synced · Healthy</span>',
+    pipe: 3,
+  },
   { html: '<span class="y25-dot">⏺</span> <b>Bash</b>(kubectl rollout status deploy/todo-app)' },
-  { html: '<span class="y25-gut">⎿</span><span class="y25-dim">deployment "todo-app" successfully rolled out</span>', pipe: 4 },
+  {
+    html: '<span class="y25-gut">⎿</span><span class="y25-dim">deployment "todo-app" successfully rolled out</span>',
+    pipe: 4,
+  },
   { html: '<span class="y25-dot">⏺</span> Live in production. Dark mode is out.', todo: 4 },
   { html: '<span class="y25-acc">✻</span> Done in 3m 12s. Anything else?' },
 ];
 
-const TODOS = ['Read the theme setup', 'Add a dark theme + toggle', 'Run the test suite', 'Open a pull request', 'Ship it to production'];
+const TODOS = [
+  'Read the theme setup',
+  'Add a dark theme + toggle',
+  'Run the test suite',
+  'Open a pull request',
+  'Ship it to production',
+];
 const PIPE = ['PR #42', 'CI', 'Merge', 'Argo CD', 'Kubernetes'];
 
 function session(section: HTMLElement): void {
@@ -131,8 +173,16 @@ function session(section: HTMLElement): void {
       t.classList.toggle('is-done', ok);
       t.querySelector('.y25-check')!.textContent = ok ? '☒' : '☐';
     });
-    pipes.forEach((p, i) => p.classList.toggle('is-done', done.some((l) => l.pipe === i)));
-    app.classList.toggle('is-dark', done.some((l) => l.dark));
+    pipes.forEach((p, i) =>
+      p.classList.toggle(
+        'is-done',
+        done.some((l) => l.pipe === i),
+      ),
+    );
+    app.classList.toggle(
+      'is-dark',
+      done.some((l) => l.dark),
+    );
     working.classList.toggle('is-on', n > 0 && n < SESSION.length);
     body.scrollTop = body.scrollHeight;
   };
@@ -158,13 +208,17 @@ function session(section: HTMLElement): void {
   mm.add(MOBILE_QUERY, () => {
     show(0);
     const run = new Run();
-    onceInView(el.querySelector('.y25-term')!, async () => {
-      const id = run.next();
-      for (let i = 1; i <= SESSION.length && run.alive(id); i++) {
-        show(i);
-        await wait(420);
-      }
-    }, 'top 70%');
+    onceInView(
+      el.querySelector('.y25-term')!,
+      async () => {
+        const id = run.next();
+        for (let i = 1; i <= SESSION.length && run.alive(id); i++) {
+          show(i);
+          await wait(420);
+        }
+      },
+      'top 70%',
+    );
     return () => run.next();
   });
 }
@@ -218,19 +272,49 @@ export const era: Era = {
         { year: '2025.01', name: 'DeepSeek-R1', icon: siDeepseek, line: 'Open weights, reasoning and all.' },
         { year: '2025.01', name: 'Tailwind CSS v4', icon: siTailwindcss, line: 'The config file disappeared.' },
         { year: '2025.02', name: 'Grok 3', line: 'xAI joins the frontier.' },
-        { year: '2025.03', name: 'Gemini 2.5 Pro', icon: siGooglegemini, line: 'Google’s model that thinks before it answers.' },
+        {
+          year: '2025.03',
+          name: 'Gemini 2.5 Pro',
+          icon: siGooglegemini,
+          line: 'Google’s model that thinks before it answers.',
+        },
         { year: '2025.04', name: 'OpenAI o3', line: 'Reasoning, with tools, in one model.' },
         { year: '2025.04', name: 'Llama 4', icon: siMeta, line: 'Open weights, now mixture-of-experts.' },
         { year: '2025.04', name: 'Qwen3', icon: siQwen, line: 'Open models from Alibaba, thinking on demand.' },
         { year: '2025.04', name: 'Codex CLI', line: 'Another colleague moves into the terminal.' },
         { year: '2025.05', name: 'Claude 4', icon: siClaude, line: 'Works on its own, for hours.' },
-        { year: '2025.05', name: 'Copilot coding agent', icon: logo(siGithubcopilot, 'current'), line: 'Assign an issue. Get a pull request.' },
-        { year: '2025.06', name: 'Gemini CLI', icon: siGooglegemini, line: 'Google’s open-source agent, in the terminal.' },
+        {
+          year: '2025.05',
+          name: 'Copilot coding agent',
+          icon: logo(siGithubcopilot, 'current'),
+          line: 'Assign an issue. Get a pull request.',
+        },
+        {
+          year: '2025.06',
+          name: 'Gemini CLI',
+          icon: siGooglegemini,
+          line: 'Google’s open-source agent, in the terminal.',
+        },
         { year: '2025.08', name: 'GPT-5', line: 'Thinking models became the default.' },
-        { year: '2025.09', name: 'WebGPU', icon: logo(siWebgpu, 'current'), line: 'With Safari 26, the GPU in every major browser.' },
-        { year: '2025', name: 'Agent SDK & Skills', icon: logo(siAnthropic, 'current'), line: 'Agents, assembled from parts.' },
+        {
+          year: '2025.09',
+          name: 'WebGPU',
+          icon: logo(siWebgpu, 'current'),
+          line: 'With Safari 26, the GPU in every major browser.',
+        },
+        {
+          year: '2025',
+          name: 'Agent SDK & Skills',
+          icon: logo(siAnthropic, 'current'),
+          line: 'Agents, assembled from parts.',
+        },
         { year: '2025.11', name: 'Gemini 3', icon: siGooglegemini, line: 'The next generation from Google.' },
-        { year: '2026.07', name: 'TypeScript native', icon: siTypescript, line: 'TypeScript 7: the compiler, rewritten in Go. Builds ~10× faster.' },
+        {
+          year: '2026.07',
+          name: 'TypeScript native',
+          icon: siTypescript,
+          line: 'TypeScript 7: the compiler, rewritten in Go. Builds ~10× faster.',
+        },
         { year: '2026.09', name: 'GPT-6 Astra', line: 'The first model OpenAI rated “Critical” for cyber.' },
       ],
       'Also starring — 2025–2026',

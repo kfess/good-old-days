@@ -1,7 +1,7 @@
 import { siAnsible, siGrunt, siSublimetext, siTerraform, siVuedotjs } from 'simple-icons';
+import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
-import { createCredits } from '../../components/credits';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
 import { gsap, reducedMotion } from '../../core/scroll';
@@ -67,7 +67,12 @@ function mountBridge(parent: HTMLElement): void {
     const tl = gsap.timeline({
       scrollTrigger: { trigger: el, start: 'top 75%', end: 'center 40%', scrub: 0.6 },
     });
-    tl.fromTo(n, { boxShadow: '0 0 0 rgba(0,0,0,0)', y: 0, borderRadius: 0 }, { boxShadow: shadows[i], y: -6 * (i + 1), borderRadius: 2, ease: 'none' }, 0);
+    tl.fromTo(
+      n,
+      { boxShadow: '0 0 0 rgba(0,0,0,0)', y: 0, borderRadius: 0 },
+      { boxShadow: shadows[i], y: -6 * (i + 1), borderRadius: 2, ease: 'none' },
+      0,
+    );
     tl.fromTo(swatch, { backgroundColor: cards[i][0] }, { backgroundColor: cards[i][1], ease: 'none' }, 0);
   });
 }
@@ -95,7 +100,12 @@ export const era: Era = {
         { year: '2012', name: 'Grunt', icon: siGrunt, line: 'Minify and concat, left to tasks.' },
         { year: '2012', name: 'Sublime Text 2', icon: siSublimetext, line: '⌘D, ⌘D, ⌘D — multiple cursors.' },
         // the "A" was black until the Red Hat red of the 2020s
-        { year: '2012', name: 'Ansible', icon: { ...siAnsible, hex: '1A1918' }, line: 'Ship to every server over plain SSH.' },
+        {
+          year: '2012',
+          name: 'Ansible',
+          icon: { ...siAnsible, hex: '1A1918' },
+          line: 'Ship to every server over plain SSH.',
+        },
         { year: '2013', name: 'Bootstrap 3', icon: bootstrapB, line: 'Mobile first. And every site looked the same.' },
         { year: '2013', name: 'gulp', line: 'Streams over config.' },
         { year: '2014', name: 'Vue.js', icon: siVuedotjs, line: 'The framework that felt just right.' },

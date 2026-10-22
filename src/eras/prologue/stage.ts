@@ -1,4 +1,4 @@
-import { scrubType, type StageScene } from '../../components/stage';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { phone, pixelArt, puzzle } from './pixel';
 
@@ -18,7 +18,11 @@ const GLYPH: Record<string, string[]> = {
 type Grid = string[][];
 const grid = (w: number, hgt: number, fill = '.'): Grid => Array.from({ length: hgt }, () => Array(w).fill(fill));
 const stamp = (g: Grid, rows: string[], x: number, y: number, ch?: string) =>
-  rows.forEach((r, dy) => [...r].forEach((c, dx) => c !== '.' && g[y + dy] && (g[y + dy][x + dx] = ch ?? c)));
+  rows.forEach((r, dy) =>
+    [...r].forEach((c, dx) => {
+      if (c !== '.' && g[y + dy]) g[y + dy][x + dx] = ch ?? c;
+    }),
+  );
 const text = (g: Grid, s: string, x: number, y: number) => [...s].forEach((c, i) => stamp(g, GLYPH[c], x + i * 4, y));
 const rows = (g: Grid) => g.map((r) => r.join(''));
 
@@ -50,11 +54,36 @@ function flashLogo(): string {
       else if (x + y > 24) g[y][x] = 'D';
     }
   // rounded corners
-  for (const [x, y] of [[0, 0], [1, 0], [0, 1], [15, 0], [14, 0], [15, 1], [0, 15], [1, 15], [0, 14], [15, 15], [14, 15], [15, 14]])
+  for (const [x, y] of [
+    [0, 0],
+    [1, 0],
+    [0, 1],
+    [15, 0],
+    [14, 0],
+    [15, 1],
+    [0, 15],
+    [1, 15],
+    [0, 14],
+    [15, 15],
+    [14, 15],
+    [15, 14],
+  ])
     g[y][x] = '.';
   stamp(
     g,
-    ['......WWW.', '.....WW..W', '.....W....', '....WW....', '..WWWWWW..', '....W.....', '...WW.....', '...W......', '..WW......', '.WW.......', 'WW........'],
+    [
+      '......WWW.',
+      '.....WW..W',
+      '.....W....',
+      '....WW....',
+      '..WWWWWW..',
+      '....W.....',
+      '...WW.....',
+      '...W......',
+      '..WW......',
+      '.WW.......',
+      'WW........',
+    ],
     3,
     3,
     'W',
@@ -71,7 +100,12 @@ function xhrLogo(): string {
   text(g, 'XHR', 4, 2);
   stamp(g, ['.........G..', 'GGGGGGGGGGGG', '.........G..'], 3, 8);
   stamp(g, ['..Y.........', 'YYYYYYYYYYYY', '..Y.........'], 4, 11);
-  return pixelArt(rows(g), { B: '#1f4fd1', L: '#5c86ff', D: '#0d2a80', W: '#ffffff', G: '#66ff66', Y: '#ffff00' }, 'p-logo', 'XMLHttpRequest');
+  return pixelArt(
+    rows(g),
+    { B: '#1f4fd1', L: '#5c86ff', D: '#0d2a80', W: '#ffffff', G: '#66ff66', Y: '#ffff00' },
+    'p-logo',
+    'XMLHttpRequest',
+  );
 }
 
 /* ---------------- scenes ---------------- */
@@ -109,12 +143,25 @@ const lamp: StageScene = {
       nEl.textContent = s.replace(/^0+/, '');
       const reqs = Math.min(5, Math.floor((n - 1998) / 9000));
       if (log.childElementCount !== reqs) {
-        log.innerHTML = Array.from({ length: reqs }, (_, i) => `<li>GET /index.php <b>200</b> <span>${(0.31 + i * 0.07).toFixed(2)}s</span></li>`).join('');
+        log.innerHTML = Array.from(
+          { length: reqs },
+          (_, i) => `<li>GET /index.php <b>200</b> <span>${(0.31 + i * 0.07).toFixed(2)}s</span></li>`,
+        ).join('');
       }
     };
     paint(1998);
 
-    tl.to(logo, { xPercent: () => (mobile() ? 0 : -115), yPercent: () => (mobile() ? -112 : -62), scale: () => (mobile() ? 0.36 : 0.5), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      logo,
+      {
+        xPercent: () => (mobile() ? 0 : -115),
+        yPercent: () => (mobile() ? -112 : -62),
+        scale: () => (mobile() ? 0.36 : 0.5),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelectorAll('.p-win, .p-php__right'), { opacity: 0, y: 30, stagger: 0.12, duration: 0.3 }, 0.3);
     scrubType(tl, typed, code, 0.9, 0.5);
     const hits = { n: 1998 };
@@ -157,7 +204,17 @@ const flash: StageScene = {
     const typed = art.querySelector<HTMLElement>('.p-fl__typed')!;
     const ghostEls = Array.from(art.querySelectorAll<HTMLElement>('.p-fl__ghost'));
 
-    tl.to(logo, { xPercent: () => (mobile() ? 0 : -115), yPercent: () => (mobile() ? -112 : -62), scale: () => (mobile() ? 0.36 : 0.5), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      logo,
+      {
+        xPercent: () => (mobile() ? 0 : -115),
+        yPercent: () => (mobile() ? -112 : -62),
+        scale: () => (mobile() ? 0.36 : 0.5),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.p-fl'), { opacity: 0, y: 40, duration: 0.3 }, 0.3);
     const play = { p: 0 };
     tl.to(
@@ -179,7 +236,13 @@ const flash: StageScene = {
     );
     // Flash 5 (2000) ActionScript: a frame action stops the timeline, the handler lives on the button instance
     tl.fromTo(skip, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: 'back.out(2)' }, 2.0);
-    scrubType(tl, typed, 'Frame Actions — frame 40\n  stop();\nObject Actions — "Enter site" button\n  on (release) {\n    gotoAndPlay("main");\n  }', 0.7, 2.15);
+    scrubType(
+      tl,
+      typed,
+      'Frame Actions — frame 40\n  stop();\nObject Actions — "Enter site" button\n  on (release) {\n    gotoAndPlay("main");\n  }',
+      0.7,
+      2.15,
+    );
     tl.to({}, { duration: 0.3 });
   },
 };
@@ -215,7 +278,17 @@ const ajax: StageScene = {
     // tiles near the start position are already loaded; the rest arrive while you drag
     const order = tileEls.map((_, i) => ({ i, d: i % COLS })).sort((a, b) => a.d - b.d);
 
-    tl.to(logo, { xPercent: () => (mobile() ? 0 : -115), yPercent: () => (mobile() ? -112 : -62), scale: () => (mobile() ? 0.36 : 0.5), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      logo,
+      {
+        xPercent: () => (mobile() ? 0 : -115),
+        yPercent: () => (mobile() ? -112 : -62),
+        scale: () => (mobile() ? 0.36 : 0.5),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.p-aj'), { opacity: 0, y: 40, duration: 0.3 }, 0.3);
     scrubType(tl, typed, "xhr.open('GET', '/tile?x=7&y=3', true);", 0.5, 0.5);
     const drag = { p: 0 };
@@ -281,7 +354,17 @@ const iphone: StageScene = {
     };
     apply();
 
-    tl.to(logo, { xPercent: () => (mobile() ? 0 : -115), yPercent: () => (mobile() ? -112 : -62), scale: () => (mobile() ? 0.36 : 0.5), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      logo,
+      {
+        xPercent: () => (mobile() ? 0 : -115),
+        yPercent: () => (mobile() ? -112 : -62),
+        scale: () => (mobile() ? 0.36 : 0.5),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     // the desktop page arrives full-size, then the phone closes in around it
     tl.from(screen, { opacity: 0, duration: 0.3 }, 0.3);
     tl.to(state, { w: 0, duration: 0.7, ease: 'power3.inOut', onUpdate: apply }, 0.7);

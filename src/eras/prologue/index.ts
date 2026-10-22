@@ -1,15 +1,15 @@
 import { siGithub, siJquery, siPerl, siRubyonrails } from 'simple-icons';
-import type { Era } from '../../core/types';
-import { gsap, ScrollTrigger, reducedMotion, scrollToEl } from '../../core/scroll';
-import { setHudVisible } from '../../core/stage';
-import { h } from '../../core/util';
-import { createStage } from '../../components/stage';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
-import { buildHomepage } from './homepage';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
+import { gsap, reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
+import { setHudVisible } from '../../core/stage';
+import type { Era } from '../../core/types';
+import { h } from '../../core/util';
 import { buildFtp } from './ftp';
+import { buildHomepage } from './homepage';
 import { crt, phone, puzzle } from './pixel';
 import { STAGE_PROLOGUE } from './stage';
 import './style.css';
@@ -80,7 +80,12 @@ function animateBridge(el: HTMLElement): void {
       .timeline({ scrollTrigger: { trigger: el, start: 'top top', end: '+=90%', scrub: 0.8, pin: true } })
       .to(el.querySelector('.p-plugin'), { opacity: 0.15, filter: 'grayscale(1) blur(2px)', scale: 0.92, duration: 1 })
       .to(el.querySelector('.p-phone'), { scale: 1.12, duration: 1 }, '<')
-      .fromTo(el.querySelector('.p-bridge__line'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'steps(18)' }, '<0.3')
+      .fromTo(
+        el.querySelector('.p-bridge__line'),
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'steps(18)' },
+        '<0.3',
+      )
       .from(el.querySelector('.p-bridge__sub'), { opacity: 0, duration: 0.5 })
       .to({}, { duration: 0.6 });
   }

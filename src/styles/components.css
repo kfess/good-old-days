@@ -79,14 +79,14 @@
   word-break: break-word;
 }
 
- /* once a long log scrolls, fade the top edge so a half-hidden line never looks clipped */
+/* once a long log scrolls, fade the top edge so a half-hidden line never looks clipped */
 .deploy__log.is-scrolled {
   -webkit-mask-image: linear-gradient(transparent 0, #000 34px);
   mask-image: linear-gradient(transparent 0, #000 34px);
 }
 
 .deploy__log:empty::before {
-  content: '▸ press the button';
+  content: "▸ press the button";
   opacity: 0.35;
 }
 
@@ -336,7 +336,7 @@
 }
 
 .flap__c::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
@@ -511,7 +511,7 @@
   .sd__box--client::after,
   .sd__box--mid::after,
   .sd__box--server::after {
-    content: '↕';
+    content: "↕";
     position: absolute;
     left: 50%;
     bottom: -22px;
@@ -526,7 +526,7 @@
     margin-bottom: 4px;
   }
   .sd--y2025 .sd__box--mid::after {
-    content: '';
+    content: "";
   }
   .sd--y2018 .sd__box--ai,
   .sd--y2021 .sd__box--ai {

@@ -1,3 +1,4 @@
+// biome-ignore-all assist/source/organizeImports: page order, which is also the order the era stylesheets are bundled in
 import type { Era } from '../core/types';
 import { era as prologue } from './prologue';
 import { era as y2010 } from './y2010';

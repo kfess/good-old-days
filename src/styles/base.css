@@ -5,8 +5,8 @@
   --muted: #666666;
   --hud-font: system-ui, sans-serif;
   --gutter: clamp(16px, 4vw, 56px);
-  --jp: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --jp: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 *,
@@ -66,7 +66,9 @@ button {
   pointer-events: none;
   font-family: var(--hud-font);
   color: var(--fg);
-  transition: opacity 0.5s ease, visibility 0.5s;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s;
 }
 
 .hud.is-hidden {
@@ -76,13 +78,18 @@ button {
 
 /* a scrim under the top HUD: solid behind the labels, then fading, so content never reads through them */
 .hud::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 112px;
-  background: linear-gradient(var(--bg) 0, var(--bg) 54px, color-mix(in srgb, var(--bg) 60%, transparent) 80px, transparent 112px);
+  background: linear-gradient(
+    var(--bg) 0,
+    var(--bg) 54px,
+    color-mix(in srgb, var(--bg) 60%, transparent) 80px,
+    transparent 112px
+  );
   opacity: 0.94;
 }
 
@@ -177,7 +184,9 @@ button {
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition:
+    background 0.3s,
+    transform 0.3s;
 }
 
 .hud__rail button span {

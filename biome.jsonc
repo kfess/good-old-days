@@ -1,0 +1,41 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    // official brand artwork is copied as published, never edited
+    "includes": ["**", "!!**/dist", "!public/brand"]
+  },
+  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 120 },
+  "javascript": { "formatter": { "quoteStyle": "single" } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        // markup is built from template strings, then queried: the element is there by construction
+        "noNonNullAssertion": "off"
+      },
+      "suspicious": {
+        // the page shows code samples, so "${…}" inside plain strings is content, not a mistake
+        "noTemplateCurlyInString": "off",
+        // `list.forEach((el) => el.classList.toggle(…))`: the ignored return value is harmless
+        "useIterableCallbackReturn": "off"
+      },
+      "complexity": {
+        // each era restyles shared components and beats inline styles set by GSAP
+        "noImportantStyles": "off"
+      }
+    }
+  },
+  "css": {
+    "linter": { "enabled": true }
+  },
+  "overrides": [
+    {
+      // era stylesheets override shared component rules on purpose, in source order
+      "includes": ["src/**/*.css"],
+      "linter": { "rules": { "style": { "noDescendingSpecificity": "off" } } }
+    }
+  ],
+  "assist": { "enabled": true, "actions": { "source": { "organizeImports": "on" } } }
+}

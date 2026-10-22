@@ -1,5 +1,5 @@
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import type { Era } from '../../core/types';
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
 import { h } from '../../core/util';
 import { fitCanvas, loopWhenVisible } from '../y2023/lib';
 import { buildCoda } from './coda';
@@ -169,7 +169,7 @@ function makeParticles(n: number): Particle[] {
   return out;
 }
 
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 
 /* ---------------- era ---------------- */
 
@@ -186,7 +186,8 @@ export const era: Era = {
         <div class="fin__pin">
           <div class="fin__stage">
             ${MINIS.map(
-              (m, i) => `<div class="fin__mini fin__mini--${m.year}" data-i="${i}"><span class="fin__tag">${m.year}</span>${m.html}</div>`,
+              (m, i) =>
+                `<div class="fin__mini fin__mini--${m.year}" data-i="${i}"><span class="fin__tag">${m.year}</span>${m.html}</div>`,
             ).join('')}
           </div>
           <canvas class="fin__canvas" aria-hidden="true"></canvas>
@@ -236,7 +237,11 @@ export const era: Era = {
     });
 
     // the first miniature fades in while the section scrolls into view, so the pin never opens on an empty screen
-    gsap.fromTo(minis[0], { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 15%', scrub: true } });
+    gsap.fromTo(
+      minis[0],
+      { opacity: 0 },
+      { opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 15%', scrub: true } },
+    );
     minis.forEach((m, i) => {
       const t0 = i * STEP;
       tl.fromTo(

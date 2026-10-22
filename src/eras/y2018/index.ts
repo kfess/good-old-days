@@ -1,20 +1,20 @@
-import { siIstio, siSvelte, siHelm, siGithubactions, siDeno } from 'simple-icons';
-import type { Era } from '../../core/types';
-import { createStage } from '../../components/stage';
+import { siDeno, siGithubactions, siHelm, siIstio, siSvelte } from 'simple-icons';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
+import type { Era } from '../../core/types';
 import { h } from '../../core/util';
+import { createGlobe } from '../y2021/globe';
+import { createDunning } from './dunning';
 import { ILLUST_2018 } from './illust';
 import { createK8sEpic } from './k8s-epic';
-import { createDunning } from './dunning';
-import { createTerraform } from './terraform';
 import { k8sMark } from './k8s-logo';
 import { createLandscape } from './landscape';
-import { STAGE_2018 } from './stage';
 import { createLook } from './look';
-import { createGlobe } from '../y2021/globe';
+import { STAGE_2018 } from './stage';
+import { createTerraform } from './terraform';
 import './style.css';
 
 export const era: Era = {
@@ -51,7 +51,12 @@ export const era: Era = {
     const credits = createCredits(
       section,
       [
-        { year: '2018', name: 'Managed Kubernetes', icon: k8sMark('logo'), line: 'EKS, GKE, AKS. K8s became the common language of the cloud.' },
+        {
+          year: '2018',
+          name: 'Managed Kubernetes',
+          icon: k8sMark('logo'),
+          line: 'EKS, GKE, AKS. K8s became the common language of the cloud.',
+        },
         { year: '2018', name: 'Istio 1.0', icon: siIstio, line: 'A mesh woven between services.' },
         { year: '2019', name: 'GPT-2', line: 'A mysterious language model, released only in stages.' },
         { year: '2019', name: 'Svelte 3', icon: siSvelte, line: 'The framework vanishes at build time.' },

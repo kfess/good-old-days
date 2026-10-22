@@ -1,5 +1,5 @@
 .era--epilogue {
-  font-family: 'Geist', 'Inter', var(--jp);
+  font-family: "Geist", "Inter", var(--jp);
   color: #fff;
 }
 
@@ -31,7 +31,9 @@
   overflow: hidden;
   border-radius: 14px;
   transform-origin: 0 0;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
   will-change: transform, opacity;
 }
 
@@ -49,7 +51,7 @@
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.72);
   color: #fff;
-  font-family: 'Geist Mono', var(--mono);
+  font-family: "Geist Mono", var(--mono);
   font-size: 12px;
   letter-spacing: 0.08em;
 }
@@ -68,7 +70,7 @@
   margin: 0;
   overflow: hidden;
   color: #d9d9d9;
-  font-family: 'Geist Mono', var(--mono);
+  font-family: "Geist Mono", var(--mono);
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -140,7 +142,7 @@
 .era--epilogue .m99 {
   background: #000033 radial-gradient(#fff 1px, transparent 1.4px) 0 0 / 34px 34px;
   color: #fff;
-  font-family: 'Times New Roman', serif;
+  font-family: "Times New Roman", serif;
   text-align: center;
 }
 
@@ -150,7 +152,7 @@
   background: #000080;
   border-bottom: 2px ridge #c0c0c0;
   color: #ffff00;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-size: 15px;
   white-space: nowrap;
 }
@@ -170,7 +172,7 @@
 .era--epilogue .m99__h {
   margin: 26px 0 14px;
   color: #ff3df5;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 17px;
   text-shadow: 3px 3px 0 #00ff66;
 }
@@ -187,7 +189,7 @@
   background: #000;
   border: 1px solid #555;
   color: #00ff66;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .era--epilogue .m99__uc {
@@ -195,9 +197,11 @@
   padding: 6px;
   background: repeating-linear-gradient(-45deg, #ffcc00 0 14px, #111 14px 28px);
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 11px;
-  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000;
 }
 
 .era--epilogue .m99__links {
@@ -210,7 +214,7 @@
 .era--epilogue .m10 {
   background: linear-gradient(#f4f8fb, #dfe8f0);
   color: #333;
-  font-family: 'Lucida Grande', 'Trebuchet MS', sans-serif;
+  font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
 }
 
 .era--epilogue .m10__head {
@@ -289,7 +293,9 @@
   font-weight: 700;
   font-size: 14px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2px 0 #4b8a17, inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 2px 0 #4b8a17,
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   -webkit-box-reflect: below 2px linear-gradient(transparent 55%, rgba(255, 255, 255, 0.35));
 }
 
@@ -301,7 +307,7 @@
   gap: 10px;
   background: #1abc9c;
   color: #fff;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: center;
 }
 
@@ -319,9 +325,25 @@
 }
 
 .era--epilogue .m13__icon span {
-  text-shadow: 1px 1px #c0392b, 2px 2px #c0392b, 3px 3px #c0392b, 4px 4px #c0392b, 5px 5px #c0392b, 6px 6px #c0392b, 7px 7px #c0392b,
-    8px 8px #c0392b, 9px 9px #c0392b, 10px 10px #c0392b, 11px 11px #c0392b, 12px 12px #c0392b, 14px 14px #c0392b, 16px 16px #c0392b,
-    18px 18px #c0392b, 20px 20px #c0392b, 24px 24px #c0392b, 28px 28px #c0392b;
+  text-shadow:
+    1px 1px #c0392b,
+    2px 2px #c0392b,
+    3px 3px #c0392b,
+    4px 4px #c0392b,
+    5px 5px #c0392b,
+    6px 6px #c0392b,
+    7px 7px #c0392b,
+    8px 8px #c0392b,
+    9px 9px #c0392b,
+    10px 10px #c0392b,
+    11px 11px #c0392b,
+    12px 12px #c0392b,
+    14px 14px #c0392b,
+    16px 16px #c0392b,
+    18px 18px #c0392b,
+    20px 20px #c0392b,
+    24px 24px #c0392b,
+    28px 28px #c0392b;
 }
 
 .era--epilogue .m13 h4 {
@@ -351,7 +373,7 @@
 .era--epilogue .m16 {
   background: #eceff1;
   color: #212121;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .era--epilogue .m16__bar {
@@ -374,7 +396,10 @@
   padding: 16px;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .era--epilogue .m16__card--2 {
@@ -431,7 +456,7 @@
   padding: 22px;
   background: radial-gradient(120% 100% at 0% 0%, #1a2550, #0b1020);
   color: #e8ecf6;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .era--epilogue .m19__h {
@@ -483,20 +508,21 @@
   display: block;
   margin-top: 18px;
   color: #8a94b2;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 14px;
 }
 
 /* 2022 */
 .era--epilogue .m22 {
   background: #07070c;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .era--epilogue .m22__aurora {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(40% 50% at 30% 30%, rgba(167, 139, 250, 0.7), transparent 70%),
+  background:
+    radial-gradient(40% 50% at 30% 30%, rgba(167, 139, 250, 0.7), transparent 70%),
     radial-gradient(40% 50% at 70% 60%, rgba(96, 165, 250, 0.6), transparent 70%),
     radial-gradient(30% 40% at 50% 90%, rgba(244, 114, 182, 0.5), transparent 70%);
   filter: blur(20px);
@@ -549,7 +575,7 @@
   padding: 22px;
   background: #f5f3ee;
   color: #1f1e1d;
-  font-family: 'Geist', sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 15px;
 }
 
@@ -608,7 +634,9 @@
   padding: 12px 16px;
   border: 1.5px solid transparent;
   border-radius: 999px;
-  background: linear-gradient(#fffdf9, #fffdf9) padding-box, linear-gradient(90deg, #d97757, #e879a6, #8b5cf6, #3b82f6) border-box;
+  background:
+    linear-gradient(#fffdf9, #fffdf9) padding-box,
+    linear-gradient(90deg, #d97757, #e879a6, #8b5cf6, #3b82f6) border-box;
   color: #a8a29e;
 }
 
@@ -617,7 +645,7 @@
   padding: 22px;
   background: #0c0c0c;
   color: #e6e6e6;
-  font-family: 'Geist Mono', monospace;
+  font-family: "Geist Mono", monospace;
   font-size: 15px;
   line-height: 1.9;
 }
@@ -676,9 +704,17 @@
     radial-gradient(1.5px 1.5px at 88% 14%, #fff 50%, transparent 51%),
     radial-gradient(1px 1px at 22% 88%, #ccf 50%, transparent 51%),
     radial-gradient(2px 2px at 45% 9%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 93% 83%, #fff 50%, transparent 51%),
-    #000033;
-  background-size: 420px 420px, 380px 380px, 520px 520px, 300px 300px, 460px 460px, 340px 340px, 600px 600px, 280px 280px, auto;
+    radial-gradient(1px 1px at 93% 83%, #fff 50%, transparent 51%), #000033;
+  background-size:
+    420px 420px,
+    380px 380px,
+    520px 520px,
+    300px 300px,
+    460px 460px,
+    340px 340px,
+    600px 600px,
+    280px 280px,
+    auto;
   image-rendering: pixelated;
   animation: coda-twinkle 3s steps(2) infinite;
 }
@@ -706,22 +742,32 @@
 
 .era--epilogue .coda__k {
   margin: 0 0 22px;
-  font: 400 clamp(11px, 1.1vw, 15px) / 1.6 'Press Start 2P', monospace;
+  font:
+    400 clamp(11px, 1.1vw, 15px) / 1.6 "Press Start 2P",
+    monospace;
   color: #9999cc;
 }
 
 .era--epilogue .coda__title {
   margin: 0;
-  font: 400 clamp(26px, 5.4vw, 76px) / 1.25 'Press Start 2P', monospace;
+  font:
+    400 clamp(26px, 5.4vw, 76px) / 1.25 "Press Start 2P",
+    monospace;
   color: #ffff00;
-  text-shadow: 4px 4px 0 #ff00cc, 0 0 24px rgba(255, 255, 0, 0.35);
+  text-shadow:
+    4px 4px 0 #ff00cc,
+    0 0 24px rgba(255, 255, 0, 0.35);
 }
 
 .era--epilogue .coda__strong {
   margin: 28px 0 0;
-  font: 400 clamp(24px, 4.4vw, 60px) / 1 'Press Start 2P', monospace;
+  font:
+    400 clamp(24px, 4.4vw, 60px) / 1 "Press Start 2P",
+    monospace;
   color: #ff3366;
-  text-shadow: 3px 3px 0 #000, 0 0 30px rgba(255, 51, 102, 0.55);
+  text-shadow:
+    3px 3px 0 #000,
+    0 0 30px rgba(255, 51, 102, 0.55);
 }
 
 .era--epilogue .coda__strong span {
@@ -741,7 +787,10 @@
 
 .era--epilogue .coda__i1 {
   margin: 0 0 14px;
-  font: 400 13px / 1.4 'Geist Mono', 'JetBrains Mono', monospace;
+  font:
+    400 13px / 1.4 "Geist Mono",
+    "JetBrains Mono",
+    monospace;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #d97757;
@@ -749,7 +798,10 @@
 
 .era--epilogue .coda__i2 {
   margin: 0;
-  font: 600 clamp(20px, 2.6vw, 36px) / 1.35 'Geist', 'Inter', sans-serif;
+  font:
+    600 clamp(20px, 2.6vw, 36px) / 1.35 "Geist",
+    "Inter",
+    sans-serif;
   letter-spacing: -0.02em;
   color: #f2f2f2;
 }
@@ -761,7 +813,10 @@
 
 .era--epilogue .coda__i3 {
   margin: 18px 0 0;
-  font: 500 clamp(14px, 1.4vw, 19px) / 1.5 'Geist', 'Inter', sans-serif;
+  font:
+    500 clamp(14px, 1.4vw, 19px) / 1.5 "Geist",
+    "Inter",
+    sans-serif;
   color: rgba(242, 242, 242, 0.8);
 }
 
@@ -792,7 +847,9 @@
   left: 50%;
   top: 100%;
   margin-top: 4px;
-  font: 400 11px 'Geist Mono', monospace;
+  font:
+    400 11px "Geist Mono",
+    monospace;
   font-style: normal;
   color: #7ee787;
   white-space: nowrap;
@@ -826,13 +883,16 @@
   border-radius: 14px;
   background: #fff8f3;
   color: #2b1a14;
-  font: 600 clamp(14px, 1.2vw, 17px) / 1.35 'Geist', 'Inter', sans-serif;
+  font:
+    600 clamp(14px, 1.2vw, 17px) / 1.35 "Geist",
+    "Inter",
+    sans-serif;
   text-align: left;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .era--epilogue .coda__bubble::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: -7px;
@@ -857,7 +917,9 @@
 
 .era--epilogue .coda__counter {
   margin: 0;
-  font: 400 11px / 1 'Press Start 2P', monospace;
+  font:
+    400 11px / 1 "Press Start 2P",
+    monospace;
   color: #c0c0c0;
 }
 
@@ -877,7 +939,9 @@
   border: 2px outset #dfdfdf;
   background: #c0c0c0;
   color: #000;
-  font: 400 11px / 1 'Press Start 2P', monospace;
+  font:
+    400 11px / 1 "Press Start 2P",
+    monospace;
   cursor: pointer;
 }
 
@@ -887,7 +951,9 @@
 
 .era--epilogue .coda__small {
   margin: 0;
-  font: 400 11px / 1.4 'Geist Mono', monospace;
+  font:
+    400 11px / 1.4 "Geist Mono",
+    monospace;
   color: #8888aa;
 }
 
@@ -949,7 +1015,9 @@
 
 .era--epilogue .coda__then {
   margin: 0 0 22px;
-  font: 400 clamp(11px, 1.1vw, 15px) / 1.6 'Press Start 2P', monospace;
+  font:
+    400 clamp(11px, 1.1vw, 15px) / 1.6 "Press Start 2P",
+    monospace;
   color: #9999cc;
 }
 
@@ -967,7 +1035,9 @@
   grid-template-columns: 6ch minmax(0, 1fr);
   gap: 18px;
   align-items: baseline;
-  font: 400 clamp(11px, 1.3vw, 18px) / 1.5 'Press Start 2P', monospace;
+  font:
+    400 clamp(11px, 1.3vw, 18px) / 1.5 "Press Start 2P",
+    monospace;
   color: #ffffff;
 }
 
@@ -994,22 +1064,32 @@
 }
 
 .era--epilogue .coda__l1 {
-  font: 400 clamp(14px, 1.8vw, 26px) / 1.4 'Press Start 2P', monospace;
+  font:
+    400 clamp(14px, 1.8vw, 26px) / 1.4 "Press Start 2P",
+    monospace;
   color: #c0c0ff;
 }
 
 .era--epilogue .coda__l2 {
   display: block;
-  font: 400 clamp(20px, 3.6vw, 52px) / 1.25 'Press Start 2P', monospace;
+  font:
+    400 clamp(20px, 3.6vw, 52px) / 1.25 "Press Start 2P",
+    monospace;
   color: #ffff00;
-  text-shadow: 4px 4px 0 #ff00cc, 0 0 28px rgba(255, 255, 0, 0.35);
+  text-shadow:
+    4px 4px 0 #ff00cc,
+    0 0 28px rgba(255, 255, 0, 0.35);
 }
 
 .era--epilogue .coda__ours {
   margin: 4.5vh 0 0;
-  font: 400 clamp(16px, 2.6vw, 38px) / 1.35 'Press Start 2P', monospace;
+  font:
+    400 clamp(16px, 2.6vw, 38px) / 1.35 "Press Start 2P",
+    monospace;
   color: #ffffff;
-  text-shadow: 3px 3px 0 #00a84f, 0 0 26px rgba(0, 255, 102, 0.45);
+  text-shadow:
+    3px 3px 0 #00a84f,
+    0 0 26px rgba(0, 255, 102, 0.45);
 }
 
 .era--epilogue .coda__ours-t {
@@ -1128,7 +1208,11 @@
   border: 1px solid #a5a5a5;
   background: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  font: 13px / 1.5 Monaco, Menlo, 'Courier New', monospace;
+  font:
+    13px / 1.5 Monaco,
+    Menlo,
+    "Courier New",
+    monospace;
   text-align: left;
   color: #000;
 }
@@ -1139,7 +1223,10 @@
   padding: 5px 10px;
   border-bottom: 1px solid #bbb;
   background: linear-gradient(#f2f2f2, #dcdcdc);
-  font: 12px 'Lucida Grande', Tahoma, sans-serif;
+  font:
+    12px "Lucida Grande",
+    Tahoma,
+    sans-serif;
   color: #555;
 }
 
@@ -1175,7 +1262,9 @@
 
 .era--epilogue .coda__joy-cap {
   margin: 0;
-  font: 400 clamp(13px, 1.4vw, 18px) / 1.4 'Press Start 2P', monospace;
+  font:
+    400 clamp(13px, 1.4vw, 18px) / 1.4 "Press Start 2P",
+    monospace;
   color: #ffff00;
   text-shadow: 3px 3px 0 #ff00cc;
 }

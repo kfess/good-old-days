@@ -1,18 +1,10 @@
-import {
-  siBabel,
-  siGraphql,
-  siPrettier,
-  siRedux,
-  siRust,
-  siWebassembly,
-  siYarn,
-} from 'simple-icons';
+import { siBabel, siGraphql, siPrettier, siRedux, siRust, siWebassembly, siYarn } from 'simple-icons';
+import { createCredits } from '../../components/credits';
 import { createDeploy } from '../../components/deploy';
 import { createStack } from '../../components/stack';
-import { createCredits } from '../../components/credits';
 import { createStage } from '../../components/stage';
 import { createThread } from '../../components/thread';
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import type { Era } from '../../core/types';
 import { h } from '../../core/util';
 import { mountApp } from './app';
@@ -77,7 +69,11 @@ function mountBridge(parent: HTMLElement): void {
         .to(w, { '--on': 0.55, duration: 0.02, ease: 'none' }, t + 0.14)
         .to(w, { '--on': 0, duration: 0.08, ease: 'power1.in' }, t + 0.18);
     });
-    tl.from([el.querySelector('.y15-bridge__jp'), el.querySelector('.y15-bridge__code')], { opacity: 0, y: 16, stagger: 0.08, duration: 0.2 }, 1.7);
+    tl.from(
+      [el.querySelector('.y15-bridge__jp'), el.querySelector('.y15-bridge__code')],
+      { opacity: 0, y: 16, stagger: 0.08, duration: 0.2 },
+      1.7,
+    );
     tl.to({}, { duration: 0.25 });
   }
 
@@ -115,7 +111,12 @@ export const era: Era = {
     createCredits(
       section,
       [
-        { year: '2015', name: 'VS Code', icon: VSCODE, line: 'Light and batteries-included. The beginning of the end of the editor wars.' },
+        {
+          year: '2015',
+          name: 'VS Code',
+          icon: VSCODE,
+          line: 'Light and batteries-included. The beginning of the end of the editor wars.',
+        },
         { year: '2015', name: 'Babel', icon: siBabel, line: 'Tomorrow’s JavaScript, in today’s browsers.' },
         { year: '2015', name: 'Redux', icon: siRedux, line: 'All state, in a single tree.' },
         { year: '2015', name: 'GraphQL', icon: siGraphql, line: 'Ask for exactly what you need.' },
@@ -160,7 +161,10 @@ export const era: Era = {
         { kind: 'progress', text: 'Pushing layers', delay: 1000 },
         { kind: 'ok', text: '1.4.2: digest: sha256:4e1fa90c… size: 2412' },
         { kind: 'cmd', text: 'ecs-cli compose service up' },
-        { kind: 'ok', text: 'INFO[0030] ECS Service has reached a stable state  desiredCount=50 runningCount=50 serviceName=ecscompose-service-web' },
+        {
+          kind: 'ok',
+          text: 'INFO[0030] ECS Service has reached a stable state  desiredCount=50 runningCount=50 serviceName=ecscompose-service-web',
+        },
         { kind: 'cmd', text: 'serverless deploy' },
         { text: 'Serverless: Uploading CloudFormation file to S3...' },
         { text: 'endpoints:' },

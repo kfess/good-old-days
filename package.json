@@ -6,11 +6,15 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "typecheck": "tsc --noEmit",
     "shot": "node scripts/shot.mjs"
   },
   "type": "module",
   "devDependencies": {
-    "@types/jquery": "^4.0.1",
+    "@biomejs/biome": "2.5.15",
+    "@types/jquery": "^1.10.45",
     "@types/three": "^0.186.0",
     "playwright-core": "^1.64.1",
     "typescript": "^5.9.3",

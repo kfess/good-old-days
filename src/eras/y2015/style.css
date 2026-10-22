@@ -94,7 +94,9 @@
   border-radius: 2px;
   background: var(--ind);
   color: #fff;
-  font: 500 14px Roboto, sans-serif;
+  font:
+    500 14px Roboto,
+    sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   box-shadow: var(--dp1);
@@ -176,7 +178,9 @@
 }
 
 .era--y2015 .iso__label {
-  font: 500 9px Roboto, sans-serif;
+  font:
+    500 9px Roboto,
+    sans-serif;
   fill: rgba(255, 255, 255, 0.95);
 }
 
@@ -242,10 +246,17 @@
   border-radius: 2px;
   background: #fff;
   color: #212121;
-  font: 500 15px Roboto, sans-serif;
+  font:
+    500 15px Roboto,
+    sans-serif;
   box-shadow: var(--dp1);
   opacity: 0.55;
-  transition: box-shadow 0.3s, background 0.3s, color 0.3s, opacity 0.3s, transform 0.3s;
+  transition:
+    box-shadow 0.3s,
+    background 0.3s,
+    color 0.3s,
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .era--y2015 .y15-pick__icon {
@@ -313,7 +324,7 @@
   overflow-x: auto;
   background: #263238;
   color: #eceff1;
-  font: 13px/1.6 var(--mono);
+  font: 13px / 1.6 var(--mono);
 }
 
 .era--y2015 .y15-route__next {
@@ -455,7 +466,9 @@
   height: 2px;
   margin: 2px 0;
   background: #fff;
-  transition: transform 0.3s, opacity 0.3s;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
 }
 
 .era--y2015 .is-drawer .md-burger span:nth-child(1) {
@@ -502,7 +515,9 @@
 .era--y2015 .md-card__img svg {
   width: 100%;
   height: 100%;
-  transition: filter 0.8s, transform 0.8s;
+  transition:
+    filter 0.8s,
+    transform 0.8s;
 }
 
 .era--y2015 .md-card__img.is-blur svg {
@@ -538,7 +553,9 @@
   border-radius: 2px;
   background: transparent;
   color: var(--ind);
-  font: 500 13px Roboto, sans-serif;
+  font:
+    500 13px Roboto,
+    sans-serif;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   cursor: pointer;
@@ -559,9 +576,19 @@
   animation: y15-shimmer 1.2s ease infinite;
 }
 
-.era--y2015 .md-skel .a { height: 150px; }
-.era--y2015 .md-skel .b { width: 60%; height: 14px; margin: 16px 16px 8px; }
-.era--y2015 .md-skel .c { width: 34%; height: 10px; margin: 0 16px; }
+.era--y2015 .md-skel .a {
+  height: 150px;
+}
+.era--y2015 .md-skel .b {
+  width: 60%;
+  height: 14px;
+  margin: 16px 16px 8px;
+}
+.era--y2015 .md-skel .c {
+  width: 34%;
+  height: 10px;
+  margin: 0 16px;
+}
 
 .era--y2015 .md-fab {
   position: absolute;
@@ -616,7 +643,9 @@
   border: 0;
   background: none;
   color: var(--pink);
-  font: 500 14px Roboto, sans-serif;
+  font:
+    500 14px Roboto,
+    sans-serif;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -671,7 +700,9 @@
   height: 56px;
   margin-bottom: auto;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 38%, #fff 0 22%, transparent 23%), radial-gradient(circle at 50% 100%, #fff 0 42%, transparent 43%), rgba(255, 255, 255, 0.3);
+  background:
+    radial-gradient(circle at 50% 38%, #fff 0 22%, transparent 23%),
+    radial-gradient(circle at 50% 100%, #fff 0 42%, transparent 43%), rgba(255, 255, 255, 0.3);
 }
 
 .era--y2015 .md-drawer__head b {
@@ -709,7 +740,9 @@
 }
 
 .era--y2015 .flow-node text {
-  font: 500 15px Roboto, sans-serif;
+  font:
+    500 15px Roboto,
+    sans-serif;
   text-anchor: middle;
   fill: var(--ind);
 }
@@ -737,7 +770,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font: 12.5px/1.95 var(--mono);
+  font: 12.5px / 1.95 var(--mono);
   color: #455a64;
 }
 
@@ -776,7 +809,9 @@
 }
 
 .era--y2015 .svc-label {
-  font: 500 11px Roboto, sans-serif;
+  font:
+    500 11px Roboto,
+    sans-serif;
   fill: #37474f;
   paint-order: stroke;
   stroke: #fff;
@@ -810,7 +845,11 @@
   border-radius: 2px;
   background: #eceff1;
   color: #90a4ae;
-  transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
 }
 
 .era--y2015 .y15-fn b {
@@ -872,7 +911,9 @@
   border-radius: 2px;
   background: var(--pink);
   color: #fff;
-  font: 500 14px Roboto, sans-serif;
+  font:
+    500 14px Roboto,
+    sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   box-shadow: var(--dp2);
@@ -974,7 +1015,9 @@
   border-radius: 50%;
   background: #fafafa;
   box-shadow: var(--dp1);
-  transition: transform 0.3s, background 0.3s;
+  transition:
+    transform 0.3s,
+    background 0.3s;
 }
 
 .era--y2015 .y15-switch input:checked + .y15-switch__track {
@@ -1021,7 +1064,9 @@
   text-shadow: none;
   filter: url(#y15-ring);
   pointer-events: none;
-  transition: color 0.35s ease, opacity 0.35s ease;
+  transition:
+    color 0.35s ease,
+    opacity 0.35s ease;
 }
 
 .era--y2015 .y15-bridge.is-dark .y15-lw {
@@ -1054,30 +1099,51 @@
 /* ---------------- keyframes ---------------- */
 
 @keyframes y15-ripple {
-  to { transform: scale(1); opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
 @keyframes y15-blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes y15-in {
-  from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.96);
+  }
 }
 
 @keyframes y15-shimmer {
-  from { background-position: 100% 50%; }
-  to { background-position: 0 50%; }
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
 }
 
 @keyframes y15-hot {
-  0% { fill: #ff4081; }
-  100% { fill: #e8eaf6; }
+  0% {
+    fill: #ff4081;
+  }
+  100% {
+    fill: #e8eaf6;
+  }
 }
 
 @keyframes y15-patch {
-  0% { background: rgba(255, 64, 129, 0.32); color: #c2185b; }
-  100% { background: transparent; }
+  0% {
+    background: rgba(255, 64, 129, 0.32);
+    color: #c2185b;
+  }
+  100% {
+    background: transparent;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1141,7 +1207,9 @@
   border-radius: 16px;
   background: #e8eaf6;
   color: var(--ind);
-  font: 500 11px Roboto, sans-serif;
+  font:
+    500 11px Roboto,
+    sans-serif;
   letter-spacing: 0.1em;
 }
 
@@ -1175,7 +1243,9 @@
   height: 100%;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.22), 0 0.025em 0.03em rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0.05em 0.1em rgba(0, 0, 0, 0.22),
+    0 0.025em 0.03em rgba(0, 0, 0, 0.2);
 }
 
 .era--y2015 .y15-disc__mark {
@@ -1199,7 +1269,9 @@
   display: flex;
   margin: 0;
   background: var(--ind);
-  font: 500 13px Roboto, sans-serif;
+  font:
+    500 13px Roboto,
+    sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1224,7 +1296,9 @@
   width: 34ch;
   height: calc(3 * 1.7em);
   margin: 22px 28px 26px;
-  font: 400 clamp(14px, 2vw, 30px) / 1.7 'Roboto Mono', monospace;
+  font:
+    400 clamp(14px, 2vw, 30px) / 1.7 "Roboto Mono",
+    monospace;
 }
 
 .era--y2015 .y15-tok {
@@ -1237,7 +1311,7 @@
 }
 
 .era--y2015 .y15-tok::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 52%;
   left: -2px;
@@ -1287,7 +1361,9 @@
   border-radius: 16px;
   background: #e0e0e0;
   color: rgba(0, 0, 0, 0.87);
-  font: 400 13px 'Roboto Mono', monospace;
+  font:
+    400 13px "Roboto Mono",
+    monospace;
 }
 
 /* webpack */
@@ -1302,7 +1378,9 @@
   background: #263238;
   color: #eceff1;
   box-shadow: var(--dp2);
-  font: 400 clamp(12px, 1.1vw, 16px) / 1.6 'Roboto Mono', monospace;
+  font:
+    400 clamp(12px, 1.1vw, 16px) / 1.6 "Roboto Mono",
+    monospace;
 }
 
 .era--y2015 .y15-wp__graph {
@@ -1339,7 +1417,9 @@
   background: #fff;
   box-shadow: var(--dp1);
   color: rgba(0, 0, 0, 0.87);
-  font: 400 13px Roboto, sans-serif;
+  font:
+    400 13px Roboto,
+    sans-serif;
   white-space: nowrap;
 }
 
@@ -1349,7 +1429,9 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  font: 700 9px Roboto, sans-serif;
+  font:
+    700 9px Roboto,
+    sans-serif;
   font-style: normal;
   color: #fff;
 }
@@ -1397,22 +1479,30 @@
   border-radius: 50%;
   background: #f7df1e;
   color: #212121;
-  font: 700 16px Roboto, sans-serif;
+  font:
+    700 16px Roboto,
+    sans-serif;
   font-style: normal;
 }
 
 .era--y2015 .y15-wp__bundle b {
-  font: 500 clamp(18px, 2vw, 28px) Roboto, sans-serif;
+  font:
+    500 clamp(18px, 2vw, 28px) Roboto,
+    sans-serif;
 }
 
 .era--y2015 .y15-wp__size {
-  font: 400 clamp(22px, 2.6vw, 38px) 'Roboto Mono', monospace;
+  font:
+    400 clamp(22px, 2.6vw, 38px) "Roboto Mono",
+    monospace;
   white-space: nowrap;
   color: var(--ind);
 }
 
 .era--y2015 .y15-wp__bundle em {
-  font: 400 12px Roboto, sans-serif;
+  font:
+    400 12px Roboto,
+    sans-serif;
   font-style: normal;
   color: rgba(0, 0, 0, 0.54);
   opacity: 0;
@@ -1428,7 +1518,8 @@
   place-items: center;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 calc(var(--glow, 0) * 28px) rgba(80, 140, 255, 0.85)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
+  filter: drop-shadow(0 0 calc(var(--glow, 0) * 28px) rgba(80, 140, 255, 0.85))
+    drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
 }
 
 .era--y2015 .y15-k8mark .k8s-mark {
@@ -1466,7 +1557,9 @@
 .era--y2015 .y15-kt__grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(127, 176, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(127, 176, 255, 0.06) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(127, 176, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 176, 255, 0.06) 1px, transparent 1px);
   background-size: 32px 32px;
   -webkit-mask-image: radial-gradient(circle at 60% 40%, #000, transparent 75%);
   mask-image: radial-gradient(circle at 60% 40%, #000, transparent 75%);
@@ -1477,7 +1570,10 @@
   left: 4%;
   bottom: 9%;
   width: 52%;
-  font: 400 clamp(9px, 0.82vw, 12.5px) / 1.55 'Roboto Mono', 'JetBrains Mono', monospace;
+  font:
+    400 clamp(9px, 0.82vw, 12.5px) / 1.55 "Roboto Mono",
+    "JetBrains Mono",
+    monospace;
   overflow: hidden;
 }
 
@@ -1525,14 +1621,18 @@
 
 .era--y2015 .y15-kt__node b {
   overflow: hidden;
-  font: 500 10px/1.3 'Roboto Mono', monospace;
+  font:
+    500 10px / 1.3 "Roboto Mono",
+    monospace;
   color: #c9d3f2;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .era--y2015 .y15-kt__node span {
-  font: 500 10px/1 'Roboto Mono', monospace;
+  font:
+    500 10px / 1 "Roboto Mono",
+    monospace;
   color: #7ee787;
 }
 
@@ -1555,7 +1655,9 @@
   right: 4%;
   bottom: 9%;
   margin: 0;
-  font: 300 clamp(18px, 2.3vw, 34px) / 1.1 Roboto, sans-serif;
+  font:
+    300 clamp(18px, 2.3vw, 34px) / 1.1 Roboto,
+    sans-serif;
   color: #c9d3f2;
 }
 
@@ -1708,12 +1810,16 @@
 }
 
 .era--y2015 .y15-mesh__label {
-  font: 500 14px Roboto, sans-serif;
+  font:
+    500 14px Roboto,
+    sans-serif;
   fill: #212121;
 }
 
 .era--y2015 .y15-mesh__sub {
-  font: 400 11px 'Roboto Mono', monospace;
+  font:
+    400 11px "Roboto Mono",
+    monospace;
   fill: #757575;
 }
 
@@ -1741,7 +1847,9 @@
 }
 
 .era--y2015 .y15-mesh__elabel {
-  font: 400 10.5px 'Roboto Mono', monospace;
+  font:
+    400 10.5px "Roboto Mono",
+    monospace;
   fill: #546e7a;
   paint-order: stroke;
   stroke: #fafafa;
@@ -1754,7 +1862,9 @@
 }
 
 .era--y2015 .y15-mesh__breaker text {
-  font: 500 10px Roboto, sans-serif;
+  font:
+    500 10px Roboto,
+    sans-serif;
   fill: #2e7d32;
 }
 
@@ -1777,7 +1887,9 @@
   border-radius: 2px;
   background: #263238;
   color: #eceff1;
-  font: 12px/1.4 'Roboto Mono', monospace;
+  font:
+    12px / 1.4 "Roboto Mono",
+    monospace;
 }
 
 .era--y2015 .y15-trace__title {
@@ -1921,7 +2033,9 @@
   border-radius: 2px;
   background: #fff;
   box-shadow: var(--dp2);
-  font: 400 11px / 1.3 'Roboto', sans-serif;
+  font:
+    400 11px / 1.3 "Roboto",
+    sans-serif;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -1952,7 +2066,7 @@
 }
 
 .era--y2015 .y15-heavy .is-nm {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: #c51162;
 }
 
@@ -1977,12 +2091,14 @@
   padding: 8px 12px;
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.06);
-  font: 400 11px / 1.35 'Roboto', sans-serif;
+  font:
+    400 11px / 1.35 "Roboto",
+    sans-serif;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .era--y2015 .y15-fatigue b {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: 500;
   color: #c51162;
 }

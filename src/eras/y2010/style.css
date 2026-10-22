@@ -1,9 +1,9 @@
 /* ============ 2010–2011: Web 2.0 — gloss, gradients, reflections, jQuery ============ */
 
 .era--y2010 {
-  --w-ui: 'Lucida Grande', 'Lucida Sans Unicode', 'Trebuchet MS', Verdana, var(--jp);
-  --w-head: 'Helvetica Neue', Helvetica, Arial, var(--jp);
-  --w-code: Consolas, Monaco, 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  --w-ui: "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", Verdana, var(--jp);
+  --w-head: "Helvetica Neue", Helvetica, Arial, var(--jp);
+  --w-code: Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", monospace;
   --w-blue: #2f7fc8;
   --w-orange: #ff7a00;
   font-family: var(--w-ui);
@@ -26,13 +26,15 @@
   font: 700 13px var(--w-ui);
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   overflow: hidden;
 }
 
 .era--y2010 .w-gbtn::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0 0 50% 0;
   background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.12));
@@ -100,7 +102,9 @@
   font: 700 13px var(--w-ui);
   letter-spacing: 0.08em;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 5px rgba(240, 112, 0, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 5px rgba(240, 112, 0, 0.35);
 }
 
 .era--y2010 .w-title {
@@ -124,7 +128,32 @@
   width: 92px;
   height: 92px;
   background: radial-gradient(circle at 50% 35%, #fff36b, #ffb800 60%, #ff8a00);
-  clip-path: polygon(50% 0, 59% 15%, 75% 7%, 76% 25%, 93% 25%, 85% 41%, 100% 50%, 85% 59%, 93% 75%, 76% 75%, 75% 93%, 59% 85%, 50% 100%, 41% 85%, 25% 93%, 24% 75%, 7% 75%, 15% 59%, 0 50%, 15% 41%, 7% 25%, 24% 25%, 25% 7%, 41% 15%);
+  clip-path: polygon(
+    50% 0,
+    59% 15%,
+    75% 7%,
+    76% 25%,
+    93% 25%,
+    85% 41%,
+    100% 50%,
+    85% 59%,
+    93% 75%,
+    76% 75%,
+    75% 93%,
+    59% 85%,
+    50% 100%,
+    41% 85%,
+    25% 93%,
+    24% 75%,
+    7% 75%,
+    15% 59%,
+    0 50%,
+    15% 41%,
+    7% 25%,
+    24% 25%,
+    25% 7%,
+    41% 15%
+  );
   transform: rotate(14deg);
   animation: w-pulse 2.4s ease-in-out infinite;
 }
@@ -171,12 +200,14 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle at 50% 35%, #ffd08a, #ff8a00 55%, #c45200);
-  box-shadow: 0 14px 30px rgba(196, 82, 0, 0.35), inset 0 -8px 18px rgba(120, 40, 0, 0.35);
+  box-shadow:
+    0 14px 30px rgba(196, 82, 0, 0.35),
+    inset 0 -8px 18px rgba(120, 40, 0, 0.35);
 }
 
 .era--y2010 .w-orb::before,
 .era--y2010 .w-icon::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 9%;
   right: 9%;
@@ -188,9 +219,14 @@
 
 .era--y2010 .w-orb span {
   position: relative;
-  font: 700 clamp(84px, 13vw, 140px) / 1 Georgia, 'Times New Roman', serif;
+  font:
+    700 clamp(84px, 13vw, 140px) / 1 Georgia,
+    "Times New Roman",
+    serif;
   color: #fff;
-  text-shadow: 0 -2px 0 rgba(120, 40, 0, 0.35), 0 4px 10px rgba(120, 40, 0, 0.3);
+  text-shadow:
+    0 -2px 0 rgba(120, 40, 0, 0.35),
+    0 4px 10px rgba(120, 40, 0, 0.3);
 }
 
 .era--y2010 .w-icon {
@@ -199,7 +235,10 @@
   width: 21%;
   aspect-ratio: 1;
   border-radius: 23%;
-  box-shadow: 0 8px 16px rgba(0, 30, 60, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -3px 6px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 8px 16px rgba(0, 30, 60, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.18);
 }
 
 .era--y2010 .w-icon::before {
@@ -331,7 +370,7 @@
 }
 
 .era--y2010 .w-site__top::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0 0 52% 0;
   background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
@@ -356,7 +395,25 @@
   width: 46px;
   height: 46px;
   background: radial-gradient(circle at 50% 35%, #fff36b, #ffb800 60%, #ff8a00);
-  clip-path: polygon(50% 0, 61% 18%, 82% 12%, 80% 34%, 100% 45%, 84% 60%, 92% 82%, 70% 82%, 60% 100%, 46% 84%, 25% 94%, 22% 72%, 2% 62%, 16% 46%, 6% 26%, 28% 22%, 32% 2%);
+  clip-path: polygon(
+    50% 0,
+    61% 18%,
+    82% 12%,
+    80% 34%,
+    100% 45%,
+    84% 60%,
+    92% 82%,
+    70% 82%,
+    60% 100%,
+    46% 84%,
+    25% 94%,
+    22% 72%,
+    2% 62%,
+    16% 46%,
+    6% 26%,
+    28% 22%,
+    32% 2%
+  );
   transform: rotate(12deg);
 }
 
@@ -455,7 +512,9 @@
   border-radius: 50%;
   background: radial-gradient(circle at 50% 30%, #666, #111);
   color: #fff;
-  font: 700 22px/1 Georgia, serif;
+  font:
+    700 22px / 1 Georgia,
+    serif;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.25s;
@@ -509,8 +568,7 @@
     radial-gradient(ellipse 75% 46% at 82% 118%, #5aa846 60%, transparent 61%),
     radial-gradient(circle at 80% 26%, #fffbe0 0 7%, rgba(255, 246, 192, 0.5) 7.5%, transparent 14%),
     radial-gradient(ellipse 12% 6% at 26% 28%, #fff 60%, transparent 64%),
-    radial-gradient(ellipse 9% 5% at 33% 25%, #fff 60%, transparent 64%),
-    linear-gradient(#5fb0f0, #cfeaff);
+    radial-gradient(ellipse 9% 5% at 33% 25%, #fff 60%, transparent 64%), linear-gradient(#5fb0f0, #cfeaff);
 }
 
 .era--y2010 .w-scene--sunset,
@@ -524,11 +582,37 @@
 .era--y2010 .w-scene--night,
 .era--y2010 .w-photo--3 {
   background:
-    radial-gradient(circle at 76% 24%, #fffbe0 0 6%, rgba(255, 251, 224, 0.25) 6.5%, transparent 11%) 0 0 / 100% 100% no-repeat,
+    radial-gradient(circle at 76% 24%, #fffbe0 0 6%, rgba(255, 251, 224, 0.25) 6.5%, transparent 11%) 0 0 / 100% 100%
+    no-repeat,
     radial-gradient(circle, #ffd56b 0 1px, transparent 1.6px) left 0 bottom 14% / 13px 9px repeat-x,
     radial-gradient(circle, #ffd56b 0 1px, transparent 1.6px) left 6px bottom 24% / 17px 9px repeat-x,
-    linear-gradient(90deg, #0c1628 0 11%, transparent 11% 14%, #101d36 14% 25%, transparent 25% 29%, #0c1628 29% 44%, transparent 44% 48%, #101d36 48% 60%, transparent 60% 63%, #0c1628 63% 79%, transparent 79% 83%, #101d36 83% 100%) bottom / 100% 36% no-repeat,
-    linear-gradient(90deg, #1a3157 0 7%, transparent 7% 17%, #1a3157 17% 23%, transparent 23% 50%, #1a3157 50% 56%, transparent 56% 85%, #1a3157 85% 91%, transparent 91%) bottom / 100% 52% no-repeat,
+    linear-gradient(
+      90deg,
+      #0c1628 0 11%,
+      transparent 11% 14%,
+      #101d36 14% 25%,
+      transparent 25% 29%,
+      #0c1628 29% 44%,
+      transparent 44% 48%,
+      #101d36 48% 60%,
+      transparent 60% 63%,
+      #0c1628 63% 79%,
+      transparent 79% 83%,
+      #101d36 83% 100%
+    )
+    bottom / 100% 36% no-repeat,
+    linear-gradient(
+      90deg,
+      #1a3157 0 7%,
+      transparent 7% 17%,
+      #1a3157 17% 23%,
+      transparent 23% 50%,
+      #1a3157 50% 56%,
+      transparent 56% 85%,
+      #1a3157 85% 91%,
+      transparent 91%
+    )
+    bottom / 100% 52% no-repeat,
     radial-gradient(circle, #fff 0 0.8px, transparent 1.3px) 0 0 / 41px 31px,
     linear-gradient(#081a3a, #2a5a90) 0 0 / 100% 100% no-repeat;
 }
@@ -556,16 +640,14 @@
     radial-gradient(ellipse 14% 40% at 15% 70%, #3f7a2f 60%, transparent 62%),
     radial-gradient(ellipse 16% 46% at 40% 66%, #356b28 60%, transparent 62%),
     radial-gradient(ellipse 14% 40% at 66% 70%, #4a8a36 60%, transparent 62%),
-    radial-gradient(ellipse 16% 46% at 88% 64%, #3a7030 60%, transparent 62%),
-    linear-gradient(#cfe8c0, #f0f7e8);
+    radial-gradient(ellipse 16% 46% at 88% 64%, #3a7030 60%, transparent 62%), linear-gradient(#cfe8c0, #f0f7e8);
 }
 
 .era--y2010 .w-photo--5 {
   background-image:
     radial-gradient(ellipse 70% 30% at 30% 100%, #d9874a 60%, transparent 62%),
     radial-gradient(ellipse 80% 34% at 85% 104%, #c26f35 60%, transparent 62%),
-    linear-gradient(transparent 62%, #e9a462 62%),
-    radial-gradient(circle at 70% 30%, #fff6d0 0 7%, transparent 8%),
+    linear-gradient(transparent 62%, #e9a462 62%), radial-gradient(circle at 70% 30%, #fff6d0 0 7%, transparent 8%),
     linear-gradient(#ffcf8a, #ffe9c9);
 }
 
@@ -584,7 +666,9 @@
   border: 1px solid #dde3ea;
   border-radius: 8px;
   background: linear-gradient(#fff, #f7f9fb);
-  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(0, 0, 0, 0.07);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 3px rgba(0, 0, 0, 0.07);
 }
 
 .era--y2010 .w-boxtitle {
@@ -647,7 +731,7 @@
 }
 
 .era--y2010 .w-checks li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 0;
   top: -1px;
@@ -706,7 +790,7 @@
 }
 
 .era--y2010 .w-faq dt::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 2px;
   transition: transform 0.2s;
@@ -895,7 +979,7 @@
   margin: 40px auto 0;
   border: 1px solid #e0e0e0;
   background: #fff;
-  font: 13px/1.7 var(--w-code);
+  font: 13px / 1.7 var(--w-code);
   box-shadow: 0 6px 20px rgba(0, 40, 80, 0.1);
 }
 
@@ -1035,7 +1119,9 @@
   border-radius: 50%;
   background: radial-gradient(circle at 50% 30%, #777, #222);
   color: #fff;
-  font: 700 16px/1 Arial, sans-serif;
+  font:
+    700 16px / 1 Arial,
+    sans-serif;
   cursor: pointer;
 }
 
@@ -1128,7 +1214,7 @@
 }
 
 .era--y2010 .w-steps li + li::before {
-  content: '›';
+  content: "›";
   margin: 0 8px;
   color: #c0c8d0;
 }
@@ -1245,11 +1331,13 @@
 }
 
 .era--y2010 .w-state::before {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .era--y2010 .w-state--pending {
@@ -1291,11 +1379,13 @@
   overflow: hidden;
   border-radius: 10px;
   color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 10px rgba(0, 30, 60, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 4px 10px rgba(0, 30, 60, 0.18);
 }
 
 .era--y2010 .w-lamp__layer::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0 0 50% 0;
   background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.06));
@@ -1303,7 +1393,7 @@
 
 .era--y2010 .w-lamp__layer b {
   position: relative;
-  font: 800 30px/1 var(--w-head);
+  font: 800 30px / 1 var(--w-head);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -1354,11 +1444,13 @@
   color: #fff;
   font: 700 16px var(--w-ui);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 3px 8px rgba(61, 155, 44, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 3px 8px rgba(61, 155, 44, 0.4);
 }
 
 .era--y2010 .deploy__btn::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0 0 50% 0;
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.12));
@@ -1374,7 +1466,10 @@
   border-radius: 6px;
   background: rgba(24, 24, 24, 0.96);
   color: #e8e8e8;
-  font: 12px/1.55 Monaco, Menlo, var(--mono);
+  font:
+    12px / 1.55 Monaco,
+    Menlo,
+    var(--mono);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -1470,11 +1565,13 @@
   font: 700 clamp(18px, 2.4vw, 28px) var(--w-head);
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .era--y2010 .w-flatten::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(#8fdc6f, #3d9b2c);
@@ -1487,7 +1584,7 @@
 }
 
 .era--y2010 .w-flatten.is-flat span {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -1519,7 +1616,7 @@
 }
 
 .era--y2010 .w-linen::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background:
@@ -1547,7 +1644,7 @@
 }
 
 .era--y2010 .w-leather::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background:
@@ -1557,7 +1654,7 @@
 }
 
 .era--y2010 .w-leather::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 7px;
   border: 2px dashed rgba(240, 210, 160, calc(0.7 * var(--tex)));
@@ -1573,7 +1670,11 @@
   position: relative;
   display: grid;
   margin: 34px 0 0;
-  font: 800 clamp(40px, 7.4vw, 112px) / 0.98 'Lucida Grande', 'Trebuchet MS', Helvetica, sans-serif;
+  font:
+    800 clamp(40px, 7.4vw, 112px) / 0.98 "Lucida Grande",
+    "Trebuchet MS",
+    Helvetica,
+    sans-serif;
   letter-spacing: -0.045em;
 }
 
@@ -1594,14 +1695,16 @@
 /* …and what it became: flat, one color, no effects */
 .era--y2010 .w-bl--flat {
   color: #2c3e50;
-  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-family: "Lato", "Helvetica Neue", sans-serif;
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
 .era--y2010 .w-bridge__sub {
   margin: 0;
-  font: 700 clamp(13px, 1.3vw, 18px) 'Lato', sans-serif;
+  font:
+    700 clamp(13px, 1.3vw, 18px) "Lato",
+    sans-serif;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #1abc9c;
@@ -1609,7 +1712,7 @@
 
 /* ---------- HUD skin ---------- */
 
-html[data-era='y2010'] .hud__year {
+html[data-era="y2010"] .hud__year {
   color: #26303a;
   text-shadow: 0 1px 0 #fff;
 }
@@ -1695,12 +1798,12 @@ html[data-era='y2010'] .hud__year {
 /* ================= stage: headline scenes (2010 gloss) ================= */
 
 .era--y2010 .stage__year {
-  font-family: 'Lucida Grande', 'Trebuchet MS', sans-serif;
+  font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
   -webkit-text-stroke: 2px rgba(59, 141, 216, 0.16);
 }
 
 .era--y2010 .stage__name {
-  font-family: 'Lucida Grande', 'Trebuchet MS', Helvetica, sans-serif;
+  font-family: "Lucida Grande", "Trebuchet MS", Helvetica, sans-serif;
   letter-spacing: -0.04em;
   background: linear-gradient(#4a4a4a, #111 60%);
   -webkit-background-clip: text;
@@ -1729,7 +1832,9 @@ html[data-era='y2010'] .hud__year {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-shadow: 0 -1px 0 rgba(150, 60, 0, 0.5);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .era--y2010 .stage__dots li {
@@ -1752,15 +1857,22 @@ html[data-era='y2010'] .hud__year {
   height: 100%;
   border-radius: 50%;
   background: radial-gradient(circle at 50% 30%, #ffc56e 0%, #ff8a1a 45%, #d95500 100%);
-  box-shadow: inset 0 -0.06em 0.12em rgba(120, 40, 0, 0.45), 0 0.08em 0.16em rgba(120, 50, 0, 0.3);
+  box-shadow:
+    inset 0 -0.06em 0.12em rgba(120, 40, 0, 0.45),
+    0 0.08em 0.16em rgba(120, 50, 0, 0.3);
   color: #fff;
-  font: 700 0.66em/1 'Lucida Grande', 'Trebuchet MS', sans-serif;
-  text-shadow: 0 -0.02em 0 rgba(130, 50, 0, 0.6), 0 0.02em 0.06em rgba(0, 0, 0, 0.25);
+  font:
+    700 0.66em / 1 "Lucida Grande",
+    "Trebuchet MS",
+    sans-serif;
+  text-shadow:
+    0 -0.02em 0 rgba(130, 50, 0, 0.6),
+    0 0.02em 0.06em rgba(0, 0, 0, 0.25);
   -webkit-box-reflect: below 0.04em linear-gradient(transparent 62%, rgba(255, 255, 255, 0.28));
 }
 
 .era--y2010 .w-dollar::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 4%;
   left: 14%;
@@ -1782,9 +1894,14 @@ html[data-era='y2010'] .hud__year {
   padding: 0.6em 0.9em;
   border-radius: 10px;
   background: linear-gradient(#3c3c3c, #1d1d1d);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   color: #f8f8f2;
-  font: 400 clamp(15px, 1.7vw, 24px) / 1.45 Monaco, Menlo, monospace;
+  font:
+    400 clamp(15px, 1.7vw, 24px) / 1.45 Monaco,
+    Menlo,
+    monospace;
 }
 
 .era--y2010 .w-jq__typed {
@@ -1821,7 +1938,7 @@ html[data-era='y2010'] .hud__year {
 
 .era--y2010 .w-jq__inner {
   height: 70vh;
-  font-family: 'Lucida Grande', Verdana, sans-serif;
+  font-family: "Lucida Grande", Verdana, sans-serif;
   color: #333;
 }
 
@@ -1905,7 +2022,9 @@ html[data-era='y2010'] .hud__year {
   font-weight: 700;
   font-size: 14px;
   text-shadow: 0 -1px 0 rgba(0, 80, 0, 0.4);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .era--y2010 .w-jq__grid {
@@ -1940,7 +2059,9 @@ html[data-era='y2010'] .hud__year {
   border-radius: 4px;
   background: linear-gradient(#ff5b5b, #d40000);
   color: #fff;
-  font: 700 9px/1.2 Verdana, sans-serif;
+  font:
+    700 9px / 1.2 Verdana,
+    sans-serif;
   font-style: normal;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -1954,7 +2075,9 @@ html[data-era='y2010'] .hud__year {
   border-radius: 22%;
   background: linear-gradient(#ff8a5c, #e34f26 55%, #c23a14);
   color: #fff;
-  box-shadow: inset 0 -0.03em 0.06em rgba(100, 20, 0, 0.4), 0 0.06em 0.14em rgba(120, 40, 0, 0.3);
+  box-shadow:
+    inset 0 -0.03em 0.06em rgba(100, 20, 0, 0.4),
+    0 0.06em 0.14em rgba(120, 40, 0, 0.3);
   -webkit-box-reflect: below 0.04em linear-gradient(transparent 62%, rgba(255, 255, 255, 0.28));
   overflow: hidden;
   position: relative;
@@ -1966,7 +2089,7 @@ html[data-era='y2010'] .hud__year {
 }
 
 .era--y2010 .w-tile::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0 0 52% 0;
   background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.06));
@@ -1981,7 +2104,10 @@ html[data-era='y2010'] .hud__year {
   border: 1px solid #a9a9a9;
   background: #e8e8e8;
   color: #333;
-  font: 700 clamp(22px, 2.6vw, 38px) / 1 'Lucida Grande', Verdana, sans-serif;
+  font:
+    700 clamp(22px, 2.6vw, 38px) / 1 "Lucida Grande",
+    Verdana,
+    sans-serif;
 }
 
 .era--y2010 .w-css__code {
@@ -1998,7 +2124,10 @@ html[data-era='y2010'] .hud__year {
   background: #fff;
   box-shadow: 0 10px 30px rgba(30, 60, 100, 0.14);
   color: #333;
-  font: 400 clamp(12px, 1vw, 15px) / 1.7 Monaco, Menlo, monospace;
+  font:
+    400 clamp(12px, 1vw, 15px) / 1.7 Monaco,
+    Menlo,
+    monospace;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
@@ -2049,14 +2178,18 @@ html[data-era='y2010'] .hud__year {
 /* Node.js */
 .era--y2010 .w-tile--node {
   background: linear-gradient(#a3d96b, #5fa83a 55%, #3c7d22);
-  box-shadow: inset 0 -0.03em 0.06em rgba(20, 60, 0, 0.4), 0 0.06em 0.14em rgba(30, 80, 0, 0.3);
+  box-shadow:
+    inset 0 -0.03em 0.06em rgba(20, 60, 0, 0.4),
+    0 0.06em 0.14em rgba(30, 80, 0, 0.3);
 }
 
 .era--y2010 .w-tile--node .logo--word {
   width: auto;
   height: auto;
   color: #fff;
-  font: 700 0.3em/1 'Lato', sans-serif;
+  font:
+    700 0.3em / 1 "Lato",
+    sans-serif;
   letter-spacing: -0.03em;
   text-shadow: 0 0.04em 0.06em rgba(20, 60, 0, 0.45);
 }
@@ -2081,7 +2214,7 @@ html[data-era='y2010'] .hud__year {
   border-radius: 10px;
   background: linear-gradient(#fff, #f3f6f9);
   box-shadow: 0 10px 30px rgba(30, 60, 100, 0.14);
-  font-family: 'Lucida Grande', Verdana, sans-serif;
+  font-family: "Lucida Grande", Verdana, sans-serif;
   color: #333;
 }
 
@@ -2136,7 +2269,7 @@ html[data-era='y2010'] .hud__year {
 }
 
 .era--y2010 .w-node__bar::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -2232,7 +2365,9 @@ html[data-era='y2010'] .hud__year {
   background: linear-gradient(#fff, #d6dde5);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   transform: rotate(var(--a)) translateY(-104px);
-  transition: background 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
 }
 
 .era--y2010 .w-node__dots i.is-on {
@@ -2263,11 +2398,11 @@ html[data-era='y2010'] .hud__year {
 /* credits + thread, 2010 gloss */
 .era--y2010 .credits__title,
 .era--y2010 .thread__title {
-  font-family: 'Lucida Grande', 'Trebuchet MS', sans-serif;
+  font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
 }
 
 .era--y2010 .credit__name {
-  font-family: 'Lucida Grande', 'Trebuchet MS', Helvetica, sans-serif;
+  font-family: "Lucida Grande", "Trebuchet MS", Helvetica, sans-serif;
   letter-spacing: -0.04em;
   background: linear-gradient(#4a4a4a, #111 60%);
   -webkit-background-clip: text;
@@ -2280,7 +2415,7 @@ html[data-era='y2010'] .hud__year {
 }
 
 .era--y2010 .credit__meta {
-  font-family: 'Lucida Grande', var(--jp);
+  font-family: "Lucida Grande", var(--jp);
 }
 
 .era--y2010 .credit__meta b {

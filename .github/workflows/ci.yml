@@ -1,0 +1,29 @@
+# Lint, format check, type check and build on every pull request and on develop.
+# (main is checked by the same build in deploy.yml.)
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [develop]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx biome ci --reporter=github
+      # type check + vite build
+      - run: npm run build

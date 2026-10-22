@@ -1,23 +1,99 @@
-import {
-  siDocker, siHelm, siPrometheus, siGrafana, siIstio, siArgo, siEnvoyproxy, siJaeger, siFluentd,
-  siLinkerd, siEtcd, siContainerd, siCncf, siHarbor, siVitess, siRook, siOpentelemetry, siFalco, siCilium,
-  siSpinnaker, siJenkins, siGitlab, siConsul, siVault, siPodman, siRancher, siRedhatopenshift, siMinio, siCeph,
-  siElasticsearch, siKibana, siDatadog, siSentry, siPagerduty, siPostgresql, siMongodb,
-  siApachekafka, siRabbitmq, siNginx, siTerraform, siPulumi, siAnsible, siGithubactions,
-} from 'simple-icons';
-import { k8sMark } from './k8s-logo';
 import type { SimpleIcon } from 'simple-icons';
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
-import { h } from '../../core/util';
+import {
+  siAnsible,
+  siApachekafka,
+  siArgo,
+  siCeph,
+  siCilium,
+  siCncf,
+  siConsul,
+  siContainerd,
+  siDatadog,
+  siDocker,
+  siElasticsearch,
+  siEnvoyproxy,
+  siEtcd,
+  siFalco,
+  siFluentd,
+  siGithubactions,
+  siGitlab,
+  siGrafana,
+  siHarbor,
+  siHelm,
+  siIstio,
+  siJaeger,
+  siJenkins,
+  siKibana,
+  siLinkerd,
+  siMinio,
+  siMongodb,
+  siNginx,
+  siOpentelemetry,
+  siPagerduty,
+  siPodman,
+  siPostgresql,
+  siPrometheus,
+  siPulumi,
+  siRabbitmq,
+  siRancher,
+  siRedhatopenshift,
+  siRook,
+  siSentry,
+  siSpinnaker,
+  siTerraform,
+  siVault,
+  siVitess,
+} from 'simple-icons';
 import { logo } from '../../components/logo';
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
+import { h } from '../../core/util';
+import { k8sMark } from './k8s-logo';
 
 // only marks that looked like this in 2018–2020 (Redis, New Relic and Traefik have been redrawn since)
 const ICONS: SimpleIcon[] = [
-  siDocker, siHelm, siPrometheus, siGrafana, siIstio, siArgo, siEnvoyproxy, siJaeger, siFluentd, siLinkerd, siEtcd,
-  siContainerd, siCncf, siHarbor, siVitess, siRook, siOpentelemetry, siFalco, siCilium, siSpinnaker, siJenkins,
-  siGitlab, siConsul, siVault, siPodman, siRancher, siRedhatopenshift, siMinio, siCeph, siElasticsearch, siKibana,
-  siDatadog, siSentry, siPagerduty, siPostgresql, siMongodb, siApachekafka, siRabbitmq,
-  siNginx, siTerraform, siPulumi, siAnsible, siGithubactions,
+  siDocker,
+  siHelm,
+  siPrometheus,
+  siGrafana,
+  siIstio,
+  siArgo,
+  siEnvoyproxy,
+  siJaeger,
+  siFluentd,
+  siLinkerd,
+  siEtcd,
+  siContainerd,
+  siCncf,
+  siHarbor,
+  siVitess,
+  siRook,
+  siOpentelemetry,
+  siFalco,
+  siCilium,
+  siSpinnaker,
+  siJenkins,
+  siGitlab,
+  siConsul,
+  siVault,
+  siPodman,
+  siRancher,
+  siRedhatopenshift,
+  siMinio,
+  siCeph,
+  siElasticsearch,
+  siKibana,
+  siDatadog,
+  siSentry,
+  siPagerduty,
+  siPostgresql,
+  siMongodb,
+  siApachekafka,
+  siRabbitmq,
+  siNginx,
+  siTerraform,
+  siPulumi,
+  siAnsible,
+  siGithubactions,
 ];
 
 const YAML = `apiVersion: apps/v1
@@ -171,11 +247,11 @@ export function createLandscape(parent: HTMLElement): void {
 
   let shown = 0;
   const show = (p: number) => {
-    const n = Math.max(1, Math.round(Math.pow(p, 1.6) * order.length));
+    const n = Math.max(1, Math.round(p ** 1.6 * order.length));
     if (n === shown) return;
     order.forEach((t, i) => t.classList.toggle('is-on', i < n));
     shown = n;
-    const total = p < 0.08 ? 1 : Math.round(Math.pow(p, 1.4) * 1000);
+    const total = p < 0.08 ? 1 : Math.round(p ** 1.4 * 1000);
     countEl.textContent = p > 0.97 ? '1,000+' : total.toLocaleString('en-US');
     el.classList.toggle('is-phase2', p > 0.42);
   };

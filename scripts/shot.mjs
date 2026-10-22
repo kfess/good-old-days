@@ -2,10 +2,14 @@
 //
 //   node scripts/shot.mjs [--era y2010] [--steps 6] [--mobile] [--out shots] [--url http://localhost:5173]
 //
+// Uses a locally installed Chrome (playwright-core ships no browser); set CHROME to its path if it
+// isn't in the default macOS location.
+//
 // Writes <out>/<era>-<n>.png and prints browser console errors.
-import { chromium } from 'playwright-core';
+
 import { mkdirSync } from 'node:fs';
 import { parseArgs } from 'node:util';
+import { chromium } from 'playwright-core';
 
 const { values: args } = parseArgs({
   options: {
@@ -18,7 +22,7 @@ const { values: args } = parseArgs({
   },
 });
 
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const CHROME = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 mkdirSync(args.out, { recursive: true });
 
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });

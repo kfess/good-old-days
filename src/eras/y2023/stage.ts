@@ -1,7 +1,17 @@
 import type { SimpleIcon } from 'simple-icons';
-import { siBrave, siClaude, siCursor, siGit, siGithub, siGoogledrive, siModelcontextprotocol, siPostgresql, siSqlite } from 'simple-icons';
-import { scrubType, type StageScene } from '../../components/stage';
+import {
+  siBrave,
+  siClaude,
+  siCursor,
+  siGit,
+  siGithub,
+  siGoogledrive,
+  siModelcontextprotocol,
+  siPostgresql,
+  siSqlite,
+} from 'simple-icons';
 import { logo } from '../../components/logo';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 import { tokenize } from './lib';
@@ -18,7 +28,8 @@ const TOKEN_MARK = `<svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><pa
 
 /* ---------------- GPT-4: tokens, one at a time ---------------- */
 
-const HAIKU = 'Sure! A haiku about the web:\nTags became pages,\npages learned to move and speak —\nnow they answer back.';
+const HAIKU =
+  'Sure! A haiku about the web:\nTags became pages,\npages learned to move and speak —\nnow they answer back.';
 
 const gpt4: StageScene = {
   year: '2023.03',
@@ -35,7 +46,10 @@ const gpt4: StageScene = {
         <div class="y23s-gpt__ask"><span>›</span> Write a haiku about the web.</div>
         <p class="y23s-gpt__out">${toks
           // a line's first word comes with its newline attached ("\nTags"): break, then keep the word
-          .map((t, i) => (t.includes('\n') ? '<br>' : '') + `<span class="y23s-tok" style="--h:${(i * 47) % 360}">${esc(t.replace(/\s*\n/, ''))}</span>`)
+          .map(
+            (t, i) =>
+              `${t.includes('\n') ? '<br>' : ''}<span class="y23s-tok" style="--h:${(i * 47) % 360}">${esc(t.replace(/\s*\n/, ''))}</span>`,
+          )
           .join('')}</p>
         <div class="y23s-meter"><b class="y23s-meter__n">0</b><span>tok/s</span><i class="y23s-meter__bar"><i></i></i><small class="y23s-meter__c">0 tokens</small></div>
       </div>`;
@@ -44,27 +58,46 @@ const gpt4: StageScene = {
     const c = art.querySelector<HTMLElement>('.y23s-meter__c')!;
     const bar = art.querySelector<HTMLElement>('.y23s-meter__bar i')!;
 
-    tl.to(mark, { xPercent: () => (mobile() ? 0 : -128), yPercent: () => (mobile() ? -150 : -78), scale: () => (mobile() ? 0.22 : 0.3), duration: 0.45, ease: 'power2.inOut' }, 0);
+    tl.to(
+      mark,
+      {
+        xPercent: () => (mobile() ? 0 : -128),
+        yPercent: () => (mobile() ? -150 : -78),
+        scale: () => (mobile() ? 0.22 : 0.3),
+        duration: 0.45,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.y23s-gpt__ask'), { opacity: 0, y: 24, duration: 0.25 }, 0.3);
     const t0 = 0.6;
     const span = 1.5;
     spans.forEach((s, i) => {
-      tl.fromTo(s, { opacity: 0, y: 18, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12, ease: 'power2.out' }, t0 + (i / spans.length) * span);
+      tl.fromTo(
+        s,
+        { opacity: 0, y: 18, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12, ease: 'power2.out' },
+        t0 + (i / spans.length) * span,
+      );
     });
     const meter = { k: 0 };
-    tl.to(meter, {
-      k: 1,
-      duration: span + 0.1,
-      ease: 'none',
-      onUpdate: () => {
-        const done = Math.round(meter.k * spans.length);
-        // a little jitter so it reads like a live meter
-        const rate = meter.k > 0 && meter.k < 1 ? 19 + Math.sin(meter.k * 40) * 3 : meter.k >= 1 ? 20.4 : 0;
-        n.textContent = rate.toFixed(1);
-        c.textContent = `${done} tokens`;
-        bar.style.transform = `scaleX(${Math.min(1, rate / 30)})`;
+    tl.to(
+      meter,
+      {
+        k: 1,
+        duration: span + 0.1,
+        ease: 'none',
+        onUpdate: () => {
+          const done = Math.round(meter.k * spans.length);
+          // a little jitter so it reads like a live meter
+          const rate = meter.k > 0 && meter.k < 1 ? 19 + Math.sin(meter.k * 40) * 3 : meter.k >= 1 ? 20.4 : 0;
+          n.textContent = rate.toFixed(1);
+          c.textContent = `${done} tokens`;
+          bar.style.transform = `scaleX(${Math.min(1, rate / 30)})`;
+        },
       },
-    }, t0);
+      t0,
+    );
     tl.to(spans, { '--tint': 0, duration: 0.3 }, t0 + span + 0.1);
     tl.to({}, { duration: 0.3 });
   },
@@ -148,19 +181,44 @@ export default function FocusTimer() {
     </div>
   );
 }`;
-    tl.to(mark, { xPercent: () => (mobile() ? 0 : -128), yPercent: () => (mobile() ? -150 : -78), scale: () => (mobile() ? 0.22 : 0.3), duration: 0.45, ease: 'power2.inOut' }, 0);
+    tl.to(
+      mark,
+      {
+        xPercent: () => (mobile() ? 0 : -128),
+        yPercent: () => (mobile() ? -150 : -78),
+        scale: () => (mobile() ? 0.22 : 0.3),
+        duration: 0.45,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.y23s-chat__me'), { opacity: 0, y: 20, duration: 0.2 }, 0.3);
     scrubType(tl, typed, 'Build me a pomodoro timer. Make it calm.', 0.5, 0.35);
     tl.from(art.querySelector('.y23s-chat__ai'), { opacity: 0, y: 16, duration: 0.2 }, 0.95);
     tl.from(art.querySelector('.y23s-chat__chip'), { opacity: 0, y: 16, duration: 0.2 }, 1.1);
-    tl.fromTo(panel, { clipPath: 'inset(0 0 0 100% round 20px)' }, { clipPath: 'inset(0 0 0 0% round 20px)', duration: 0.45, ease: 'power3.inOut' }, 1.15);
+    tl.fromTo(
+      panel,
+      { clipPath: 'inset(0 0 0 100% round 20px)' },
+      { clipPath: 'inset(0 0 0 0% round 20px)', duration: 0.45, ease: 'power3.inOut' },
+      1.15,
+    );
     scrubType(tl, code, src, 0.7, 1.45);
     // follow the cursor: the generated component is longer than the panel
     const pre = art.querySelector<HTMLElement>('.y23s-panel__code')!;
     tl.to({}, { duration: 0.75, ease: 'none', onUpdate: () => (pre.scrollTop = pre.scrollHeight) }, 1.45);
     tl.to(art.querySelector('.y23s-panel__code'), { opacity: 0, duration: 0.15 }, 2.2);
-    tl.fromTo(pieces, { opacity: 0, y: 24, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, stagger: 0.09, duration: 0.25, ease: 'back.out(1.8)' }, 2.25);
-    tl.fromTo(art.querySelector('.y23s-ring-fg'), { strokeDashoffset: 276 }, { strokeDashoffset: 0, duration: 0.45, ease: 'power2.out' }, 2.45);
+    tl.fromTo(
+      pieces,
+      { opacity: 0, y: 24, scale: 0.9 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.09, duration: 0.25, ease: 'back.out(1.8)' },
+      2.25,
+    );
+    tl.fromTo(
+      art.querySelector('.y23s-ring-fg'),
+      { strokeDashoffset: 276 },
+      { strokeDashoffset: 0, duration: 0.45, ease: 'power2.out' },
+      2.45,
+    );
 
     // the spark claude.ai turned while answering (2024) leaves the chat, arcs over to the artifact, then throws in each piece
     const sk = art.querySelector<HTMLElement>('.y23s-sk')!;
@@ -172,16 +230,48 @@ export default function FocusTimer() {
     tl.fromTo(spark, { rotate: -90 }, { rotate: 0, duration: 0.22, ease: 'power2.out' }, 0.95);
     tl.fromTo(say, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.12 }, 1.05);
     tl.to(say, { opacity: 0, duration: 0.1 }, 1.3);
-    tl.to(sk, { keyframes: [{ x: () => hop() * 0.5, y: -70, duration: 0.14, ease: 'power2.out' }, { x: 0, y: 0, duration: 0.14, ease: 'power2.in' }] }, 1.3);
+    tl.to(
+      sk,
+      {
+        keyframes: [
+          { x: () => hop() * 0.5, y: -70, duration: 0.14, ease: 'power2.out' },
+          { x: 0, y: 0, duration: 0.14, ease: 'power2.in' },
+        ],
+      },
+      1.3,
+    );
     // it keeps turning while the code streams in
     tl.to(spark, { rotate: 720, duration: 1.2, ease: 'none' }, 1.3);
     blocks.forEach((b, i) => {
       const at = 2.12 + i * 0.09;
       tl.fromTo(b, { opacity: 0, x: 0, y: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.04 }, at);
-      tl.to(b, { x: () => (mobile() ? 60 + i * 34 : 120 + i * 40), y: () => (mobile() ? -120 - i * 30 : -150 - i * 46), rotate: 180, opacity: 0, duration: 0.16, ease: 'power2.in' }, at + 0.04);
+      tl.to(
+        b,
+        {
+          x: () => (mobile() ? 60 + i * 34 : 120 + i * 40),
+          y: () => (mobile() ? -120 - i * 30 : -150 - i * 46),
+          rotate: 180,
+          opacity: 0,
+          duration: 0.16,
+          ease: 'power2.in',
+        },
+        at + 0.04,
+      );
       tl.to(sk, { scale: 1.14, duration: 0.04, yoyo: true, repeat: 1 }, at);
     });
-    tl.fromTo(say, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.12, immediateRender: false, onStart: () => (say.textContent = 'Done'), onReverseComplete: () => (say.textContent = 'Writing…') }, 2.62);
+    tl.fromTo(
+      say,
+      { opacity: 0, y: 8 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.12,
+        immediateRender: false,
+        onStart: () => (say.textContent = 'Done'),
+        onReverseComplete: () => (say.textContent = 'Writing…'),
+      },
+      2.62,
+    );
     tl.to({}, { duration: 0.35 });
   },
 };
@@ -227,8 +317,20 @@ function wireTimer(root: HTMLElement): void {
 
 /* ---------------- Cursor: ⌘K, then the diff sweeps through ---------------- */
 
-const OLD = ['function total(items) {', '  let sum = 0;', '  for (let i = 0; i < items.length; i++) {', '    sum += items[i].price * items[i].qty;', '  }', '  return sum;', '}'];
-const NEW = ['function total(items: Item[]): number {', '  return items.reduce((sum, i) => sum + i.price * i.qty, 0);', '}'];
+const OLD = [
+  'function total(items) {',
+  '  let sum = 0;',
+  '  for (let i = 0; i < items.length; i++) {',
+  '    sum += items[i].price * items[i].qty;',
+  '  }',
+  '  return sum;',
+  '}',
+];
+const NEW = [
+  'function total(items: Item[]): number {',
+  '  return items.reduce((sum, i) => sum + i.price * i.qty, 0);',
+  '}',
+];
 
 const cursor: StageScene = {
   year: '2023',
@@ -260,7 +362,17 @@ const cursor: StageScene = {
     const accept = art.querySelector<HTMLElement>('.y23s-accept')!;
     const sweep = art.querySelector<HTMLElement>('.y23s-sweep')!;
 
-    tl.to(mark, { xPercent: () => (mobile() ? 0 : -128), yPercent: () => (mobile() ? -150 : -78), scale: () => (mobile() ? 0.22 : 0.3), duration: 0.45, ease: 'power2.inOut' }, 0);
+    tl.to(
+      mark,
+      {
+        xPercent: () => (mobile() ? 0 : -128),
+        yPercent: () => (mobile() ? -150 : -78),
+        scale: () => (mobile() ? 0.22 : 0.3),
+        duration: 0.45,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.y23s-ed'), { opacity: 0, y: 40, duration: 0.3 }, 0.25);
     tl.set(news, { height: 0, opacity: 0 }, 0);
     // like Cursor's inline prompt, the ⌘K box opens above the code and pushes it down instead of covering line 1
@@ -344,7 +456,12 @@ const mcp: StageScene = {
 
     // the logo becomes the hub at the center
     tl.to(mark, { scale: () => (mobile() ? 0.42 : 0.36), duration: 0.4, ease: 'power2.inOut' }, 0);
-    tl.fromTo(art.querySelector('.y23s-hubring'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.3 }, 0.25);
+    tl.fromTo(
+      art.querySelector('.y23s-hubring'),
+      { strokeDashoffset: 1 },
+      { strokeDashoffset: 0, duration: 0.3 },
+      0.25,
+    );
     plugs.forEach((p, i) => {
       const at = 0.45 + i * 0.16;
       tl.fromTo(p, { '--r': 1, opacity: 0 }, { '--r': 0, opacity: 1, duration: 0.3, ease: 'power3.in' }, at);
@@ -354,21 +471,25 @@ const mcp: StageScene = {
     tl.from(art.querySelector('.y23s-mcp__cfg'), { opacity: 0, x: 30, duration: 0.25 }, 1.0);
     // packets run out to every tool and back
     const flow = { k: 0 };
-    tl.to(flow, {
-      k: 2,
-      duration: 0.7,
-      ease: 'none',
-      onUpdate: () => {
-        pkts.forEach((c, i) => {
-          const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-          const u = (flow.k + i * 0.13) % 1;
-          const r = (u < 0.5 ? u * 2 : (1 - u) * 2) * 78;
-          c.setAttribute('cx', (Math.cos(a) * r).toFixed(2));
-          c.setAttribute('cy', (Math.sin(a) * r).toFixed(2));
-          c.style.opacity = flow.k > 0 && flow.k < 2 ? '1' : '0';
-        });
+    tl.to(
+      flow,
+      {
+        k: 2,
+        duration: 0.7,
+        ease: 'none',
+        onUpdate: () => {
+          pkts.forEach((c, i) => {
+            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+            const u = (flow.k + i * 0.13) % 1;
+            const r = (u < 0.5 ? u * 2 : (1 - u) * 2) * 78;
+            c.setAttribute('cx', (Math.cos(a) * r).toFixed(2));
+            c.setAttribute('cy', (Math.sin(a) * r).toFixed(2));
+            c.style.opacity = flow.k > 0 && flow.k < 2 ? '1' : '0';
+          });
+        },
       },
-    }, 1.65);
+      1.65,
+    );
     tl.to({}, { duration: 0.2 });
   },
 };

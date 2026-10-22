@@ -1,11 +1,14 @@
-import { esc, h, onceInView, sleep } from '../../core/util';
 import { reducedMotion } from '../../core/scroll';
+import { esc, h, onceInView, sleep } from '../../core/util';
 
 const FALLBACK = 'Sorry, I didn’t understand that. 🤖';
 
 const RULES: { match: RegExp; reply: string }[] = [
   { match: /price|pricing|cost|plan/i, reply: 'Our plans start at $29/month. Would you like to see the pricing page?' },
-  { match: /sales|demo|contact/i, reply: 'Great! Please leave your email and our team will get back to you within 1–2 business days.' },
+  {
+    match: /sales|demo|contact/i,
+    reply: 'Great! Please leave your email and our team will get back to you within 1–2 business days.',
+  },
   { match: /^(hi|hello|hey)/i, reply: 'Hello! 👋 Please choose one of the options below.' },
   { match: /human|person/i, reply: 'Our support team is available Mon–Fri, 9am–5pm (PST).' },
 ];
@@ -146,7 +149,11 @@ export function createLook(parent: HTMLElement): void {
       await sleep(reducedMotion ? 0 : 1400);
       if (!auto) return;
       await toggle(true);
-      for (const msg of ['Pricing', 'Can I migrate my Postgres to Aurora with zero downtime?', 'Can I talk to a human?']) {
+      for (const msg of [
+        'Pricing',
+        'Can I migrate my Postgres to Aurora with zero downtime?',
+        'Can I talk to a human?',
+      ]) {
         await sleep(reducedMotion ? 0 : 1600);
         if (!auto) return;
         await answer(msg);

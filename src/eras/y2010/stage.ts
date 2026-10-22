@@ -1,6 +1,6 @@
 import { siHtml5 } from 'simple-icons';
-import { scrubType, type StageScene } from '../../components/stage';
 import { logo } from '../../components/logo';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
@@ -39,7 +39,17 @@ const jquery: StageScene = {
     const code1 = "$('#page').slideDown('slow');";
     const code2 = "$('#page').slideDown('slow')\n  .find('.badge').fadeIn();";
 
-    tl.to(dollar, { xPercent: () => (mobile() ? 0 : -95), yPercent: () => (mobile() ? -88 : -40), scale: () => (mobile() ? 0.4 : 0.62), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      dollar,
+      {
+        xPercent: () => (mobile() ? 0 : -95),
+        yPercent: () => (mobile() ? -88 : -40),
+        scale: () => (mobile() ? 0.4 : 0.62),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.w-jq__code'), { opacity: 0, y: 20, duration: 0.2 }, 0.35);
     scrubType(tl, typed, code1, 0.7, 0.45);
     tl.fromTo(page, { height: 0 }, { height: () => (mobile() ? '34vh' : '70vh'), duration: 1, ease: swing }, 1.25);
@@ -75,7 +85,17 @@ const css3: StageScene = {
     const box = art.querySelector<HTMLElement>('.w-css__box')!;
     const lines = Array.from(art.querySelectorAll<HTMLElement>('[data-r]'));
 
-    tl.to(tile, { xPercent: () => (mobile() ? 0 : 90), yPercent: () => (mobile() ? -95 : -55), scale: () => (mobile() ? 0.35 : 0.45), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      tile,
+      {
+        xPercent: () => (mobile() ? 0 : 90),
+        yPercent: () => (mobile() ? -95 : -55),
+        scale: () => (mobile() ? 0.35 : 0.45),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from([box, art.querySelector('.w-css__code')], { opacity: 0, y: 30, stagger: 0.1, duration: 0.3 }, 0.3);
     // what each line does to the button (the -moz- twins add nothing visible in a WebKit-like preview)
     const styles: (gsap.TweenVars | null)[] = [
@@ -137,7 +157,17 @@ const node: StageScene = {
     const served = art.querySelector<HTMLElement>('.w-node__served b')!;
     const code = "http.createServer(function (req, res) {\n  res.end('Hello World\\n');\n}).listen(8124);";
 
-    tl.to(tile, { xPercent: () => (mobile() ? 0 : -95), yPercent: () => (mobile() ? -88 : -40), scale: () => (mobile() ? 0.4 : 0.62), duration: 0.5, ease: 'power2.inOut' }, 0);
+    tl.to(
+      tile,
+      {
+        xPercent: () => (mobile() ? 0 : -95),
+        yPercent: () => (mobile() ? -88 : -40),
+        scale: () => (mobile() ? 0.4 : 0.62),
+        duration: 0.5,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
     tl.from(art.querySelector('.w-node__code'), { opacity: 0, y: 20, duration: 0.2 }, 0.35);
     scrubType(tl, typed, code, 0.8, 0.45);
     tl.from(art.querySelectorAll('.w-node__col'), { opacity: 0, y: 40, stagger: 0.12, duration: 0.3 }, 0.6);

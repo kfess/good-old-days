@@ -1,6 +1,6 @@
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
-import { MD, scene, type Box } from './iso';
+import { type Box, MD, scene } from './iso';
 
 const WORDS = ['component.', 'container.', 'function.', 'microservice.'];
 
@@ -17,7 +17,16 @@ function illustration(): string {
     }
   }
   for (let k = 0; k < 4; k++) {
-    boxes.push({ x: 12, y: 1, z: k * 1.25, w: 1.6, d: 4.2, h: 1.15, color: [MD.lightBlue, MD.teal, MD.blueGrey, MD.deepOrange][k], cls: 'drop stackbox' });
+    boxes.push({
+      x: 12,
+      y: 1,
+      z: k * 1.25,
+      w: 1.6,
+      d: 4.2,
+      h: 1.15,
+      color: [MD.lightBlue, MD.teal, MD.blueGrey, MD.deepOrange][k],
+      cls: 'drop stackbox',
+    });
   }
   boxes.push({ x: 12, y: 7, z: 0, w: 2.6, d: 2.6, h: 5.5, color: MD.blueGrey, cls: 'drop' });
   const { svg, viewBox } = scene(boxes, 26);

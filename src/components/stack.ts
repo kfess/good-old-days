@@ -2,7 +2,17 @@ import { reducedMotion } from '../core/scroll';
 import { esc, h, onceInView } from '../core/util';
 
 /** Fixed category order, so the same column changes value era after era. */
-export const STACK_CATS = ['Frontend', 'Language', 'CSS / UI', 'Build', 'Backend', 'Database', 'Infra', 'Dev', 'AI'] as const;
+export const STACK_CATS = [
+  'Frontend',
+  'Language',
+  'CSS / UI',
+  'Build',
+  'Backend',
+  'Database',
+  'Infra',
+  'Dev',
+  'AI',
+] as const;
 export type StackCat = (typeof STACK_CATS)[number];
 
 export interface StackItem {
@@ -62,7 +72,12 @@ const TOPOLOGY: Record<string, Topology> = {
     boxes: [
       { area: 'dev', role: 'Your PC', cats: DEV },
       { area: 'client', role: 'Browser', note: 'Internet Explorer 6 · Firefox', cats: CLIENT },
-      { area: 'server', role: 'One shared server', note: 'Apache, PHP and MySQL in the same box', cats: ['Backend', 'Database'] },
+      {
+        area: 'server',
+        role: 'One shared server',
+        note: 'Apache, PHP and MySQL in the same box',
+        cats: ['Backend', 'Database'],
+      },
       { area: 'infra', role: 'Runs on', cats: ['Infra'] },
     ],
     wires: [
@@ -366,7 +381,9 @@ export function createStack(parent: HTMLElement, items: StackItem[], title?: str
             .map(
               (w) =>
                 `<path class="sd__wire sd__wire--${w.kind}" data-id="${w.id}"/>${
-                  w.label ? `<text class="sd__label sd__label--${w.kind}" data-for="${w.id}">${esc(w.label)}</text>` : ''
+                  w.label
+                    ? `<text class="sd__label sd__label--${w.kind}" data-for="${w.id}">${esc(w.label)}</text>`
+                    : ''
                 }`,
             )
             .join('')}
@@ -385,7 +402,9 @@ export function createStack(parent: HTMLElement, items: StackItem[], title?: str
   const boxes = new Map(
     Array.from(el.querySelectorAll<HTMLElement>('.sd__box')).map((b) => [b.dataset.area as Area, b] as const),
   );
-  const paths = new Map(Array.from(svg.querySelectorAll<SVGPathElement>('.sd__wire')).map((p) => [p.dataset.id!, p] as const));
+  const paths = new Map(
+    Array.from(svg.querySelectorAll<SVGPathElement>('.sd__wire')).map((p) => [p.dataset.id!, p] as const),
+  );
 
   /* draw the wires from the boxes' live positions */
   const wire = () => {
@@ -435,7 +454,7 @@ export function createStack(parent: HTMLElement, items: StackItem[], title?: str
     for (const step of topo.path) {
       const back = step.startsWith('-');
       const p = paths.get(back ? step.slice(1) : step);
-      if (!p || !p.getAttribute('d')) continue;
+      if (!p?.getAttribute('d')) continue;
       const len = p.getTotalLength();
       const dur = Math.max(260, len * 1.6);
       const t0 = performance.now();

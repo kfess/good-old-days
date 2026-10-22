@@ -1,27 +1,68 @@
 import {
-  siGithubcopilot, siCloudflarepages, siAstro, siSolid, siRemix, siBun, siNextdotjs, siReact, siSvelte,
-  siTailwindcss, siTypescript, siSupabase, siPrisma, siTrpc, siVercel, siCloudflare, siPnpm, siEsbuild, siFigma,
-  siLinear, siPlanetscale, siStorybook,
+  siAstro,
+  siBun,
+  siCloudflare,
+  siCloudflarepages,
+  siEsbuild,
+  siFigma,
+  siGithubcopilot,
+  siLinear,
+  siNextdotjs,
+  siPlanetscale,
+  siPnpm,
+  siPrisma,
+  siReact,
+  siRemix,
+  siSolid,
+  siStorybook,
+  siSupabase,
+  siSvelte,
+  siTailwindcss,
+  siTrpc,
+  siTypescript,
+  siVercel,
 } from 'simple-icons';
-import type { Era } from '../../core/types';
-import { createStage } from '../../components/stage';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
-import { createStack } from '../../components/stack';
 import { logo } from '../../components/logo';
+import { createStack } from '../../components/stack';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
 import { gsap, reducedMotion, scrollToEl } from '../../core/scroll';
+import type { Era } from '../../core/types';
 import { h, onceInView, sleep } from '../../core/util';
-import { STAGE_2021 } from './stage';
 import { createBento } from './bento';
 import { createGlobe } from './globe';
-import { VITE, DENO, VITEST, TURBOREPO } from './icons';
+import { DENO, TURBOREPO, VITE, VITEST } from './icons';
+import { STAGE_2021 } from './stage';
 import './style.css';
 
 const MARQUEE = [
-  VITE, siReact, siNextdotjs, siSvelte, siAstro, siRemix, siSolid, siTailwindcss, siTypescript, siBun, DENO,
-  siSupabase, siPrisma, siTrpc, siVercel, siCloudflare, siPnpm, TURBOREPO, siEsbuild, siGithubcopilot, siFigma,
-  siLinear, siPlanetscale, VITEST, siStorybook,
+  VITE,
+  siReact,
+  siNextdotjs,
+  siSvelte,
+  siAstro,
+  siRemix,
+  siSolid,
+  siTailwindcss,
+  siTypescript,
+  siBun,
+  DENO,
+  siSupabase,
+  siPrisma,
+  siTrpc,
+  siVercel,
+  siCloudflare,
+  siPnpm,
+  TURBOREPO,
+  siEsbuild,
+  siGithubcopilot,
+  siFigma,
+  siLinear,
+  siPlanetscale,
+  VITEST,
+  siStorybook,
 ];
 
 export const era: Era = {
@@ -58,7 +99,12 @@ export const era: Era = {
       section,
       [
         { year: '2021', name: 'Astro', icon: siAstro, line: 'JavaScript only on the islands that need it.' },
-        { year: '2021', name: 'Cloudflare Pages', icon: siCloudflarepages, line: 'git push, and it’s on the edge worldwide.' },
+        {
+          year: '2021',
+          name: 'Cloudflare Pages',
+          icon: siCloudflarepages,
+          line: 'git push, and it’s on the edge worldwide.',
+        },
         { year: '2021', name: 'SolidJS 1.0', icon: siSolid, line: 'Faster, without a virtual DOM.' },
         { year: '2021', name: 'Remix', icon: siRemix, line: 'Betting on web standards again.' },
         { year: '2021', name: 'Turborepo', icon: TURBOREPO, line: 'Monorepo builds, made instant by caching.' },
@@ -197,9 +243,24 @@ export const era: Era = {
       // the date looms, the box steps forward: the last quiet moment before everything changes
       gsap
         .timeline({ scrollTrigger: { trigger: end, start: 'top 80%', end: 'top top', scrub: 0.6 } })
-        .fromTo(end.querySelector('.y21-end__date'), { opacity: 0, letterSpacing: '0.2em' }, { opacity: 1, letterSpacing: '-0.04em', ease: 'power2.out' }, 0)
-        .fromTo(end.querySelector('.y21-end__what'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, ease: 'power2.out' }, 0.12)
-        .fromTo(end.querySelector('.y21-end__box'), { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, ease: 'power2.out' }, 0.2);
+        .fromTo(
+          end.querySelector('.y21-end__date'),
+          { opacity: 0, letterSpacing: '0.2em' },
+          { opacity: 1, letterSpacing: '-0.04em', ease: 'power2.out' },
+          0,
+        )
+        .fromTo(
+          end.querySelector('.y21-end__what'),
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, ease: 'power2.out' },
+          0.12,
+        )
+        .fromTo(
+          end.querySelector('.y21-end__box'),
+          { scale: 0.9, opacity: 0 },
+          { scale: 1, opacity: 1, ease: 'power2.out' },
+          0.2,
+        );
     }
     onceInView(
       end.querySelector('.y21-end__box')!,

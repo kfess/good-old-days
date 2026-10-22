@@ -1,12 +1,15 @@
 import { siReact, siVuedotjs } from 'simple-icons';
-import { angularShield } from '../../components/marks';
 import { logo } from '../../components/logo';
+import { angularShield } from '../../components/marks';
 import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { esc, h } from '../../core/util';
 
 type Framework = 'react' | 'angular' | 'vue';
 
-const ROUTES: Record<Framework, { name: string; icon: typeof siReact; color: string; line: string; code: string; x: number }> = {
+const ROUTES: Record<
+  Framework,
+  { name: string; icon: typeof siReact; color: string; line: string; code: string; x: number }
+> = {
   react: {
     name: 'React 15',
     icon: siReact,

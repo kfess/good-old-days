@@ -1,6 +1,6 @@
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h, onceInView } from '../../core/util';
-import { MD, P, scene, type Box } from './iso';
+import { type Box, MD, P, scene } from './iso';
 import { ripples } from './md';
 import { mountMesh } from './mesh';
 
@@ -28,11 +28,33 @@ function splitScene(): string {
   const monoSvg = scene(mono, S).svg;
   const svcSvg = scene(svc, S).svg;
   // crack lines across the monolith's top face
-  const c = (pts: [number, number][]) => pts.map(([x, y]) => P(x, y, 3.4, S).map((v) => v.toFixed(1)).join(',')).join(' ');
+  const c = (pts: [number, number][]) =>
+    pts
+      .map(([x, y]) =>
+        P(x, y, 3.4, S)
+          .map((v) => v.toFixed(1))
+          .join(','),
+      )
+      .join(' ');
   const cracks = [
-    c([[3, 0], [3.1, 1.8], [2.9, 3.4], [3.1, 5.4]]),
-    c([[6.2, 0], [6.4, 2], [6.1, 3.6], [6.3, 5.4]]),
-    c([[0, 2.9], [2.6, 2.7], [5, 3], [8.6, 2.8]]),
+    c([
+      [3, 0],
+      [3.1, 1.8],
+      [2.9, 3.4],
+      [3.1, 5.4],
+    ]),
+    c([
+      [6.2, 0],
+      [6.4, 2],
+      [6.1, 3.6],
+      [6.3, 5.4],
+    ]),
+    c([
+      [0, 2.9],
+      [2.6, 2.7],
+      [5, 3],
+      [8.6, 2.8],
+    ]),
   ];
   // service names float above their stacks, drawn last so no block covers them
   const labels = SERVICES.map(([name, , x, y]) => {
@@ -79,14 +101,27 @@ function mountSplit(parent: HTMLElement): void {
       .timeline()
       .to(cracks, { strokeDashoffset: 0, duration: reducedMotion ? 0 : 0.5, stagger: 0.12 })
       .to(mono, { opacity: 0, y: 20, duration: reducedMotion ? 0 : 0.4 }, '+=0.15')
-      .fromTo(svc, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: reducedMotion ? 0 : 0.5, stagger: 0.08, ease: 'back.out(2)' }, '-=0.1')
-      .fromTo(reps, { opacity: 0, y: -90 }, { opacity: 1, y: 0, duration: reducedMotion ? 0 : 0.45, stagger: 0.06, ease: 'bounce.out' })
-      .to(n, {
-        v: 50,
-        duration: reducedMotion ? 0 : 1,
-        ease: 'power2.out',
-        onUpdate: () => (count.textContent = `6 services · ${Math.round(n.v)} containers`),
-      }, '<');
+      .fromTo(
+        svc,
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: reducedMotion ? 0 : 0.5, stagger: 0.08, ease: 'back.out(2)' },
+        '-=0.1',
+      )
+      .fromTo(
+        reps,
+        { opacity: 0, y: -90 },
+        { opacity: 1, y: 0, duration: reducedMotion ? 0 : 0.45, stagger: 0.06, ease: 'bounce.out' },
+      )
+      .to(
+        n,
+        {
+          v: 50,
+          duration: reducedMotion ? 0 : 1,
+          ease: 'power2.out',
+          onUpdate: () => (count.textContent = `6 services · ${Math.round(n.v)} containers`),
+        },
+        '<',
+      );
   }
   btn.addEventListener('click', run);
   if (!reducedMotion) onceInView(el, () => setTimeout(run, 900), 'top 55%');
@@ -94,7 +129,20 @@ function mountSplit(parent: HTMLElement): void {
 
 /** AWS Lambda: twelve functions that only exist (and bill) while a request is running. */
 function mountLambda(parent: HTMLElement): void {
-  const names = ['resize', 'thumbnail', 'auth', 'webhook', 'cron', 'search', 'notify', 'export', 'ocr', 'feed', 'pdf', 'ping'];
+  const names = [
+    'resize',
+    'thumbnail',
+    'auth',
+    'webhook',
+    'cron',
+    'search',
+    'notify',
+    'export',
+    'ocr',
+    'feed',
+    'pdf',
+    'ping',
+  ];
   const el = h(`
     <div class="y15-card y15-lambda">
       <p class="y15-card__title">Serverless <span>billed per 100 ms</span></p>

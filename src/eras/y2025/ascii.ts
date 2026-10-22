@@ -44,8 +44,8 @@ export function mountAsciiGlobe(pre: HTMLElement, cols: number, rows: number): v
         const lat = Math.asin(Math.max(-1, Math.min(1, y1)));
         const lon = Math.atan2(u, w);
         let s = 0.1 + 0.9 * Math.max(0, x * light[0] + y * light[1] + z * light[2]);
-        const latLine = Math.abs(((lat / (Math.PI / 9)) % 1 + 1) % 1 - 0.5) > 0.42;
-        const lonLine = Math.abs(((lon / (Math.PI / 8)) % 1 + 1) % 1 - 0.5) > 0.44;
+        const latLine = Math.abs(((((lat / (Math.PI / 9)) % 1) + 1) % 1) - 0.5) > 0.42;
+        const lonLine = Math.abs(((((lon / (Math.PI / 8)) % 1) + 1) % 1) - 0.5) > 0.44;
         if (latLine || lonLine) s = Math.min(1, 0.35 + s * 0.75);
         else s *= 0.32;
         grid[j][i] = RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.floor(s * RAMP.length)))];
@@ -80,7 +80,7 @@ export function mountAsciiGlobe(pre: HTMLElement, cols: number, rows: number): v
         const c = grid[j][i];
         line += scramble > 0 && c !== ' ' && Math.random() < scramble ? NOISE[(Math.random() * NOISE.length) | 0] : c;
       }
-      out += line + '\n';
+      out += `${line}\n`;
     }
     pre.textContent = out;
   };

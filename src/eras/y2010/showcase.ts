@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { parodyBook } from '../../components/oreilly';
-import { ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 
 const SLIDES = [
@@ -21,8 +21,22 @@ const UPDATES = [
 ];
 
 const TAGS: [string, number][] = [
-  ['ajax', 5], ['jquery', 5], ['web2.0', 4], ['html5', 4], ['css3', 3], ['mashup', 3], ['rss', 2], ['social', 3],
-  ['beta', 2], ['rails', 2], ['widgets', 1], ['tagging', 2], ['folksonomy', 1], ['mobile', 3], ['cloud', 2], ['api', 1],
+  ['ajax', 5],
+  ['jquery', 5],
+  ['web2.0', 4],
+  ['html5', 4],
+  ['css3', 3],
+  ['mashup', 3],
+  ['rss', 2],
+  ['social', 3],
+  ['beta', 2],
+  ['rails', 2],
+  ['widgets', 1],
+  ['tagging', 2],
+  ['folksonomy', 1],
+  ['mobile', 3],
+  ['cloud', 2],
+  ['api', 1],
 ];
 
 /** A loving recreation of a 2010 "Web 2.0" startup homepage, powered by real jQuery 1.12. */
@@ -192,8 +206,14 @@ function setupSlider(el: HTMLElement): void {
     if (!reducedMotion) timer = window.setInterval(() => go(current + 1), 4200);
   };
 
-  $slider.find('.w-slider__arrow--prev').on('click', () => (go(current - 1), restart()));
-  $slider.find('.w-slider__arrow--next').on('click', () => (go(current + 1), restart()));
+  $slider.find('.w-slider__arrow--prev').on('click', () => {
+    go(current - 1);
+    restart();
+  });
+  $slider.find('.w-slider__arrow--next').on('click', () => {
+    go(current + 1);
+    restart();
+  });
   $dots.on('click', function (this: HTMLElement) {
     go($dots.index(this));
     restart();
@@ -252,15 +272,20 @@ function setupLightbox(el: HTMLElement): void {
     $loading.show();
     const bw = w + 20;
     const bh = hh + 56;
-    $box.stop(true).animate({ width: bw, height: bh, marginLeft: -bw / 2, marginTop: -bh / 2 }, reducedMotion ? 0 : 400, () => {
-      window.setTimeout(() => {
-        $loading.hide();
-        $img.fadeIn(reducedMotion ? 0 : 350);
-        $lb.find('.w-lb__title').text(PHOTOS[index]);
-        $lb.find('.w-lb__count').text(`Image ${index + 1} of ${PHOTOS.length}`);
-        $meta.slideDown('fast');
-      }, reducedMotion ? 0 : 350);
-    });
+    $box
+      .stop(true)
+      .animate({ width: bw, height: bh, marginLeft: -bw / 2, marginTop: -bh / 2 }, reducedMotion ? 0 : 400, () => {
+        window.setTimeout(
+          () => {
+            $loading.hide();
+            $img.fadeIn(reducedMotion ? 0 : 350);
+            $lb.find('.w-lb__title').text(PHOTOS[index]);
+            $lb.find('.w-lb__count').text(`Image ${index + 1} of ${PHOTOS.length}`);
+            $meta.slideDown('fast');
+          },
+          reducedMotion ? 0 : 350,
+        );
+      });
   };
 
   const open = (i: number) => {
@@ -276,10 +301,12 @@ function setupLightbox(el: HTMLElement): void {
     $overlay.animate({ opacity: 0 }, 300, () => $lb.attr('hidden', ''));
   };
 
-  $(el).find('.w-thumb').on('click', function (this: HTMLElement, e) {
-    e.preventDefault();
-    open(Number($(this).data('i')));
-  });
+  $(el)
+    .find('.w-thumb')
+    .on('click', function (this: HTMLElement, e) {
+      e.preventDefault();
+      open(Number($(this).data('i')));
+    });
   $overlay.on('click', close);
   $lb.find('.w-lb__close').on('click', close);
   $lb.find('.w-lb__nav--prev').on('click', () => show(index - 1));
@@ -300,7 +327,9 @@ function setupUpdates(el: HTMLElement): void {
 
   // newest first: each older update is a few minutes further back
   const item = ([user, text]: string[], i: number) =>
-    $(`<li><span class="w-avatar w-avatar--${user.length % 4}">${user[0].toUpperCase()}</span><p><a href="#">@${user}</a> ${text}<small>${2 + i * 7 + (user.length % 4)} minutes ago</small></p></li>`);
+    $(
+      `<li><span class="w-avatar w-avatar--${user.length % 4}">${user[0].toUpperCase()}</span><p><a href="#">@${user}</a> ${text}<small>${2 + i * 7 + (user.length % 4)} minutes ago</small></p></li>`,
+    );
 
   // stand-in for $.ajax({ url: '/updates.json' }) — same Deferred API, no network
   const fetchUpdates = (from: number) => {
@@ -314,11 +343,20 @@ function setupUpdates(el: HTMLElement): void {
 
   $more.on('click', () => {
     if (shown >= UPDATES.length) return;
-    const $spin = $('<li class="w-loading"><span class="w-spinner"></span> Loading...</li>').appendTo($list).hide().fadeIn(150);
+    const $spin = $('<li class="w-loading"><span class="w-spinner"></span> Loading...</li>')
+      .appendTo($list)
+      .hide()
+      .fadeIn(150);
     $more.prop('disabled', true);
-    fetchUpdates(shown).done((rows) => {
+    fetchUpdates(shown).done((rows = []) => {
       $spin.remove();
-      rows.forEach((u, i) => item(u, shown + i).appendTo($list).hide().delay(i * 120).fadeIn(400));
+      rows.forEach((u, i) =>
+        item(u, shown + i)
+          .appendTo($list)
+          .hide()
+          .delay(i * 120)
+          .fadeIn(400),
+      );
       shown += rows.length;
       $more.prop('disabled', shown >= UPDATES.length).text(shown >= UPDATES.length ? 'No more updates' : 'Load more');
     });

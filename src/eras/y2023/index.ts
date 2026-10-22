@@ -1,16 +1,16 @@
-import type { Era } from '../../core/types';
 import { siGooglegemini, siLangchain, siMeta, siShadcnui, siVercel } from 'simple-icons';
-import { createStage } from '../../components/stage';
 import { createCredits } from '../../components/credits';
-import { createThread } from '../../components/thread';
 import { createDeploy } from '../../components/deploy';
-import { createStack } from '../../components/stack';
-import { gsap, reducedMotion } from '../../core/scroll';
-import { esc, h, onceInView } from '../../core/util';
-import { Run, streamInto, wait, whenVisible, loopWhenVisible } from './lib';
-import { mountEmbeddings } from './embeddings';
-import { STAGE_2023 } from './stage';
 import { parodyBook } from '../../components/oreilly';
+import { createStack } from '../../components/stack';
+import { createStage } from '../../components/stage';
+import { createThread } from '../../components/thread';
+import { gsap, reducedMotion } from '../../core/scroll';
+import type { Era } from '../../core/types';
+import { esc, h, onceInView } from '../../core/util';
+import { mountEmbeddings } from './embeddings';
+import { loopWhenVisible, Run, streamInto, wait, whenVisible } from './lib';
+import { STAGE_2023 } from './stage';
 import './style.css';
 
 /* ---------------- easter egg: the App Router ---------------- */
@@ -78,7 +78,11 @@ function intro(section: HTMLElement): void {
     async () => {
       await wait(700);
       reply.innerHTML = '';
-      await streamInto(reply, 'Sure! A normal bit is a coin lying flat: heads or tails. A qubit is a coin still spinning, a bit of both until you look.', { tps: 22 });
+      await streamInto(
+        reply,
+        'Sure! A normal bit is a coin lying flat: heads or tails. A qubit is a coin still spinning, a bit of both until you look.',
+        { tps: 22 },
+      );
     },
     'top 55%',
   );
@@ -228,7 +232,36 @@ function ragCard(): HTMLElement {
 
 /* ---------------- infra: GPUs ---------------- */
 
-const TOKENS = [' The', ' web', ' is', ' a', ' conversation', ' now', '.', ' Hello', '!', ' How', ' can', ' I', ' help', '?', ' Sure', ',', ' here', "'s", ' a', ' React', ' component', ' that', ' streams', ' tokens', ' from', ' the', ' GPU', '…'];
+const TOKENS = [
+  ' The',
+  ' web',
+  ' is',
+  ' a',
+  ' conversation',
+  ' now',
+  '.',
+  ' Hello',
+  '!',
+  ' How',
+  ' can',
+  ' I',
+  ' help',
+  '?',
+  ' Sure',
+  ',',
+  ' here',
+  "'s",
+  ' a',
+  ' React',
+  ' component',
+  ' that',
+  ' streams',
+  ' tokens',
+  ' from',
+  ' the',
+  ' GPU',
+  '…',
+];
 
 function gpuPanel(section: HTMLElement): void {
   const rows = [0, 1, 2, 3]
@@ -239,7 +272,10 @@ function gpuPanel(section: HTMLElement): void {
     })
     .join('');
   let seed = 3;
-  const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  const rnd = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
   const racks = Array.from({ length: 8 })
     .map(
       () =>

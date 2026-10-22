@@ -22,13 +22,13 @@
   border-color: #fff #404040 #404040 #fff;
 }
 .era--prologue .sd__role {
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 8px;
   letter-spacing: 0.04em;
 }
 .era--prologue .sd__label {
   fill: #c0c0ff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 8px;
 }
 
@@ -42,7 +42,7 @@
   --wire: #8fa6bd;
   --wire-hot: #ff7a00;
   --packet: #ff7a00;
-  --sd-font: 'Lucida Grande', Verdana, sans-serif;
+  --sd-font: "Lucida Grande", Verdana, sans-serif;
   --flap-bg: linear-gradient(#3a3a3a 0 50%, #1c1c1c 50%);
 }
 
@@ -57,16 +57,28 @@
   --wire: #95a5a6;
   --wire-hot: #2c3e50;
   --packet: #e74c3c;
-  --sd-font: 'Lato', sans-serif;
+  --sd-font: "Lato", sans-serif;
   --flap-bg: rgba(0, 0, 0, 0.25);
   --flap-fg: #fff;
 }
-.era--y2012 .sd__box--client { background: #3498db; }
-.era--y2012 .sd__box--mid { background: #9b59b6; }
-.era--y2012 .sd__box--server { background: #16a085; }
-.era--y2012 .sd__box--data { background: #e67e22; }
-.era--y2012 .sd__box--infra { background: #34495e; }
-.era--y2012 .sd__box--dev { background: #7f8c8d; }
+.era--y2012 .sd__box--client {
+  background: #3498db;
+}
+.era--y2012 .sd__box--mid {
+  background: #9b59b6;
+}
+.era--y2012 .sd__box--server {
+  background: #16a085;
+}
+.era--y2012 .sd__box--data {
+  background: #e67e22;
+}
+.era--y2012 .sd__box--infra {
+  background: #34495e;
+}
+.era--y2012 .sd__box--dev {
+  background: #7f8c8d;
+}
 
 /* 2015–17: Material paper */
 .era--y2015 .stack {
@@ -78,10 +90,10 @@
   --wire: #9e9e9e;
   --wire-hot: #ff4081;
   --packet: #ff4081;
-  --sd-font: 'Roboto', sans-serif;
+  --sd-font: "Roboto", sans-serif;
   --flap-bg: #3f51b5;
   --flap-fg: #fff;
-  --flap-font: 'Roboto Mono', monospace;
+  --flap-font: "Roboto Mono", monospace;
 }
 
 /* 2018–20: dark cloud-native glow */
@@ -96,7 +108,7 @@
   --wire-hot: #7fb0ff;
   --deploy: #a57bff;
   --packet: #ffffff;
-  --sd-font: 'Poppins', sans-serif;
+  --sd-font: "Poppins", sans-serif;
   --flap-bg: #0a0f1f;
   --flap-fg: #7fb0ff;
 }
@@ -113,7 +125,7 @@
   --wire: rgba(167, 139, 250, 0.45);
   --wire-hot: #c4b5fd;
   --packet: #f0abfc;
-  --sd-font: 'Space Grotesk', sans-serif;
+  --sd-font: "Space Grotesk", sans-serif;
   --flap-bg: rgba(255, 255, 255, 0.08);
   --flap-fg: #f2f2f7;
 }
@@ -133,14 +145,17 @@
   --wire: #c9c1b3;
   --wire-hot: #d97757;
   --packet: #d97757;
-  --sd-font: 'Geist', sans-serif;
+  --sd-font: "Geist", sans-serif;
   --flap-bg: #1f1e1d;
   --flap-fg: #f5f3ee;
-  --flap-font: 'Geist Mono', monospace;
+  --flap-font: "Geist Mono", monospace;
 }
 .era--y2023 .sd__box--ai {
   border-color: #d97757;
-  box-shadow: 0 0 0 1px #d97757, 0 0 34px rgba(217, 119, 87, 0.35), 0 0 70px rgba(167, 139, 250, 0.25);
+  box-shadow:
+    0 0 0 1px #d97757,
+    0 0 34px rgba(217, 119, 87, 0.35),
+    0 0 70px rgba(167, 139, 250, 0.25);
 }
 
 /* 2025–26: a terminal map; the agent in the middle */
@@ -155,10 +170,10 @@
   --wire: #555;
   --wire-hot: #7ee787;
   --packet: #7ee787;
-  --sd-font: 'Geist Mono', 'JetBrains Mono', monospace;
+  --sd-font: "Geist Mono", "JetBrains Mono", monospace;
   --flap-bg: transparent;
   --flap-fg: #e6e6e6;
-  --flap-font: 'Geist Mono', monospace;
+  --flap-font: "Geist Mono", monospace;
 }
 .era--y2025 .sd__box--mid {
   border-color: #d97757;
@@ -167,7 +182,7 @@
 
 /* "Hide the menu" diff: the code face of each era */
 .era--prologue .thread {
-  --thread-font: 'Press Start 2P', monospace;
+  --thread-font: "Press Start 2P", monospace;
 }
 .era--prologue .thread__src {
   font-size: clamp(10px, 1.3vw, 16px);
@@ -180,15 +195,15 @@
   --thread-font: Menlo, Consolas, monospace;
 }
 .era--y2015 .thread {
-  --thread-font: 'Roboto Mono', monospace;
+  --thread-font: "Roboto Mono", monospace;
 }
 .era--y2018 .thread,
 .era--y2021 .thread {
-  --thread-font: 'JetBrains Mono', monospace;
+  --thread-font: "JetBrains Mono", monospace;
 }
 .era--y2023 .thread,
 .era--y2025 .thread {
-  --thread-font: 'Geist Mono', monospace;
+  --thread-font: "Geist Mono", monospace;
 }
 
 /* 2012's flat boxes carry white text, but wire labels sit on the page background */

@@ -58,7 +58,10 @@ function mountHerd(parent: HTMLElement): void {
       s.querySelector('.y12-srv__tag')!.textContent = pad(i + 1);
     });
     for (let i = PETS.length; i < 12; i++) {
-      grid.insertAdjacentHTML('beforeend', `<button type="button" class="y12-srv" data-flip-id="c${i}">${server(FLAT.concrete)}<span class="y12-srv__tag">${pad(i + 1)}</span></button>`);
+      grid.insertAdjacentHTML(
+        'beforeend',
+        `<button type="button" class="y12-srv" data-flip-id="c${i}">${server(FLAT.concrete)}<span class="y12-srv__tag">${pad(i + 1)}</span></button>`,
+      );
     }
     // the original pets turn grey and become buttons like the rest of the herd
     grid.querySelectorAll<HTMLElement>('.y12-srv').forEach((s) => {
@@ -70,7 +73,12 @@ function mountHerd(parent: HTMLElement): void {
       duration: reducedMotion ? 0 : 0.9,
       ease: 'power3.inOut',
       absolute: true,
-      onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.04, delay: 0.4 }),
+      onEnter: (els) =>
+        gsap.fromTo(
+          els,
+          { opacity: 0, scale: 0.4 },
+          { opacity: 1, scale: 1, duration: 0.5, stagger: 0.04, delay: 0.4 },
+        ),
     });
   }
 
@@ -81,11 +89,14 @@ function mountHerd(parent: HTMLElement): void {
     s.classList.add('is-dying');
     replaced++;
     count.textContent = String(replaced);
-    setTimeout(() => {
-      s.classList.remove('is-dying');
-      s.classList.add('is-new');
-      setTimeout(() => s.classList.remove('is-new'), 900);
-    }, reducedMotion ? 0 : 700);
+    setTimeout(
+      () => {
+        s.classList.remove('is-dying');
+        s.classList.add('is-new');
+        setTimeout(() => s.classList.remove('is-new'), 900);
+      },
+      reducedMotion ? 0 : 700,
+    );
   });
 
   if (!reducedMotion) onceInView(el, () => setTimeout(toCattle, 1600), 'top 45%');

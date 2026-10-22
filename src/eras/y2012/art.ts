@@ -44,17 +44,21 @@ function shadow(s: Shape): string {
     return `${x + w},${y} ${x + w + L},${y + L} ${x + w + L},${y + h + L} ${x + L},${y + h + L} ${x},${y + h}`;
   }
   if (s.t === 'circle') {
-    const ax = s.cx + s.r * K, ay = s.cy - s.r * K;
-    const bx = s.cx - s.r * K, by = s.cy + s.r * K;
+    const ax = s.cx + s.r * K,
+      ay = s.cy - s.r * K;
+    const bx = s.cx - s.r * K,
+      by = s.cy + s.r * K;
     return `${ax},${ay} ${ax + L},${ay + L} ${bx + L},${by + L} ${bx},${by}`;
   }
   return '';
 }
 
 function shape(s: Shape, color: string): string {
-  if (s.t === 'path') return `<path d="${s.d}" fill="none" stroke="${color}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
+  if (s.t === 'path')
+    return `<path d="${s.d}" fill="none" stroke="${color}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
   const fill = s.detail ? color : '#fff';
-  if (s.t === 'rect') return `<rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="${s.r ?? 1.5}" fill="${fill}"/>`;
+  if (s.t === 'rect')
+    return `<rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="${s.r ?? 1.5}" fill="${fill}"/>`;
   return `<circle cx="${s.cx}" cy="${s.cy}" r="${s.r}" fill="${fill}"/>`;
 }
 
@@ -95,7 +99,10 @@ export const ICONS: Record<'laptop' | 'phone' | 'tablet' | 'cloud' | 'mail' | 'c
 export function badge(color: string, icon: keyof typeof ICONS, cls = ''): string {
   const id = `y12ls${uid++}`;
   const shapes = ICONS[icon];
-  const shadows = shapes.filter((s) => s.t !== 'path' && !s.detail).map((s) => `<polygon points="${shadow(s)}"/>`).join('');
+  const shadows = shapes
+    .filter((s) => s.t !== 'path' && !s.detail)
+    .map((s) => `<polygon points="${shadow(s)}"/>`)
+    .join('');
   return `<svg class="ls-badge ${cls}" viewBox="0 0 100 100" aria-hidden="true">
     <defs><clipPath id="${id}"><circle cx="50" cy="50" r="50"/></clipPath></defs>
     <circle cx="50" cy="50" r="50" fill="${color}"/>

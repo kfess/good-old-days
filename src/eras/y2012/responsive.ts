@@ -1,6 +1,6 @@
 import { gsap, reducedMotion } from '../../core/scroll';
 import { h, onceInView } from '../../core/util';
-import { FLAT, ICONS, badge } from './art';
+import { badge, FLAT, type ICONS } from './art';
 
 type FlatColor = keyof typeof FLAT;
 
@@ -166,18 +166,27 @@ export function mountResponsive(parent: HTMLElement): void {
       if (!loading && page < 4 && st + site.clientHeight > site.scrollHeight - 120) {
         loading = true;
         loader.classList.add('is-loading');
-        setTimeout(() => {
-          page++;
-          const shuffled = PINS.map((_, i) => PINS[(i * 4 + page * 3) % PINS.length]);
-          masonry.insertAdjacentHTML('beforeend', shuffled.slice(0, 6).map((p, i) => pin(p, i + page * 6)).join(''));
-          masonry.querySelectorAll('.lm-pin:not(.is-shown)').forEach((n, i) => {
-            (n as HTMLElement).style.animationDelay = `${i * 0.07}s`;
-            n.classList.add('is-shown', 'bounceIn');
-          });
-          loader.classList.remove('is-loading');
-          if (page >= 4) loader.textContent = 'You’ve reached the end. Time to go outside.';
-          loading = false;
-        }, reducedMotion ? 0 : 900);
+        setTimeout(
+          () => {
+            page++;
+            const shuffled = PINS.map((_, i) => PINS[(i * 4 + page * 3) % PINS.length]);
+            masonry.insertAdjacentHTML(
+              'beforeend',
+              shuffled
+                .slice(0, 6)
+                .map((p, i) => pin(p, i + page * 6))
+                .join(''),
+            );
+            masonry.querySelectorAll('.lm-pin:not(.is-shown)').forEach((n, i) => {
+              (n as HTMLElement).style.animationDelay = `${i * 0.07}s`;
+              n.classList.add('is-shown', 'bounceIn');
+            });
+            loader.classList.remove('is-loading');
+            if (page >= 4) loader.textContent = 'You’ve reached the end. Time to go outside.';
+            loading = false;
+          },
+          reducedMotion ? 0 : 900,
+        );
       }
     },
     { passive: true },
@@ -190,15 +199,19 @@ export function mountResponsive(parent: HTMLElement): void {
 
   // a one-time guided tour: desktop → tablet → phone (with the off-canvas menu) → desktop
   if (!reducedMotion) {
-    onceInView(el.querySelector('.rd__stage')!, () => {
-      if (maxW() < 800) return;
-      demo = gsap
-        .timeline({ delay: 0.6, onUpdate: apply })
-        .to(state, { w: 768, duration: 1, ease: 'power3.inOut', onUpdate: apply })
-        .to(state, { w: 360, duration: 1, ease: 'power3.inOut', onUpdate: apply }, '+=0.9')
-        .call(() => setMenu(true), [], '+=0.5')
-        .call(() => setMenu(false), [], '+=1.3')
-        .to(state, { w: Math.min(1024, maxW()), duration: 1.1, ease: 'power3.inOut', onUpdate: apply }, '+=0.6');
-    }, 'top 60%');
+    onceInView(
+      el.querySelector('.rd__stage')!,
+      () => {
+        if (maxW() < 800) return;
+        demo = gsap
+          .timeline({ delay: 0.6, onUpdate: apply })
+          .to(state, { w: 768, duration: 1, ease: 'power3.inOut', onUpdate: apply })
+          .to(state, { w: 360, duration: 1, ease: 'power3.inOut', onUpdate: apply }, '+=0.9')
+          .call(() => setMenu(true), [], '+=0.5')
+          .call(() => setMenu(false), [], '+=1.3')
+          .to(state, { w: Math.min(1024, maxW()), duration: 1.1, ease: 'power3.inOut', onUpdate: apply }, '+=0.6');
+      },
+      'top 60%',
+    );
   }
 }

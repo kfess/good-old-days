@@ -1,8 +1,8 @@
 import { siTerraform } from 'simple-icons';
-import { ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { logo } from '../../components/logo';
+import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { holdHudYear } from '../../core/stage';
 import { esc, h } from '../../core/util';
-import { logo } from '../../components/logo';
 import { k8sMark } from './k8s-logo';
 
 /*
@@ -89,7 +89,10 @@ function hcl(src: string): string {
       if (/^\s*#/.test(line)) return `<span class="c">${esc(line)}</span>`;
       let out = esc(line);
       out = out.replace(/&quot;.*?&quot;/g, (m) => `<span class="s">${m}</span>`);
-      out = out.replace(/^(\s*)(terraform|provider|resource|data|backend|vpc_config|scaling_config|lifecycle|tags)\b/, '$1<span class="k">$2</span>');
+      out = out.replace(
+        /^(\s*)(terraform|provider|resource|data|backend|vpc_config|scaling_config|lifecycle|tags)\b/,
+        '$1<span class="k">$2</span>',
+      );
       out = out.replace(/^(\s*)([a-z_]+)(\s+=)/, '$1<span class="a">$2</span>$3');
       return out;
     })
@@ -168,11 +171,16 @@ const APPLY: Line[] = [
   ...[0, 1, 2].map((i) => ({ t: `aws_subnet.public[${i}]: Creating...` })),
   { t: 'aws_internet_gateway.main: Creation complete after 1s [id=igw-0f3e2d1c0b9a87654]', stage: 'igw' },
   { t: 'aws_route_table.public: Creating...' },
-  ...[0, 1, 2].map((i) => ({ t: `aws_subnet.public[${i}]: Creation complete after 2s [id=${SUBNET_IDS[i]}]`, stage: `sub${i}` })),
+  ...[0, 1, 2].map((i) => ({
+    t: `aws_subnet.public[${i}]: Creation complete after 2s [id=${SUBNET_IDS[i]}]`,
+    stage: `sub${i}`,
+  })),
   { t: 'aws_eks_cluster.prod: Creating...', stage: 'cp' },
   { t: 'aws_route_table.public: Creation complete after 1s [id=rtb-0b7e4c2a9d1f35e86]' },
   ...[0, 1, 2].map((i) => ({ t: `aws_route_table_association.public[${i}]: Creating...` })),
-  ...[0, 1, 2].map((i) => ({ t: `aws_route_table_association.public[${i}]: Creation complete after 0s [id=${ASSOC_IDS[i]}]` })),
+  ...[0, 1, 2].map((i) => ({
+    t: `aws_route_table_association.public[${i}]: Creation complete after 0s [id=${ASSOC_IDS[i]}]`,
+  })),
   { t: 'aws_eks_cluster.prod: Still creating... [10s elapsed]', cls: 'dim' },
   { t: 'aws_eks_cluster.prod: Still creating... [20s elapsed]', cls: 'dim' },
   { t: '⋮', cls: 'dim' },

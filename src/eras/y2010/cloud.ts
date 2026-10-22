@@ -68,7 +68,9 @@ export function buildCloud(): HTMLElement {
       launched++;
       const id = `i-${(0x3f2a91c4 + launched * 0x1d3b).toString(16).slice(-8)}`;
       const ip = `ec2-174-129-${((20 + launched * 7) % 254) + 1}-${((100 + launched * 13) % 254) + 1}.compute-1.amazonaws.com`;
-      const $row = $(`<tr><td><code>${id}</code></td><td>${type}</td><td><span class="w-state w-state--pending">pending</span></td><td class="w-dns">—</td></tr>`);
+      const $row = $(
+        `<tr><td><code>${id}</code></td><td>${type}</td><td><span class="w-state w-state--pending">pending</span></td><td class="w-dns">—</td></tr>`,
+      );
       $row.appendTo($el.find('.w-instances tbody')).hide().fadeIn(300);
       window.setTimeout(
         () => {

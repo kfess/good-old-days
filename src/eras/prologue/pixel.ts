@@ -25,14 +25,34 @@ export function pixelArt(rows: string[], palette: Record<string, string>, cls = 
 
 export const star = (cls = '') =>
   pixelArt(
-    ['....Y....', '....Y....', '...YYY...', 'YYYYWYYYY', '.YYYYYYY.', '..YYYYY..', '..YY.YY..', '.YY...YY.', '.Y.....Y.'],
+    [
+      '....Y....',
+      '....Y....',
+      '...YYY...',
+      'YYYYWYYYY',
+      '.YYYYYYY.',
+      '..YYYYY..',
+      '..YY.YY..',
+      '.YY...YY.',
+      '.Y.....Y.',
+    ],
     { Y: '#ffff00', W: '#ffffff' },
     cls,
   );
 
 export const cone = (cls = '') =>
   pixelArt(
-    ['....O....', '...OOO...', '...WWW...', '...OOO...', '..OOOOO..', '..WWWWW..', '..OOOOO..', '.OOOOOOO.', 'KKKKKKKKK'],
+    [
+      '....O....',
+      '...OOO...',
+      '...WWW...',
+      '...OOO...',
+      '..OOOOO..',
+      '..WWWWW..',
+      '..OOOOO..',
+      '.OOOOOOO.',
+      'KKKKKKKKK',
+    ],
     { O: '#ff7a00', W: '#ffffff', K: '#333333' },
     cls,
   );
@@ -106,7 +126,10 @@ export const phone = (cls = '') =>
 /** The intro illustration: a beige CRT showing a tiny homepage. */
 export function crt(): string {
   // screen content: 36×22 pixels at (14,8)
-  const keys = Array.from({ length: 10 }, (_, i) => `<rect x="${12 + i * 4}" y="50" width="3" height="1" fill="#b9b19a"/>`).join('');
+  const keys = Array.from(
+    { length: 10 },
+    (_, i) => `<rect x="${12 + i * 4}" y="50" width="3" height="1" fill="#b9b19a"/>`,
+  ).join('');
   return `
   <svg class="px p-crt" viewBox="0 0 64 58" shape-rendering="crispEdges" role="img" aria-label="beige CRT computer showing a homepage">
     <rect x="7" y="1" width="50" height="38" fill="#5e5848"/>
@@ -166,7 +189,10 @@ export function crt(): string {
 /** The shared-hosting box "zeus". */
 export function zeus(): string {
   const bays = [6, 11, 16]
-    .map((y) => `<rect x="5" y="${y}" width="18" height="4" fill="#9e9680"/><rect x="6" y="${y + 1}" width="16" height="2" fill="#c9c1a8"/><rect x="19" y="${y + 1}" width="2" height="1" fill="#5e5848"/>`)
+    .map(
+      (y) =>
+        `<rect x="5" y="${y}" width="18" height="4" fill="#9e9680"/><rect x="6" y="${y + 1}" width="16" height="2" fill="#c9c1a8"/><rect x="19" y="${y + 1}" width="2" height="1" fill="#5e5848"/>`,
+    )
     .join('');
   return `
   <svg class="px p-zeus__svg" viewBox="0 0 28 44" shape-rendering="crispEdges" role="img" aria-label="server named zeus">

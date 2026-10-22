@@ -78,7 +78,10 @@
 .coda__legal {
   max-width: 760px;
   margin: 0 auto;
-  font: 400 10px / 1.5 'Inter', system-ui, sans-serif;
+  font:
+    400 10px / 1.5 "Inter",
+    system-ui,
+    sans-serif;
   color: rgba(200, 200, 230, 0.55);
   text-align: center;
 }

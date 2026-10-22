@@ -1,4 +1,4 @@
-import { ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { esc, h, onceInView } from '../../core/util';
 import { cone, envelope, star } from './pixel';
 
@@ -11,7 +11,10 @@ const GUESTS = [
 /** A late-90s personal homepage: table layout, marquee, NEW!, counter, guestbook, snow, sparkles. */
 export function buildHomepage(): HTMLElement {
   const nav = ["What's New", 'About Me', 'My Pets', 'Links', 'Guestbook', 'BBS']
-    .map((label, i) => `<li>${star('p-bullet')}<a href="#">${label}</a>${i === 0 || i === 4 ? ' <span class="p-new">NEW!</span>' : ''}</li>`)
+    .map(
+      (label, i) =>
+        `<li>${star('p-bullet')}<a href="#">${label}</a>${i === 0 || i === 4 ? ' <span class="p-new">NEW!</span>' : ''}</li>`,
+    )
     .join('');
 
   const el = h(`
@@ -84,7 +87,11 @@ export function buildHomepage(): HTMLElement {
 
   setupCounter(el);
   setupGuestbook(el);
-  setupSnow(home, el.querySelector<HTMLCanvasElement>('.p-snow')!, el.querySelector<HTMLInputElement>('.p-snow-toggle input')!);
+  setupSnow(
+    home,
+    el.querySelector<HTMLCanvasElement>('.p-snow')!,
+    el.querySelector<HTMLInputElement>('.p-snow-toggle input')!,
+  );
   setupSparkles(home);
   return el;
 }
@@ -139,7 +146,13 @@ function setupSnow(home: HTMLElement, canvas: HTMLCanvasElement, toggle: HTMLInp
     return;
   }
   const ctx = canvas.getContext('2d')!;
-  const flakes = Array.from({ length: 70 }, () => ({ x: Math.random(), y: Math.random(), s: 1 + Math.floor(Math.random() * 3), v: 0.0006 + Math.random() * 0.0012, d: Math.random() * 6 }));
+  const flakes = Array.from({ length: 70 }, () => ({
+    x: Math.random(),
+    y: Math.random(),
+    s: 1 + Math.floor(Math.random() * 3),
+    v: 0.0006 + Math.random() * 0.0012,
+    d: Math.random() * 6,
+  }));
   let raf = 0;
   let visible = false;
   const size = () => {

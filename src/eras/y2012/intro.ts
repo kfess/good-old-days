@@ -1,6 +1,6 @@
 import { gsap, reducedMotion } from '../../core/scroll';
 import { h } from '../../core/util';
-import { FLAT, badge } from './art';
+import { badge, FLAT } from './art';
 
 /** Opening: the catchphrase and a cluster of long-shadow badges drifting in parallax. */
 export function mountIntro(parent: HTMLElement): void {

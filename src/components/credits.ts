@@ -1,8 +1,8 @@
 import type { SimpleIcon } from 'simple-icons';
 import { gsap, reducedMotion } from '../core/scroll';
 import { esc, h } from '../core/util';
-import { logo } from './logo';
 import { brandName, hasWordmark } from './brand';
+import { logo } from './logo';
 
 export interface CreditItem {
   year: string;
@@ -15,7 +15,7 @@ export interface CreditItem {
 /** The name as the brand writes it; an official wordmark replaces both icon and name. */
 function nameTag(name: string): string {
   const b = brandName(name);
-  return `<span class="credit__name${b.cls ? ' ' + b.cls : ''}"${b.style ? ` style="${b.style}"` : ''}>${b.html}</span>`;
+  return `<span class="credit__name${b.cls ? ` ${b.cls}` : ''}"${b.style ? ` style="${b.style}"` : ''}>${b.html}</span>`;
 }
 
 /** a wordmark fallback would just repeat the name, so only real marks are drawn */

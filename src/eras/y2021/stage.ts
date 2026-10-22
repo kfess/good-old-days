@@ -1,6 +1,6 @@
 import { siGithubcopilot } from 'simple-icons';
-import { scrubType, type StageScene } from '../../components/stage';
 import { logo } from '../../components/logo';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 import { VITE_COLOR } from './icons';
@@ -8,7 +8,8 @@ import { VITE_COLOR } from './icons';
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
 /** brand mark on a frosted glass tile with a clay-soft glow behind it */
-const glass = (mark: string, c: string) => `<span class="y21-gl" style="--c:${c}"><i></i><span class="y21-gl__tile">${mark}</span></span>`;
+const glass = (mark: string, c: string) =>
+  `<span class="y21-gl" style="--c:${c}"><i></i><span class="y21-gl__tile">${mark}</span></span>`;
 
 function park(tl: gsap.core.Timeline, el: HTMLElement, desk: [number, number], at = 0): void {
   tl.to(
@@ -133,15 +134,29 @@ const vite: StageScene = {
     // 3. the new way: ready before you can blink, and every save shows up instantly
     tl.from(q('.y21-vt__vite'), { opacity: 0, duration: 0.05 }, 2.2);
     scrubType(tl, q('.y21-vt__c2'), 'npm run dev', 0.18, 2.22);
-    tl.from(art.querySelectorAll('.y21-vt__banner'), { opacity: 0, x: -20, duration: 0.12, stagger: 0.06, ease: 'power3.out' }, 2.38);
+    tl.from(
+      art.querySelectorAll('.y21-vt__banner'),
+      { opacity: 0, x: -20, duration: 0.12, stagger: 0.06, ease: 'power3.out' },
+      2.38,
+    );
     tl.from(art.querySelectorAll('.y21-vt__vite .y21-vt__dim'), { opacity: 0, duration: 0.1, stagger: 0.03 }, 2.42);
     tl.to(page, { opacity: 1, filter: 'grayscale(0)', duration: 0.15 }, 2.45);
     hmr.forEach((line, i) => {
       const at = 2.7 + i * 0.35;
       tl.from(line, { opacity: 0, x: -10, duration: 0.08 }, at);
-      tl.fromTo(page, { boxShadow: '0 0 0 0px rgba(167,139,250,0)' }, { boxShadow: '0 0 0 6px rgba(167,139,250,0.55)', duration: 0.06, yoyo: true, repeat: 1 }, at);
+      tl.fromTo(
+        page,
+        { boxShadow: '0 0 0 0px rgba(167,139,250,0)' },
+        { boxShadow: '0 0 0 6px rgba(167,139,250,0.55)', duration: 0.06, yoyo: true, repeat: 1 },
+        at,
+      );
       tl.fromTo(ms, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.06 }, at);
-      if (i === 2) tl.to(q('.y21-prev__btn'), { backgroundImage: 'linear-gradient(90deg, #a78bfa, #22d3ee)', color: '#0b0b12', duration: 0.05 }, at);
+      if (i === 2)
+        tl.to(
+          q('.y21-prev__btn'),
+          { backgroundImage: 'linear-gradient(90deg, #a78bfa, #22d3ee)', color: '#0b0b12', duration: 0.05 },
+          at,
+        );
     });
     // heading text follows the playhead (reversible)
     tl.eventCallback('onUpdate', () => {
@@ -157,7 +172,8 @@ const vite: StageScene = {
 const COPILOT_TYPED_1 = 'const copilot: StageScene = {';
 const COPILOT_GHOST_1 = "  name: 'GitHub Copilot',\n  line: 'Gray text started writing what comes next.',";
 const COPILOT_TYPED_2 = '  play({ art, tl }) {';
-const COPILOT_GHOST_2 = "    const ghost = suggest(art, context);\n    tl.to(ghost, { opacity: 1 });\n    onTab(() => ghost.accept());\n  },\n};";
+const COPILOT_GHOST_2 =
+  '    const ghost = suggest(art, context);\n    tl.to(ghost, { opacity: 1 });\n    onTab(() => ghost.accept());\n  },\n};';
 
 const copilot: StageScene = {
   year: '2021.06',
@@ -189,8 +205,17 @@ const copilot: StageScene = {
     const round = (typed: HTMLElement, text: string, ghost: HTMLElement, caretOn: HTMLElement, at: number) => {
       scrubType(tl, typed, text, 0.35, at);
       tl.to(ghost, { opacity: 1, duration: 0.12 }, at + 0.55);
-      tl.fromTo(tab, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.1, ease: 'back.out(2)' }, at + 0.75);
-      tl.to(tab, { scale: 0.88, background: '#a78bfa', color: '#0b0b12', duration: 0.05, yoyo: true, repeat: 1 }, at + 0.95);
+      tl.fromTo(
+        tab,
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.1, ease: 'back.out(2)' },
+        at + 0.75,
+      );
+      tl.to(
+        tab,
+        { scale: 0.88, background: '#a78bfa', color: '#0b0b12', duration: 0.05, yoyo: true, repeat: 1 },
+        at + 0.95,
+      );
       tl.to(ghost, { color: '#e6e6f0', duration: 0.08 }, at + 1.0);
       tl.to(tab, { opacity: 0, duration: 0.1 }, at + 1.12);
       tl.to(caretOn, { opacity: 0, duration: 0.01 }, at + 1.0);
@@ -350,7 +375,10 @@ const diffusion: StageScene = {
       const dst = new Uint8ClampedArray(src.length);
       for (let by = 0; by < SD; by += size)
         for (let bx = 0; bx < SD; bx += size) {
-          let r = 0, gg = 0, b = 0, n = 0;
+          let r = 0,
+            gg = 0,
+            b = 0,
+            n = 0;
           for (let y = by; y < Math.min(SD, by + size); y++)
             for (let x = bx; x < Math.min(SD, bx + size); x++) {
               const o = (y * SD + x) * 4;
@@ -381,8 +409,8 @@ const diffusion: StageScene = {
         for (let i = 0; i < noise.length; i++) noise[i] = rand(i * 1.37) * 255;
       }
       const s = step / STEPS;
-      const a = Math.pow(s, 1.3);
-      const size = Math.max(1, Math.round(24 * Math.pow(1 - s, 2.2)));
+      const a = s ** 1.3;
+      const size = Math.max(1, Math.round(24 * (1 - s) ** 2.2));
       const src = pixelated(size);
       const d = out.data;
       for (let i = 0, j = 0; i < d.length; i += 4, j += 3) {
@@ -399,7 +427,13 @@ const diffusion: StageScene = {
 
     park(tl, mark, [-128, -64]);
     tl.from(art.querySelector('.y21-sd'), { opacity: 0, y: 40, duration: 0.3 }, 0.2);
-    scrubType(tl, art.querySelector<HTMLElement>('.y21-sd__text')!, 'a lighthouse on a cliff at sunset, oil painting', 0.6, 0.45);
+    scrubType(
+      tl,
+      art.querySelector<HTMLElement>('.y21-sd__text')!,
+      'a lighthouse on a cliff at sunset, oil painting',
+      0.6,
+      0.45,
+    );
     const p = { s: 0 };
     tl.to(p, { s: STEPS, duration: 1.8, ease: 'power1.inOut', onUpdate: () => draw(Math.round(p.s)) }, 1.15);
     tl.to({}, { duration: 0.35 });

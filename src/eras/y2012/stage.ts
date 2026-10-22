@@ -1,8 +1,8 @@
-import { siDocker, siReact, type SimpleIcon } from 'simple-icons';
+import { type SimpleIcon, siDocker, siReact } from 'simple-icons';
 import { angularShield } from '../../components/marks';
-import { scrubType, type StageScene } from '../../components/stage';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY, reducedMotion } from '../../core/scroll';
-import { FLAT, bootstrapB } from './art';
+import { bootstrapB, FLAT } from './art';
 
 const mobile = () => window.matchMedia(MOBILE_QUERY).matches;
 let uid = 0;
@@ -13,7 +13,10 @@ let uid = 0;
  */
 export function longShadowBadge(icon: SimpleIcon, bg: string, fg = '#fff'): string {
   const id = `y12b${uid++}`;
-  const copies = Array.from({ length: 46 }, (_, k) => `<use href="#${id}p" transform="translate(${26 + k} ${26 + k}) scale(2)"/>`).join('');
+  const copies = Array.from(
+    { length: 46 },
+    (_, k) => `<use href="#${id}p" transform="translate(${26 + k} ${26 + k}) scale(2)"/>`,
+  ).join('');
   return `<svg class="y12-lsb" viewBox="0 0 100 100" aria-hidden="true">
     <defs>
       <path id="${id}p" d="${icon.path}"/>
@@ -49,7 +52,12 @@ function dock(tl: gsap.core.Timeline, logo: HTMLElement, at = 0): void {
 /** flip a class on/off at a point of a scrubbed timeline (works in both scroll directions) */
 function toggleAt(tl: gsap.core.Timeline, el: Element, cls: string, at: number): void {
   const o = { v: 0 };
-  tl.fromTo(o, { v: 0 }, { v: 1, duration: 0.02, immediateRender: false, onUpdate: () => el.classList.toggle(cls, o.v >= 0.5) }, at);
+  tl.fromTo(
+    o,
+    { v: 0 },
+    { v: 1, duration: 0.02, immediateRender: false, onUpdate: () => el.classList.toggle(cls, o.v >= 0.5) },
+    at,
+  );
 }
 
 const bootstrap2: StageScene = {
@@ -95,7 +103,12 @@ const bootstrap2: StageScene = {
     tl.from(art.querySelector('.y12-bs__src'), { opacity: 0, y: 20, duration: 0.2 }, 0.35);
     scrubType(tl, typed, code1, 0.6, 0.5);
     toggleAt(tl, page, 'is-boot', 1.15);
-    tl.fromTo(cols, { scaleY: 0 }, { scaleY: 1, stagger: 0.03, duration: 0.3, ease: 'power2.out', transformOrigin: 'top' }, 1.3);
+    tl.fromTo(
+      cols,
+      { scaleY: 0 },
+      { scaleY: 1, stagger: 0.03, duration: 0.3, ease: 'power2.out', transformOrigin: 'top' },
+      1.3,
+    );
     scrubType(tl, typed, code2, 0.5, 1.5);
     toggleAt(tl, page, 'is-grid', 1.65);
     tl.to(cols, { opacity: 0, duration: 0.3 }, 2.25);
@@ -149,7 +162,11 @@ const angular: StageScene = {
 
     dock(tl, logo, 0);
     tl.from(art.querySelector('.y12-ng__src'), { opacity: 0, y: 24, duration: 0.25 }, 0.2);
-    tl.from(art.querySelector('.y12-ng__input'), { opacity: 0, scaleX: 0.6, transformOrigin: 'left center', duration: 0.3, ease: 'back.out(1.4)' }, 0.3);
+    tl.from(
+      art.querySelector('.y12-ng__input'),
+      { opacity: 0, scaleX: 0.6, transformOrigin: 'left center', duration: 0.3, ease: 'back.out(1.4)' },
+      0.3,
+    );
     tl.from(art.querySelector('.y12-ng__out'), { opacity: 0, y: 30, duration: 0.3 }, 0.45);
     tl.from(art.querySelector('.y12-ng__wire line'), { attr: { y2: 0 }, duration: 0.25 }, 0.55);
     tl.from(digest, { opacity: 0, duration: 0.25 }, 0.6);
@@ -173,7 +190,15 @@ const WHALE = [
 ];
 const CW = 40;
 const CH = 26;
-const BOX_COLORS = [FLAT.alizarin, FLAT.sunflower, FLAT.emerald, FLAT.amethyst, FLAT.carrot, FLAT.river, FLAT.turquoise];
+const BOX_COLORS = [
+  FLAT.alizarin,
+  FLAT.sunflower,
+  FLAT.emerald,
+  FLAT.amethyst,
+  FLAT.carrot,
+  FLAT.river,
+  FLAT.turquoise,
+];
 
 const docker: StageScene = {
   year: '2013',
@@ -225,10 +250,23 @@ const docker: StageScene = {
     // the gaps close and the cargo becomes one animal
     tl.to(ribs, { opacity: 0, duration: 0.2 }, merged);
     rects.forEach((rect, i) =>
-      tl.to(rect, { attr: { x: cells[i].c * CW, y: cells[i].r * CH, width: CW, height: CH }, fill: cells[i].r >= 5 ? '#d6eaf8' : FLAT.river, duration: 0.35, ease: 'power2.inOut' }, merged + i * 0.004),
+      tl.to(
+        rect,
+        {
+          attr: { x: cells[i].c * CW, y: cells[i].r * CH, width: CW, height: CH },
+          fill: cells[i].r >= 5 ? '#d6eaf8' : FLAT.river,
+          duration: 0.35,
+          ease: 'power2.inOut',
+        },
+        merged + i * 0.004,
+      ),
     );
     tl.to(art.querySelector('.y12-dk__eye'), { opacity: 1, duration: 0.15 }, merged + 0.4);
-    tl.from(art.querySelectorAll('.y12-dk__spout circle'), { opacity: 0, y: 30, scale: 0, transformOrigin: '50% 100%', stagger: 0.06, duration: 0.25, ease: 'back.out(3)' }, merged + 0.5);
+    tl.from(
+      art.querySelectorAll('.y12-dk__spout circle'),
+      { opacity: 0, y: 30, scale: 0, transformOrigin: '50% 100%', stagger: 0.06, duration: 0.25, ease: 'back.out(3)' },
+      merged + 0.5,
+    );
     // ...and swims off to the right, bobbing
     const swim = merged + 0.9;
     // (with reduced motion the scene is shown at its end state, so keep the whale in frame)
@@ -283,10 +321,32 @@ const react: StageScene = {
     scrubType(tl, art.querySelector<HTMLElement>('.y12-rx__typed')!, jsx, 1.1, 0.45);
     tl.to(page, { '--outline': 1, duration: 0.2 }, 0.6);
     comps.forEach((c, i) => {
-      tl.to(c, { x: () => burst[i][0] * k(), y: () => burst[i][1] * k(), rotate: burst[i][2], duration: 0.45, ease: 'power3.out' }, 0.85 + i * 0.05);
+      tl.to(
+        c,
+        {
+          x: () => burst[i][0] * k(),
+          y: () => burst[i][1] * k(),
+          rotate: burst[i][2],
+          duration: 0.45,
+          ease: 'power3.out',
+        },
+        0.85 + i * 0.05,
+      );
     });
     // posts drop below the <Feed> tag instead of rising into it
-    posts.forEach((p, i) => tl.to(p, { y: () => (22 + i * 6) * k(), x: () => (i - 1) * 18 * k(), rotate: (i - 1) * 3, duration: 0.4, ease: 'power3.out' }, 1.05));
+    posts.forEach((p, i) =>
+      tl.to(
+        p,
+        {
+          y: () => (22 + i * 6) * k(),
+          x: () => (i - 1) * 18 * k(),
+          rotate: (i - 1) * 3,
+          duration: 0.4,
+          ease: 'power3.out',
+        },
+        1.05,
+      ),
+    );
     const snap = 1.85;
     tl.to([...comps, ...posts], { x: 0, y: 0, rotate: 0, duration: 0.4, ease: 'back.inOut(1.6)', stagger: 0.03 }, snap);
     tl.to(page, { '--outline': 0, duration: 0.25 }, snap + 0.45);

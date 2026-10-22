@@ -1,4 +1,4 @@
-import { ScrollTrigger, reducedMotion, scrollToEl } from '../../core/scroll';
+import { reducedMotion, ScrollTrigger, scrollToEl } from '../../core/scroll';
 import { esc, h } from '../../core/util';
 import { visibleLoop } from '../y2018/loop';
 
@@ -187,7 +187,15 @@ async function initClay(tile: HTMLElement, canvas: HTMLCanvasElement): Promise<v
   scene.add(rim);
 
   const clay = (color: number) =>
-    new THREE.MeshPhysicalMaterial({ color, roughness: 0.55, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.4, sheen: 0.6, sheenColor: new THREE.Color(0xffffff) });
+    new THREE.MeshPhysicalMaterial({
+      color,
+      roughness: 0.55,
+      metalness: 0,
+      clearcoat: 0.35,
+      clearcoatRoughness: 0.4,
+      sheen: 0.6,
+      sheenColor: new THREE.Color(0xffffff),
+    });
   const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1, 0.36, 240, 36), clay(0xa78bfa));
   scene.add(knot);
   const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.34, 48, 48), clay(0x22d3ee));

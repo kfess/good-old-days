@@ -1,4 +1,4 @@
-import { gsap, ScrollTrigger, reducedMotion } from '../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger } from '../core/scroll';
 import { holdHudYear } from '../core/stage';
 import { esc, h } from '../core/util';
 import { brandName } from './brand';
@@ -41,7 +41,7 @@ export interface StageScene {
 /** The technology's name as the brand writes it (wordmark, brand typeface or substitute). */
 function nameTag(name: string): string {
   const b = brandName(name);
-  return `<h3 class="stage__name${b.cls ? ' ' + b.cls : ''}"${b.style ? ` style="${b.style}"` : ''}>${b.html}</h3>`;
+  return `<h3 class="stage__name${b.cls ? ` ${b.cls}` : ''}"${b.style ? ` style="${b.style}"` : ''}>${b.html}</h3>`;
 }
 
 const ENTER = 0.6;
@@ -61,7 +61,7 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
         ${scenes
           .map(
             (s, i) => `
-          <article class="stage__scene${s.className ? ' ' + s.className : ''}" data-i="${i}" aria-label="${esc(s.year)} ${esc(s.name)}">
+          <article class="stage__scene${s.className ? ` ${s.className}` : ''}" data-i="${i}" aria-label="${esc(s.year)} ${esc(s.name)}">
             <div class="stage__art" aria-hidden="true"></div>
             <div class="stage__logo" aria-hidden="true"><div class="stage__logo-in">${s.logo ?? ''}</div></div>
             <div class="stage__copy">
@@ -135,9 +135,24 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
     // the first scene makes its entrance while the stage scrolls into view, before the pin
     const enter = i === 0 ? intro : master;
     const at = i === 0 ? 0 : t;
-    enter.fromTo(sc, { autoAlpha: 0, scale: 0.92, filter: 'blur(18px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: ENTER, ease: 'power2.out' }, at);
-    enter.fromTo(logoEl, { scale: 0.5, rotate: -8 }, { scale: 1, rotate: 0, duration: ENTER * 1.2, ease: 'back.out(1.6)' }, at);
-    enter.fromTo(copyKids, { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: ENTER, ease: 'power3.out' }, at + 0.15);
+    enter.fromTo(
+      sc,
+      { autoAlpha: 0, scale: 0.92, filter: 'blur(18px)' },
+      { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: ENTER, ease: 'power2.out' },
+      at,
+    );
+    enter.fromTo(
+      logoEl,
+      { scale: 0.5, rotate: -8 },
+      { scale: 1, rotate: 0, duration: ENTER * 1.2, ease: 'back.out(1.6)' },
+      at,
+    );
+    enter.fromTo(
+      copyKids,
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, stagger: 0.08, duration: ENTER, ease: 'power3.out' },
+      at + 0.15,
+    );
     if (i > 0) t += ENTER;
     master.add(subs[i].tweenFromTo(0, subs[i].duration(), { duration: len, ease: 'none', immediateRender: false }), t);
     t += len;
@@ -179,27 +194,35 @@ export function createStage(parent: HTMLElement, scenes: StageScene[]): HTMLElem
     sync();
   });
 
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: pin,
-      pin: true,
-      start: 'top top',
-      end: () => `+=${master.duration() * window.innerHeight * vhPerUnit}`,
-      scrub: 0.8,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onToggle: (self) => {
-        pinned = self.isActive;
-        holdHudYear(pinned ? sceneYear(Math.max(0, shown)) : null);
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: pin,
+        pin: true,
+        start: 'top top',
+        end: () => `+=${master.duration() * window.innerHeight * vhPerUnit}`,
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onToggle: (self) => {
+          pinned = self.isActive;
+          holdHudYear(pinned ? sceneYear(Math.max(0, shown)) : null);
+        },
       },
-    },
-  }).add(master);
+    })
+    .add(master);
 
   return el;
 }
 
 /** Typewriter tied to a scrubbed timeline: reveals `text` in `el` over `duration`. */
-export function scrubType(tl: gsap.core.Timeline, el: HTMLElement, text: string, duration: number, at?: gsap.Position): void {
+export function scrubType(
+  tl: gsap.core.Timeline,
+  el: HTMLElement,
+  text: string,
+  duration: number,
+  at?: gsap.Position,
+): void {
   const p = { n: 0 };
   tl.to(
     p,

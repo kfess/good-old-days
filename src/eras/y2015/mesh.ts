@@ -1,4 +1,4 @@
-import { gsap, ScrollTrigger, reducedMotion } from '../../core/scroll';
+import { gsap, reducedMotion, ScrollTrigger } from '../../core/scroll';
 import { h } from '../../core/util';
 import { MD } from './iso';
 import { ripples } from './md';
@@ -45,15 +45,87 @@ function curve(a: readonly [number, number], b: readonly [number, number]): stri
   return `M${a[0]} ${a[1]} C${mx} ${a[1]} ${mx} ${b[1]} ${b[0]} ${b[1]}`;
 }
 
-const EDGES: { id: string; d: string; label: string; lx: number; ly: number; kind: 'http' | 'event' | 'lookup'; anchor: 'start' | 'middle' | 'end' }[] = [
-  { id: 'c-gw', d: curve(right(byId.client), left(byId.gw)), label: 'POST /orders', lx: 157, ly: 160, kind: 'http', anchor: 'middle' },
-  { id: 'gw-orders', d: curve(right(byId.gw), left(byId.orders)), label: 'POST /orders', lx: 374, ly: 186, kind: 'http', anchor: 'end' },
-  { id: 'o-users', d: `M${top(byId.orders)[0]} ${top(byId.orders)[1]} L${bottom(byId.users)[0]} ${bottom(byId.users)[1]}`, label: 'GET /users/42', lx: 450, ly: 136, kind: 'http', anchor: 'start' },
-  { id: 'o-inv', d: curve(right(byId.orders), left(byId.inventory)), label: 'POST /reservations', lx: 594, ly: 116, kind: 'http', anchor: 'end' },
-  { id: 'o-pay', d: curve(right(byId.orders), left(byId.payments)), label: 'POST /charges', lx: 552, ly: 282, kind: 'http', anchor: 'middle' },
-  { id: 'o-kafka', d: `M${bottom(byId.orders)[0]} ${bottom(byId.orders)[1]} L${top(byId.kafka)[0]} ${top(byId.kafka)[1]}`, label: 'publish', lx: 470, ly: 262, kind: 'event', anchor: 'middle' },
-  { id: 'k-notify', d: curve(right(byId.kafka), left(byId.notify)), label: 'consume', lx: 548, ly: 312, kind: 'event', anchor: 'middle' },
-  { id: 'gw-eureka', d: `M${top(byId.gw)[0]} ${top(byId.gw)[1]} L${bottom(byId.eureka)[0]} ${bottom(byId.eureka)[1]}`, label: 'lookup', lx: 238, ly: 128, kind: 'lookup', anchor: 'middle' },
+const EDGES: {
+  id: string;
+  d: string;
+  label: string;
+  lx: number;
+  ly: number;
+  kind: 'http' | 'event' | 'lookup';
+  anchor: 'start' | 'middle' | 'end';
+}[] = [
+  {
+    id: 'c-gw',
+    d: curve(right(byId.client), left(byId.gw)),
+    label: 'POST /orders',
+    lx: 157,
+    ly: 160,
+    kind: 'http',
+    anchor: 'middle',
+  },
+  {
+    id: 'gw-orders',
+    d: curve(right(byId.gw), left(byId.orders)),
+    label: 'POST /orders',
+    lx: 374,
+    ly: 186,
+    kind: 'http',
+    anchor: 'end',
+  },
+  {
+    id: 'o-users',
+    d: `M${top(byId.orders)[0]} ${top(byId.orders)[1]} L${bottom(byId.users)[0]} ${bottom(byId.users)[1]}`,
+    label: 'GET /users/42',
+    lx: 450,
+    ly: 136,
+    kind: 'http',
+    anchor: 'start',
+  },
+  {
+    id: 'o-inv',
+    d: curve(right(byId.orders), left(byId.inventory)),
+    label: 'POST /reservations',
+    lx: 594,
+    ly: 116,
+    kind: 'http',
+    anchor: 'end',
+  },
+  {
+    id: 'o-pay',
+    d: curve(right(byId.orders), left(byId.payments)),
+    label: 'POST /charges',
+    lx: 552,
+    ly: 282,
+    kind: 'http',
+    anchor: 'middle',
+  },
+  {
+    id: 'o-kafka',
+    d: `M${bottom(byId.orders)[0]} ${bottom(byId.orders)[1]} L${top(byId.kafka)[0]} ${top(byId.kafka)[1]}`,
+    label: 'publish',
+    lx: 470,
+    ly: 262,
+    kind: 'event',
+    anchor: 'middle',
+  },
+  {
+    id: 'k-notify',
+    d: curve(right(byId.kafka), left(byId.notify)),
+    label: 'consume',
+    lx: 548,
+    ly: 312,
+    kind: 'event',
+    anchor: 'middle',
+  },
+  {
+    id: 'gw-eureka',
+    d: `M${top(byId.gw)[0]} ${top(byId.gw)[1]} L${bottom(byId.eureka)[0]} ${bottom(byId.eureka)[1]}`,
+    label: 'lookup',
+    lx: 238,
+    ly: 128,
+    kind: 'lookup',
+    anchor: 'middle',
+  },
 ];
 
 interface Span {
@@ -249,7 +321,11 @@ export function mountMesh(parent: HTMLElement): void {
 
   function failure(): gsap.core.Timeline {
     packets.innerHTML = '';
-    setTrace(TRACE_SLOW, '202 Accepted · 886 ms', 'hystrix.command.payments.execution.isolation.thread.timeoutInMilliseconds=800 — every call waits it out before falling back, and orders’ threads pile up.');
+    setTrace(
+      TRACE_SLOW,
+      '202 Accepted · 886 ms',
+      'hystrix.command.payments.execution.isolation.thread.timeoutInMilliseconds=800 — every call waits it out before falling back, and orders’ threads pile up.',
+    );
     payNode.classList.add('is-slow');
     status.textContent = 'payments p99: 4.2 s';
     const tl = gsap.timeline();
@@ -259,13 +335,27 @@ export function mountMesh(parent: HTMLElement): void {
       travel(tl, 'o-pay', COLORS.err, k * 0.22 + 0.55, 0.25, true);
     }
     const err = { v: 0 };
-    tl.to(err, { v: 62, duration: 1.6, ease: 'power1.in', onUpdate: () => (status.textContent = `payments error rate ${Math.round(err.v)}% · threshold 50% over 20+ req / 10 s`) }, 0.2);
-    tl.call(() => {
-      breaker.classList.replace('is-closed', 'is-open');
-      bstate.textContent = 'OPEN';
-      setTrace(TRACE_OPEN, '', '');
-      res.textContent = '';
-    }, [], 1.9);
+    tl.to(
+      err,
+      {
+        v: 62,
+        duration: 1.6,
+        ease: 'power1.in',
+        onUpdate: () =>
+          (status.textContent = `payments error rate ${Math.round(err.v)}% · threshold 50% over 20+ req / 10 s`),
+      },
+      0.2,
+    );
+    tl.call(
+      () => {
+        breaker.classList.replace('is-closed', 'is-open');
+        bstate.textContent = 'OPEN';
+        setTrace(TRACE_OPEN, '', '');
+        res.textContent = '';
+      },
+      [],
+      1.9,
+    );
     // the next request fails fast to the fallback inside orders; payments is never called, nothing piles up
     travel(tl, 'c-gw', COLORS.req, 2.2, 0.35);
     travel(tl, 'gw-orders', COLORS.req, 2.55, 0.35);
@@ -276,10 +366,15 @@ export function mountMesh(parent: HTMLElement): void {
     travel(tl, 'o-inv', COLORS.res, 3.65, 0.25, true);
     travel(tl, 'gw-orders', COLORS.res, 3.95, 0.3, true);
     travel(tl, 'c-gw', COLORS.res, 4.25, 0.35, true);
-    tl.call(() => {
-      res.textContent = '202 Accepted · 66 ms';
-      note.textContent = 'Circuit open: orders skips payments and runs its fallback (charge queued) in ~1 ms. No timeouts pile up upstream.';
-    }, [], 4.6);
+    tl.call(
+      () => {
+        res.textContent = '202 Accepted · 66 ms';
+        note.textContent =
+          'Circuit open: orders skips payments and runs its fallback (charge queued) in ~1 ms. No timeouts pile up upstream.';
+      },
+      [],
+      4.6,
+    );
     return tl;
   }
 
@@ -289,7 +384,9 @@ export function mountMesh(parent: HTMLElement): void {
     if (reducedMotion) current.progress(1);
   }
 
-  el.querySelectorAll<HTMLButtonElement>('[data-run]').forEach((b) => b.addEventListener('click', () => run(b.dataset.run as 'ok' | 'fail')));
+  el.querySelectorAll<HTMLButtonElement>('[data-run]').forEach((b) =>
+    b.addEventListener('click', () => run(b.dataset.run as 'ok' | 'fail')),
+  );
 
   if (reducedMotion) {
     run('ok');

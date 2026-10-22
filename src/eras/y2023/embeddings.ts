@@ -86,7 +86,7 @@ export function mountEmbeddings(parent: HTMLElement): void {
   );
   select(0, 0);
 
-  const ease = (x: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+  const ease = (x: number) => 1 - (1 - Math.min(1, Math.max(0, x))) ** 3;
 
   const draw = (now: number) => {
     const { w, h: H, dpr } = fitCanvas(canvas);
@@ -110,9 +110,16 @@ export function mountEmbeddings(parent: HTMLElement): void {
     // cluster halos
     if (k > 0.6) {
       CLUSTERS.forEach((cl) => {
-        const g = ctx.createRadialGradient(24 + cl.cx * (w - 48), 20 + cl.cy * (H - 40), 0, 24 + cl.cx * (w - 48), 20 + cl.cy * (H - 40), Math.min(w, H) * 0.22);
-        g.addColorStop(0, cl.color + '22');
-        g.addColorStop(1, cl.color + '00');
+        const g = ctx.createRadialGradient(
+          24 + cl.cx * (w - 48),
+          20 + cl.cy * (H - 40),
+          0,
+          24 + cl.cx * (w - 48),
+          20 + cl.cy * (H - 40),
+          Math.min(w, H) * 0.22,
+        );
+        g.addColorStop(0, `${cl.color}22`);
+        g.addColorStop(1, `${cl.color}00`);
         ctx.fillStyle = g;
         ctx.globalAlpha = (k - 0.6) / 0.4;
         ctx.fillRect(0, 0, w, H);
@@ -124,7 +131,12 @@ export function mountEmbeddings(parent: HTMLElement): void {
     // the clusters sideways, so phones get a smaller face to keep neighbours from running together
     const fs = w < 480 ? 11 : 13;
     ctx.font = `500 ${fs}px Geist, sans-serif`;
-    const boxes = words.map((wd, i) => ({ x: pos[i].x - 4, y: pos[i].y - 10, w: ctx.measureText(wd.text).width + 12, h: 16 }));
+    const boxes = words.map((wd, i) => ({
+      x: pos[i].x - 4,
+      y: pos[i].y - 10,
+      w: ctx.measureText(wd.text).width + 12,
+      h: 16,
+    }));
     words.forEach((wd, i) => {
       const p = pos[i];
       const color = CLUSTERS[wd.c].color;
@@ -172,8 +184,14 @@ export function mountEmbeddings(parent: HTMLElement): void {
       // above, below, right, left or diagonal to the point: whichever covers the fewest words
       const lw = tw + 16;
       const spots: [number, number][] = [
-        [qx - lw / 2, qy - 40], [qx - lw / 2, qy + 16], [qx + 14, qy - 11], [qx - lw - 14, qy - 11],
-        [qx - 10, qy - 40], [qx - lw + 10, qy - 40], [qx - 10, qy + 16], [qx - lw + 10, qy + 16],
+        [qx - lw / 2, qy - 40],
+        [qx - lw / 2, qy + 16],
+        [qx + 14, qy - 11],
+        [qx - lw - 14, qy - 11],
+        [qx - 10, qy - 40],
+        [qx - lw + 10, qy - 40],
+        [qx - 10, qy + 16],
+        [qx - lw + 10, qy + 16],
       ];
       const covered = ([x, y]: [number, number]) =>
         boxes.filter((b) => x < b.x + b.w && b.x < x + lw && y < b.y + b.h && b.y < y + 22).length +
@@ -187,7 +205,6 @@ export function mountEmbeddings(parent: HTMLElement): void {
       ctx.fillText(label, lx + 8, ly + 15);
       ctx.restore();
     }
-
   };
 
   if (reducedMotion) {

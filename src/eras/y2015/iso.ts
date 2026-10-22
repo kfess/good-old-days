@@ -18,7 +18,9 @@ export const MD = {
 export function shade(hex: string, amt: number): string {
   const n = parseInt(hex.slice(1), 16);
   const ch = (v: number) => Math.max(0, Math.min(255, Math.round(amt > 0 ? v + (255 - v) * amt : v * (1 + amt))));
-  const r = ch(n >> 16), g = ch((n >> 8) & 255), b = ch(n & 255);
+  const r = ch(n >> 16),
+    g = ch((n >> 8) & 255),
+    b = ch(n & 255);
   return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
 }
 
@@ -62,7 +64,10 @@ export function box(b: Box, s: number): string {
 /** Render boxes back-to-front and fit the viewBox around them. */
 export function scene(boxes: Box[], s: number, pad = 12): { svg: string; viewBox: string } {
   const order = [...boxes].sort((a, b) => a.x + a.y + a.z * 0.01 - (b.x + b.y + b.z * 0.01) || a.z - b.z);
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  let minX = Infinity,
+    minY = Infinity,
+    maxX = -Infinity,
+    maxY = -Infinity;
   for (const b of boxes) {
     for (const [px, py] of [
       P(b.x, b.y, b.z + b.h, s),
@@ -72,8 +77,10 @@ export function scene(boxes: Box[], s: number, pad = 12): { svg: string; viewBox
       P(b.x + b.w, b.y + b.d, b.z + b.h, s),
       P(b.x, b.y, b.z, s),
     ]) {
-      minX = Math.min(minX, px); maxX = Math.max(maxX, px);
-      minY = Math.min(minY, py); maxY = Math.max(maxY, py);
+      minX = Math.min(minX, px);
+      maxX = Math.max(maxX, px);
+      minY = Math.min(minY, py);
+      maxY = Math.max(maxY, py);
     }
   }
   return {

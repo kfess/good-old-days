@@ -11,11 +11,26 @@ const range = (a: number, b: number, y: number, skip: number[] = []): Px[] =>
     .map((x) => [x, y]);
 
 const BODY: Px[] = [...range(3, 14, 0), ...range(3, 14, 1, [5, 12]), ...range(3, 14, 2), ...range(3, 14, 3)];
-const ARM_L: Px[] = [[1, 2], [2, 2]];
-const ARM_R: Px[] = [[15, 2], [16, 2]];
-const EYES: Px[] = [[5, 1], [12, 1]];
-const LEGS_A: Px[] = [[4, 4], [11, 4]];
-const LEGS_B: Px[] = [[6, 4], [13, 4]];
+const ARM_L: Px[] = [
+  [1, 2],
+  [2, 2],
+];
+const ARM_R: Px[] = [
+  [15, 2],
+  [16, 2],
+];
+const EYES: Px[] = [
+  [5, 1],
+  [12, 1],
+];
+const LEGS_A: Px[] = [
+  [4, 4],
+  [11, 4],
+];
+const LEGS_B: Px[] = [
+  [6, 4],
+  [13, 4],
+];
 
 const rects = (px: Px[]) => px.map(([x, y]) => `<rect x="${x}" y="${y * 2}" width="1" height="2"/>`).join('');
 

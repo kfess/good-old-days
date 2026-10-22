@@ -16,8 +16,8 @@ const id = import.meta.env.VITE_GA_ID;
 export function initAnalytics(): void {
   if (!id || import.meta.env.DEV) return;
   window.dataLayer = window.dataLayer || [];
-  // gtag.js only reads `arguments` objects from the queue, not arrays
   window.gtag = function gtag() {
+    // biome-ignore lint/complexity/noArguments: gtag.js only reads `arguments` objects from the queue
     window.dataLayer.push(arguments);
   };
   window.gtag('js', new Date());

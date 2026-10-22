@@ -1,7 +1,7 @@
-import { siTypescript, siReact, siTailwindcss, siVuedotjs } from 'simple-icons';
-import { angularShield } from '../../components/marks';
-import { scrubType, type StageScene } from '../../components/stage';
+import { siReact, siTailwindcss, siTypescript, siVuedotjs } from 'simple-icons';
 import { logo } from '../../components/logo';
+import { angularShield } from '../../components/marks';
+import { type StageScene, scrubType } from '../../components/stage';
 import { MOBILE_QUERY } from '../../core/scroll';
 import { esc } from '../../core/util';
 
@@ -12,7 +12,13 @@ const glow = (icon: Parameters<typeof logo>[0], c: string) =>
   `<span class="y18-glow" style="--c:${c}"><i></i>${logo(icon)}</span>`;
 
 /** move the big logo out of the way once the scene has entered */
-function park(tl: gsap.core.Timeline, el: HTMLElement, desk: [number, number], mob: [number, number] = [0, -105], at = 0): void {
+function park(
+  tl: gsap.core.Timeline,
+  el: HTMLElement,
+  desk: [number, number],
+  mob: [number, number] = [0, -105],
+  at = 0,
+): void {
   tl.to(
     el,
     {
@@ -76,7 +82,19 @@ const typescript: StageScene = {
 
     // 1. every framework converges on TypeScript
     tl.from(art.querySelector('.y18-ts__merge'), { opacity: 0, y: 30, duration: 0.3 }, 0);
-    tl.to(routes, { x: () => (mobile() ? 0 : window.innerWidth * 0.3), y: (i) => (mobile() ? 0 : (1 - i) * 30), scale: 0.6, opacity: 0, stagger: 0.06, duration: 0.45, ease: 'power2.in' }, 0.45);
+    tl.to(
+      routes,
+      {
+        x: () => (mobile() ? 0 : window.innerWidth * 0.3),
+        y: (i) => (mobile() ? 0 : (1 - i) * 30),
+        scale: 0.6,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.45,
+        ease: 'power2.in',
+      },
+      0.45,
+    );
     tl.to(art.querySelector('.y18-ts__merge'), { opacity: 0, duration: 0.2 }, 0.9);
     park(tl, mark, [-128, -62], [0, -105], 0.85);
 
@@ -108,7 +126,7 @@ const typescript: StageScene = {
       label.textContent = live.length === 1 ? 'problem' : 'problems';
       status.classList.toggle('is-clean', live.length === 0 && tl.time() > 2.2);
       status.classList.toggle('is-idle', live.length === 0 && tl.time() <= 2.2);
-      tip.textContent = live.length ? live[live.length - 1].dataset.msg ?? '' : '';
+      tip.textContent = live.length ? (live[live.length - 1].dataset.msg ?? '') : '';
       const fixed = tl.time() > 3.45;
       if (fixed !== wasFixed) {
         wasFixed = fixed;
@@ -187,7 +205,7 @@ const hooks: StageScene = {
         old[idx],
         {
           x: () => dir * (mobile() ? 260 : 380 + (idx % 5) * 70),
-          y: () => (idx % 3 - 1) * 60,
+          y: () => ((idx % 3) - 1) * 60,
           rotate: dir * (8 + (idx % 4) * 6),
           opacity: 0,
           duration: 0.35,
@@ -208,13 +226,26 @@ const hooks: StageScene = {
     };
     tl.to(box, { height: fullHeight, duration: 0.4, ease: 'power3.inOut' }, 1.35);
     const n = { v: CLASS_LINES.length };
-    tl.to(n, { v: HOOK_LINES.length, duration: 0.5, ease: 'power1.inOut', onUpdate: () => (lines.textContent = `${Math.round(n.v)} lines`) }, 1.1);
+    tl.to(
+      n,
+      {
+        v: HOOK_LINES.length,
+        duration: 0.5,
+        ease: 'power1.inOut',
+        onUpdate: () => (lines.textContent = `${Math.round(n.v)} lines`),
+      },
+      1.1,
+    );
 
     // and comes back as a function
     HOOK_LINES.forEach((l, i) => scrubType(tl, neu[i], l, 0.18 + l.length / 300, 1.65 + i * 0.22));
     tl.from(art.querySelector('.y18-hk__out'), { height: 0, opacity: 0, duration: 0.25 }, 2.7);
     const c = { v: 0 };
-    tl.to(c, { v: 3, duration: 0.6, ease: 'steps(3)', onUpdate: () => (btnCount.textContent = String(Math.round(c.v))) }, 2.9);
+    tl.to(
+      c,
+      { v: 3, duration: 0.6, ease: 'steps(3)', onUpdate: () => (btnCount.textContent = String(Math.round(c.v))) },
+      2.9,
+    );
     tl.to({}, { duration: 0.3 });
   },
 };
@@ -229,9 +260,24 @@ interface Tok {
 }
 
 const TW_LINES: { open: string; close: string; toks: string[]; on: Tok['on'] }[] = [
-  { open: '<div class="', close: '">', toks: ['flex', 'items-center', 'p-6', 'rounded-lg', 'bg-indigo-500', 'text-white', 'shadow-xl'], on: 'card' },
-  { open: '  <img class="', close: '" />', toks: ['w-16', 'h-16', 'mr-4', 'rounded-full', 'border-4', 'border-white'], on: 'av' },
-  { open: '  <button class="', close: '">', toks: ['ml-auto', 'rounded-full', 'bg-white', 'px-4', 'py-2', 'text-indigo-600'], on: 'btn' },
+  {
+    open: '<div class="',
+    close: '">',
+    toks: ['flex', 'items-center', 'p-6', 'rounded-lg', 'bg-indigo-500', 'text-white', 'shadow-xl'],
+    on: 'card',
+  },
+  {
+    open: '  <img class="',
+    close: '" />',
+    toks: ['w-16', 'h-16', 'mr-4', 'rounded-full', 'border-4', 'border-white'],
+    on: 'av',
+  },
+  {
+    open: '  <button class="',
+    close: '">',
+    toks: ['ml-auto', 'rounded-full', 'bg-white', 'px-4', 'py-2', 'text-indigo-600'],
+    on: 'btn',
+  },
 ];
 
 const tailwind: StageScene = {
@@ -266,7 +312,11 @@ const tailwind: StageScene = {
     // the Tailwind wordmark already carries the mark, so the glowing logo bows out instead of parking on it
     park(tl, mark, [0, 78], [0, -105]);
     tl.to(mark, { opacity: 0, duration: 0.3 }, 0.2);
-    tl.from([art.querySelector('.y18-tw__code'), art.querySelector('.y18-tw__stage')], { opacity: 0, y: 40, stagger: 0.1, duration: 0.3 }, 0.25);
+    tl.from(
+      [art.querySelector('.y18-tw__code'), art.querySelector('.y18-tw__stage')],
+      { opacity: 0, y: 40, stagger: 0.1, duration: 0.3 },
+      0.25,
+    );
     const p = { n: 0 };
     tl.to(
       p,
@@ -283,7 +333,7 @@ const tailwind: StageScene = {
             if (left <= 0) break;
             const take = Math.min(left, t.cls.length);
             typed[t.line].push(t.cls.slice(0, take));
-            if (take === t.cls.length) on[t.on].push('tw-' + t.cls.replace(/[/.]/g, '_'));
+            if (take === t.cls.length) on[t.on].push(`tw-${t.cls.replace(/[/.]/g, '_')}`);
             else partial = t.line;
             left -= t.cls.length + 1;
           }
@@ -295,7 +345,11 @@ const tailwind: StageScene = {
               : '';
           });
           (Object.keys(nodes) as Tok['on'][]).forEach((k) => {
-            nodes[k].className = nodes[k].className.split(' ').filter((c) => !c.startsWith('tw-')).concat(on[k]).join(' ');
+            nodes[k].className = nodes[k].className
+              .split(' ')
+              .filter((c) => !c.startsWith('tw-'))
+              .concat(on[k])
+              .join(' ');
           });
         },
       },

@@ -5,7 +5,7 @@
   --ts: #007acc;
   --card: rgba(255, 255, 255, 0.035);
   --line: rgba(255, 255, 255, 0.09);
-  font-family: 'Poppins', 'Inter', var(--jp);
+  font-family: "Poppins", "Inter", var(--jp);
   /* code reads as typed: no "~>" / "=>" / "->" arrows from JetBrains Mono's and Inter's contextual ligatures */
   font-variant-ligatures: no-contextual;
 }
@@ -227,7 +227,9 @@
   color: #c9d3f2;
   opacity: 0;
   transform: scale(0.3);
-  transition: opacity 0.45s, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.3);
+  transition:
+    opacity 0.45s,
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.3);
 }
 
 .era--y2018 .land__tile.is-on {
@@ -293,7 +295,9 @@
 .era--y2018 .land__title > span,
 .era--y2018 .land__sub > span {
   grid-area: 1 / 1;
-  transition: opacity 0.5s, transform 0.5s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
 }
 
 .era--y2018 .land__sub {
@@ -368,7 +372,9 @@
   overflow: hidden;
   border-radius: 14px;
   background: #fff;
-  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 60px 120px -40px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .era--y2018 .look__chrome {
@@ -399,7 +405,7 @@
   padding: 3px 10px;
   border-radius: 6px;
   background: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   text-align: center;
   color: #666;
@@ -415,8 +421,10 @@
   overflow: hidden;
   background: var(--pg);
   color: var(--pt);
-  font-family: 'Inter', sans-serif;
-  transition: background 0.5s, color 0.5s;
+  font-family: "Inter", sans-serif;
+  transition:
+    background 0.5s,
+    color 0.5s;
 }
 
 .era--y2018 .look__page.is-dark {
@@ -517,7 +525,9 @@
   height: 26px;
   border-radius: 13px;
   background: rgba(255, 255, 255, 0.3);
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.25);
   transition: background 0.3s;
 }
 
@@ -579,7 +589,9 @@
   color: #635bff;
   font-size: 14px;
   font-weight: 700;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px rgba(50, 50, 93, 0.11),
+    0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .era--y2018 .look__cta.is-ghost {
@@ -601,7 +613,9 @@
   padding: 18px 20px;
   border-radius: 12px;
   background: var(--pc);
-  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3);
   transition: background 0.5s;
 }
 
@@ -646,12 +660,16 @@
 .era--y2018 .look__card.is-neu {
   position: relative;
   background: #e0e5ec;
-  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.6);
+  box-shadow:
+    9px 9px 16px rgba(163, 177, 198, 0.6),
+    -9px -9px 16px rgba(255, 255, 255, 0.6);
 }
 
 .era--y2018 .look__page.is-dark .look__card.is-neu {
   background: #1b2029;
-  box-shadow: 8px 8px 16px #0a0d12, -8px -8px 16px #262d39;
+  box-shadow:
+    8px 8px 16px #0a0d12,
+    -8px -8px 16px #262d39;
 }
 
 .era--y2018 .look__knob {
@@ -661,11 +679,15 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.7), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.7),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.8);
 }
 
 .era--y2018 .look__page.is-dark .look__knob {
-  box-shadow: inset 4px 4px 8px #0a0d12, inset -4px -4px 8px #2a3240;
+  box-shadow:
+    inset 4px 4px 8px #0a0d12,
+    inset -4px -4px 8px #2a3240;
 }
 
 /* chatbot */
@@ -720,7 +742,9 @@
   overflow: hidden;
   border-radius: 16px;
   background: var(--pc);
-  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.35), 0 18px 36px -18px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 30px 60px -12px rgba(50, 50, 93, 0.35),
+    0 18px 36px -18px rgba(0, 0, 0, 0.4);
   animation: y18-pod-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-origin: bottom right;
 }
@@ -779,7 +803,7 @@
   max-width: 85%;
   padding: 9px 12px;
   border-radius: 14px;
-  font-family: 'Inter', var(--jp);
+  font-family: "Inter", var(--jp);
   font-size: 13px;
   line-height: 1.45;
 }
@@ -908,7 +932,7 @@
 }
 
 .era--y2018 .gitops li:not(:last-child)::after {
-  content: '→';
+  content: "→";
   position: absolute;
   top: 50%;
   right: -26px;
@@ -929,7 +953,10 @@
 /* once the terminal runs, the flow follows it instead of cycling on its own */
 .era--y2018 .gitops.is-driven li {
   animation: none;
-  transition: border-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    opacity 0.3s;
 }
 
 .era--y2018 .gitops.is-driven li.is-done {
@@ -1099,7 +1126,7 @@
 /* ================= stage: headline scenes (2018 · glow on dark) ================= */
 
 .era--y2018 .stage__pin::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -10%;
   background:
@@ -1112,13 +1139,13 @@
 }
 
 .era--y2018 .stage__year {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
   -webkit-text-stroke: 1.5px rgba(157, 184, 255, 0.13);
 }
 
 .era--y2018 .stage__name {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
   background: linear-gradient(120deg, #ffffff 30%, #9db8ff 65%, #ff8fb1);
   -webkit-background-clip: text;
@@ -1217,8 +1244,10 @@
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 14px;
   background: rgba(13, 17, 33, 0.92);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(91, 60, 255, 0.08);
-  font-family: 'JetBrains Mono', var(--mono);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(91, 60, 255, 0.08);
+  font-family: "JetBrains Mono", var(--mono);
   color: #d6dcf0;
 }
 
@@ -1292,14 +1321,16 @@
 }
 
 .era--y2018 .sq::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: -0.2em;
   height: 0.32em;
   opacity: var(--sq, 0);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q2 0 4 3 T8 3' fill='none' stroke='%23ff5c5c' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x 0 100% / 0.5em 0.32em;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q2 0 4 3 T8 3' fill='none' stroke='%23ff5c5c' stroke-width='1.2'/%3E%3C/svg%3E")
+    repeat-x 0 100% / 0.5em 0.32em;
 }
 
 .era--y2018 .y18-ed__tip {
@@ -1361,7 +1392,7 @@
 }
 
 .era--y2018 .y18-ed__status::before {
-  content: '⊗';
+  content: "⊗";
 }
 
 .era--y2018 .y18-ed__status.is-clean {
@@ -1369,7 +1400,7 @@
 }
 
 .era--y2018 .y18-ed__status.is-clean::before {
-  content: '✓';
+  content: "✓";
 }
 
 .era--y2018 .y18-ed__status.is-idle {
@@ -1438,7 +1469,9 @@
   border-radius: 12px;
   background: linear-gradient(135deg, #61dafb, #5b3cff);
   color: #0b1020;
-  font: 600 16px/1 'Poppins', sans-serif;
+  font:
+    600 16px / 1 "Poppins",
+    sans-serif;
   box-shadow: 0 12px 30px rgba(97, 218, 251, 0.3);
 }
 
@@ -1496,7 +1529,9 @@
   display: block;
   width: 86%;
   color: #c9d1ea;
-  font: 17px/1.4 'Times New Roman', serif;
+  font:
+    17px / 1.4 "Times New Roman",
+    serif;
   transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -1524,29 +1559,75 @@
 
 /* … and the utilities, applied as they are typed */
 /* Tailwind CSS 1.0 (May 2019) values: default palette, 0.25rem spacing scale */
-.era--y2018 .tw-flex { display: flex; }
-.era--y2018 .tw-items-center { align-items: center; }
-.era--y2018 .tw-p-6 { padding: 24px; }
-.era--y2018 .tw-rounded-lg { border-radius: 8px; }
-.era--y2018 .tw-bg-indigo-500 { background: #667eea; }
-.era--y2018 .tw-text-white { color: #fff; font-family: 'Inter', 'Poppins', sans-serif; }
-.era--y2018 .tw-shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 18px 40px rgba(0, 0, 0, 0.35); }
-.era--y2018 .tw-w-16 { width: 64px; flex: none; }
-.era--y2018 .tw-h-16 { height: 64px; }
-.era--y2018 .tw-mr-4 { margin-right: 16px; }
-.era--y2018 .tw-rounded-full { border-radius: 9999px; }
-.era--y2018 .tw-border-4 { border: 4px solid; }
-.era--y2018 .tw-border-white { border-color: #fff; }
-.era--y2018 .tw-ml-auto { margin-left: auto; }
-.era--y2018 .tw-bg-white { background: #fff; text-decoration: none; }
-.era--y2018 .tw-px-4 { padding-left: 16px; padding-right: 16px; }
-.era--y2018 .tw-py-2 { padding-top: 8px; padding-bottom: 8px; }
-.era--y2018 .tw-text-indigo-600 { color: #5a67d8; font-weight: 600; font-family: 'Inter', sans-serif; }
+.era--y2018 .tw-flex {
+  display: flex;
+}
+.era--y2018 .tw-items-center {
+  align-items: center;
+}
+.era--y2018 .tw-p-6 {
+  padding: 24px;
+}
+.era--y2018 .tw-rounded-lg {
+  border-radius: 8px;
+}
+.era--y2018 .tw-bg-indigo-500 {
+  background: #667eea;
+}
+.era--y2018 .tw-text-white {
+  color: #fff;
+  font-family: "Inter", "Poppins", sans-serif;
+}
+.era--y2018 .tw-shadow-xl {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+.era--y2018 .tw-w-16 {
+  width: 64px;
+  flex: none;
+}
+.era--y2018 .tw-h-16 {
+  height: 64px;
+}
+.era--y2018 .tw-mr-4 {
+  margin-right: 16px;
+}
+.era--y2018 .tw-rounded-full {
+  border-radius: 9999px;
+}
+.era--y2018 .tw-border-4 {
+  border: 4px solid;
+}
+.era--y2018 .tw-border-white {
+  border-color: #fff;
+}
+.era--y2018 .tw-ml-auto {
+  margin-left: auto;
+}
+.era--y2018 .tw-bg-white {
+  background: #fff;
+  text-decoration: none;
+}
+.era--y2018 .tw-px-4 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.era--y2018 .tw-py-2 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.era--y2018 .tw-text-indigo-600 {
+  color: #5a67d8;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+}
 
 /* ---------- credits + thread ---------- */
 
 .era--y2018 .credit__name {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #e8ecf6;
 }
 
@@ -1565,16 +1646,25 @@
 }
 
 .era--y2018 .credit.is-mystery .credit__name::before {
-  content: '?  ';
+  content: "?  ";
   -webkit-text-stroke: 0;
   color: #ff8fb1;
 }
 
 @keyframes y18-flicker {
-  0%, 100% { opacity: 1; }
-  47% { opacity: 0.35; }
-  49% { opacity: 1; }
-  83% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  47% {
+    opacity: 0.35;
+  }
+  49% {
+    opacity: 1;
+  }
+  83% {
+    opacity: 0.6;
+  }
 }
 
 .era--y2018 .thread__title {
@@ -1624,7 +1714,7 @@
 }
 
 /* near-black brand marks would vanish on the dark stage */
-.era--y2018 .credit__icon .logo:is([aria-label='Helm'], [aria-label='Deno']) {
+.era--y2018 .credit__icon .logo:is([aria-label="Helm"], [aria-label="Deno"]) {
   fill: #e8ecf6;
 }
 
@@ -1634,7 +1724,7 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Poppins', 'Inter', sans-serif;
+  font-family: "Poppins", "Inter", sans-serif;
 }
 
 .era--y2018 .kx__canvas {
@@ -1695,7 +1785,10 @@
   min-height: 4.8em;
   margin: 0;
   padding: 10px 12px;
-  font: 400 clamp(10px, 0.8vw, 11.5px)/1.6 'JetBrains Mono', ui-monospace, monospace;
+  font:
+    400 clamp(10px, 0.8vw, 11.5px) / 1.6 "JetBrains Mono",
+    ui-monospace,
+    monospace;
   font-variant-ligatures: none; /* the shorthand above resets the era's no-contextual */
   color: #cfe0ff;
   white-space: pre-wrap;
@@ -1730,7 +1823,7 @@
 
 .era--y2018 .kx__sub {
   margin: 12px 0 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(14px, 1.2vw, 18px);
   line-height: 1.5;
   color: #b4c0de;
@@ -1835,7 +1928,7 @@
 
 .era--y2018 .kx__copy::before,
 .era--y2018 .kx__stats::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -60px -90px -50px -70px;
   z-index: -1;
@@ -1933,7 +2026,9 @@
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--muted);
-  font: 500 11px / 1 'JetBrains Mono', monospace;
+  font:
+    500 11px / 1 "JetBrains Mono",
+    monospace;
 }
 
 .era--y2018 .tf__bar i {
@@ -1955,7 +2050,9 @@
   padding: 12px 16px;
   overflow: hidden;
   color: #c9d1e6;
-  font: 400 clamp(10px, 0.85vw, 12.5px) / 1.55 'JetBrains Mono', monospace;
+  font:
+    400 clamp(10px, 0.85vw, 12.5px) / 1.55 "JetBrains Mono",
+    monospace;
   font-variant-ligatures: none; /* the shorthand above resets the era's no-contextual */
   white-space: pre;
 }
@@ -2028,7 +2125,9 @@
   display: block;
   margin-bottom: 8px;
   color: var(--muted);
-  font: 600 10px / 1 'JetBrains Mono', monospace;
+  font:
+    600 10px / 1 "JetBrains Mono",
+    monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -2041,8 +2140,12 @@
   border: 1px dashed rgba(255, 255, 255, 0.16);
   border-radius: 8px;
   color: var(--muted);
-  font: 400 11px / 1.3 'JetBrains Mono', monospace;
-  transition: border-color 0.4s, color 0.4s;
+  font:
+    400 11px / 1.3 "JetBrains Mono",
+    monospace;
+  transition:
+    border-color 0.4s,
+    color 0.4s;
 }
 
 .era--y2018 .tf__state b {
@@ -2086,7 +2189,10 @@
   background: rgba(16, 24, 52, 0.9);
   opacity: 0.12;
   transform: translateY(-10px) scale(0.96);
-  transition: opacity 0.5s, transform 0.5s, box-shadow 0.6s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s,
+    box-shadow 0.6s;
 }
 
 .era--y2018 .tf__cp.is-on {
@@ -2096,7 +2202,9 @@
 
 .era--y2018 .tf__cp.is-ready {
   opacity: 1;
-  box-shadow: 0 0 0 1px rgba(50, 108, 229, 0.8), 0 0 40px rgba(50, 108, 229, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(50, 108, 229, 0.8),
+    0 0 40px rgba(50, 108, 229, 0.45);
 }
 
 .era--y2018 .tf__cpmark {
@@ -2122,7 +2230,9 @@
   border-radius: 999px;
   background: rgba(240, 181, 74, 0.16);
   color: #f0b54a;
-  font: 700 10px / 1.4 'JetBrains Mono', monospace;
+  font:
+    700 10px / 1.4 "JetBrains Mono",
+    monospace;
 }
 
 .era--y2018 .tf__cp.is-ready .tf__cpstate {
@@ -2146,7 +2256,9 @@
   border: 2px dashed rgba(165, 123, 255, 0.55);
   border-radius: 14px;
   opacity: 0.12;
-  transition: opacity 0.5s, background 0.5s;
+  transition:
+    opacity 0.5s,
+    background 0.5s;
 }
 
 .era--y2018 .tf__vpc.is-on {
@@ -2163,7 +2275,9 @@
   background: #1a2040;
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: var(--muted);
-  font: 700 10px / 1.4 'JetBrains Mono', monospace;
+  font:
+    700 10px / 1.4 "JetBrains Mono",
+    monospace;
   opacity: 0;
   transition: opacity 0.4s;
 }
@@ -2188,7 +2302,10 @@
   border-radius: 10px;
   opacity: 0.15;
   transform: translateY(8px);
-  transition: opacity 0.4s, transform 0.4s, border-color 0.4s;
+  transition:
+    opacity 0.4s,
+    transform 0.4s,
+    border-color 0.4s;
 }
 
 .era--y2018 .tf__az.is-on {
@@ -2203,7 +2320,9 @@
 
 .era--y2018 .tf__subnet {
   color: #7ee787;
-  font: 600 12px / 1 'JetBrains Mono', monospace;
+  font:
+    600 12px / 1 "JetBrains Mono",
+    monospace;
 }
 
 .era--y2018 .tf__node {
@@ -2216,10 +2335,14 @@
   background: rgba(50, 108, 229, 0.16);
   border: 1px solid rgba(50, 108, 229, 0.5);
   color: #cfe0ff;
-  font: 600 11px / 1 'JetBrains Mono', monospace;
+  font:
+    600 11px / 1 "JetBrains Mono",
+    monospace;
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.4s, transform 0.4s;
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
 }
 
 .era--y2018 .tf__node i {
@@ -2240,7 +2363,9 @@
   display: block;
   margin-top: 10px;
   color: #9fb6e8;
-  font: 500 11px / 1.3 'JetBrains Mono', monospace;
+  font:
+    500 11px / 1.3 "JetBrains Mono",
+    monospace;
   text-align: center;
   opacity: 0;
   transition: opacity 0.4s;
@@ -2259,7 +2384,9 @@
   border-radius: 16px;
   background: rgba(8, 11, 24, 0.86);
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 80px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 30px 80px rgba(0, 0, 0, 0.6);
   font-size: clamp(22px, 2.6vw, 38px);
   font-weight: 700;
   line-height: 1.15;
@@ -2268,7 +2395,9 @@
   white-space: nowrap;
   opacity: 0;
   transform: translate(-50%, 20px);
-  transition: opacity 0.5s, transform 0.5s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
   pointer-events: none;
 }
 
@@ -2277,11 +2406,15 @@
 }
 
 .era--y2018 .tf__grid {
-  transition: opacity 0.5s, filter 0.5s;
+  transition:
+    opacity 0.5s,
+    filter 0.5s;
 }
 
 .era--y2018 .tf__head {
-  transition: opacity 0.5s, filter 0.5s;
+  transition:
+    opacity 0.5s,
+    filter 0.5s;
 }
 
 .era--y2018 .tf.is-handoff .tf__grid,
@@ -2425,7 +2558,9 @@
 
 .era--y2018 .dk__title {
   margin: 0;
-  font: 800 clamp(34px, 5vw, 72px) / 1 'Poppins', sans-serif;
+  font:
+    800 clamp(34px, 5vw, 72px) / 1 "Poppins",
+    sans-serif;
   letter-spacing: -0.03em;
 }
 
@@ -2452,7 +2587,9 @@
 
 .era--y2018 .dk__axis-label {
   fill: #8a94b2;
-  font: 500 14px 'Poppins', sans-serif;
+  font:
+    500 14px "Poppins",
+    sans-serif;
 }
 
 .era--y2018 .dk__ghost {
@@ -2482,7 +2619,9 @@
   max-width: 260px;
   transform: translate(-50%, calc(-100% - 22px));
   opacity: 0;
-  transition: opacity 0.4s, transform 0.4s;
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
 }
 
 .era--y2018 .dk__beat.is-on {
@@ -2509,7 +2648,9 @@
 }
 
 .era--y2018 .dk__beat figcaption {
-  font: 500 11px / 1.4 'Poppins', sans-serif;
+  font:
+    500 11px / 1.4 "Poppins",
+    sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #8a94b2;
@@ -2524,8 +2665,12 @@
   padding: 10px 14px;
   border-radius: 12px;
   background: rgba(19, 26, 51, 0.92);
-  box-shadow: 0 0 0 1px rgba(50, 108, 229, 0.4), 0 14px 30px rgba(0, 0, 0, 0.45);
-  font: 600 clamp(14px, 1.4vw, 20px) / 1.3 'Poppins', sans-serif;
+  box-shadow:
+    0 0 0 1px rgba(50, 108, 229, 0.4),
+    0 14px 30px rgba(0, 0, 0, 0.45);
+  font:
+    600 clamp(14px, 1.4vw, 20px) / 1.3 "Poppins",
+    sans-serif;
   color: #e8ecf6;
 }
 
@@ -2575,10 +2720,14 @@
   padding: 12px 14px 10px;
   border-radius: 10px;
   background: rgba(10, 13, 26, 0.94);
-  box-shadow: 0 0 0 1px rgba(255, 107, 129, 0.35), 0 18px 40px rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(255, 107, 129, 0.35),
+    0 18px 40px rgba(0, 0, 0, 0.55);
   opacity: 0;
   transform: translateY(-8px);
-  transition: opacity 0.35s, transform 0.35s;
+  transition:
+    opacity 0.35s,
+    transform 0.35s;
   pointer-events: none;
 }
 
@@ -2590,7 +2739,9 @@
 .era--y2018 .tf__leak pre {
   display: grid;
   margin: 0;
-  font: 400 11px / 1.55 'JetBrains Mono', monospace;
+  font:
+    400 11px / 1.55 "JetBrains Mono",
+    monospace;
   font-variant-ligatures: none; /* the shorthand above resets the era's no-contextual */
   color: #b7c0dc;
   white-space: pre-wrap;
@@ -2618,7 +2769,9 @@
   padding: 8px 10px;
   border-radius: 8px;
   background: rgba(255, 107, 129, 0.12);
-  font: 500 12px / 1.45 'Poppins', sans-serif;
+  font:
+    500 12px / 1.45 "Poppins",
+    sans-serif;
   color: #ffd2d9;
 }
 
@@ -2632,7 +2785,9 @@
 
 .era--y2018 .tf__leak small {
   display: block;
-  font: italic 400 11px 'Poppins', sans-serif;
+  font:
+    italic 400 11px "Poppins",
+    sans-serif;
   color: #8a94b2;
   text-align: right;
 }

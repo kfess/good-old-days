@@ -26,9 +26,10 @@ export function textSprite(text: string, color = '#ffffff'): Promise<HTMLImageEl
 /** Claude-kun as a standalone image: the CSS classes become an inline <style>, since SVG-as-image can't see page CSS. */
 export function kunSprite(): Promise<HTMLImageElement> {
   const inner = claudeKun('', 'happy').match(/<svg[^>]*>([\s\S]*)<\/svg>/)![1];
-  const css =
-    '.ck__body,.ck__arms,.ck__legs{fill:#d77757}.ck__eye{fill:#1a1a1a}';
-  return toImage(`<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 -4 18 18" shape-rendering="crispEdges"><style>${css}</style>${inner}</svg>`);
+  const css = '.ck__body,.ck__arms,.ck__legs{fill:#d77757}.ck__eye{fill:#1a1a1a}';
+  return toImage(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 -4 18 18" shape-rendering="crispEdges"><style>${css}</style>${inner}</svg>`,
+  );
 }
 
 interface Kun {
@@ -49,14 +50,20 @@ const RINGS = [
  * `state.reveal` (0 → 1, scrubbed by the scene) spirals them out from the center.
  * Draws only while the canvas is on screen and its scene is the current one; centered on `center`.
  */
-export function orbitMarks(canvas: HTMLCanvasElement, scene: HTMLElement, center: HTMLElement, sources: Promise<HTMLImageElement>[], count = 260): { state: { reveal: number } } {
+export function orbitMarks(
+  canvas: HTMLCanvasElement,
+  scene: HTMLElement,
+  center: HTMLElement,
+  sources: Promise<HTMLImageElement>[],
+  count = 260,
+): { state: { reveal: number } } {
   const state = { reveal: 0 };
   const ctx = canvas.getContext('2d')!;
   const kuns: Kun[] = Array.from({ length: count }, (_, i) => ({
     ring: i % RINGS.length,
     a: (i * 2.399963) % (Math.PI * 2),
-    speed: (0.12 + ((i * 37) % 100) / 100 * 0.18) * (i % 2 ? 1 : 0.85),
-    size: 9 + ((i * 53) % 100) / 100 * 13,
+    speed: (0.12 + (((i * 37) % 100) / 100) * 0.18) * (i % 2 ? 1 : 0.85),
+    size: 9 + (((i * 53) % 100) / 100) * 13,
   }));
   let sprites: HTMLImageElement[] = [];
   Promise.all(sources).then((imgs) => (sprites = imgs));
